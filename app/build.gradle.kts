@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -8,7 +10,7 @@ plugins {
 // machine-local debug key. Maintainers can provide keystore.properties locally
 // to reproduce the signed release build; the key and password are never committed.
 val localKeystorePropertiesFile = rootProject.file("keystore.properties")
-val localKeystoreProperties = java.util.Properties().apply {
+val localKeystoreProperties = Properties().apply {
     if (localKeystorePropertiesFile.exists()) {
         localKeystorePropertiesFile.inputStream().use { load(it) }
     }
