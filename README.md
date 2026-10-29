@@ -4,6 +4,27 @@
 [![Latest release](https://img.shields.io/github/v/release/andrewr8712/legend-tuner)](https://github.com/andrewr8712/legend-tuner/releases/latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+
+******Please note - This has been entirely made using DeepSeek V4.1-Flash-1017, I AM NOT A DEVELOPER. 
+This was the initial Prompt - 
+
+"There is an android game i like to play called Grid:Legends.
+It has a plaintext configuration file that can be manually edited to adjust various graphical and performance options.
+
+Instead of doing this in a text editor, I would like a native android app with a gui for easy adjustments.
+Can you help develop this?"
+
+The only other input I had was the following after trying the end result - 
+
+"Can the fixed render height slider be changed - it's too difficult to set an exact value.
+replace it with a drop down of values that correspond to common screen resolution heights."
+
+And finally, one last prompt to upload to GitHub - 
+
+"I would like to upload this project to github. Can you assist me in getting this done?"
+
+
+
 An unofficial, tablet-first Android app for editing the **GRID™ Legends** graphics configuration file.
 
 Built for the Lenovo Yoga Tab Plus **TB520FU** (12.7″, 2944 × 1840) and tested on Android 17 with Shizuku.
