@@ -1,0 +1,19 @@
+Legend Tuner
+============
+
+GRID™ Legends and related marks are trademarks of their respective owners.
+Legend Tuner is an unofficial fan project and is not affiliated with or
+endorsed by Feral Interactive, Electronic Arts, or Codemasters. No GRID Legends
+game code, assets, or game data files are included in this repository.
+
+The sanitized preferences sample in testdata/ is included solely to exercise
+the XML parser and is not a game asset.
+
+Barlow Condensed
+----------------
+The app bundles Barlow Condensed Medium, SemiBold, and Bold.
+
+Copyright 2017 The Barlow Project Authors (https://github.com/jpt/barlow)
+
+Licensed under the SIL Open Font License, Version 1.1. The complete license text
+is included at app/src/main/res/raw/barlow_ofl.txt.

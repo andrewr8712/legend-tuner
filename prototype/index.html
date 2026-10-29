@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Legend Tuner — UI prototype</title>
+<style>
+@font-face{font-family:'Barlow Condensed';src:url('fonts/BarlowCondensed-500.woff2') format('woff2');font-weight:500;font-style:normal}
+@font-face{font-family:'Barlow Condensed';src:url('fonts/BarlowCondensed-600.woff2') format('woff2');font-weight:600;font-style:normal}
+@font-face{font-family:'Barlow Condensed';src:url('fonts/BarlowCondensed-700.woff2') format('woff2');font-weight:700;font-style:normal}
+@font-face{font-family:'Inter';src:url('fonts/Inter-400.woff2') format('woff2');font-weight:100 900;font-style:normal}
+:root{
+  --bg:#070908;
+  --ink:#F3F5EF;
+  --muted:#8F978C;
+  --dim:#5E675D;
+  --card:#121512;
+  --card2:#171B17;
+  --line:#252B24;
+  --lime:#D7FF3F;
+  --lime-dim:#B9DD31;
+  --orange:#FFB454;
+  --red:#FF6259;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif}
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(900px 600px at 50% -180px, rgba(215,255,63,.11), transparent 65%),
+    linear-gradient(rgba(255,255,255,.017) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.017) 1px, transparent 1px),
+    var(--bg);
+  background-size:auto, 44px 44px, 44px 44px, auto;
+}
+.stage{width:1362px;margin:0 auto;padding:34px 0 54px}
+.brandline{display:flex;align-items:flex-end;justify-content:space-between;padding:0 2px 22px}
+.brandline .mark{font-family:'Barlow Condensed';font-weight:700;font-size:31px;letter-spacing:.04em;line-height:.9}
+.brandline .mark span{color:var(--lime)}
+.brandline .meta{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim);font-weight:600}
+.rack{display:flex;gap:39px;align-items:flex-start}
+.unit{width:390px;flex:0 0 390px}
+.caption{display:flex;align-items:center;gap:10px;margin:0 4px 12px}
+.caption .num{font-family:'Barlow Condensed';font-size:15px;font-weight:700;color:var(--lime);letter-spacing:.08em}
+.caption .txt{font-size:9.5px;letter-spacing:.22em;font-weight:600;color:var(--dim);text-transform:uppercase}
+.caption .rule{height:1px;background:linear-gradient(90deg,var(--line),transparent);flex:1}
+.phone{
+  width:390px;height:844px;border-radius:48px;background:#050605;
+  border:8px solid #20241F;position:relative;overflow:hidden;
+  box-shadow:0 0 0 1px #050605, 0 32px 80px rgba(0,0,0,.55), inset 0 0 0 1px rgba(255,255,255,.04);
+}
+.phone:before{
+  content:"";position:absolute;top:9px;left:50%;transform:translateX(-50%);
+  width:105px;height:25px;border-radius:14px;background:#050605;z-index:20;
+}
+.screen{position:absolute;inset:0;border-radius:40px;overflow:hidden;background:var(--bg)}
+.statusbar{
+  height:46px;display:flex;align-items:flex-end;justify-content:space-between;
+  padding:0 24px 8px;font-size:11px;font-weight:600;letter-spacing:.01em;position:relative;z-index:10
+}
+.statusbar .icons{display:flex;gap:5px;align-items:center;opacity:.9}
+.sig{display:flex;gap:2px;align-items:flex-end;height:9px}
+.sig i{display:block;width:2.5px;background:var(--ink);border-radius:1px}
+.sig i:nth-child(1){height:3px}.sig i:nth-child(2){height:5px}.sig i:nth-child(3){height:7px}.sig i:nth-child(4){height:9px}
+.batt{width:17px;height:9px;border:1px solid var(--ink);border-radius:2.5px;position:relative;opacity:.9}
+.batt:before{content:"";position:absolute;left:1.5px;top:1.5px;bottom:1.5px;width:10px;background:var(--ink);border-radius:1px}
+.batt:after{content:"";position:absolute;right:-3px;top:2.5px;width:2px;height:3px;background:var(--ink);border-radius:0 1px 1px 0}
+.content{height:798px;padding:0 22px;position:relative}
+
+/* ---------- HOME ---------- */
+.home-head{padding-top:15px;display:flex;justify-content:space-between;align-items:flex-start}
+.eyebrow{font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--lime);font-weight:600;margin-bottom:8px}
+.title{font-family:'Barlow Condensed';font-size:56px;line-height:.82;letter-spacing:.01em;font-weight:700}
+.title .thin{color:var(--muted);font-weight:500}
+.unofficial{font-size:8px;letter-spacing:.13em;border:1px solid var(--line);color:var(--dim);padding:5px 7px;border-radius:5px;margin-top:4px}
+.sub{font-size:11px;color:var(--dim);margin-top:14px;letter-spacing:.02em}
+
+.game-card{
+  margin-top:24px;background:linear-gradient(145deg,#181C16,#101310 65%);
+  border:1px solid #2A3025;border-radius:22px;padding:17px 17px 15px;position:relative;overflow:hidden
+}
+.game-card:after{content:"";position:absolute;right:-35px;top:-70px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(215,255,63,.11),transparent 66%)}
+.status-row{display:flex;align-items:center;gap:8px}
+.pulse{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 4px rgba(215,255,63,.10)}
+.status-label{font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--lime)}
+.access-chip{margin-left:auto;font-size:8px;letter-spacing:.13em;font-weight:700;color:var(--lime);border:1px solid rgba(215,255,63,.32);background:rgba(215,255,63,.07);padding:5px 7px;border-radius:5px}
+.path{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:9.5px;color:#A8B0A2;margin-top:13px;line-height:1.55;overflow-wrap:anywhere}
+.path b{color:var(--ink);font-weight:500}
+.file-meta{display:flex;gap:12px;align-items:center;margin-top:11px;padding-top:11px;border-top:1px solid #262C23;font-size:9.5px;color:var(--dim)}
+.file-meta .dot{width:2px;height:2px;border-radius:50%;background:#4A5247}
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;margin-top:14px}
+.stat{padding:0 11px;border-left:1px solid #2A3025}
+.stat:first-child{padding-left:0;border-left:0}
+.stat .v{font-family:'Barlow Condensed';font-size:27px;line-height:1;font-weight:600;letter-spacing:.02em}
+.stat .k{font-size:7.5px;letter-spacing:.16em;color:var(--dim);font-weight:600;margin-top:5px}
+.primary{
+  margin-top:19px;width:100%;height:57px;border:0;border-radius:17px;background:var(--lime);color:#11150B;
+  display:flex;align-items:center;justify-content:space-between;padding:0 19px;font:600 13px Inter;
+  box-shadow:0 8px 26px rgba(215,255,63,.16);cursor:pointer
+}
+.primary .arrow{font-size:20px;font-weight:400;line-height:1}
+.secondary-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.secondary{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;height:63px;
+  display:flex;align-items:center;gap:10px;padding:0 14px;cursor:pointer
+}
+.secondary svg{width:17px;height:17px;stroke:#AAB2A4;fill:none;stroke-width:1.5;flex:0 0 auto}
+.secondary .t{font-size:10.5px;font-weight:600;color:#DCE1D8}
+.secondary .s{font-size:8px;color:var(--dim);margin-top:2px}
+.warning{
+  margin-top:17px;background:rgba(255,180,84,.055);border:1px solid rgba(255,180,84,.17);
+  border-radius:14px;padding:11px 13px;display:flex;gap:9px;align-items:flex-start
+}
+.warning svg{width:14px;height:14px;stroke:var(--orange);fill:none;stroke-width:1.7;flex:0 0 auto;margin-top:1px}
+.warning p{font-size:9.5px;line-height:1.45;color:#C8B99F}
+.warning b{color:#FFD49C;font-weight:600}
+.home-foot{position:absolute;left:22px;right:22px;bottom:15px;display:flex;justify-content:space-between;font-size:7.5px;letter-spacing:.14em;text-transform:uppercase;color:#4E564B;font-weight:600}
+.home-foot span:last-child{color:#718069}
+
+/* ---------- EDITOR ---------- */
+.appbar{height:51px;display:flex;align-items:center;justify-content:space-between;padding-top:3px}
+.iconbtn{width:34px;height:34px;border-radius:11px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;background:#101310}
+.iconbtn svg{width:16px;height:16px;stroke:var(--ink);fill:none;stroke-width:1.8}
+.appbar .ttl{font-size:12px;font-weight:600;letter-spacing:.01em}
+.appbar .subttl{font-size:8px;color:var(--dim);margin-top:2px;letter-spacing:.05em}
+.presets{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;background:#0D100D;border:1px solid var(--line);border-radius:13px;padding:4px;margin-top:15px}
+.preset{height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;color:var(--dim);gap:5px}
+.preset.active{background:#242B20;color:var(--ink);box-shadow:inset 0 0 0 1px rgba(215,255,63,.22)}
+.preset .tick{width:4px;height:4px;border-radius:50%;background:var(--lime);display:none}
+.preset.active .tick{display:block}
+.editor-head{display:flex;justify-content:space-between;align-items:flex-end;margin-top:19px}
+.editor-title{font-family:'Barlow Condensed';font-size:33px;font-weight:600;line-height:.9;letter-spacing:.01em}
+.editor-sub{font-size:9px;color:var(--dim);margin-top:5px}
+.live-pill{font-size:7.5px;letter-spacing:.13em;color:var(--lime);border:1px solid rgba(215,255,63,.24);padding:5px 7px;border-radius:5px;font-weight:700}
+.summary{display:flex;gap:0;margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:15px;padding:12px 2px}
+.summary div{flex:1;padding:0 12px;border-left:1px solid var(--line)}
+.summary div:first-child{border-left:0}
+.summary .v{font-family:'Barlow Condensed';font-size:20px;font-weight:600;line-height:1}
+.summary .v em{font-style:normal;font-size:10px;color:var(--muted);font-weight:500;margin-left:2px}
+.summary .k{font-size:7px;color:var(--dim);letter-spacing:.14em;font-weight:600;margin-top:4px}
+.scroll{margin-top:6px}
+.section{margin-top:14px}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:0 3px 7px}
+.section-head span:first-child{font-size:8px;letter-spacing:.2em;font-weight:700;color:#7C8577}
+.section-head span:last-child{font-size:8px;color:#4E564B}
+.rows{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.row{height:45px;display:flex;align-items:center;gap:10px;padding:0 13px;border-top:1px solid #20251F}
+.row:first-child{border-top:0}
+.row .label{font-size:10px;font-weight:500;color:#DDE2D9}
+.row .desc{font-size:8px;color:#697165;margin-top:1px}
+.row .val{margin-left:auto;font-size:9.5px;font-weight:600;color:#AEB7A7;display:flex;align-items:center;gap:6px}
+.row .val.lime{color:var(--lime)}
+.chev{width:5px;height:9px;border-right:1px solid #4F584D;border-top:1px solid #4F584D;transform:rotate(45deg);margin-left:2px}
+.mini-chip{font-size:8px;padding:4px 7px;border-radius:5px;background:#242A20;color:#D8FF5B;border:1px solid #37402E;font-weight:600}
+.slider-row{padding:10px 13px 11px}
+.slider-top{display:flex;justify-content:space-between;align-items:center}
+.slider-top .label{font-size:10px;font-weight:500;color:#DDE2D9}
+.slider-top .val{font-size:9px;color:var(--lime);font-weight:600}
+.track{height:3px;border-radius:2px;background:#2A3028;margin-top:10px;position:relative}
+.track .fill{position:absolute;left:0;top:0;bottom:0;width:66%;background:linear-gradient(90deg,#98B62C,var(--lime));border-radius:2px}
+.track .thumb{position:absolute;left:66%;top:50%;width:12px;height:12px;border-radius:50%;background:var(--lime);transform:translate(-50%,-50%);border:3px solid #1A1F16;box-shadow:0 0 0 1px #6C7B35}
+.scale{display:flex;justify-content:space-between;font-size:7px;color:#50584D;margin-top:6px}
+.toggle{width:32px;height:18px;border-radius:10px;background:#2B3129;position:relative;border:1px solid #3A4236}
+.toggle:after{content:"";position:absolute;width:12px;height:12px;border-radius:50%;background:#828C7C;top:2px;left:2px}
+.toggle.on{background:rgba(215,255,63,.16);border-color:rgba(215,255,63,.3)}
+.toggle.on:after{background:var(--lime);left:16px}
+.savebar{position:absolute;left:0;right:0;bottom:0;height:88px;background:linear-gradient(180deg,rgba(7,9,8,0),#070908 38%);display:flex;align-items:flex-end;padding:0 22px 16px}
+.save{width:100%;height:53px;border-radius:15px;background:var(--lime);display:flex;align-items:center;justify-content:center;gap:8px;color:#11150B;font-size:12px;font-weight:700;position:relative}
+.save .unsaved{position:absolute;right:17px;width:6px;height:6px;border-radius:50%;background:#11150B;opacity:.55}
+.save svg{width:15px;height:15px;stroke:#11150B;fill:none;stroke-width:2}
+
+/* ---------- SHEET ---------- */
+.sheet-screen .content{filter:blur(1.4px)}
+.scrim{position:absolute;inset:0;background:rgba(2,4,2,.62);z-index:30}
+.sheet{
+  position:absolute;left:0;right:0;bottom:0;background:#141814;border:1px solid #2B3229;border-bottom:0;
+  border-radius:27px 27px 0 0;padding:10px 20px 25px;z-index:31;
+  box-shadow:0 -24px 60px rgba(0,0,0,.55)
+}
+.grab{width:34px;height:3px;border-radius:2px;background:#394136;margin:0 auto 19px}
+.sheet-eyebrow{font-size:8px;letter-spacing:.2em;font-weight:700;color:#74806E}
+.sheet-title{font-family:'Barlow Condensed';font-size:32px;font-weight:600;margin-top:4px;line-height:1}
+.sheet-desc{font-size:9.5px;color:#7B8576;line-height:1.5;margin-top:7px;max-width:310px}
+.options{margin-top:15px;border-top:1px solid #272D25}
+.opt{height:47px;display:flex;align-items:center;gap:11px;border-bottom:1px solid #272D25}
+.opt .radio{width:15px;height:15px;border-radius:50%;border:1px solid #4C5548;position:relative;flex:0 0 auto}
+.opt.sel .radio{border-color:var(--lime)}
+.opt.sel .radio:after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--lime)}
+.opt .name{font-size:11px;font-weight:500;color:#D7DDD3}
+.opt .hint{margin-left:auto;font-size:8px;color:#5D6659}
+.opt.sel .name{color:var(--lime)}
+.impact{margin-top:14px;display:flex;align-items:center;gap:10px}
+.impact .k{font-size:8px;letter-spacing:.14em;color:#6B7566;font-weight:600;text-transform:uppercase}
+.bars{display:flex;gap:3px;margin-left:auto}
+.bars i{width:17px;height:4px;background:#2D342B;border-radius:2px}
+.bars i.on{background:var(--lime)}
+.impact .v{font-size:8px;color:#AEB6A7;width:38px;text-align:right}
+.apply{height:51px;border-radius:14px;background:var(--lime);color:#11150B;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;margin-top:17px}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="brandline">
+    <div class="mark">LEGEND <span>TUNER</span><div style="font-family:Inter;font-size:8px;letter-spacing:.2em;color:#596253;font-weight:600;margin-top:7px">NATIVE CONFIG EDITOR · UI PROTOTYPE</div></div>
+    <div class="meta">Android 14+ · Root / Shizuku / Manual</div>
+  </div>
+  <div class="rack">
+
+    <!-- HOME -->
+    <div class="unit">
+      <div class="caption"><span class="num">01</span><span class="txt">Connect &amp; overview</span><span class="rule"></span></div>
+      <div class="phone">
+        <div class="screen">
+          <div class="statusbar">
+            <span>9:41</span>
+            <div class="icons"><div class="sig"><i></i><i></i><i></i><i></i></div><div class="batt"></div></div>
+          </div>
+          <div class="content">
+            <div class="home-head">
+              <div>
+                <div class="eyebrow">Unofficial config editor</div>
+                <div class="title">GRID<br><span class="thin">LEGENDS</span></div>
+              </div>
+              <div class="unofficial">FAN MADE</div>
+            </div>
+            <div class="sub">Tune graphics. Keep the file intact.</div>
+
+            <div class="game-card">
+              <div class="status-row"><span class="pulse"></span><span class="status-label">Game found</span><span class="access-chip">ROOT ACCESS</span></div>
+              <div class="path"><span>/Android/data/</span><br><b>com.feralinteractive.gridlegends_android</b><br><span>/files/feral_app_support/</span><b>preferences</b></div>
+              <div class="file-meta"><span>GRID™ Legends v1.1.5</span><span class="dot"></span><span>18.4 KB</span><span class="dot"></span><span>XML registry</span></div>
+              <div class="stats">
+                <div class="stat"><div class="v">60</div><div class="k">FPS CAP</div></div>
+                <div class="stat"><div class="v">HIGH</div><div class="k">TEXTURES</div></div>
+                <div class="stat"><div class="v">OFF</div><div class="k">DYN. RES</div></div>
+              </div>
+            </div>
+
+            <div class="primary"><span>Edit graphics</span><span class="arrow">→</span></div>
+            <div class="secondary-row">
+              <div class="secondary">
+                <svg viewBox="0 0 24 24"><path d="M4 7v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2H9l-2-2H4z"/><path d="M12 11v5m0 0-2-2m2 2 2-2"/></svg>
+                <div><div class="t">Backups</div><div class="s">3 snapshots</div></div>
+              </div>
+              <div class="secondary">
+                <svg viewBox="0 0 24 24"><path d="m8 6-5 6 5 6M16 6l5 6-5 6M14 4l-4 16"/></svg>
+                <div><div class="t">Raw XML</div><div class="s">Advanced</div></div>
+              </div>
+            </div>
+            <div class="warning">
+              <svg viewBox="0 0 24 24"><path d="M12 9v4m0 4h.01M10.3 3.9 2.5 18a2 2 0 0 0 1.7 3h15.6a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+              <p><b>Close the game before saving.</b> GRID Legends rewrites this file when it exits, which can undo your changes.</p>
+            </div>
+            <div class="home-foot"><span>Local only · no analytics</span><span>1.1.5 · ready</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDITOR -->
+    <div class="unit">
+      <div class="caption"><span class="num">02</span><span class="txt">Preset editor</span><span class="rule"></span></div>
+      <div class="phone">
+        <div class="screen">
+          <div class="statusbar"><span>9:41</span><div class="icons"><div class="sig"><i></i><i></i><i></i><i></i></div><div class="batt"></div></div></div>
+          <div class="content">
+            <div class="appbar">
+              <div class="iconbtn"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></div>
+              <div style="text-align:center"><div class="ttl">Graphics</div><div class="subttl">BatterySaver · Graphics · Performance</div></div>
+              <div class="iconbtn"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></div>
+            </div>
+
+            <div class="presets">
+              <div class="preset"><span class="tick"></span>Battery Saver</div>
+              <div class="preset active"><span class="tick"></span>Graphics</div>
+              <div class="preset"><span class="tick"></span>Performance</div>
+            </div>
+
+            <div class="editor-head">
+              <div><div class="editor-title">Graphics preset</div><div class="editor-sub">Balanced quality for supported devices</div></div>
+              <div class="live-pill">ACTIVE</div>
+            </div>
+
+            <div class="summary">
+              <div><div class="v">60<em>fps</em></div><div class="k">CAP</div></div>
+              <div><div class="v">70<em>%</em></div><div class="k">MAX SCALE</div></div>
+              <div><div class="v">OFF</div><div class="k">DYN. RES</div></div>
+            </div>
+
+            <div class="scroll">
+              <div class="section">
+                <div class="section-head"><span>FRAME RATE</span><span>3 settings</span></div>
+                <div class="rows">
+                  <div class="row"><div><div class="label">FPS cap</div></div><div class="val"><span class="mini-chip">60 fps</span><span class="chev"></span></div></div>
+                  <div class="slider-row">
+                    <div class="slider-top"><div class="label">Resolution scale</div><div class="val">70% max · 60% min</div></div>
+                    <div class="track"><div class="fill"></div><div class="thumb"></div></div>
+                    <div class="scale"><span>50</span><span>75</span><span>100</span></div>
+                  </div>
+                  <div class="row"><div><div class="label">Dynamic resolution</div><div class="desc">Lower resolution under load</div></div><div class="val"><div class="toggle"></div></div></div>
+                </div>
+              </div>
+
+              <div class="section">
+                <div class="section-head"><span>VISUALS</span><span>5 settings</span></div>
+                <div class="rows">
+                  <div class="row"><div><div class="label">Anti-aliasing</div></div><div class="val">4×<span class="chev"></span></div></div>
+                  <div class="row"><div><div class="label">Texture quality</div></div><div class="val lime">High<span class="chev"></span></div></div>
+                  <div class="row"><div><div class="label">Shadows</div></div><div class="val lime">High<span class="chev"></span></div></div>
+                  <div class="row"><div><div class="label">Ambient occlusion</div></div><div class="val">On<span class="chev"></span></div></div>
+                  <div class="row"><div><div class="label">Level of detail</div></div><div class="val">High<span class="chev"></span></div></div>
+                </div>
+              </div>
+
+              <div class="section">
+                <div class="section-head"><span>EFFECTS</span><span>3 of 8</span></div>
+                <div class="rows">
+                  <div class="row"><div><div class="label">Motion blur</div></div><div class="val">On<span class="chev"></span></div></div>
+                  <div class="row"><div><div class="label">Particles</div></div><div class="val">High<span class="chev"></span></div></div>
+                  <div class="row"><div><div class="label">Screen-space reflections</div></div><div class="val">On<span class="chev"></span></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="savebar"><div class="save"><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg>Save changes<span class="unsaved"></span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SHEET -->
+    <div class="unit">
+      <div class="caption"><span class="num">03</span><span class="txt">Fine-tune a setting</span><span class="rule"></span></div>
+      <div class="phone">
+        <div class="screen sheet-screen">
+          <div class="statusbar"><span>9:41</span><div class="icons"><div class="sig"><i></i><i></i><i></i><i></i></div><div class="batt"></div></div></div>
+          <div class="content">
+            <div class="appbar">
+              <div class="iconbtn"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></div>
+              <div style="text-align:center"><div class="ttl">Graphics</div><div class="subttl">Graphics preset</div></div>
+              <div class="iconbtn"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></div>
+            </div>
+            <div class="presets"><div class="preset">Battery Saver</div><div class="preset active"><span class="tick"></span>Graphics</div><div class="preset">Performance</div></div>
+            <div class="editor-head"><div><div class="editor-title">Graphics preset</div><div class="editor-sub">Balanced quality for supported devices</div></div><div class="live-pill">ACTIVE</div></div>
+            <div class="summary"><div><div class="v">60<em>fps</em></div><div class="k">CAP</div></div><div><div class="v">70<em>%</em></div><div class="k">MAX SCALE</div></div><div><div class="v">OFF</div><div class="k">DYN. RES</div></div></div>
+            <div class="section" style="margin-top:14px"><div class="section-head"><span>VISUALS</span><span>5 settings</span></div><div class="rows">
+              <div class="row"><div><div class="label">Texture quality</div></div><div class="val lime">High<span class="chev"></span></div></div>
+              <div class="row"><div><div class="label">Shadows</div></div><div class="val lime">High<span class="chev"></span></div></div>
+              <div class="row"><div><div class="label">Ambient occlusion</div></div><div class="val">On<span class="chev"></span></div></div>
+            </div></div>
+          </div>
+          <div class="scrim"></div>
+          <div class="sheet">
+            <div class="grab"></div>
+            <div class="sheet-eyebrow">GRAPHICS PRESET · VISUALS</div>
+            <div class="sheet-title">Shadows</div>
+            <div class="sheet-desc">Controls shadow resolution and the distance at which detailed shadows are drawn.</div>
+            <div class="options">
+              <div class="opt"><span class="radio"></span><span class="name">Off</span><span class="hint">Fastest</span></div>
+              <div class="opt"><span class="radio"></span><span class="name">Low</span></div>
+              <div class="opt"><span class="radio"></span><span class="name">Medium</span></div>
+              <div class="opt sel"><span class="radio"></span><span class="name">High</span><span class="hint">Recommended</span></div>
+              <div class="opt"><span class="radio"></span><span class="name">Ultra</span><span class="hint">Expensive</span></div>
+            </div>
+            <div class="impact"><span class="k">Performance cost</span><div class="bars"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div><span class="v">3 / 5</span></div>
+            <div class="apply">Apply to Graphics preset</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

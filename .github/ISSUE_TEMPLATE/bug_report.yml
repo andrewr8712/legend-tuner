@@ -1,0 +1,49 @@
+name: Bug report
+description: Report a crash, layout issue, or save problem
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not attach a real `preferences` file without removing account and device identifiers.
+  - type: input
+    id: device
+    attributes:
+      label: Device and Android version
+      placeholder: Lenovo Yoga Tab Plus TB520FU, Android 17
+    validations:
+      required: true
+  - type: dropdown
+    id: access
+    attributes:
+      label: Access mode
+      options: [Root, Shizuku, Manual file, Direct]
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Legend Tuner version
+      placeholder: 1.1.0-debug
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: "1. Open ...\n2. Tap ...\n3. See ..."
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error text or logs
+      render: text
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I removed personal identifiers from any attached config or log.
+          required: true

@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Legend Tuner — Tablet UI</title>
+<style>
+@font-face{font-family:'Barlow Condensed';src:url('fonts/BarlowCondensed-500.woff2') format('woff2');font-weight:500}
+@font-face{font-family:'Barlow Condensed';src:url('fonts/BarlowCondensed-600.woff2') format('woff2');font-weight:600}
+@font-face{font-family:'Barlow Condensed';src:url('fonts/BarlowCondensed-700.woff2') format('woff2');font-weight:700}
+@font-face{font-family:'Inter';src:url('fonts/Inter-400.woff2') format('woff2');font-weight:100 900}
+:root{
+  --bg:#070908;--ink:#F3F5EF;--muted:#98A092;--dim:#5E675D;
+  --card:#121512;--card2:#171B17;--line:#252B24;
+  --lime:#D7FF3F;--orange:#FFB454;--red:#FF6259;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif}
+body{min-height:100vh;background:radial-gradient(1000px 600px at 50% -180px,rgba(215,255,63,.09),transparent 65%),linear-gradient(rgba(255,255,255,.017) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.017) 1px,transparent 1px),var(--bg);background-size:auto,44px 44px,44px 44px,auto}
+.stage{width:1500px;margin:0 auto;padding:34px 0 50px}
+.brandline{display:flex;align-items:flex-end;justify-content:space-between;padding:0 2px 20px}
+.mark{font-family:'Barlow Condensed';font-weight:700;font-size:32px;letter-spacing:.04em;line-height:.9}
+.mark span{color:var(--lime)}
+.mark small{display:block;font-family:Inter;font-size:8px;letter-spacing:.21em;color:#596253;font-weight:600;margin-top:8px}
+.meta{text-align:right;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600;line-height:1.8}
+.meta b{color:#9DA793;font-weight:600}
+.device-wrap{display:flex;justify-content:center}
+.device{
+  width:1400px;height:875px;border-radius:38px;background:#050605;border:9px solid #232822;position:relative;overflow:hidden;
+  box-shadow:0 0 0 1px #050605,0 38px 90px rgba(0,0,0,.6),inset 0 0 0 1px rgba(255,255,255,.04)
+}
+.device:before{content:"";position:absolute;top:13px;left:50%;transform:translateX(-50%);width:7px;height:7px;border-radius:50%;background:#0B0D0B;border:1px solid #2A3029;z-index:60}
+.screen{position:absolute;inset:0;border-radius:29px;overflow:hidden;background:var(--bg);display:flex}
+.status{height:37px;position:absolute;top:0;left:0;right:0;display:flex;align-items:flex-end;justify-content:space-between;padding:0 22px 6px;font-size:10px;font-weight:600;z-index:50;pointer-events:none}
+.status .icons{display:flex;gap:10px;align-items:center;opacity:.9}
+.sig{display:flex;gap:2px;align-items:flex-end;height:8px}.sig i{display:block;width:2.5px;background:var(--ink);border-radius:1px}.sig i:nth-child(1){height:3px}.sig i:nth-child(2){height:4px}.sig i:nth-child(3){height:6px}.sig i:nth-child(4){height:8px}
+.batt{width:17px;height:8px;border:1px solid var(--ink);border-radius:2px;position:relative}.batt:before{content:"";position:absolute;left:1.5px;top:1.5px;bottom:1.5px;width:10px;background:var(--ink);border-radius:1px}.batt:after{content:"";position:absolute;right:-3px;top:2px;width:2px;height:3px;background:var(--ink);border-radius:0 1px 1px 0}
+.wifi{font-size:10px;letter-spacing:-1px}
+
+/* rail */
+.rail{width:82px;flex:0 0 82px;border-right:1px solid #1D221C;padding-top:50px;display:flex;flex-direction:column;align-items:center;position:relative;z-index:20}
+.logo{width:35px;height:35px;border-radius:11px;background:var(--lime);display:flex;align-items:center;justify-content:center;color:#11150B;font-family:'Barlow Condensed';font-weight:700;font-size:21px;box-shadow:0 4px 16px rgba(215,255,63,.14)}
+.rail-items{margin-top:26px;display:flex;flex-direction:column;gap:7px;width:100%;padding:0 8px}
+.rail-item{height:56px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#626B60;font-size:7px;letter-spacing:.07em;font-weight:600}
+.rail-item svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5}
+.rail-item.active{background:#1B2019;color:var(--lime)}
+.rail-item.active svg{stroke:var(--lime)}
+.rail-foot{margin-top:auto;padding-bottom:17px;display:flex;flex-direction:column;align-items:center;gap:13px}
+.dot-conn{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 4px rgba(215,255,63,.09)}
+.rail-foot .lbl{font-size:6.5px;letter-spacing:.14em;color:#5D675B;font-weight:600}
+
+.main{flex:1;min-width:0;padding:44px 24px 0 26px;position:relative;height:100%}
+.topline{height:34px;display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}
+.crumb{font-size:8px;letter-spacing:.18em;font-weight:600;color:#626D5E;text-transform:uppercase}
+.crumb b{color:#A8B2A2;font-weight:600}
+.crumb-editor{display:none}
+body.editor .crumb-home{display:none}
+body.editor .crumb-editor{display:inline}
+.top-actions{display:flex;align-items:center;gap:8px}
+.pill{height:26px;border-radius:7px;border:1px solid #2B3228;background:#111410;display:flex;align-items:center;gap:6px;padding:0 9px;font-size:7.5px;letter-spacing:.12em;font-weight:700;color:#AAB4A4}
+.pill .live{width:5px;height:5px;border-radius:50%;background:var(--lime)}
+.pill.lime{border-color:rgba(215,255,63,.28);background:rgba(215,255,63,.07);color:var(--lime)}
+.ghostbtn{height:26px;border-radius:7px;border:1px solid #2B3228;background:#111410;color:#8E9889;font-size:8px;font-weight:600;padding:0 10px;display:flex;align-items:center;gap:6px}
+.ghostbtn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.6}
+
+/* common */
+.eyebrow{font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--lime);font-weight:700}
+.hero-title{font-family:'Barlow Condensed';font-size:60px;line-height:.84;font-weight:700;letter-spacing:.005em}
+.hero-title span{color:#8D978A;font-weight:500}
+.card{background:linear-gradient(145deg,#151915,#101310 70%);border:1px solid #272D24;border-radius:18px}
+.card.flat{background:var(--card)}
+.sec-title{font-family:'Barlow Condensed';font-size:23px;font-weight:600;letter-spacing:.01em;line-height:1}
+.sec-sub{font-size:8.5px;color:#707A6C;margin-top:3px}
+.row{display:flex;align-items:center;gap:11px;min-height:50px;padding:0 15px;border-top:1px solid #20251F}
+.row:first-child{border-top:0}
+.row .name{font-size:10.5px;font-weight:500;color:#DDE2D9}
+.row .desc{font-size:8px;color:#667061;margin-top:2px}
+.row .val{margin-left:auto;font-size:9.5px;font-weight:600;color:#AEB7A7;display:flex;align-items:center;gap:7px}
+.row .val.lime{color:var(--lime)}
+.chev{width:5px;height:8px;border-right:1px solid #50594B;border-top:1px solid #50594B;transform:rotate(45deg)}
+.chip{font-size:7.5px;padding:4px 7px;border-radius:5px;background:#242A20;color:#D8FF5B;border:1px solid #37402E;font-weight:600}
+.toggle{width:33px;height:18px;border-radius:10px;background:#2B3129;position:relative;border:1px solid #3A4236;flex:0 0 auto}
+.toggle:after{content:"";position:absolute;width:12px;height:12px;border-radius:50%;background:#828C7C;top:2px;left:2px}
+.toggle.on{background:rgba(215,255,63,.16);border-color:rgba(215,255,63,.3)}
+.toggle.on:after{background:var(--lime);left:17px}
+.slider{padding:13px 15px 14px;border-top:1px solid #20251F}
+.slider-top{display:flex;align-items:center;justify-content:space-between}
+.slider-top .name{font-size:10.5px;font-weight:500;color:#DDE2D9}
+.slider-top .val{font-size:9px;color:var(--lime);font-weight:600}
+.track{height:4px;border-radius:2px;background:#2B3129;margin-top:11px;position:relative}
+.track .fill{position:absolute;left:0;top:0;bottom:0;width:66%;background:linear-gradient(90deg,#8FA92A,var(--lime));border-radius:2px}
+.track .thumb{position:absolute;left:66%;top:50%;width:13px;height:13px;border-radius:50%;background:var(--lime);transform:translate(-50%,-50%);border:3px solid #1A1F16;box-shadow:0 0 0 1px #718134}
+.scale{display:flex;justify-content:space-between;font-size:7px;color:#50584D;margin-top:6px}
+
+/* ============ HOME ============ */
+.snapshot{margin-top:14px;position:relative;z-index:1;background:#0C0F0B;border:1px solid #242B21;border-radius:12px;padding:12px 14px}
+.snap-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.snap-top .k{font-size:6.5px;letter-spacing:.17em;color:#5D6859;font-weight:700}
+.snap-top .v{font-size:6.5px;letter-spacing:.12em;color:var(--lime);font-weight:700}
+.snap-row{display:flex;align-items:center;gap:10px;height:24px}
+.snap-row .n{font-size:8px;color:#A8B2A1;width:78px;flex:0 0 auto}
+.snap-row .bar{height:3px;border-radius:2px;background:#272E24;flex:1;position:relative;overflow:hidden}
+.snap-row .bar i{position:absolute;left:0;top:0;bottom:0;border-radius:2px;background:#B9DD31}
+.snap-row .v{font-size:7.5px;color:#C4CCBD;width:34px;text-align:right;font-weight:600}
+
+.quick{margin-top:18px;position:relative;z-index:1}
+.quick-head{font-size:6.5px;letter-spacing:.18em;color:#5E695B;font-weight:700;margin-bottom:7px}
+.quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.quick-item{background:#0D100C;border:1px solid #262D23;border-radius:10px;padding:10px 11px;display:flex;align-items:center;gap:9px}
+.quick-item svg{width:14px;height:14px;stroke:#A9B3A2;fill:none;stroke-width:1.5;flex:0 0 auto}
+.quick-item .qt{font-size:8.5px;font-weight:600;color:#C7CFC1}
+.quick-item .qs{font-size:6.5px;color:#5D6759;margin-top:2px}
+
+.home-view{display:flex;flex-direction:column;height:calc(100% - 34px)}
+.home-grid{display:grid;grid-template-columns:1.34fr .86fr;gap:18px;flex:1;min-height:0}
+.hero{padding:26px 27px 22px;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.hero:after{content:"";position:absolute;right:-90px;top:-120px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(215,255,63,.09),transparent 65%)}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:1}
+.fanmade{font-size:7px;letter-spacing:.14em;color:#667061;border:1px solid #2C332A;padding:5px 7px;border-radius:5px;font-weight:600}
+.hero .sub{font-size:10px;line-height:1.55;color:#828D7E;margin-top:12px;max-width:390px}
+.game-strip{margin-top:auto;background:rgba(9,11,9,.58);border:1px solid #2B3228;border-radius:13px;padding:11px 13px;position:relative;z-index:1;backdrop-filter:blur(6px)}
+.gs-top{display:flex;align-items:center;gap:7px}
+.gs-dot{width:6px;height:6px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 4px rgba(215,255,63,.08)}
+.gs-title{font-size:7.5px;letter-spacing:.17em;font-weight:700;color:var(--lime)}
+.gs-access{margin-left:auto;font-size:6.5px;letter-spacing:.12em;font-weight:700;color:var(--lime);border:1px solid rgba(215,255,63,.28);background:rgba(215,255,63,.06);padding:4px 6px;border-radius:4px}
+.gs-path{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:8px;line-height:1.55;color:#8F9989;margin-top:8px;overflow-wrap:anywhere}
+.gs-path b{color:#D5DCD1;font-weight:500}
+.gs-meta{display:flex;gap:10px;align-items:center;margin-top:7px;font-size:7.5px;color:#626C5F}
+.gs-meta i{width:2px;height:2px;border-radius:50%;background:#424B40}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:12px;padding-top:11px;border-top:1px solid #242A22}
+.stat{padding:0 13px;border-left:1px solid #242A22}
+.stat:first-child{padding-left:0;border-left:0}
+.stat .v{font-family:'Barlow Condensed';font-size:27px;font-weight:600;line-height:.9;letter-spacing:.01em}
+.stat .v em{font-style:normal;font-size:10px;color:#8B9586;margin-left:1px;font-weight:500}
+.stat .k{font-size:6.5px;letter-spacing:.14em;color:#5C6659;font-weight:600;margin-top:4px}
+
+.side{display:flex;flex-direction:column;gap:12px;min-height:0}
+.action-primary{height:120px;border-radius:18px;background:var(--lime);color:#11150B;padding:16px 19px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;box-shadow:0 10px 30px rgba(215,255,63,.12)}
+.action-primary:after{content:"";position:absolute;right:-24px;bottom:-38px;width:150px;height:150px;border-radius:50%;border:1px solid rgba(17,21,11,.15)}
+.action-primary .t{font-family:'Barlow Condensed';font-size:31px;font-weight:600;line-height:.9}
+.action-primary .s{font-size:8px;font-weight:600;color:#3A451C;letter-spacing:.04em}
+.action-primary .arrow{position:absolute;right:19px;top:19px;font-size:24px;font-weight:400;line-height:1}
+.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.action-tile{height:86px;padding:14px;display:flex;flex-direction:column;justify-content:space-between}
+.action-tile svg{width:18px;height:18px;stroke:#AAB4A4;fill:none;stroke-width:1.5}
+.action-tile .t{font-size:10px;font-weight:600;color:#D9DFD5}
+.action-tile .s{font-size:7.5px;color:#667061;margin-top:2px}
+.display-card{padding:13px 15px;display:flex;align-items:center;gap:12px}
+.display-card .ic{width:34px;height:34px;border-radius:10px;background:#1E241C;display:flex;align-items:center;justify-content:center}
+.display-card .ic svg{width:18px;height:18px;stroke:var(--lime);fill:none;stroke-width:1.3}
+.display-card .k{font-size:6.5px;letter-spacing:.15em;color:#677162;font-weight:600}
+.display-card .v{font-size:10.5px;font-weight:600;color:#D6DDD2;margin-top:2px}
+.display-card .v span{color:#879181;font-weight:400}
+.warn{padding:12px 14px;display:flex;gap:10px;align-items:flex-start;background:rgba(255,180,84,.05);border-color:rgba(255,180,84,.16)}
+.warn svg{width:15px;height:15px;stroke:var(--orange);fill:none;stroke-width:1.7;flex:0 0 auto;margin-top:1px}
+.warn p{font-size:8.5px;line-height:1.5;color:#C7B99F}
+.warn b{color:#FFD49C;font-weight:600}
+.home-foot{display:flex;justify-content:space-between;font-size:7px;letter-spacing:.13em;text-transform:uppercase;color:#4E584B;font-weight:600;padding:12px 2px 0}
+
+/* ============ EDITOR ============ */
+.editor-view{display:none;flex-direction:column;height:calc(100% - 34px)}
+body.editor .home-view{display:none}
+body.editor .editor-view{display:flex}
+.editor-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:14px}
+.editor-head .title{font-family:'Barlow Condensed';font-size:36px;font-weight:600;line-height:.9}
+.editor-head .sub{font-size:8.5px;color:#707A6C;margin-top:4px}
+.savebtn{height:38px;border-radius:10px;background:var(--lime);color:#11150B;display:flex;align-items:center;gap:7px;padding:0 17px;font-size:9.5px;font-weight:700}
+.savebtn svg{width:14px;height:14px;stroke:#11150B;fill:none;stroke-width:2.2}
+.preset-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:15px}
+.preset-card{border:1px solid #272D24;background:#111410;border-radius:14px;padding:12px 14px;position:relative;min-height:76px;display:flex;flex-direction:column;justify-content:space-between}
+.preset-card.active{border-color:rgba(215,255,63,.45);background:linear-gradient(135deg,rgba(215,255,63,.10),rgba(215,255,63,.025) 65%,transparent)}
+.preset-card .top{display:flex;align-items:center;gap:7px}
+.preset-card .dot{width:5px;height:5px;border-radius:50%;background:#454E42}
+.preset-card.active .dot{background:var(--lime)}
+.preset-card .name{font-size:10.5px;font-weight:600;color:#C3CBBE}
+.preset-card.active .name{color:var(--ink)}
+.preset-card .flag{margin-left:auto;font-size:6px;letter-spacing:.13em;color:var(--lime);font-weight:700}
+.preset-card .bottom{display:flex;align-items:flex-end;gap:8px}
+.preset-card .num{font-family:'Barlow Condensed';font-size:22px;line-height:.85;font-weight:600;color:#DDE4D8}
+.preset-card .num em{font-style:normal;font-size:8px;color:#778174;margin-left:1px}
+.preset-card .note{font-size:7px;color:#626C5E;padding-bottom:1px}
+.editor-body{display:flex;gap:15px;flex:1;min-height:0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;flex:1;min-width:0;overflow:hidden;align-content:start}
+.group{overflow:hidden}
+.group-head{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 15px;border-bottom:1px solid #222820}
+.group-head .gname{font-size:7px;letter-spacing:.19em;font-weight:700;color:#7C8778}
+.group-head .gcount{font-size:7px;color:#4F594C}
+.group .row{min-height:46px}
+.group .slider{padding-top:11px;padding-bottom:11px}
+.group .slider + .row{border-top:1px solid #20251F}
+
+/* inspector */
+.inspector{width:350px;flex:0 0 350px;background:linear-gradient(160deg,#161B15,#0F120F);border:1px solid #2A3127;border-radius:18px;display:flex;flex-direction:column;overflow:hidden}
+.insp-head{padding:18px 18px 15px;border-bottom:1px solid #252C23}
+.insp-eyebrow{font-size:7px;letter-spacing:.2em;color:#6E7969;font-weight:700}
+.insp-title{font-family:'Barlow Condensed';font-size:34px;font-weight:600;line-height:1;margin-top:5px}
+.insp-desc{font-size:8.5px;color:#7A8575;line-height:1.55;margin-top:7px}
+.insp-options{padding:5px 17px 0}
+.insp-opt{height:45px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #252C23}
+.radio{width:15px;height:15px;border-radius:50%;border:1px solid #505A4C;position:relative;flex:0 0 auto}
+.insp-opt.sel .radio{border-color:var(--lime)}
+.insp-opt.sel .radio:after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--lime)}
+.insp-opt .n{font-size:10.5px;font-weight:500;color:#CFD6CA}
+.insp-opt.sel .n{color:var(--lime)}
+.insp-opt .hint{margin-left:auto;font-size:7px;color:#5C6658}
+.impact{padding:13px 18px 0}
+.impact .k{font-size:6.5px;letter-spacing:.15em;color:#687363;font-weight:700;text-transform:uppercase}
+.impact .line{display:flex;align-items:center;gap:9px;margin-top:8px}
+.bars{display:flex;gap:3px}
+.bars i{width:25px;height:4px;background:#2C332A;border-radius:2px}
+.bars i.on{background:var(--lime)}
+.impact .v{font-size:7.5px;color:#A6B09F;margin-left:auto}
+.insp-note{margin:14px 18px 0;padding:10px 11px;border-radius:9px;background:#0C0F0C;border:1px solid #232A21;font-size:7.5px;line-height:1.55;color:#667060}
+.insp-note b{color:#AAB5A3;font-weight:500}
+.insp-apply{margin:auto 18px 17px;height:40px;border-radius:10px;background:var(--lime);color:#11150B;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:700}
+.editor-foot{display:flex;justify-content:space-between;align-items:center;padding:10px 2px 0;font-size:7px;letter-spacing:.1em;color:#4E584B;font-weight:600;text-transform:uppercase}
+.editor-foot .saved{display:flex;align-items:center;gap:5px}
+.editor-foot .saved i{width:4px;height:4px;border-radius:50%;background:var(--lime)}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="brandline">
+    <div class="mark">LEGEND <span>TUNER</span><small>TABLET UI · LANDSCAPE · 12.7″ 3K</small></div>
+    <div class="meta"><b>LENOVO YOGA TAB PLUS</b><br>TB520FU · 2944 × 1840 · ANDROID 14+</div>
+  </div>
+  <div class="device-wrap">
+    <div class="device">
+      <div class="screen">
+        <div class="status"><span>9:41</span><div class="icons"><span class="wifi">◔</span><div class="sig"><i></i><i></i><i></i><i></i></div><div class="batt"></div></div></div>
+        <nav class="rail">
+          <div class="logo">L</div>
+          <div class="rail-items">
+            <div class="rail-item active"><svg viewBox="0 0 24 24"><path d="M4 13h6V4H4v9zm10 7h6v-9h-6v9zM4 20h6v-4H4v4zM14 4v4h6V4h-6z"/></svg>Dashboard</div>
+            <div class="rail-item"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="2" fill="#070908"/><circle cx="15" cy="12" r="2" fill="#070908"/><circle cx="7" cy="18" r="2" fill="#070908"/></svg>Graphics</div>
+            <div class="rail-item"><svg viewBox="0 0 24 24"><path d="M4 7v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2H9L7 5H4z"/><path d="M12 11v5m0 0-2-2m2 2 2-2"/></svg>Backups</div>
+            <div class="rail-item"><svg viewBox="0 0 24 24"><path d="m8 6-5 6 5 6M16 6l5 6-5 6M14 4l-4 16"/></svg>Raw XML</div>
+          </div>
+          <div class="rail-foot"><span class="dot-conn"></span><span class="lbl">ROOT</span></div>
+        </nav>
+        <main class="main">
+          <div class="topline">
+            <div class="crumb">LEGEND TUNER <b class="crumb-home">/ DASHBOARD</b><b class="crumb-editor">/ GRAPHICS</b></div>
+            <div class="top-actions">
+              <div class="pill"><span class="live"></span>GAME READY</div>
+              <div class="pill lime">ROOT ACCESS</div>
+              <div class="ghostbtn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.56V21h-4v-.09A1.7 1.7 0 0 0 9 19.35a1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 4.63 15a1.7 1.7 0 0 0-1.56-1.03H3v-4h.09A1.7 1.7 0 0 0 4.65 9a1.7 1.7 0 0 0-.34-1.88l-.06-.06 2.83-2.83.06.06A1.7 1.7 0 0 0 9 4.63h.01A1.7 1.7 0 0 0 10 3.09V3h4v.09a1.7 1.7 0 0 0 1.03 1.56 1.7 1.7 0 0 0 1.88-.34l.06-.06 2.83 2.83-.06.06A1.7 1.7 0 0 0 19.37 9v.01A1.7 1.7 0 0 0 20.91 10H21v4h-.09A1.7 1.7 0 0 0 19.4 15z"/></svg>Settings</div>
+            </div>
+          </div>
+
+          <section class="home-view">
+            <div class="home-grid">
+              <div class="card hero">
+                <div class="hero-top">
+                  <div class="eyebrow">Unofficial config editor</div>
+                  <div class="fanmade">FAN MADE · NO TELEMETRY</div>
+                </div>
+                <div class="hero-title" style="margin-top:18px">YOUR GRID.<br><span>YOUR FRAME.</span></div>
+                <div class="sub">Fine-tune GRID Legends on the big screen. Edit the game’s own XML registry with readable controls, automatic backups, and a raw editor when you need it.</div>
+                <div class="quick">
+                  <div class="quick-head">QUICK TUNE</div>
+                  <div class="quick-grid">
+                    <div class="quick-item"><svg viewBox="0 0 24 24"><path d="M4 17l6-6 4 4 6-7"/><path d="M15 8h5v5"/></svg><div><div class="qt">Frame rate</div><div class="qs">60 fps cap</div></div></div>
+                    <div class="quick-item"><svg viewBox="0 0 24 24"><path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6l1.4 1.4m10 10 1.4 1.4m0-12.8-1.4 1.4m-10 10L5.6 18.4"/><circle cx="12" cy="12" r="4"/></svg><div><div class="qt">Visuals</div><div class="qs">Textures · High</div></div></div>
+                    <div class="quick-item"><svg viewBox="0 0 24 24"><path d="M12 3l2.2 5.8L20 11l-5.8 2.2L12 19l-2.2-5.8L4 11l5.8-2.2L12 3z"/></svg><div><div class="qt">Effects</div><div class="qs">8 options</div></div></div>
+                  </div>
+                </div>
+                <div class="snapshot">
+                  <div class="snap-top"><span class="k">CURRENT PRESET SNAPSHOT</span><span class="v">GRAPHICS · ACTIVE</span></div>
+                  <div class="snap-row"><span class="n">Shadows</span><span class="bar"><i style="width:75%"></i></span><span class="v">High</span></div>
+                  <div class="snap-row"><span class="n">Textures</span><span class="bar"><i style="width:75%"></i></span><span class="v">High</span></div>
+                  <div class="snap-row"><span class="n">Resolution</span><span class="bar"><i style="width:70%"></i></span><span class="v">70%</span></div>
+                </div>
+                <div class="game-strip">
+                  <div class="gs-top"><span class="gs-dot"></span><span class="gs-title">GAME FOUND</span><span class="gs-access">ROOT ACCESS</span></div>
+                  <div class="gs-path">/Android/data/<b>com.feralinteractive.gridlegends_android</b>/files/feral_app_support/<b>preferences</b></div>
+                  <div class="gs-meta"><span>GRID™ Legends v1.1.5</span><i></i><span>18.4 KB</span><i></i><span>XML registry</span><i></i><span>Internal storage</span></div>
+                  <div class="stats">
+                    <div class="stat"><div class="v">60</div><div class="k">FPS CAP</div></div>
+                    <div class="stat"><div class="v">HIGH</div><div class="k">TEXTURES</div></div>
+                    <div class="stat"><div class="v">OFF</div><div class="k">DYN. RES</div></div>
+                    <div class="stat"><div class="v">838<em>p</em></div><div class="k">RENDER HEIGHT</div></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="side">
+                <div class="action-primary"><span class="arrow">→</span><div class="t">Edit<br>graphics</div><div class="s">3 presets · 25 settings</div></div>
+                <div class="action-grid">
+                  <div class="card action-tile"><svg viewBox="0 0 24 24"><path d="M4 7v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2H9L7 5H4z"/><path d="M12 11v5m0 0-2-2m2 2 2-2"/></svg><div><div class="t">Backups</div><div class="s">3 snapshots · 2 min ago</div></div></div>
+                  <div class="card action-tile"><svg viewBox="0 0 24 24"><path d="m8 6-5 6 5 6M16 6l5 6-5 6M14 4l-4 16"/></svg><div><div class="t">Raw XML</div><div class="s">Advanced editing</div></div></div>
+                </div>
+                <div class="card display-card">
+                  <div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+                  <div><div class="k">DETECTED DISPLAY</div><div class="v">2944 × 1840 <span>· 12.7″ · 16:10</span></div></div>
+                </div>
+                <div class="card warn">
+                  <svg viewBox="0 0 24 24"><path d="M12 9v4m0 4h.01M10.3 3.9 2.5 18a2 2 0 0 0 1.7 3h15.6a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+                  <p><b>Close the game before saving.</b> GRID Legends rewrites this file when it exits, which can undo your changes. The app backs up the original before every write.</p>
+                </div>
+              </div>
+            </div>
+            <div class="home-foot"><span>LOCAL ONLY · NO NETWORK PERMISSION</span><span>TABLET LAYOUT · LANDSCAPE</span><span>1.1.5 · READY</span></div>
+          </section>
+
+          <section class="editor-view">
+            <div class="editor-head">
+              <div><div class="title">Graphics preset</div><div class="sub">Editing the preset that GRID Legends will load on next launch</div></div>
+              <div style="display:flex;align-items:center;gap:9px"><div class="ghostbtn">Discard</div><div class="savebtn"><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg>Save changes</div></div>
+            </div>
+            <div class="preset-row">
+              <div class="preset-card"><div class="top"><span class="dot"></span><span class="name">Battery Saver</span></div><div class="bottom"><div class="num">30<em>fps</em></div><div class="note">Maximum battery life</div></div></div>
+              <div class="preset-card active"><div class="top"><span class="dot"></span><span class="name">Graphics</span><span class="flag">ACTIVE</span></div><div class="bottom"><div class="num">60<em>fps</em></div><div class="note">Balanced quality</div></div></div>
+              <div class="preset-card"><div class="top"><span class="dot"></span><span class="name">Performance</span></div><div class="bottom"><div class="num">60<em>fps</em></div><div class="note">Lowest effects</div></div></div>
+            </div>
+
+            <div class="editor-body">
+              <div class="grid">
+                <div class="card group">
+                  <div class="group-head"><span class="gname">FRAME RATE</span><span class="gcount">3 SETTINGS</span></div>
+                  <div class="row"><div class="name">FPS cap</div><div class="val"><span class="chip">60 fps</span><span class="chev"></span></div></div>
+                  <div class="slider"><div class="slider-top"><div class="name">Resolution scale</div><div class="val">70% max · 60% min</div></div><div class="track"><div class="fill"></div><div class="thumb"></div></div><div class="scale"><span>50</span><span>75</span><span>100</span></div></div>
+                  <div class="row"><div><div class="name">Dynamic resolution</div><div class="desc">Lower resolution under load</div></div><div class="val"><div class="toggle"></div></div></div>
+                </div>
+
+                <div class="card group">
+                  <div class="group-head"><span class="gname">VISUALS</span><span class="gcount">5 SETTINGS</span></div>
+                  <div class="row"><div class="name">Anti-aliasing</div><div class="val">4×<span class="chev"></span></div></div>
+                  <div class="row"><div class="name">Texture quality</div><div class="val lime">High<span class="chev"></span></div></div>
+                  <div class="row"><div class="name">Shadows</div><div class="val lime">High<span class="chev"></span></div></div>
+                  <div class="row"><div class="name">Ambient occlusion</div><div class="val">On<span class="chev"></span></div></div>
+                  <div class="row"><div class="name">Level of detail</div><div class="val">High<span class="chev"></span></div></div>
+                </div>
+
+                <div class="card group">
+                  <div class="group-head"><span class="gname">EFFECTS</span><span class="gcount">5 OF 8</span></div>
+                  <div class="row"><div class="name">Motion blur</div><div class="val">On<span class="chev"></span></div></div>
+                  <div class="row"><div class="name">Particles</div><div class="val">High<span class="chev"></span></div></div>
+                  <div class="row"><div class="name">Screen-space reflections</div><div class="val">On<span class="chev"></span></div></div>
+                  <div class="row"><div class="name">Volumetric lights</div><div class="val">On<span class="chev"></span></div></div>
+                  <div class="row"><div class="name">Weather effects</div><div class="val">On<span class="chev"></span></div></div>
+                </div>
+
+                <div class="card group">
+                  <div class="group-head"><span class="gname">DISPLAY</span><span class="gcount">3 SETTINGS</span></div>
+                  <div class="row"><div class="name">HDR</div><div class="val"><div class="toggle on"></div></div></div>
+                  <div class="row"><div class="name">VSync</div><div class="val"><div class="toggle"></div></div></div>
+                  <div class="row"><div><div class="name">Fixed render height</div><div class="desc">Advanced · may affect UI layout</div></div><div class="val">838<span class="chev"></span></div></div>
+                </div>
+              </div>
+
+              <aside class="inspector">
+                <div class="insp-head">
+                  <div class="insp-eyebrow">GRAPHICS PRESET · VISUALS</div>
+                  <div class="insp-title">Shadows</div>
+                  <div class="insp-desc">Controls shadow resolution and the distance at which detailed shadows are drawn.</div>
+                </div>
+                <div class="insp-options">
+                  <div class="insp-opt"><span class="radio"></span><span class="n">Off</span><span class="hint">Fastest</span></div>
+                  <div class="insp-opt"><span class="radio"></span><span class="n">Low</span></div>
+                  <div class="insp-opt"><span class="radio"></span><span class="n">Medium</span></div>
+                  <div class="insp-opt sel"><span class="radio"></span><span class="n">High</span><span class="hint">Recommended</span></div>
+                  <div class="insp-opt"><span class="radio"></span><span class="n">Ultra</span><span class="hint">Expensive</span></div>
+                </div>
+                <div class="impact"><span class="k">Performance cost</span><div class="line"><div class="bars"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div><span class="v">3 / 5</span></div></div>
+                <div class="insp-note"><b>Tablet tip:</b> on a 2944 × 1840 panel, shadows and resolution scaling have the biggest effect on frame rate. Change one group at a time.</div>
+                <div class="insp-apply">Apply to Graphics preset</div>
+              </aside>
+            </div>
+            <div class="editor-foot"><span class="saved"><i></i>ALL CHANGES SAVED</span><span>CTRL + S TO SAVE · ESC TO CLOSE PANEL</span><span>DRAFT · GRAPHICS</span></div>
+          </section>
+        </main>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+function render(){document.body.classList.toggle('editor',location.hash==='#editor');}
+addEventListener('hashchange',render);render();
+</script>
+</body>
+</html>

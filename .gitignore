@@ -1,0 +1,23 @@
+# Gradle / Android build output
+.gradle/
+.gradle-home/
+.android-home/
+build/
+app/build/
+local.properties
+toolchain/
+.tools/
+*.log
+
+# Signing material — never commit these
+keystore.properties
+keystore/*.jks
+keystore/*.keystore
+
+# Local release artifacts — distributed through GitHub Releases
+dist/
+
+# IDE / OS
+.DS_Store
+.idea/
+*.iml
