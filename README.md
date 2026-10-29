@@ -157,7 +157,7 @@ DESIGN.md          schema notes and design rationale
 
 ## Disclaimer
 
-This project is unofficial and is not affiliated with or endorsed by Feral Interactive, Electronic Arts, Codemasters, or the GRID franchise. GRID™ Legends and related marks are the property of their respective owners. No game code, assets, or game data files are included.
+This project is unofficial and is not affiliated with or endorsed by Feral Interactive, Electronic Arts, Codemasters, or the GRID franchise. GRID™ Legends and related marks are the property of their respective owners. No game code, artwork, or audio assets are included. A sanitized preferences sample is used only for parser tests.
 
 The XML structure is based on a publicly shared, sanitized preferences sample; see [testdata/README.md](testdata/README.md).
 

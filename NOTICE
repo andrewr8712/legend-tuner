@@ -7,7 +7,7 @@ endorsed by Feral Interactive, Electronic Arts, or Codemasters. No GRID Legends
 game code, assets, or game data files are included in this repository.
 
 The sanitized preferences sample in testdata/ is included solely to exercise
-the XML parser and is not a game asset.
+the XML parser. It contains no personal identifiers and is not a game asset.
 
 Barlow Condensed
 ----------------
