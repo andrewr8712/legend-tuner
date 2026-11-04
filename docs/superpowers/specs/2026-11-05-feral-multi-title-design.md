@@ -101,7 +101,7 @@ data class FeralTitle(
     val id: String,           // stable slug, used for preferences + backup namespace
     val label: String,        // display name
     val packageName: String,
-    val gameKey: String?,     // registry key under Software/Feral Interactive; null = auto-detect
+    val registryRoot: List<String>?, // absolute settings path; null until a sample is inspected
     val catalog: TitleCatalog? // null until a verified sample + catalogue exist
 )
 
@@ -110,14 +110,14 @@ object FeralTitles {
         id = "grid-legends",
         label = "GRID Legends",
         packageName = "com.feralinteractive.gridlegends_android",
-        gameKey = "GRIDLegends",
+        registryRoot = listOf("HKEY_CURRENT_USER", "Software", "Feral Interactive", "GRIDLegends"),
         catalog = GridLegendsCatalog
     )
     // Candidates: package IDs confirmed from Feral's Play listing, no catalogue yet.
     val CANDIDATES: List<FeralTitle> = listOf(
         GRID_LEGENDS,
-        FeralTitle("grid-autosport", "GRID Autosport", "com.feralinteractive.gridas", null, null),
-        FeralTitle("alien-isolation", "Alien: Isolation", "com.feralinteractive.alienisolation_android", null, null),
+        FeralTitle("grid-autosport", "GRID Autosport", "com.feralinteractive.gridas", listOf("HKEY_CURRENT_USER", "Software", "Feral Interactive", "GRID Autosport", "Setup"), null),
+        FeralTitle("alien-isolation", "Alien: Isolation", "com.feralinteractive.alienisolation_android", listOf("HKEY_CURRENT_USER", "Software", "Feral Interactive", "Alien Isolation", "Setup"), null),
         FeralTitle("xcom2", "XCOM 2 Collection", "com.feralinteractive.xcom2_android", null, null),
         FeralTitle("company-of-heroes", "Company of Heroes", "com.feralinteractive.companyofheroes_android", null, null),
         FeralTitle("empire", "Total War: EMPIRE", "com.feralinteractive.empire_android", null, null),
@@ -125,18 +125,21 @@ object FeralTitles {
         FeralTitle("rome", "ROME: Total War", "com.feralinteractive.rometw", null, null),
         FeralTitle("rome-bi", "ROME: Total War – BI", "com.feralinteractive.rometwbi", null, null),
         FeralTitle("rome-alexander", "ROME: Total War – Alexander", "com.feralinteractive.rometwalex", null, null),
-        FeralTitle("napoleon", "Total War: NAPOLEON", "com.feralinteractive.napoleon_android", null, null),
-        FeralTitle("hitman-blood-money", "Hitman: Blood Money — Reprisal", "com.feralinteractive.hitmanbloodmoney_android", null, null),
-        FeralTitle("lara-croft-gol", "Lara Croft: Guardian of Light", "com.feralinteractive.laracroftgol_android", null, null),
-        FeralTitle("lara-croft-too", "Lara Croft and the Temple of Osiris", "com.feralinteractive.laracrofttoo_android", null, null)
+        FeralTitle("napoleon", "Total War: NAPOLEON", "com.feralinteractive.napoleon_android", listOf("HKEY_CURRENT_USER", "Software", "The Creative Assembly Limited", "Napoleon Total War - Mobile", "Setup"), null),
+        FeralTitle("hitman-blood-money", "Hitman: Blood Money — Reprisal", "com.feralinteractive.hitmanbloodmoney_android", listOf("HKEY_CURRENT_USER", "Software", "Feral Interactive", "Hitman Blood Money", "Setup"), null),
+        FeralTitle("lara-croft-gol", "Lara Croft: Guardian of Light", "com.feralinteractive.laracroftgol_android", listOf("HKEY_CURRENT_USER", "Software", "Feral Interactive", "Lara Croft and the Guardian of Light", "Setup"), null),
+        FeralTitle("lara-croft-too", "Lara Croft and the Temple of Osiris", "com.feralinteractive.laracrofttoo_android", listOf("HKEY_CURRENT_USER", "Software", "Feral Interactive", "Lara Croft and the Temple of Osiris", "Setup"), null),
+        FeralTitle("saints-row-3", "Saints Row: The Third", "com.feralinteractive.saintsrow3_android", listOf("HKEY_CURRENT_USER", "Software", "Feral Interactive", "Saints Row The Third", "Setup"), null)
     )
     val SUPPORTED: List<FeralTitle> get() = CANDIDATES.filter { it.catalog != null }
     fun byPackage(pkg: String): FeralTitle? = CANDIDATES.firstOrNull { it.packageName == pkg }
 }
 ```
 
-`gameKey` is a shortcut for the default browse scope and for GRID's guided paths; a catalogue's
-group paths are absolute, so a title without it still renders correctly.
+`registryRoot` is the absolute path to the title's settings subtree. It is not always under Feral
+Interactive: NAPOLEON writes to `Software/The Creative Assembly Limited/Napoleon Total War -
+Mobile/Setup`, so a game-key-only model would miss it. A null root means no inspected sample, which
+also means the title cannot enter `SUPPORTED`.
 
 "Supported" means: package and config path confirmed, a real `preferences` sample inspected, and a
 catalogue authored against it. The picker lists `FeralTitles.SUPPORTED` only, because every card
@@ -268,10 +271,11 @@ fun validateText(type: String, text: String): String?        // null = valid; nu
 always runs inside the active scope, matching name and path case-insensitively.
 
 **Types.** `validateText` returns `null` (valid) for `integer` only when the text parses as `Long`
-(leading `-` allowed), for `binary` when empty or even-length hex, and for `string` always. Any other
-type has no validator: its row renders with the raw type as its badge and is **read-only** in the
-inspector, with a hint that raw XML editing is available. This keeps a future Feral type from
-making a title impossible to open or save.
+(leading `-` allowed), for `double` when it parses as a `Double`, for `array` when it is a
+comma-separated list of numbers or bare words, for `binary` when empty or even-length hex, and for
+`string` always. Any other type has no validator: its row renders with the raw type as its badge and
+is **read-only** in the inspector, with a hint that raw XML editing is available. This keeps a future
+Feral type from making a title impossible to open or save.
 
 
 ### 7.5 Guided catalogue model
@@ -305,6 +309,8 @@ sealed interface Control {
                       val options: List<Option>) : Control
     data class Stepper(override val name: String, override val label: String, override val description: String,
                        val min: Int, val max: Int, val step: Int, val unit: String = "") : Control
+    data class Decimal(override val name: String, override val label: String, override val description: String,
+                       val min: Double, val max: Double, val step: Double, val unit: String = "") : Control
     data class Text(override val name: String, override val label: String, override val description: String) : Control
 }
 
@@ -312,13 +318,16 @@ data class Option(val stored: String, val label: String)   // "ultra" / "Ultra";
 
 sealed interface PresetModel {
     object None : PresetModel                                             // one flat settings block
-    data class Blocks(val livePath: List<String>, val presetKeys: List<String>) : PresetModel
+    data class Blocks(val livePath: List<String>, val presetKeys: List<String>,
+                      val selector: ValueRef? = null) : PresetModel
     data class Prefixed(val livePrefix: String, val variants: List<PresetVariant>,
                         val nameKey: String? = null) : PresetModel
-    data class Suffixed(val suffixes: List<String>, val labels: Map<String, String>) : PresetModel
+    data class Suffixed(val suffixes: List<String>, val labels: Map<String, String>,
+                        val firstTokenOnly: Boolean = false) : PresetModel
 }
 
 data class PresetVariant(val label: String, val prefix: String)
+data class ValueRef(val path: List<String>, val name: String)
 ```
 
 Values are stored as text in the file, so every control reads and writes `String`. `Toggle` carries its
@@ -364,7 +373,12 @@ Preset models and value shapes, with what each rests on:
 | GRID Autosport | `Prefixed("gfxconfig_", [High, Power saver])`, `nameKey = gfxconfig_preset_name` | string enums (`ultra`, `high`, `off`, `8xmsaa`, `custom`) | Android 1.10.6 dump from the TB520FU |
 | Alien: Isolation | `None`, flat `VideoSetting_*` + `_Visible` | integers with `_Visible` gates | Android 1.4.3 dump from the TB520FU |
 | XCOM 2 | `Suffixed("", "_battery", "_graphics")` | integers, levels 0–4 | community posts only; **provisional, no full file** |
-| Railroads, Hitman BM, Lara Croft GoL/ToO | unknown | unknown | no public copy found; not guided |
+| Saints Row: The Third | `Blocks(Setup, [BatterySaverPreset, GraphicsPreset, PerformancePreset])`, `selector = GameOptions/GfxMobilePreset` | string / integer / double mix | Android 1.0.3 dump |
+| NAPOLEON | `None`, flat `GraphicsSettings` under the Creative Assembly root | integers | Android 1.3.4 dump |
+| Hitman: Blood Money | `Suffixed(["_battery", "_graphics", "_perf", "_plus"])`, `firstTokenOnly = true` | `"16, 16, 16"` triples | Android 1.3.1 dump; active-preset selector not yet identified |
+| Lara Croft: Guardian of Light | `None`, flat `Setup`; `GraphicsPreset` integer index | integers | Android 1.2.7 dump |
+| Lara Croft: Temple of Osiris | `None`, flat `Setup` | integers | Android 1.2.3 dump |
+| Sid Meier's Railroads! | unknown | unknown | not installed; no public copy |
 
 GRID Autosport is the clearest argument for per-title catalogues: same publisher, same file name and
 the same hives, but no `GraphicsSettings` blocks at all — the settings are flat `Setup` values with
@@ -548,7 +562,7 @@ lists the active namespace.
 
 ### 7.10 Manifest and naming
 
-`<queries>` gains one `<package>` per entry in `FeralTitles.CANDIDATES` (11 entries plus Shizuku), so
+`<queries>` gains one `<package>` per entry in `FeralTitles.CANDIDATES` (15 entries plus Shizuku), so
 installed candidates are visible even before they gain a catalogue.
 
 Display name: the launcher label and the loading wordmark become **Config Tuner**; the subtitle in
@@ -571,8 +585,13 @@ Fixtures live in `testdata/` and are all sanitised real files:
 | `grid-legends-preferences-sample.xml` | Android | 1.1.5 | existing repo sample |
 | `grid-autosport-preferences-sample.xml` | Android | 1.10.6 | TB520FU device dump |
 | `alien-isolation-preferences-sample.xml` | Android | 1.4.3 | TB520FU device dump |
+| `saintsrow3-preferences-sample.xml` | Android | 1.0.3 | TB520FU device dump |
+| `napoleon-preferences-sample.xml` | Android | 1.3.4 | TB520FU device dump |
+| `hitman-blood-money-preferences-sample.xml` | Android | 1.3.1 | TB520FU device dump |
+| `lara-croft-gol-preferences-sample.xml` | Android | 1.2.7 | TB520FU device dump |
+| `lara-croft-too-preferences-sample.xml` | Android | 1.2.3 | TB520FU device dump |
 
-All three fixtures are Android dumps. Console dumps of the same two titles were used during early
+All eight fixtures are Android dumps. Console dumps of the same two titles were used during early
 discovery and are not committed: the key sets differ materially. GRID Autosport's Android `Setup`
 carries 608 values against 540 on Switch, adding touch/virtual-pad keys, DLC enable flags and
 Android-only setup values while dropping console-only ones; Alien's Android `Setup` carries 160
@@ -674,3 +693,11 @@ primary experience for non-GRID games. That correction is why the catalogue, `Co
    committed fixtures are Android dumps pulled from the TB520FU once it was reachable. The key sets
    differ enough (touch/virtual-pad keys, DLC flags, console-only settings) that catalogues key off
    the Android files only.
+7. **Absolute registry root.** NAPOLEON stores its settings under
+   `Software/The Creative Assembly Limited/...`, not under `Software/Feral Interactive`. The title
+   profile therefore carries an absolute `registryRoot`; a game-key model would have silently
+   excluded it.
+8. **Three preset shapes from one publisher.** Blocks with a selector (Saints Row), four suffixed
+   families with triples (Hitman), and a flat block with an index (both Lara Croft titles) all exist
+   alongside GRID's triples and GRID Autosport's prefixes. The catalogue model carries all of them;
+   no schema is inferred from a sibling title.
