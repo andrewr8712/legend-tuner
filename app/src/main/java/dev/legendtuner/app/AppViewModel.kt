@@ -21,6 +21,8 @@ import dev.legendtuner.app.access.ShizukuManager
 import dev.legendtuner.app.data.BackupInfo
 import dev.legendtuner.app.data.BackupStore
 import dev.legendtuner.app.data.ConfigDocument
+import dev.legendtuner.app.data.FeralTitle
+import dev.legendtuner.app.data.FeralTitles
 import dev.legendtuner.app.data.Preset
 import dev.legendtuner.app.data.SettingDef
 import dev.legendtuner.app.data.SettingScope
@@ -53,11 +55,20 @@ data class UiMessage(
     val id: Long = System.nanoTime()
 )
 
+data class TitleStatus(
+    val title: FeralTitle,
+    val installed: Boolean,
+    val readable: Boolean
+)
+
 data class AppState(
     val loading: Boolean = true,
     val connecting: Boolean = false,
     val saving: Boolean = false,
     val config: LoadedConfig? = null,
+    val titleStatuses: List<TitleStatus> = emptyList(),
+    val activeTitle: FeralTitle? = null,
+    val manualFile: Boolean = false,
     val gameInstalled: Boolean = false,
     val selectedPreset: Preset = Preset.GRAPHICS,
     val selectedSettingKey: String? = null,
@@ -78,6 +89,8 @@ data class AppState(
 ) {
     val accessMode: AccessMode? get() = config?.access?.mode
     val forceStopAvailable: Boolean get() = accessMode == AccessMode.ROOT || accessMode == AccessMode.SHIZUKU
+    val guided: Boolean get() = activeTitle?.guided == true
+    val activeLabel: String get() = activeTitle?.label ?: "Manual file"
 }
 
 class AppViewModel(application: Application) : AndroidViewModel(application) {
@@ -92,13 +105,86 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         _state.value = _state.value.copy(
-            gameInstalled = GamePaths.isGameInstalled(app),
+            gameInstalled = GamePaths.isInstalled(app, FeralTitles.GRID_LEGENDS.packageName),
             shizukuInstalled = ShizukuManager.isInstalled(app),
             displayInfo = readDisplayInfo(),
             backups = backupStore.list()
         )
-        viewModelScope.launch { refreshAccessOptions() }
-        viewModelScope.launch { autoConnect() }
+        viewModelScope.launch {
+            refreshAccessOptions()
+            refreshTitleStatuses()
+            _state.value = _state.value.copy(loading = false, setupVisible = false)
+        }
+    }
+
+    // ------------------------------------------------------------ title picker
+
+    fun refreshTitleStatuses() {
+        viewModelScope.launch {
+            val statuses = withContext(Dispatchers.IO) {
+                FeralTitles.ALL.map { title ->
+                    val installed = GamePaths.isInstalled(app, title.packageName)
+                    TitleStatus(
+                        title = title,
+                        installed = installed,
+                        readable = installed && GamePaths.isReadableDirectly(app, title.packageName)
+                    )
+                }
+            }
+            _state.value = _state.value.copy(titleStatuses = statuses)
+        }
+    }
+
+    fun openTitle(title: FeralTitle) {
+        viewModelScope.launch {
+            _state.value = _state.value.copy(
+                loading = true,
+                activeTitle = title,
+                manualFile = false,
+                message = null,
+                setupVisible = false,
+                showAccessSheet = false
+            )
+            val saved = prefs.getString(KEY_MODE, null)
+            val order = buildList {
+                if (saved != null) add(saved)
+                add(AccessMode.ROOT.name)
+                add(AccessMode.DIRECT.name)
+                add(AccessMode.SHIZUKU.name)
+            }.distinct()
+
+            for (mode in order) {
+                val access = when (mode) {
+                    AccessMode.ROOT.name -> AccessFactory.tryRoot(app, title.packageName)
+                    AccessMode.SHIZUKU.name ->
+                        runCatching { ShizukuAccess.connect(app, title.packageName) }.getOrNull()
+                    AccessMode.DIRECT.name -> AccessFactory.tryDirect(app, title.packageName)
+                    else -> null
+                } ?: continue
+                if (loadWith(access, silent = true)) return@launch
+            }
+
+            _state.value = _state.value.copy(loading = false, setupVisible = true)
+        }
+    }
+
+    fun backToPicker() {
+        loaded = null
+        _state.value = _state.value.copy(
+            config = null,
+            activeTitle = null,
+            manualFile = false,
+            loading = false,
+            saving = false,
+            connecting = false,
+            dirty = false,
+            rawXml = "",
+            rawError = null,
+            selectedSettingKey = null,
+            showAccessSheet = false,
+            setupVisible = false
+        )
+        refreshTitleStatuses()
     }
 
     // ------------------------------------------------------------ access setup
@@ -107,64 +193,37 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         val root = withContext(Dispatchers.IO) { RootShell.hasSuBinary() }
         val running = ShizukuManager.isBinderAlive()
         val granted = ShizukuManager.hasPermission()
-        val direct = withContext(Dispatchers.IO) { AccessFactory.directPossible(app) }
+        val direct = withContext(Dispatchers.IO) {
+            _state.value.activeTitle?.let { AccessFactory.directPossible(app, it.packageName) } ?: false
+        }
         _state.value = _state.value.copy(
             rootDetected = root,
             shizukuRunning = running,
             shizukuHasPermission = granted,
             directAvailable = direct,
             shizukuInstalled = ShizukuManager.isInstalled(app),
-            gameInstalled = GamePaths.isGameInstalled(app)
+            gameInstalled = GamePaths.isInstalled(app, FeralTitles.GRID_LEGENDS.packageName)
         )
     }
 
-    private suspend fun autoConnect() {
-        val savedMode = prefs.getString(KEY_MODE, null)
-        if (savedMode != null) {
-            when (savedMode) {
-                AccessMode.MANUAL.name -> {
-                    val uri = prefs.getString(KEY_MANUAL_URI, null)?.let(Uri::parse)
-                    if (uri != null && importUri(uri, silent = true)) return
-                }
-                AccessMode.ROOT.name -> {
-                    if (connectRootInternal(silent = true)) return
-                }
-                AccessMode.SHIZUKU.name -> {
-                    if (connectShizukuInternal(silent = true)) return
-                }
-            }
-        }
-
-        // First launch / stale saved mode: try the least disruptive paths first.
-        if (withContext(Dispatchers.IO) { RootShell.hasSuBinary() }) {
-            if (connectRootInternal(silent = true)) return
-        }
-        val direct = withContext(Dispatchers.IO) { AccessFactory.tryDirect(app) }
-        if (direct != null && loadWith(direct, silent = true)) return
-        if (ShizukuManager.hasPermission()) {
-            if (connectShizukuInternal(silent = true)) return
-        }
-
-        _state.value = _state.value.copy(loading = false, setupVisible = true)
-    }
-
     fun connectRoot() {
+        val title = _state.value.activeTitle ?: return
         viewModelScope.launch {
             _state.value = _state.value.copy(connecting = true, showAccessSheet = false)
-            connectRootInternal(silent = false)
+            connectRootInternal(title, silent = false)
         }
     }
 
-    private suspend fun connectRootInternal(silent: Boolean): Boolean {
+    private suspend fun connectRootInternal(title: FeralTitle, silent: Boolean): Boolean {
         return try {
-            val access = AccessFactory.tryRoot(app)
+            val access = AccessFactory.tryRoot(app, title.packageName)
                 ?: throw IllegalStateException("Root access was denied or su is unavailable.")
             val ok = loadWith(access, silent)
             if (!ok) {
                 _state.value = _state.value.copy(
                     connecting = false,
                     setupVisible = true,
-                    message = if (silent) null else UiMessage("Root is available, but the GRID Legends config file was not found.", true)
+                    message = if (silent) null else UiMessage("Root is available, but the ${title.label} config file was not found.", true)
                 )
             }
             ok
@@ -180,13 +239,14 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun connectShizuku() {
+        val title = _state.value.activeTitle ?: return
         viewModelScope.launch {
             _state.value = _state.value.copy(connecting = true, showAccessSheet = false)
-            connectShizukuInternal(silent = false)
+            connectShizukuInternal(title, silent = false)
         }
     }
 
-    private suspend fun connectShizukuInternal(silent: Boolean): Boolean {
+    private suspend fun connectShizukuInternal(title: FeralTitle, silent: Boolean): Boolean {
         return try {
             if (!ShizukuManager.isBinderAlive()) {
                 throw IllegalStateException("Shizuku is not running. Open Shizuku, start it with wireless debugging, then try again.")
@@ -194,13 +254,13 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             if (!ShizukuManager.hasPermission()) {
                 throw SecurityException("Grant Legend Tuner permission in Shizuku first.")
             }
-            val access = ShizukuAccess.connect(app)
+            val access = ShizukuAccess.connect(app, title.packageName)
             val ok = loadWith(access, silent)
             if (!ok) {
                 _state.value = _state.value.copy(
                     connecting = false,
                     setupVisible = true,
-                    message = if (silent) null else UiMessage("Shizuku is connected, but the GRID Legends config file was not found.", true)
+                    message = if (silent) null else UiMessage("Shizuku is connected, but the ${title.label} config file was not found.", true)
                 )
             }
             ok
@@ -246,9 +306,10 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun connectDirect() {
+        val title = _state.value.activeTitle ?: return
         viewModelScope.launch {
             _state.value = _state.value.copy(connecting = true, showAccessSheet = false)
-            val access = withContext(Dispatchers.IO) { AccessFactory.tryDirect(app) }
+            val access = withContext(Dispatchers.IO) { AccessFactory.tryDirect(app, title.packageName) }
             if (access == null) {
                 _state.value = _state.value.copy(
                     connecting = false,
@@ -276,6 +337,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     private suspend fun importUri(uri: Uri, silent: Boolean): Boolean {
         return try {
+            _state.value = _state.value.copy(activeTitle = null, manualFile = true)
             val flags = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
             runCatching { app.contentResolver.takePersistableUriPermission(uri, flags) }
                 .onFailure { runCatching { app.contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION) } }
@@ -295,24 +357,25 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private suspend fun loadWith(access: FileAccess, silent: Boolean): Boolean {
+        val label = _state.value.activeLabel
         val file = access.locate()
         if (file == null) {
             _state.value = _state.value.copy(loading = false, setupVisible = true)
             if (!silent) {
                 _state.value = _state.value.copy(
-                    message = UiMessage("The GRID Legends preferences file was not found. Launch the game once, or use manual mode.", true)
+                    message = UiMessage("The $label preferences file was not found. Launch the game once, or use manual mode.", true)
                 )
             }
             return false
         }
         val bytes = access.read(file.path)
         val doc = ConfigDocument.parse(bytes)
-        doc.validate()
+        validateFor(doc)
         loaded = LoadedConfig(doc, access, file, bytes)
         prefs.edit()
             .putString(KEY_MODE, access.mode.name)
             .apply()
-        val preset = doc.ensureActivePresetExists()
+        val preset = presetFor(doc)
         revision++
         _state.value = _state.value.copy(
             loading = false,
@@ -327,6 +390,17 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             message = if (silent) null else UiMessage("Connected using ${access.mode.label}.")
         )
         return true
+    }
+
+    /**
+     * GRID Legends presets only. Other titles are flat registries, so a missing preset block must
+     * never fail a load; they simply open without a preset model.
+     */
+    private fun presetFor(doc: ConfigDocument): Preset =
+        if (_state.value.guided) doc.ensureActivePresetExists() else Preset.GRAPHICS
+
+    private fun validateFor(doc: ConfigDocument) {
+        if (_state.value.guided) doc.validate() else doc.validateRegistry()
     }
 
     fun refreshAccessStatus() {
@@ -407,12 +481,12 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         val current = loaded ?: return
         runCatching {
             val doc = ConfigDocument.parse(current.originalBytes)
-            doc.validate()
+            validateFor(doc)
             loaded = current.copy(document = doc)
             revision++
             _state.value = _state.value.copy(
                 config = loaded,
-                selectedPreset = doc.ensureActivePresetExists(),
+                selectedPreset = presetFor(doc),
                 selectedSettingKey = null,
                 dirty = false,
                 revision = revision,
@@ -431,8 +505,8 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             var backup: BackupInfo? = null
             try {
                 val doc = current.document
-                if (applyPreset) doc.applyPresetToLive(_state.value.selectedPreset)
-                doc.validate()
+                if (applyPreset && _state.value.guided) doc.applyPresetToLive(_state.value.selectedPreset)
+                validateFor(doc)
                 val bytes = doc.serialize()
 
                 backup = withContext(Dispatchers.IO) {
@@ -444,8 +518,8 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
                 // Verify the write by reading it back and parsing it.
                 val verifiedBytes = withContext(Dispatchers.IO) { current.access.read(current.file.path) }
                 val verified = ConfigDocument.parse(verifiedBytes)
-                verified.validate()
-                if (verified.activePreset() != _state.value.selectedPreset) {
+                validateFor(verified)
+                if (_state.value.guided && verified.activePreset() != _state.value.selectedPreset) {
                     error("Verification failed: active preset did not persist")
                 }
 
@@ -458,7 +532,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
                     dirty = false,
                     revision = revision,
                     backups = withContext(Dispatchers.IO) { backupStore.list() },
-                    message = UiMessage("Saved. Launch GRID Legends to apply the preset.")
+                    message = UiMessage("Saved. Launch ${_state.value.activeLabel} to apply the changes.")
                 )
             } catch (e: Exception) {
                 var restored = false
@@ -489,7 +563,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             val ok = runCatching { withContext(Dispatchers.IO) { current.access.forceStop() } }.getOrDefault(false)
             _state.value = _state.value.copy(
-                message = if (ok) UiMessage("GRID Legends was force-stopped.") else UiMessage(
+                message = if (ok) UiMessage("${_state.value.activeLabel} was force-stopped.") else UiMessage(
                     "Force stop is only available with Root or Shizuku. Close the game manually.", true
                 )
             )
@@ -514,12 +588,12 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         val current = loaded ?: return false
         return try {
             val doc = ConfigDocument.parse(_state.value.rawXml)
-            doc.validate()
+            validateFor(doc)
             loaded = current.copy(document = doc)
             revision++
             _state.value = _state.value.copy(
                 config = loaded,
-                selectedPreset = doc.ensureActivePresetExists(),
+                selectedPreset = presetFor(doc),
                 selectedSettingKey = null,
                 dirty = true,
                 revision = revision,
@@ -545,19 +619,19 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             try {
                 val backupBytes = withContext(Dispatchers.IO) { backupStore.read(name) }
                 val doc = ConfigDocument.parse(backupBytes)
-                doc.validate()
+                validateFor(doc)
                 withContext(Dispatchers.IO) {
                     backupStore.save(current.originalBytes, "before-restore")
                     current.access.write(current.file.path, backupBytes)
                 }
                 val verifiedBytes = withContext(Dispatchers.IO) { current.access.read(current.file.path) }
                 val verified = ConfigDocument.parse(verifiedBytes)
-                verified.validate()
+                validateFor(verified)
                 loaded = current.copy(document = verified, originalBytes = verifiedBytes)
                 revision++
                 _state.value = _state.value.copy(
                     config = loaded,
-                    selectedPreset = verified.ensureActivePresetExists(),
+                    selectedPreset = presetFor(verified),
                     dirty = false,
                     revision = revision,
                     backups = backupStore.list(),

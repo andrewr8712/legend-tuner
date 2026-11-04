@@ -100,6 +100,9 @@ fun LegendBackground(content: @Composable () -> Unit) {
 fun NavRail(
     selected: AppDestination,
     mode: AccessMode?,
+    monogram: String,
+    destinations: List<AppDestination>,
+    onMonogramClick: () -> Unit,
     onSelect: (AppDestination) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -116,18 +119,19 @@ fun NavRail(
             Modifier
                 .size(38.dp)
                 .clip(RoundedCornerShape(12.dp))
-                .background(Lime),
+                .background(Lime)
+                .clickable(onClick = onMonogramClick),
             contentAlignment = Alignment.Center
         ) {
             Text(
-                "L",
-                style = MaterialTheme.typography.headlineSmall,
+                monogram,
+                style = MaterialTheme.typography.headlineSmall.copy(fontSize = 15.sp),
                 color = Color(0xFF11150B),
                 fontWeight = FontWeight.Bold
             )
         }
         Spacer(Modifier.height(24.dp))
-        AppDestination.entries.forEach { destination ->
+        destinations.forEach { destination ->
             val active = destination == selected
             Column(
                 Modifier
@@ -174,6 +178,7 @@ fun NavRail(
 @Composable
 fun CompactNav(
     selected: AppDestination,
+    destinations: List<AppDestination>,
     onSelect: (AppDestination) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -186,7 +191,7 @@ fun CompactNav(
             .padding(horizontal = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        AppDestination.entries.forEach { destination ->
+        destinations.forEach { destination ->
             val active = destination == selected
             Column(
                 Modifier

@@ -14,12 +14,13 @@ import kotlin.coroutines.resumeWithException
 
 class ShizukuAccess private constructor(
     private val context: Context,
-    private val service: IFileService
+    private val service: IFileService,
+    private val packageName: String
 ) : FileAccess {
     override val mode = AccessMode.SHIZUKU
 
     override suspend fun locate(): LocatedFile? = withContext(Dispatchers.IO) {
-        for (candidate in GamePaths.candidates(context)) {
+        for (candidate in GamePaths.candidates(context, packageName)) {
             val exists = runCatching { service.exists(candidate.path) }.getOrDefault(false)
             if (!exists) continue
             val rawStat = runCatching { service.stat(candidate.path) }.getOrDefault("")
@@ -47,13 +48,13 @@ class ShizukuAccess private constructor(
     }
 
     override suspend fun forceStop(): Boolean = withContext(Dispatchers.IO) {
-        runCatching { service.forceStopGame(GamePaths.GAME_PACKAGE) }.getOrDefault(false)
+        runCatching { service.forceStopGame(packageName) }.getOrDefault(false)
     }
 
     companion object {
         private var activeConnection: ServiceConnection? = null
 
-        suspend fun connect(context: Context): ShizukuAccess {
+        suspend fun connect(context: Context, packageName: String): ShizukuAccess {
             if (!ShizukuManager.isBinderAlive()) {
                 throw IllegalStateException("Shizuku is not running. Open Shizuku and start the service first.")
             }
@@ -61,7 +62,7 @@ class ShizukuAccess private constructor(
                 throw SecurityException("Shizuku permission has not been granted.")
             }
             val service = withTimeout(15_000) { bind(context.applicationContext) }
-            return ShizukuAccess(context.applicationContext, service)
+            return ShizukuAccess(context.applicationContext, service, packageName)
         }
 
         private suspend fun bind(context: Context): IFileService = suspendCancellableCoroutine { cont ->

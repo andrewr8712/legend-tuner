@@ -7,13 +7,12 @@ import android.os.storage.StorageManager
 import java.io.File
 
 object GamePaths {
-    const val GAME_PACKAGE = "com.feralinteractive.gridlegends_android"
-    const val RELATIVE_CONFIG_PATH =
-        "Android/data/$GAME_PACKAGE/files/feral_app_support/preferences"
-
     data class Candidate(val path: String, val volumeLabel: String)
 
-    fun candidates(context: Context): List<Candidate> {
+    fun relativeConfigPath(packageName: String): String =
+        "Android/data/$packageName/files/feral_app_support/preferences"
+
+    fun candidates(context: Context, packageName: String): List<Candidate> {
         val roots = LinkedHashMap<String, String>() // canonical root -> label
         fun addRoot(root: File?, label: String) {
             if (root == null) return
@@ -48,22 +47,27 @@ object GamePaths {
             }
         }
 
+        val relative = relativeConfigPath(packageName)
         return roots.keys.map { root ->
             Candidate(
-                path = "$root/$RELATIVE_CONFIG_PATH",
+                path = "$root/$relative",
                 volumeLabel = roots[root] ?: "Storage"
             )
         }
     }
 
-    fun primaryCandidate(context: Context): Candidate =
-        candidates(context).firstOrNull() ?: Candidate(
-            "${Environment.getExternalStorageDirectory().absolutePath}/$RELATIVE_CONFIG_PATH",
+    fun primaryCandidate(context: Context, packageName: String): Candidate =
+        candidates(context, packageName).firstOrNull() ?: Candidate(
+            "${Environment.getExternalStorageDirectory().absolutePath}/${relativeConfigPath(packageName)}",
             "Internal storage"
         )
 
-    fun isGameInstalled(context: Context): Boolean = runCatching {
-        context.packageManager.getPackageInfo(GAME_PACKAGE, 0)
+    fun isInstalled(context: Context, packageName: String): Boolean = runCatching {
+        context.packageManager.getPackageInfo(packageName, 0)
         true
     }.getOrDefault(false)
+
+    /** True when the preferences file can be stat'ed directly (old Android / permissive devices). */
+    fun isReadableDirectly(context: Context, packageName: String): Boolean =
+        candidates(context, packageName).any { File(it.path).canRead() }
 }

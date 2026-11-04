@@ -67,17 +67,21 @@ fun SetupScreen(
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.Top) {
             Column(Modifier.weight(1f)) {
                 Text(
-                    "LEGEND TUNER",
+                    "CONFIG TUNER",
                     style = MaterialTheme.typography.headlineLarge,
                     color = Ink
                 )
                 Text(
-                    "NATIVE CONFIG EDITOR",
+                    "FERAL CONFIG EDITOR",
                     style = MaterialTheme.typography.labelSmall.copy(letterSpacing = 2.sp),
                     color = Lime
                 )
             }
-            StatusChip(if (state.gameInstalled) "Game installed" else "Game not detected", lime = state.gameInstalled)
+            val installed = state.titleStatuses
+                .firstOrNull { it.title.id == state.activeTitle?.id }
+                ?.installed
+                ?: state.gameInstalled
+            StatusChip(if (installed) "Game installed" else "Game not detected", lime = installed)
         }
         Spacer(Modifier.height(30.dp))
         Text(
@@ -87,7 +91,7 @@ fun SetupScreen(
         )
         Spacer(Modifier.height(10.dp))
         Text(
-            "Legend Tuner edits GRID Legends' own preferences file. On Android 11 and newer, normal apps cannot read another app's Android/data folder, so choose a privileged or manual route.",
+            "Config Tuner edits ${state.activeLabel}'s own preferences file. On Android 11 and newer, normal apps cannot read another app's Android/data folder, so choose a privileged or manual route.",
             style = MaterialTheme.typography.bodyMedium.copy(fontSize = 11.sp, lineHeight = 17.sp),
             color = Muted,
             modifier = Modifier.widthIn(max = 720.dp)
@@ -100,7 +104,7 @@ fun SetupScreen(
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(
-                "/Android/data/${GamePaths.GAME_PACKAGE}/files/feral_app_support/preferences",
+                "/Android/data/${state.activeTitle?.packageName ?: "…"}/files/feral_app_support/preferences",
                 style = MaterialTheme.typography.bodySmall.copy(
                     fontFamily = FontFamily.Monospace,
                     fontSize = 8.sp,
@@ -137,7 +141,7 @@ fun SetupScreen(
             border = BorderStroke(1.dp, Amber.copy(alpha = 0.17f))
         ) {
             Text(
-                "Before you edit: fully close GRID Legends. The game rewrites preferences when it exits. If the game is installed on a microSD card, connect with Root or Shizuku so the app can scan every volume.",
+                "Before you edit: fully close ${state.activeLabel}. The game rewrites preferences when it exits. If the game is installed on a microSD card, connect with Root or Shizuku so the app can scan every volume.",
                 style = MaterialTheme.typography.bodySmall.copy(fontSize = 9.sp, lineHeight = 14.sp),
                 color = Color(0xFFC7B99F),
                 modifier = Modifier.padding(13.dp)
@@ -239,7 +243,7 @@ private fun ShizukuCard(
     val subtitle = when {
         !state.shizukuInstalled -> "Install Shizuku to use the shell route"
         !state.shizukuRunning -> "Open Shizuku and start it with wireless debugging"
-        !state.shizukuHasPermission -> "Grant Legend Tuner access inside Shizuku"
+        !state.shizukuHasPermission -> "Grant Config Tuner access inside Shizuku"
         else -> "Binder running · shell UID 2000"
     }
     val onClick: () -> Unit = when {

@@ -44,7 +44,7 @@ fun RawXmlScreen(
 ) {
     Column(Modifier.fillMaxSize().padding(horizontal = 24.dp)) {
         PageHeader(
-            crumb = "Legend Tuner / Raw XML",
+            crumb = "Config Tuner / Raw XML",
             title = "Raw XML",
             subtitle = "The complete preferences registry — unknown keys preserved",
             mode = state.accessMode,

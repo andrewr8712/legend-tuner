@@ -10,6 +10,13 @@
 
     <queries>
         <package android:name="com.feralinteractive.gridlegends_android" />
+        <package android:name="com.feralinteractive.gridas" />
+        <package android:name="com.feralinteractive.alienisolation_android" />
+        <package android:name="com.feralinteractive.saintsrow3_android" />
+        <package android:name="com.feralinteractive.napoleon_android" />
+        <package android:name="com.feralinteractive.hitmanbloodmoney_android" />
+        <package android:name="com.feralinteractive.laracroftgol_android" />
+        <package android:name="com.feralinteractive.laracrofttoo_android" />
         <package android:name="moe.shizuku.privileged.api" />
     </queries>
 

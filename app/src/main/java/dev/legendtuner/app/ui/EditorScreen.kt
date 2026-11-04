@@ -89,7 +89,7 @@ fun EditorScreen(
             .padding(horizontal = if (twoColumns) 24.dp else 16.dp)
     ) {
         PageHeader(
-            crumb = "Legend Tuner / Graphics",
+            crumb = "Config Tuner / Graphics",
             title = "Graphics preset",
             subtitle = "Editing the preset GRID Legends will load on next launch",
             mode = state.accessMode,

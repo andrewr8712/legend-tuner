@@ -84,7 +84,7 @@ fun DashboardScreen(
             .padding(horizontal = if (wide) 26.dp else 18.dp)
     ) {
         PageHeader(
-            crumb = "Legend Tuner / Dashboard",
+            crumb = "Config Tuner / Dashboard",
             title = "Dashboard",
             subtitle = if (state.gameInstalled) "GRID Legends detected on this tablet" else "GRID Legends is not installed",
             mode = state.accessMode,
@@ -431,7 +431,7 @@ private fun DashboardActions(
 }
 
 @Composable
-private fun ActionTile(
+fun ActionTile(
     title: String,
     subtitle: String,
     icon: androidx.compose.ui.graphics.vector.ImageVector,
