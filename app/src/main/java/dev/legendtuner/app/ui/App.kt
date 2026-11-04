@@ -242,10 +242,12 @@ fun LegendTunerApp(
                                             state = state,
                                             catalog = title.titleCatalog,
                                             root = valueRoot,
+                                            activeFamilyId = state.activeFamilyId,
                                             dockedInspector = dockedInspector,
                                             twoColumns = twoColumns,
                                             onSelect = viewModel::selectSetting,
                                             onUpdate = viewModel::updateTitleControl,
+                                            onSelectFamily = viewModel::selectFamily,
                                             onSave = { viewModel.save(applyPreset = false) },
                                             onDiscard = viewModel::discardChanges,
                                             onOpenAccess = viewModel::openAccessSheet

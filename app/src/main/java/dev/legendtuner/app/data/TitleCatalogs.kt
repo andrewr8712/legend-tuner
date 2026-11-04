@@ -27,7 +27,11 @@ object SaintsRowCatalog {
 
     val catalog = TitleCatalog(
         groups = listOf(IMAGE, SCENE, PERF),
-        pathSuffix = listOf("GraphicsPreset"),
+        families = listOf(
+            PresetFamily("graphics", "Graphics", pathSuffix = listOf("GraphicsPreset")),
+            PresetFamily("battery", "Battery saver", pathSuffix = listOf("BatterySaverPreset")),
+            PresetFamily("performance", "Performance", pathSuffix = listOf("PerformancePreset"))
+        ),
         controls = listOf(
             Control(
                 "GfxShadow", "Shadow detail",
@@ -214,42 +218,130 @@ object NapoleonCatalog {
 }
 
 object HitmanCatalog {
-    private const val IMAGE = "Graphics"
+    private const val FRAME = "Frame rate"
+    private const val SHADOWS = "Shadows"
+    private const val POST = "Post-processing"
+    private const val DETAIL = "Detail"
     private const val DISPLAY = "Display"
-    private const val NOTE =
-        "This game stores four preset variants as comma triples. Only the live base keys are exposed; per-preset editing stays in Raw XML."
+    private const val LADDER =
+        "This key stores a ladder (three different values), so it is shown read-only rather than overwritten with one number."
+
+    private fun step(key: String, label: String, description: String, max: Int, group: String) =
+        Control(key, label, description, group, ControlKind.STEPPER, min = 0, max = max, triple = true)
+
+    private fun toggle(key: String, label: String, description: String, invert: Boolean = false, group: String = POST) =
+        Control(
+            key, label, description, group, ControlKind.TOGGLE,
+            listOf(ControlChoice("0", "Off"), ControlChoice("1", "On")),
+            triple = true, invert = invert
+        )
+
+    private fun readOnly(key: String, label: String, description: String, group: String = POST) =
+        Control(key, label, description, group, ControlKind.READONLY, triple = true)
 
     val catalog = TitleCatalog(
-        groups = listOf(IMAGE, DISPLAY),
+        groups = listOf(FRAME, SHADOWS, POST, DETAIL, DISPLAY),
+        families = listOf(
+            PresetFamily("live", "Live values"),
+            PresetFamily("battery", "Battery saver", keySuffix = "_battery"),
+            PresetFamily("graphics", "Graphics", keySuffix = "_graphics"),
+            PresetFamily("perf", "Performance", keySuffix = "_perf"),
+            PresetFamily("plus", "Performance+", keySuffix = "_plus")
+        ),
         controls = listOf(
+            step(
+                "IdleFPS", "Idle frame cap",
+                "Frame cap when the player is still or the scene is static. Lower values save battery in quiet moments.",
+                120, FRAME
+            ),
+            step(
+                "ResponsiveFPS", "Active frame cap",
+                "Frame cap while input is active. This is the cap that matters during play and in firefights.",
+                120, FRAME
+            ),
+
             Control(
                 "DirectionalShadowResolution", "Sun shadow resolution",
-                "Shadow map size for the directional light. Higher values sharpen character shadows indoors and out.",
-                IMAGE, ControlKind.CHOICE,
+                "Shadow map size for the directional light. The stored triple is a ladder of three presets, not one value.",
+                SHADOWS, ControlKind.CHOICE,
                 listOf(
                     ControlChoice("512", "512"),
                     ControlChoice("1024", "1024"),
                     ControlChoice("1536", "1536"),
                     ControlChoice("2048", "2048")
                 ),
-                note = NOTE
+                note = LADDER, triple = true
             ),
-            Control(
-                "CharacterLevelOfDetail", "Character level of detail",
-                "Distance at which characters drop to lower-detail meshes. Raising it keeps faces and suits sharp further away.",
-                IMAGE, ControlKind.CHOICE, intLevels(3, listOf("Low", "Medium", "High", "Ultra")),
-                note = NOTE
+            step(
+                "DropShadowQuality", "Drop shadow quality",
+                "Quality of the cheap character and prop drop shadows cast onto the floor.",
+                3, SHADOWS
             ),
-            Control(
-                "EnableReflections", "Reflections",
-                "Enables reflection passes on floors, glass and polished surfaces.",
-                IMAGE, ControlKind.TOGGLE, intToggle(), note = NOTE
+            toggle(
+                "EnableDropShadows", "Drop shadows",
+                "Enables the cheap character shadow pass. Turning it off removes the flat shadow under characters.",
+                group = SHADOWS
             ),
-            Control(
-                "PostProcessing", "Post processing",
-                "Master switch for colour grading, bloom and the finish filter.",
-                IMAGE, ControlKind.TOGGLE, intToggle(), note = NOTE
+            toggle(
+                "EnableSelfShadows", "Self shadows",
+                "Lets characters cast shadows on themselves. Subtle, but it costs an extra shadow pass.",
+                group = SHADOWS
             ),
+
+            step(
+                "Antialias", "Anti-aliasing",
+                "MSAA sample level for geometric edges. Zero is off, higher values cost bandwidth.",
+                8, POST
+            ),
+            step(
+                "FXAAPreset", "FXAA preset",
+                "FXAA quality preset index. Higher presets trade a little sharpness for fewer jagged edges.",
+                3, POST
+            ),
+            toggle(
+                "DisableBloom", "Bloom",
+                "Adds a soft glow around bright highlights. Stored inverted: 1 means bloom is disabled.",
+                invert = true
+            ),
+            toggle(
+                "DisableDepthOfField", "Depth of field",
+                "Blurs out-of-focus depth ranges around the focal plane. Stored inverted: 1 disables it.",
+                invert = true
+            ),
+            toggle(
+                "DisableFinishFilter", "Finish filter",
+                "Applies the colour-grade finish pass over the frame. Stored inverted: 1 disables it.",
+                invert = true
+            ),
+            readOnly(
+                "FXAAEdgeQualityThreshold", "FXAA edge threshold",
+                "Edge detection threshold for FXAA. Lower values find more edges and smooth more of the image."
+            ),
+            readOnly(
+                "FXAAEdgeThresholdMin", "FXAA minimum threshold",
+                "Minimum contrast before FXAA acts. Raising it leaves low-contrast detail untouched."
+            ),
+            readOnly(
+                "FXAASubpixQuality", "FXAA subpixel quality",
+                "Subpixel aliasing removal strength. Higher values smooth thin geometry and text more."
+            ),
+
+            step(
+                "LevelOfDetail", "Level of detail",
+                "Distance at which props and characters drop to lower-detail meshes. Higher keeps detail further out.",
+                3, DETAIL
+            ),
+            step(
+                "TextureResolution", "Texture resolution",
+                "Texture streaming budget and mip selection. Higher values need more memory and bandwidth.",
+                3, DETAIL
+            ),
+            step(
+                "Anisotropy", "Anisotropic filtering",
+                "Anisotropic filtering level for floors and walls seen at an angle.",
+                16, DETAIL
+            ),
+
             Control(
                 "FixedScreenHeight", "Render height",
                 "Internal vertical resolution. Higher values are sharper; lower values raise frame rate on this tablet.",
@@ -266,7 +358,12 @@ object LaraGolCatalog {
 
     val catalog = TitleCatalog(
         groups = listOf(IMAGE, EFFECTS, DISPLAY),
-        pathSuffix = listOf("GraphicsPreset"),
+        families = listOf(
+            PresetFamily("graphics", "Graphics", pathSuffix = listOf("GraphicsPreset")),
+            PresetFamily("battery", "Battery saver", pathSuffix = listOf("BatterySaverPreset")),
+            PresetFamily("performance", "Performance", pathSuffix = listOf("PerformancePreset")),
+            PresetFamily("plus", "Performance+", pathSuffix = listOf("PerformancePlusPreset"))
+        ),
         controls = listOf(
             Control(
                 "TextureDetail", "Texture detail",
@@ -337,7 +434,11 @@ object LaraTooCatalog {
 
     val catalog = TitleCatalog(
         groups = listOf(IMAGE, DISPLAY),
-        pathSuffix = listOf("GraphicsPreset"),
+        families = listOf(
+            PresetFamily("graphics", "Graphics", pathSuffix = listOf("GraphicsPreset")),
+            PresetFamily("battery", "Battery saver", pathSuffix = listOf("BatterySaverPreset")),
+            PresetFamily("performance", "Performance", pathSuffix = listOf("PerformancePreset"))
+        ),
         controls = listOf(
             q(
                 "ShadowQuality", "Shadows",

@@ -70,6 +70,7 @@ data class AppState(
     val config: LoadedConfig? = null,
     val titleStatuses: List<TitleStatus> = emptyList(),
     val activeTitle: FeralTitle? = null,
+    val activeFamilyId: String? = null,
     val manualFile: Boolean = false,
     val gameInstalled: Boolean = false,
     val selectedPreset: Preset = Preset.GRAPHICS,
@@ -142,6 +143,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             _state.value = _state.value.copy(
                 loading = true,
                 activeTitle = title,
+                activeFamilyId = null,
                 manualFile = false,
                 message = null,
                 setupVisible = false,
@@ -175,6 +177,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         _state.value = _state.value.copy(
             config = null,
             activeTitle = null,
+            activeFamilyId = null,
             manualFile = false,
             loading = false,
             saving = false,
@@ -409,9 +412,10 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     fun updateTitleControl(control: Control, token: String) {
         val current = loaded ?: return
         val title = _state.value.activeTitle ?: return
-        val catalog = title.titleCatalog ?: return
+        val base = title.titleCatalog ?: return
+        val catalog = base.withFamily(base.family(_state.value.activeFamilyId))
         val root = title.valueRoot ?: return
-        if (current.document.value(root, catalog.keyFor(control)) == null) {
+        if (current.document.value(root + catalog.pathSuffix, catalog.keyFor(control)) == null) {
             _state.value = _state.value.copy(
                 message = UiMessage("${control.label} is not stored in this file, so it was left untouched.", true)
             )
@@ -423,6 +427,10 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         }
         revision++
         _state.value = _state.value.copy(dirty = true, revision = revision)
+    }
+
+    fun selectFamily(id: String) {
+        _state.value = _state.value.copy(activeFamilyId = id, selectedSettingKey = null)
     }
 
     fun refreshAccessStatus() {

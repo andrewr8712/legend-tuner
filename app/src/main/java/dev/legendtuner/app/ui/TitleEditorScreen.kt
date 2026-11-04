@@ -55,17 +55,20 @@ fun TitleEditorScreen(
     state: AppState,
     catalog: TitleCatalog,
     root: List<String>,
+    activeFamilyId: String?,
     dockedInspector: Boolean,
     twoColumns: Boolean,
     onSelect: (String?) -> Unit,
     onUpdate: (Control, String) -> Unit,
+    onSelectFamily: (String) -> Unit,
     onSave: () -> Unit,
     onDiscard: () -> Unit,
     onOpenAccess: () -> Unit
 ) {
     val config = state.config ?: return
     val doc = config.document
-    val selected = state.selectedSettingKey?.let(catalog::find)
+    val activeCatalog = catalog.withFamily(catalog.family(activeFamilyId))
+    val selected = state.selectedSettingKey?.let(activeCatalog::find)
 
     Column(
         Modifier
@@ -97,7 +100,24 @@ fun TitleEditorScreen(
                 )
             }
         )
-        Spacer(Modifier.height(14.dp))
+        Spacer(Modifier.height(12.dp))
+
+        if (catalog.families.size > 1) {
+            val active = catalog.family(activeFamilyId)
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                catalog.families.forEach { family ->
+                    FamilyChip(
+                        label = family.label,
+                        selected = family.id == active?.id,
+                        onClick = { onSelectFamily(family.id) },
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+            }
+            Spacer(Modifier.height(12.dp))
+        } else {
+            Spacer(Modifier.height(2.dp))
+        }
 
         Row(Modifier.fillMaxWidth().weight(1f), horizontalArrangement = Arrangement.spacedBy(14.dp)) {
             Column(
@@ -111,19 +131,19 @@ fun TitleEditorScreen(
                     Row(horizontalArrangement = Arrangement.spacedBy(13.dp), verticalAlignment = Alignment.Top) {
                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(13.dp)) {
                             catalog.groups.take(half).forEach { group ->
-                                GroupCard(group, catalog, doc, root, state.revision, onSelect)
+                                GroupCard(group, activeCatalog, doc, root, state.revision, onSelect)
                             }
                         }
                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(13.dp)) {
                             catalog.groups.drop(half).forEach { group ->
-                                GroupCard(group, catalog, doc, root, state.revision, onSelect)
+                                GroupCard(group, activeCatalog, doc, root, state.revision, onSelect)
                             }
                         }
                     }
                 } else {
                     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                         catalog.groups.forEach { group ->
-                            GroupCard(group, catalog, doc, root, state.revision, onSelect)
+                            GroupCard(group, activeCatalog, doc, root, state.revision, onSelect)
                         }
                     }
                 }
@@ -146,7 +166,7 @@ fun TitleEditorScreen(
             if (dockedInspector) {
                 ControlInspector(
                     control = selected,
-                    catalog = catalog,
+                    catalog = activeCatalog,
                     doc = doc,
                     root = root,
                     revision = state.revision,
@@ -167,7 +187,7 @@ fun TitleEditorScreen(
         ) {
             ControlInspector(
                 control = selected,
-                catalog = catalog,
+                catalog = activeCatalog,
                 doc = doc,
                 root = root,
                 revision = state.revision,
@@ -297,6 +317,8 @@ private fun ControlInspector(
 
         val current = TitleCatalogEngine.token(doc, root, catalog, control)
         val exists = TitleCatalogEngine.value(doc, root, catalog, control) != null
+        val raw = TitleCatalogEngine.value(doc, root, catalog, control)?.text?.trim()
+        val ladder = control.triple && exists && current == null
 
         Column(
             Modifier
@@ -326,6 +348,16 @@ private fun ControlInspector(
             if (!exists) {
                 Notice(
                     "This title does not store a value for this setting on this device. Config Tuner will not create one."
+                )
+            } else if (ladder) {
+                Text(
+                    raw ?: "—",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = Muted
+                )
+                Spacer(Modifier.height(10.dp))
+                Notice(
+                    "This key stores three different values — a preset ladder, not one number. Editing it here would corrupt the ladder, so it stays read-only."
                 )
             } else {
                 when (control.kind) {
@@ -381,6 +413,41 @@ private fun stateCased(kind: ControlKind): String = when (kind) {
     ControlKind.CHOICE -> "OPTIONS"
     ControlKind.STEPPER -> "VALUE"
     ControlKind.READONLY -> "READ ONLY"
+}
+
+@Composable
+private fun FamilyChip(
+    label: String,
+    selected: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Surface(
+        onClick = onClick,
+        modifier = modifier,
+        color = if (selected) Lime.copy(alpha = 0.07f) else BgElevated,
+        shape = RoundedCornerShape(10.dp),
+        border = BorderStroke(1.dp, if (selected) Lime.copy(alpha = 0.45f) else Line)
+    ) {
+        Row(
+            Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(
+                Modifier
+                    .size(5.dp)
+                    .clip(CircleShape)
+                    .background(if (selected) Lime else Dim)
+            )
+            Spacer(Modifier.width(7.dp))
+            Text(
+                label.uppercase(),
+                style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 0.8.sp),
+                color = if (selected) Ink else Muted,
+                maxLines = 1
+            )
+        }
+    }
 }
 
 @Composable

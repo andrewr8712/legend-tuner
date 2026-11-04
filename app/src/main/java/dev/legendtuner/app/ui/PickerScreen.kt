@@ -136,6 +136,54 @@ fun PickerScreen(
         }
 
         Spacer(Modifier.height(6.dp))
+        val missing = state.titleStatuses.filter { !it.installed }
+        if (missing.isNotEmpty()) {
+            Spacer(Modifier.height(14.dp))
+            Text(
+                "ALSO SUPPORTED",
+                style = MaterialTheme.typography.labelSmall.copy(letterSpacing = 1.8.sp),
+                color = Muted
+            )
+            Spacer(Modifier.height(8.dp))
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                color = BgElevated,
+                shape = RoundedCornerShape(14.dp),
+                border = BorderStroke(1.dp, Line)
+            ) {
+                Column {
+                    missing.forEachIndexed { index, status ->
+                        Row(
+                            Modifier.fillMaxWidth().padding(horizontal = 15.dp, vertical = 12.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Box(
+                                Modifier
+                                    .size(26.dp)
+                                    .clip(RoundedCornerShape(7.dp))
+                                    .border(1.dp, Line, RoundedCornerShape(7.dp)),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(status.title.monogram, color = Dim, fontSize = 10.sp)
+                            }
+                            Spacer(Modifier.width(12.dp))
+                            Column(Modifier.weight(1f)) {
+                                Text(status.title.label, style = MaterialTheme.typography.bodyMedium, color = Muted)
+                                Text(
+                                    "Install and launch once to edit",
+                                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp),
+                                    color = Dim
+                                )
+                            }
+                            StatusChip("Not installed", lime = false)
+                        }
+                        if (index != missing.lastIndex) DividerLine(Modifier.padding(start = 53.dp))
+                    }
+                }
+            }
+        }
+
+        Spacer(Modifier.height(10.dp))
         Surface(
             onClick = onOpenFile,
             modifier = Modifier.fillMaxWidth(),

@@ -19,18 +19,40 @@ data class Control(
     val min: Int = 0,
     val max: Int = 0,
     val suffix: String = "",
-    val note: String? = null
+    val note: String? = null,
+    /** Hitman stores "a, b, c" per preset; uniform triples are editable, ladders are not. */
+    val triple: Boolean = false,
+    /** Keys named Disable* store the inverse of the label. */
+    val invert: Boolean = false
 ) {
-    fun labelFor(token: String?): String {
-        if (token == null) return "—"
+    fun labelFor(token: String?, raw: String? = null): String {
+        if (token == null) return raw ?: "—"
         return when (kind) {
-            ControlKind.TOGGLE, ControlKind.CHOICE ->
-                choices.firstOrNull { it.token.equals(token, ignoreCase = true) }?.label ?: token
+            ControlKind.TOGGLE, ControlKind.CHOICE -> {
+                val effective = if (invert) flip(token) else token
+                choices.firstOrNull { it.token.equals(effective, ignoreCase = true) }?.label ?: token
+            }
             ControlKind.STEPPER -> "$token$suffix"
             ControlKind.READONLY -> token
         }
     }
 }
+
+private fun flip(token: String): String = when (token.trim()) {
+    "0" -> "1"
+    "1" -> "0"
+    else -> token
+}
+
+/** One selectable setting set inside a title: a preset block, a prefix or a suffix family. */
+data class PresetFamily(
+    val id: String,
+    val label: String,
+    val keyPrefix: String = "",
+    val stripPrefix: String = "",
+    val keySuffix: String = "",
+    val pathSuffix: List<String> = emptyList()
+)
 
 /**
  * [keyPrefix] rewrites the value name for titles that keep several copies of the same setting set.
@@ -42,25 +64,57 @@ data class TitleCatalog(
     val controls: List<Control>,
     val keyPrefix: String = "",
     val stripPrefix: String = "",
+    val keySuffix: String = "",
     /** Keys between the title's registry root and the values, e.g. `Setup/GraphicsPreset`. */
-    val pathSuffix: List<String> = emptyList()
+    val pathSuffix: List<String> = emptyList(),
+    val families: List<PresetFamily> = emptyList()
 ) {
     fun controlsFor(group: String): List<Control> = controls.filter { it.group == group }
 
     fun find(key: String): Control? = controls.firstOrNull { it.key == key }
 
-    fun keyFor(control: Control): String = keyPrefix + control.key.removePrefix(stripPrefix)
+    fun keyFor(control: Control): String = keyPrefix + control.key.removePrefix(stripPrefix) + keySuffix
+
+    fun family(id: String?): PresetFamily? =
+        families.firstOrNull { it.id == id } ?: families.firstOrNull()
+
+    /** Applies a preset family on top of this catalogue's base paths. */
+    fun withFamily(family: PresetFamily?): TitleCatalog {
+        if (family == null) return this
+        return copy(
+            keyPrefix = family.keyPrefix.ifEmpty { keyPrefix },
+            stripPrefix = family.stripPrefix.ifEmpty { stripPrefix },
+            keySuffix = family.keySuffix,
+            pathSuffix = pathSuffix + family.pathSuffix
+        )
+    }
 }
 
 object TitleCatalogEngine {
     fun value(doc: ConfigDocument, root: List<String>, catalog: TitleCatalog, control: Control): ConfigDocument.ConfigValue? =
         doc.value(root + catalog.pathSuffix, catalog.keyFor(control))
 
-    fun token(doc: ConfigDocument, root: List<String>, catalog: TitleCatalog, control: Control): String? =
-        value(doc, root, catalog, control)?.text?.trim()
+    fun tokens(raw: String?): List<String> =
+        raw?.split(',')?.map { it.trim() }?.filter { it.isNotEmpty() } ?: emptyList()
 
-    fun display(doc: ConfigDocument, root: List<String>, catalog: TitleCatalog, control: Control): String =
-        control.labelFor(token(doc, root, catalog, control))
+    fun isUniform(raw: String?): Boolean {
+        val list = tokens(raw)
+        return list.isNotEmpty() && list.distinct().size == 1
+    }
+
+    /** A single token for editable controls; null when a triple is a ladder rather than one value. */
+    fun token(doc: ConfigDocument, root: List<String>, catalog: TitleCatalog, control: Control): String? {
+        val raw = value(doc, root, catalog, control)?.text ?: return null
+        if (!control.triple) return raw.trim()
+        return if (isUniform(raw)) tokens(raw).first() else null
+    }
+
+    fun display(doc: ConfigDocument, root: List<String>, catalog: TitleCatalog, control: Control): String {
+        val raw = value(doc, root, catalog, control)?.text
+        val token = token(doc, root, catalog, control)
+        if (token == null) return raw?.trim() ?: "—"
+        return control.labelFor(token, raw)
+    }
 
     fun write(
         doc: ConfigDocument,
@@ -68,7 +122,11 @@ object TitleCatalogEngine {
         catalog: TitleCatalog,
         control: Control,
         token: String
-    ): Boolean = doc.setValue(root + catalog.pathSuffix, catalog.keyFor(control), token)
+    ): Boolean {
+        val stored = if (control.invert) flip(token) else token
+        val text = if (control.triple) "$stored, $stored, $stored" else stored
+        return doc.setValue(root + catalog.pathSuffix, catalog.keyFor(control), text)
+    }
 }
 
 private fun quality5(prefix: String = "q"): List<ControlChoice> = listOf(
@@ -106,6 +164,11 @@ object GridAutosportCatalog {
 
     val catalog = TitleCatalog(
         groups = listOf(IMAGE, DETAIL, LIGHT, PERF),
+        families = listOf(
+            PresetFamily("current", "Current"),
+            PresetFamily("high", "Performance cache", keyPrefix = "gfxconfig_high_", stripPrefix = "gfxconfig_"),
+            PresetFamily("power", "Power saver cache", keyPrefix = "gfxconfigpowersaver_", stripPrefix = "gfxconfig_")
+        ),
         controls = listOf(
             q(
                 "gfxconfig_shadows", "Shadows",
