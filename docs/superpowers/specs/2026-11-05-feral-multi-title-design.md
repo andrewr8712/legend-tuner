@@ -482,6 +482,9 @@ down the session; the session is closed when the process ends.
 
 ### 7.8 Screens
 
+Visual specification, tokens and component states: `docs/ui-plan.md`; rendered direction:
+`prototype/multi-title.html` and `prototype/multi-title.png`.
+
 **PickerScreen** (new). Wordmark, "Choose a game", access chip (mode + change), refresh.
 `LazyVerticalGrid` of cards, minimum 260 dp wide, so 2 up on a tablet in portrait and 3 up in
 landscape.
