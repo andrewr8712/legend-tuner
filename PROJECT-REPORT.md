@@ -1,5 +1,8 @@
 # Legend Tuner — Token, Cost & Performance Report
 
+> **Historical (v1.1.0).** Kept for the record. The 1.2.0 multi-title release and its own session
+> metrics are in [`docs/CHANGELOG-1.2.0.md`](docs/CHANGELOG-1.2.0.md).
+
 > **Snapshot:** 2026-10-30 12:35 AWST (2026-10-30 04:35 UTC)  
 > **Model:** `deepseek-flash` — DeepSeek-V4.1-Flash-1017  
 > **Project:** [Legend Tuner](https://github.com/andrewr8712/legend-tuner) · [v1.1.0 release](https://github.com/andrewr8712/legend-tuner/releases/tag/v1.1.0)  

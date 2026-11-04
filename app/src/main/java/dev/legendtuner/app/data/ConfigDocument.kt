@@ -188,6 +188,15 @@ class ConfigDocument private constructor(val document: Document) {
         if (key(presetPath(active)) == null) error("Active preset block '${active.keyName}' is missing")
     }
 
+    /**
+     * Structural check that holds for every Feral title. GRID-specific key paths must not be
+     * required here: other titles use their own root and have no preset blocks.
+     */
+    fun validateRegistry() {
+        require(root.tagName == "registry") { "Invalid root element" }
+        require(allValues().isNotEmpty()) { "Registry has no values" }
+    }
+
     private fun stripWhitespace(element: Element) {
         val children = element.childNodes
         var i = children.length - 1

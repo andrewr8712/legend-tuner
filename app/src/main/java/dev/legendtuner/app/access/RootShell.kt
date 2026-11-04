@@ -76,11 +76,14 @@ object RootShell {
     fun quote(path: String): String = "'" + path.replace("'", "'\\''") + "'"
 }
 
-class RootAccess(private val context: android.content.Context) : FileAccess {
+class RootAccess(
+    private val context: android.content.Context,
+    private val packageName: String
+) : FileAccess {
     override val mode = AccessMode.ROOT
 
     override suspend fun locate(): LocatedFile? {
-        for (candidate in GamePaths.candidates(context)) {
+        for (candidate in GamePaths.candidates(context, packageName)) {
             val test = RootShell.run("test -f ${RootShell.quote(candidate.path)} && echo yes")
             if (test.code == 0 && test.text.lineSequence().any { it.trim() == "yes" }) {
                 val stat = RootShell.run("stat -c '%s|%Y' ${RootShell.quote(candidate.path)}")
@@ -110,7 +113,7 @@ class RootAccess(private val context: android.content.Context) : FileAccess {
     }
 
     override suspend fun forceStop(): Boolean {
-        val result = RootShell.run("am force-stop ${GamePaths.GAME_PACKAGE}")
+        val result = RootShell.run("am force-stop ${packageName.replace(Regex("[^a-zA-Z0-9_.]"), "")}")
         return result.code == 0
     }
 }

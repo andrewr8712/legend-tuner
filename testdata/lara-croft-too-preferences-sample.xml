@@ -1,0 +1,370 @@
+<?xml version='1.0' encoding='utf-8'?>
+<registry>
+    <key name="HKEY_CLASSES_ROOT">
+    </key>
+    <key name="HKEY_CURRENT_CONFIG">
+    </key>
+    <key name="HKEY_CURRENT_USER">
+        <key name="AutoValueRemap">
+            <key name="GPURemap">
+                <key name="keys">
+                    <value name="Software\IndirectX\Direct3D\Config" type="integer">1</value>
+                </key>
+                <key name="values">
+                    <value name="Software\Feral Interactive\Lara Croft and the Temple of Osiris\Setup\FullScreen" type="integer">1</value>
+                    <value name="Software\Feral Interactive\Lara Croft and the Temple of Osiris\Setup\ScreenH" type="integer">1</value>
+                    <value name="Software\Feral Interactive\Lara Croft and the Temple of Osiris\Setup\ScreenW" type="integer">1</value>
+                </key>
+            </key>
+        </key>
+        <key name="Software">
+            <key name="CloudDrive">
+                <key name="Config">
+                    <value name="CloudSyncVersion" type="double">1.000000</value>
+                    <value name="CloudUseCellularAlert" type="integer">1</value>
+                    <value name="CloudUseDisabledAlert" type="integer">1</value>
+                    <value name="CloudUseOfflineMode" type="integer">0</value>
+                </key>
+            </key>
+            <key name="Crystal Dynamics">
+                <key name="Lara Croft and the Temple of Osiris">
+                    <key name="Graphics">
+                        <value name="PerformancePresetAvailable" type="integer">1</value>
+                        <key name="BatterySaverPreset">
+                            <value name="AmbientOcclusionQuality" type="integer">1</value>
+                            <value name="Bloom" type="integer">1</value>
+                            <value name="DOFQuality" type="integer">1</value>
+                            <value name="DRSFPSTarget" type="integer">30000</value>
+                            <value name="DRSMaxScaling" type="integer">800</value>
+                            <value name="DRSMinScaling" type="integer">600</value>
+                            <value name="DRSStepCount" type="integer">5</value>
+                            <value name="EnableParticleSlowdownSystem" type="integer">0</value>
+                            <value name="FXAA" type="integer">0</value>
+                            <value name="MaxFramesPerSecond" type="integer">30</value>
+                            <value name="ParticleSlowdownFPSThresholdOff" type="integer">27</value>
+                            <value name="ParticleSlowdownFPSThresholdOn" type="integer">25</value>
+                            <value name="ParticleSlowdownPlayerThreshold" type="integer">3</value>
+                            <value name="ReflectionQuality" type="integer">1</value>
+                            <value name="ShadowQuality" type="integer">3</value>
+                            <value name="SSAAQuality" type="integer">1</value>
+                            <value name="TextureFiltering" type="integer">4</value>
+                            <value name="TextureQuality" type="integer">2</value>
+                            <value name="TripleBuffering" type="integer">0</value>
+                            <value name="VSync" type="integer">0</value>
+                        </key>
+                        <key name="GraphicsPreset">
+                            <value name="AmbientOcclusionQuality" type="integer">1</value>
+                            <value name="Bloom" type="integer">1</value>
+                            <value name="DOFQuality" type="integer">1</value>
+                            <value name="DRSFPSTarget" type="integer">30000</value>
+                            <value name="DRSMaxScaling" type="integer">1000</value>
+                            <value name="DRSMinScaling" type="integer">800</value>
+                            <value name="DRSStepCount" type="integer">5</value>
+                            <value name="EnableParticleSlowdownSystem" type="integer">0</value>
+                            <value name="FXAA" type="integer">0</value>
+                            <value name="MaxFramesPerSecond" type="integer">30</value>
+                            <value name="ParticleSlowdownFPSThresholdOff" type="integer">27</value>
+                            <value name="ParticleSlowdownFPSThresholdOn" type="integer">25</value>
+                            <value name="ParticleSlowdownPlayerThreshold" type="integer">3</value>
+                            <value name="ReflectionQuality" type="integer">1</value>
+                            <value name="ShadowQuality" type="integer">3</value>
+                            <value name="SSAAQuality" type="integer">1</value>
+                            <value name="TextureFiltering" type="integer">4</value>
+                            <value name="TextureQuality" type="integer">2</value>
+                            <value name="TripleBuffering" type="integer">0</value>
+                            <value name="VSync" type="integer">0</value>
+                        </key>
+                        <key name="PerformancePreset">
+                            <value name="AmbientOcclusionQuality" type="integer">1</value>
+                            <value name="Bloom" type="integer">1</value>
+                            <value name="DOFQuality" type="integer">1</value>
+                            <value name="DRSFPSTarget" type="integer">60000</value>
+                            <value name="DRSMaxScaling" type="integer">800</value>
+                            <value name="DRSMinScaling" type="integer">600</value>
+                            <value name="DRSStepCount" type="integer">5</value>
+                            <value name="EnableParticleSlowdownSystem" type="integer">0</value>
+                            <value name="FXAA" type="integer">0</value>
+                            <value name="MaxFramesPerSecond" type="integer">60</value>
+                            <value name="ParticleSlowdownFPSThresholdOff" type="integer">55</value>
+                            <value name="ParticleSlowdownFPSThresholdOn" type="integer">50</value>
+                            <value name="ParticleSlowdownPlayerThreshold" type="integer">3</value>
+                            <value name="ReflectionQuality" type="integer">1</value>
+                            <value name="ShadowQuality" type="integer">3</value>
+                            <value name="SSAAQuality" type="integer">1</value>
+                            <value name="TextureFiltering" type="integer">4</value>
+                            <value name="TextureQuality" type="integer">2</value>
+                            <value name="TripleBuffering" type="integer">0</value>
+                            <value name="VSync" type="integer">0</value>
+                        </key>
+                    </key>
+                </key>
+            </key>
+            <key name="Feral Interactive">
+                <key name="Lara Croft and the Temple of Osiris">
+                    <key name="Setup">
+                        <value name="AddSteamCloudAlias" type="integer">1</value>
+                        <value name="AllowAutorotate" type="integer">1</value>
+                        <value name="AllowPausing" type="integer">1</value>
+                        <value name="AllowPushNotifications" type="integer">1</value>
+                        <value name="AudioCompressedSamplesThreshold" type="integer">50000</value>
+                        <value name="AudioEnabled" type="integer">1</value>
+                        <value name="AudioQualityLowPlayerThresh" type="integer">0</value>
+                        <value name="AudioQualityMediumPlayerThresh" type="integer">0</value>
+                        <value name="AudioSamplePlayFreqAnalysisTime" type="double">10.000000</value>
+                        <value name="AudioSamplePlayFreqThreshold" type="double">0.200000</value>
+                        <value name="AvoidPerInstanceVertexData" type="integer">0</value>
+                        <value name="BatterySaverPlayerCount" type="integer">0</value>
+                        <value name="ConstantAmplitudeHaptics" type="integer">1</value>
+                        <value name="CopyFXLibs" type="integer">0</value>
+                        <value name="CreateLobbyPopUpDelayInMS" type="integer">500</value>
+                        <value name="CreateLobbyPopUpMinDurationInMS" type="integer">1500</value>
+                        <value name="CustomVCPLayoutIndex" type="integer">-1</value>
+                        <value name="DebugDisableSaving" type="integer">0</value>
+                        <value name="DisableAFBCOnDepthBuffer" type="integer">0</value>
+                        <value name="DisableFeralNetOverlay" type="integer">1</value>
+                        <value name="DisableInstancedDraws" type="integer">0</value>
+                        <value name="DisableMomentumScrolling" type="integer">1</value>
+                        <value name="DisableOSShortcuts" type="integer">1</value>
+                        <value name="DisableRemoteResources" type="integer">0</value>
+                        <value name="DisableSubsurfaceScattering" type="integer">1</value>
+                        <value name="DisableTutorials" type="integer">0</value>
+                        <value name="DisplayControlsPrompt" type="integer">1</value>
+                        <value name="DoneMinOS" type="integer">0</value>
+                        <value name="DonePromotional" type="integer">0</value>
+                        <value name="DoneUnsupported" type="integer">1</value>
+                        <value name="DoShowBatteryOptimisationsWarning" type="integer">1</value>
+                        <value name="EarlyOARLowResPass" type="integer">1</value>
+                        <value name="EnableAdvancedGraphicsOption" type="integer">0</value>
+                        <value name="EnableCameraTruckModifiers" type="integer">1</value>
+                        <value name="EnableDyslexiaFont" type="integer">0</value>
+                        <value name="EnableInfiniteAmmo" type="integer">0</value>
+                        <value name="EnableInvincibility" type="integer">0</value>
+                        <value name="EnableLocalCoopCopyProfileFix" type="integer">1</value>
+                        <value name="EnableLocalCoopTempProfileFix" type="integer">0</value>
+                        <value name="EnableLowResAlpha" type="integer">1</value>
+                        <value name="EnableLowResPreTranslucent" type="integer">1</value>
+                        <value name="EnableParticleCompressor" type="integer">1</value>
+                        <value name="EnableQuickReleaseJump" type="integer">1</value>
+                        <value name="EnableSpawnerOverrides" type="integer">1</value>
+                        <value name="EnableZoomModifiers" type="integer">1</value>
+                        <value name="EnableZSorting" type="integer">1</value>
+                        <value name="EscBackButton" type="integer">1</value>
+                        <value name="FeralAnalyticsInstallID" type="string">SANITIZED</value>
+                        <value name="FilterOutOgUiTextures" type="integer">1</value>
+                        <value name="FixedScreenHeight" type="integer">1080</value>
+                        <value name="ForceCancelConnecting" type="integer">1</value>
+                        <value name="FramerateOverride" type="integer">0</value>
+                        <value name="Freeze3DRenderingOnPause" type="integer">1</value>
+                        <value name="GameCompleteReviewPopupTriggered" type="integer">0</value>
+                        <value name="GameInstallVersion" type="integer">16909056</value>
+                        <value name="GameInstallVersionString" type="string">Lara Croft® and the Temple of Osiris™ v1.2.3</value>
+                        <value name="GameInstallVersionWithStages" type="integer">19103744</value>
+                        <value name="GamepadSupportEnabled" type="integer">1</value>
+                        <value name="GameVersionNew" type="integer">16909056</value>
+                        <value name="GameVersionString" type="string">Lara Croft® and the Temple of Osiris™ v1.2.3</value>
+                        <value name="HapticControllerFallbackToDevice" type="integer">1</value>
+                        <value name="HasSimilarHardwareToSupportedDevice" type="integer">1</value>
+                        <value name="HideSystemUIInFullscreen" type="integer">1</value>
+                        <value name="IntroduceInstancesTimeout" type="integer">18000</value>
+                        <value name="IsLanguageAutoDetectSelected" type="integer">0</value>
+                        <value name="JumpCancelRadius" type="double">10.000000</value>
+                        <value name="JumpDelay" type="double">0.075000</value>
+                        <value name="LoadStoreOptimisations" type="integer">1</value>
+                        <value name="MaxFrameTime" type="integer">0</value>
+                        <value name="MergeRenderPasses" type="integer">1</value>
+                        <value name="MeshOverridesRead" type="integer">1</value>
+                        <value name="MeshShadowOverridesRead" type="integer">1</value>
+                        <value name="MouseCursorIconScale" type="double">0.700000</value>
+                        <value name="MouseCursorMaxIconScale" type="double">3.000000</value>
+                        <value name="MouseCursorMinIconScale" type="double">0.100000</value>
+                        <value name="MouseSensitivity" type="double">0.280000</value>
+                        <value name="MouseSensitivityMultiplier" type="double">7.000000</value>
+                        <value name="MoveRateMultiplier" type="double">1.750000</value>
+                        <value name="NewGameCheckpointSave" type="integer">0</value>
+                        <value name="NewTombTracker" type="integer">0</value>
+                        <value name="OptimisePostProcessing" type="integer">1</value>
+                        <value name="OptimizeFogApplication" type="integer">1</value>
+                        <value name="ParticleCompressorGain" type="string">0.55</value>
+                        <value name="ParticleCompressorRatio" type="string">4.00</value>
+                        <value name="ParticleCompressorThreshold" type="string">7.50</value>
+                        <value name="PauseMoviesOnPause" type="integer">1</value>
+                        <value name="PauseOnSuspend" type="integer">1</value>
+                        <value name="PauseSoundOnPause" type="integer">1</value>
+                        <value name="PauseTimersOnPause" type="integer">0</value>
+                        <value name="PresetVCPLayoutIndex" type="integer">0</value>
+                        <value name="PreventPlayerDeathCanResetTautology" type="integer">1</value>
+                        <value name="PSVariantHBAO" type="integer">1</value>
+                        <value name="RequireStrictDataCheck" type="integer">0</value>
+                        <value name="RestrictShadowMapSize" type="integer">1</value>
+                        <value name="RmlLinearizeVertexColor" type="integer">1</value>
+                        <value name="RmlRootVFSPath" type="string">feral</value>
+                        <value name="RollSwipeMaxTime" type="double">0.200000</value>
+                        <value name="RollSwipeMinDistance" type="double">50.000000</value>
+                        <value name="SafelyLoadAllRadialInstances" type="integer">1</value>
+                        <value name="ScreenDensityMax" type="integer">320</value>
+                        <value name="SeenSpecificationAlertUUIDDeviceDefaults_Adreno750_1_2b23" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDGraphicsSettings" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDUntestedCapableHardware" type="integer">1</value>
+                        <value name="SeparateFullScaleDepthTexture" type="integer">1</value>
+                        <value name="SeparateFullScaleTexture" type="integer">0</value>
+                        <value name="ShadowsDisabledPlayerThresh" type="integer">-1</value>
+                        <value name="SingleTapStaffEquip" type="integer">1</value>
+                        <value name="SkipDarkLightPass" type="integer">1</value>
+                        <value name="SkipReflectionAndUIScenes" type="integer">1</value>
+                        <value name="SobekFightReviewPopupTriggered" type="integer">0</value>
+                        <value name="SpecificationFirstLaunchCheck" type="integer">1</value>
+                        <value name="SpecificationLastUpdateCheckTime" type="binary">cb8deb6a00000000</value>
+                        <value name="SpecificationUpdateURL" type="string">https://u1.feralinteractive.com/autoupdate/laracrofttempleofosirismobile/specifications_android_1_2_3.xml</value>
+                        <value name="TotalLaunchCount" type="integer">1</value>
+                        <value name="TutorialReviewPopupTriggered" type="integer">0</value>
+                        <value name="UpdateServerDomain" type="string">u1.feralinteractive.com</value>
+                        <value name="UpdateServerPath" type="string">/autoupdate/</value>
+                        <value name="UpdateServerProtocol" type="string">https://</value>
+                        <value name="UpdateVCPWithInputProcess" type="integer">1</value>
+                        <value name="UseCacheSpawnerOverrides" type="integer">0</value>
+                        <value name="UseDodgeAsButton" type="integer">0</value>
+                        <value name="UseDropAsButton" type="integer">0</value>
+                        <value name="UseFixedMoveStick" type="integer">0</value>
+                        <value name="UseHardcodedVersionInformation" type="integer">1</value>
+                        <value name="UseJumpAsButton" type="integer">0</value>
+                        <value name="UseOfflineEvents" type="integer">1</value>
+                        <value name="UseReducedLightBuffer" type="integer">1</value>
+                        <value name="UseReducedSpecBuffer" type="integer">1</value>
+                        <value name="UseRMLDataDownloadUI" type="integer">1</value>
+                        <value name="UseSystemLanguageAsTextLanguage" type="integer">1</value>
+                        <value name="UseSystemLanguageAsVOLanguage" type="integer">1</value>
+                        <value name="VibrationGamepadMultiplier" type="double">0.500000</value>
+                        <value name="VibrationTouchMultiplier" type="double">0.300000</value>
+                        <value name="WaitForWarmerToLoad" type="integer">1</value>
+                        <value name="WarmShadersWhenLoading" type="integer">1</value>
+                        <value name="WaterResolutionDivision" type="integer">6</value>
+                        <key name="DocumentNavigation">
+                            <value name="FocusOnHoverChange" type="integer">1</value>
+                            <value name="ScrollInitialFocus" type="integer">0</value>
+                            <value name="WASDNavigationEnabled" type="integer">1</value>
+                        </key>
+                        <key name="DynamicResolutionScaling">
+                            <value name="DropDelayFrames" type="integer">6</value>
+                            <value name="DropTimeMargin" type="double">-1.250000</value>
+                            <value name="Enable" type="integer">1</value>
+                            <value name="FastDropTimeMargin" type="double">-2.500000</value>
+                            <value name="RaiseTimeMargin" type="double">0.250000</value>
+                        </key>
+                        <key name="FeralLatencyLimiter">
+                            <value name="Enable" type="integer">1</value>
+                            <value name="Limit" type="integer">2</value>
+                        </key>
+                        <key name="ShadowsBlackList">
+                            <value name="EnableShadowsBlackList" type="integer">1</value>
+                            <value name="ShadowsBlackListResources" type="string">lc2_bend_lowpolybush_a_0f52ea732f863251;lc2_bendie_bush_dead_v01_10d2d6e8292fee48;lc2_bendie_bush_v01_281ebabb424934e1;lc2_bendie_cypress_papyruss_v01_97c9726cd0cd7562;lc2_bendie_fern_v01_4f0967eae88b3a7b;lc2_bendie_medium_shrub_v01_3f4990c968c6bce6;lc2_bendie_palm_tall_bvhills_v01_498977232438f266;lc2_bendie_palm_tall_v01_4d26d41d1a73fad1;lc2_bendie_palm_thick_v01_5cbbc52f943a23bb;lc2_bendie_palm_v01_df7450f7bba0b19a;lc2_bendie_palm_v02_df7450f7bb886852;lc2_bendie_palm_v04_df7450f7a4f13f54;lc2_bendie_palm_v05_df7450f7a4dc6100;lc2_bendie_tree_nile_small_v01_875f12e4800af2cf;lc2_bendie_tree_spindly_v01_9daf618680e61d5a;lc2_bendie_water_grass_catail_v01_ef2544a7225e0f07;lc2_spikes_pit_long_v01_f83ea517fb57e327;lc2_grid_sobek_catwalk_floor_str_4x4_v03_broken_1_d3f9cf366e254168;lc2_grid_sobek_catwalk_floor_str_2x4_v01_fa440d462e994096;lc2_grid_sobek_catwalk_floor_str_4x4_corner_v01_102859dbfdf8e721;lc2_grid_sobek_catwalk_floor_str_4x4_v01_c6bdd7197360e54f;lc2_grid_sobek_catwalk_floor_str_4x4_v03_c6bdd7197021880c;lc2_grid_sobek_aqueduct_watergroove_pool_v01_4560fd864915c973;lc2_grid_sobek_aqueduct_watergroove_str_v01_0e2ece3fb9fed533;lc2_grid_sobek_aqueduct_watergroove_str_v03_0e2ece3fb8af17f8;lc2_grid_sobek_aqueduct_watergroove_turn_v01_13288448cfc2983e;lc2_grid_sobek_catwalk_floor_str_1x4_v01_fa62e1aa9305c95a;lc2_grid_sobek_catwalk_floor_str_2x2_v01_fab2c605cd4df68f;lc2_prop_lighting_strung_rope_v05_792cd3c94f028b63;lc2_prop_lighting_strung_rope_v06_792cd3c94e3ce359;lc2_prop_torch_standing_v03_55f3172ad3f674c8;lc2_crumblebridge_v05_a3ab1e0ef1a156a1</value>
+                        </key>
+                        <key name="ShadowsWhiteList">
+                            <value name="EnableShadowsWhiteList" type="integer">0</value>
+                            <value name="ShadowsWhiteListResources" type="string" />
+                        </key>
+                        <key name="SpecificationAlerts">
+                            <value name="GeneralConfiguration" type="integer">1</value>
+                        </key>
+                    </key>
+                </key>
+            </key>
+            <key name="IndirectX">
+                <key name="Direct3D">
+                    <key name="Config">
+                        <value name="AllowSM5" type="integer">1</value>
+                        <value name="EnableF3DWarmer" type="integer">1</value>
+                        <value name="EnableIdxD3D11Threaded" type="integer">1</value>
+                        <value name="EnableShaderDeduplicator" type="integer">1</value>
+                    </key>
+                </key>
+            </key>
+            <key name="MacDoze">
+                <key name="Config">
+                    <value name="ClearSavesEnabled" type="integer">0</value>
+                    <value name="DisableClearSaveDataAlert" type="integer">0</value>
+                </key>
+            </key>
+            <key name="SessionAnalytics">
+                <value name="DaysSinceFirstRun" type="integer">0</value>
+                <value name="Enabled" type="integer">1</value>
+                <value name="FirstLaunchTime" type="integer">815514955</value>
+                <value name="HoursSinceFirstLaunch" type="integer">0</value>
+                <value name="LongestSessionPlaytimeInForeground" type="integer">0</value>
+                <value name="NumberOfSessionBackgrounds" type="integer">0</value>
+                <value name="PlaytimeSinceInstall" type="integer">0</value>
+                <value name="TotalSessionForeground" type="integer">0</value>
+                <value name="TotalSessionTime" type="integer">0</value>
+            </key>
+            <key name="SystemMonitor">
+                <key name="Config">
+                    <value name="AppVersion" type="integer">0</value>
+                    <value name="Backgrounded" type="integer">1</value>
+                    <value name="OSVersion" type="string">17.0</value>
+                    <value name="QuitIntentional" type="integer">0</value>
+                </key>
+            </key>
+        </key>
+    </key>
+    <key name="HKEY_LOCAL_MACHINE">
+        <key name="Hardware">
+            <key name="Description">
+                <key name="System">
+                    <key name="CentralProcessor">
+                        <key name="0">
+                            <value name="Identifier" type="string">SANITIZED-CPU</value>
+                            <value name="ProcessorNameString" type="string">SANITIZED-CPU</value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="1">
+                            <value name="Identifier" type="string">SANITIZED-CPU</value>
+                            <value name="ProcessorNameString" type="string">SANITIZED-CPU</value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="2">
+                            <value name="Identifier" type="string">SANITIZED-CPU</value>
+                            <value name="ProcessorNameString" type="string">SANITIZED-CPU</value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="3">
+                            <value name="Identifier" type="string">SANITIZED-CPU</value>
+                            <value name="ProcessorNameString" type="string">SANITIZED-CPU</value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="4">
+                            <value name="Identifier" type="string">SANITIZED-CPU</value>
+                            <value name="ProcessorNameString" type="string">SANITIZED-CPU</value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="5">
+                            <value name="Identifier" type="string">SANITIZED-CPU</value>
+                            <value name="ProcessorNameString" type="string">SANITIZED-CPU</value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="6">
+                            <value name="Identifier" type="string">SANITIZED-CPU</value>
+                            <value name="ProcessorNameString" type="string">SANITIZED-CPU</value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="7">
+                            <value name="Identifier" type="string">SANITIZED-CPU</value>
+                            <value name="ProcessorNameString" type="string">SANITIZED-CPU</value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                    </key>
+                </key>
+            </key>
+        </key>
+        <key name="Software">
+        </key>
+    </key>
+    <key name="HKEY_USERS">
+    </key>
+</registry>

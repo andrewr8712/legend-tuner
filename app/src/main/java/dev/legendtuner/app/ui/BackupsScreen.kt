@@ -58,7 +58,7 @@ fun BackupsScreen(
             .padding(horizontal = 24.dp)
     ) {
         PageHeader(
-            crumb = "Legend Tuner / Backups",
+            crumb = "Config Tuner / Backups",
             title = "Backups",
             subtitle = "Automatic snapshots stored inside the app",
             mode = state.accessMode,

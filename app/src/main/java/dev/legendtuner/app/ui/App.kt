@@ -108,6 +108,7 @@ fun LegendTunerApp(
     }
 
     LaunchedEffect(Unit) { runCatching { focusRequester.requestFocus() } }
+    LaunchedEffect(state.activeTitle?.id) { destination = AppDestination.DASHBOARD }
     LaunchedEffect(state.message?.id) {
         val message = state.message ?: return@LaunchedEffect
         snackbarHostState.showSnackbar(
@@ -151,6 +152,18 @@ fun LegendTunerApp(
                 Box(Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.systemBars)) {
                     LoadingScreen()
                 }
+            } else if (state.config == null && state.activeTitle == null) {
+                Box(Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.systemBars)) {
+                    PickerScreen(
+                        state = state,
+                        wide = twoColumns,
+                        onOpenTitle = viewModel::openTitle,
+                        onOpenMissing = viewModel::openMissingTitle,
+                        onOpenFile = pickManual,
+                        onOpenAccess = viewModel::openAccessSheet,
+                        onRefresh = viewModel::refreshTitleStatuses
+                    )
+                }
             } else if (state.config == null) {
                 Box(Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.systemBars)) {
                     SetupScreen(
@@ -165,6 +178,14 @@ fun LegendTunerApp(
                     )
                 }
             } else {
+                val destinations = when {
+                    state.activeTitle?.titleCatalog != null -> listOf(
+                        AppDestination.DASHBOARD, AppDestination.EDITOR,
+                        AppDestination.BACKUPS, AppDestination.RAW
+                    )
+                    state.activeTitle?.legacyGuided == true -> AppDestination.entries.toList()
+                    else -> listOf(AppDestination.DASHBOARD, AppDestination.RAW, AppDestination.BACKUPS)
+                }
                 Row(
                     Modifier
                         .fillMaxSize()
@@ -174,40 +195,80 @@ fun LegendTunerApp(
                         NavRail(
                             selected = destination,
                             mode = state.accessMode,
-                            onSelect = selectDestination
+                            monogram = state.activeTitle?.monogram ?: "CT",
+                            destinations = destinations,
+                            onMonogramClick = viewModel::backToPicker,
+                            onSelect = selectDestination,
+                            editorLabel = if (state.activeTitle?.titleCatalog != null) "Settings" else "Graphics"
                         )
                     }
                     Column(Modifier.weight(1f).fillMaxSize()) {
                         Box(Modifier.weight(1f).fillMaxSize()) {
                             when (destination) {
-                                AppDestination.DASHBOARD -> DashboardScreen(
-                                    state = state,
-                                    wide = twoColumns,
-                                    onEdit = {
-                                        viewModel.selectSetting(null)
-                                        destination = AppDestination.EDITOR
-                                    },
-                                    onBackups = { selectDestination(AppDestination.BACKUPS) },
-                                    onRaw = { selectDestination(AppDestination.RAW) },
-                                    onOpenAccess = viewModel::openAccessSheet,
-                                    onQuickTune = { group ->
-                                        viewModel.selectSetting(SettingsCatalog.forGroup(group).firstOrNull()?.key)
-                                        destination = AppDestination.EDITOR
+                                AppDestination.DASHBOARD -> if (state.activeTitle?.legacyGuided == true) {
+                                    DashboardScreen(
+                                        state = state,
+                                        wide = twoColumns,
+                                        onEdit = {
+                                            viewModel.selectSetting(null)
+                                            destination = AppDestination.EDITOR
+                                        },
+                                        onBackups = { selectDestination(AppDestination.BACKUPS) },
+                                        onRaw = { selectDestination(AppDestination.RAW) },
+                                        onOpenAccess = viewModel::openAccessSheet,
+                                        onQuickTune = { group ->
+                                            viewModel.selectSetting(SettingsCatalog.forGroup(group).firstOrNull()?.key)
+                                            destination = AppDestination.EDITOR
+                                        }
+                                    )
+                                } else {
+                                    GenericDashboardScreen(
+                                        state = state,
+                                        wide = twoColumns,
+                                        onEdit = {
+                                            viewModel.selectSetting(null)
+                                            destination = AppDestination.EDITOR
+                                        },
+                                        onRaw = { selectDestination(AppDestination.RAW) },
+                                        onBackups = { selectDestination(AppDestination.BACKUPS) },
+                                        onOpenAccess = viewModel::openAccessSheet,
+                                        onChooseGame = viewModel::backToPicker
+                                    )
+                                }
+                                AppDestination.EDITOR -> {
+                                    val title = state.activeTitle
+                                    val valueRoot = title?.valueRoot
+                                    if (title?.titleCatalog != null && valueRoot != null) {
+                                        TitleEditorScreen(
+                                            state = state,
+                                            catalog = title.titleCatalog,
+                                            root = valueRoot,
+                                            activeFamilyId = state.activeFamilyId,
+                                            dockedInspector = dockedInspector,
+                                            twoColumns = twoColumns,
+                                            onSelect = viewModel::selectSetting,
+                                            onUpdate = viewModel::updateTitleControl,
+                                            onSelectFamily = viewModel::selectFamily,
+                                            onSave = { viewModel.save(applyPreset = false) },
+                                            onDiscard = viewModel::discardChanges,
+                                            onOpenAccess = viewModel::openAccessSheet
+                                        )
+                                    } else {
+                                        EditorScreen(
+                                            state = state,
+                                            dockedInspector = dockedInspector,
+                                            twoColumns = twoColumns,
+                                            onSelectPreset = viewModel::selectPreset,
+                                            onSelectSetting = viewModel::selectSetting,
+                                            onUpdate = viewModel::updateSetting,
+                                            onSave = { viewModel.save() },
+                                            onDiscard = viewModel::discardChanges,
+                                            onOpenAccess = viewModel::openAccessSheet,
+                                            onForceStop = viewModel::forceStopGame,
+                                            onReload = viewModel::refreshAccess
+                                        )
                                     }
-                                )
-                                AppDestination.EDITOR -> EditorScreen(
-                                    state = state,
-                                    dockedInspector = dockedInspector,
-                                    twoColumns = twoColumns,
-                                    onSelectPreset = viewModel::selectPreset,
-                                    onSelectSetting = viewModel::selectSetting,
-                                    onUpdate = viewModel::updateSetting,
-                                    onSave = { viewModel.save() },
-                                    onDiscard = viewModel::discardChanges,
-                                    onOpenAccess = viewModel::openAccessSheet,
-                                    onForceStop = viewModel::forceStopGame,
-                                    onReload = viewModel::refreshAccess
-                                )
+                                }
                                 AppDestination.BACKUPS -> BackupsScreen(
                                     state = state,
                                     onRestore = viewModel::restoreBackup,
@@ -231,7 +292,12 @@ fun LegendTunerApp(
                             }
                         }
                         if (compact) {
-                            CompactNav(selected = destination, onSelect = selectDestination)
+                            CompactNav(
+                                selected = destination,
+                                destinations = destinations,
+                                onSelect = selectDestination,
+                                editorLabel = if (state.activeTitle?.titleCatalog != null) "Settings" else "Graphics"
+                            )
                         }
                     }
                 }
@@ -272,7 +338,7 @@ fun LegendTunerApp(
 private fun LoadingScreen() {
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text("LEGEND TUNER", style = MaterialTheme.typography.headlineLarge, color = Ink)
+            Text("CONFIG TUNER", style = MaterialTheme.typography.headlineLarge, color = Ink)
             Text(
                 "READING CONFIG",
                 style = MaterialTheme.typography.labelSmall.copy(letterSpacing = 2.sp),

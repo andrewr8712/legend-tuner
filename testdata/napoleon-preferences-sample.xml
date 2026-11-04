@@ -1,0 +1,522 @@
+<?xml version='1.0' encoding='utf-8'?>
+<registry>
+    <key name="HKEY_CLASSES_ROOT">
+    </key>
+    <key name="HKEY_CURRENT_CONFIG">
+    </key>
+    <key name="HKEY_CURRENT_USER">
+        <key name="AutoValueRemap">
+            <key name="GPURemap">
+                <key name="keys">
+                    <value name="Software\IndirectX\Direct3D\Config" type="integer">1</value>
+                    <value name="Software\The Creative Assembly Limited\Napoleon Total War - Mobile\Setup\GraphicsSettings" type="integer">1</value>
+                </key>
+                <key name="values">
+                    <value name="Software\The Creative Assembly Limited\Napoleon Total War - Mobile\Setup\DisableFSAA" type="integer">1</value>
+                    <value name="Software\The Creative Assembly Limited\Napoleon Total War - Mobile\Setup\FullScreen" type="integer">1</value>
+                    <value name="Software\The Creative Assembly Limited\Napoleon Total War - Mobile\Setup\GraphicsQuality" type="integer">1</value>
+                    <value name="Software\The Creative Assembly Limited\Napoleon Total War - Mobile\Setup\ScreenH" type="integer">1</value>
+                    <value name="Software\The Creative Assembly Limited\Napoleon Total War - Mobile\Setup\ScreenW" type="integer">1</value>
+                </key>
+            </key>
+        </key>
+        <key name="Software">
+            <key name="CloudDrive">
+                <key name="Config">
+                    <value name="CloudSyncVersion" type="double">1.000000</value>
+                    <value name="CloudUseCellularAlert" type="integer">1</value>
+                    <value name="CloudUseDisabledAlert" type="integer">1</value>
+                    <value name="CloudUseOfflineMode" type="integer">1</value>
+                </key>
+            </key>
+            <key name="IndirectX">
+                <key name="Direct3D">
+                    <key name="Config">
+                        <value name="DisableARGBFloatMSAA" type="integer">1</value>
+                        <value name="EnableF3DWarmer" type="integer">1</value>
+                        <value name="EnableFramerateManager" type="integer">1</value>
+                        <value name="EnableShaderDeduplicator" type="integer">1</value>
+                        <value name="FeralGUIWatermarkText" type="string" />
+                        <value name="FramerateManagerBatterySaverIdleFPS" type="integer">20</value>
+                        <value name="FramerateManagerBatterySaverResponsiveFPS" type="integer">30</value>
+                        <value name="FramerateManagerBattleIdleFPS" type="integer">30</value>
+                        <value name="FramerateManagerBattleIdleFPS_Battery" type="integer">30</value>
+                        <value name="FramerateManagerBattleResponsiveFPS" type="integer">30</value>
+                        <value name="FramerateManagerBattleResponsiveFPS_Battery" type="integer">30</value>
+                        <value name="FramerateManagerCampaignIdleFPS" type="integer">30</value>
+                        <value name="FramerateManagerCampaignResponsiveFPS" type="integer">30</value>
+                        <value name="FramerateManagerNormalIdleFPS" type="integer">30</value>
+                        <value name="FramerateManagerNormalResponsiveFPS" type="integer">60</value>
+                        <value name="FramerateManagerResponsiveFPSDuration" type="integer">2000</value>
+                        <value name="IdxEnableLegacyD3DThreaded" type="integer">1</value>
+                        <value name="ShowFeralGUIWatermark" type="integer">0</value>
+                        <value name="VulkanRenderToBackbuffer" type="integer">1</value>
+                        <value name="VulkanUseSecondaryCmdBuffersForGraphicsPass" type="integer">0</value>
+                        <value name="VulkanUseSeparateSubmitThread" type="integer">1</value>
+                        <value name="VulkanUseThreadedRecording" type="integer">1</value>
+                    </key>
+                </key>
+            </key>
+            <key name="MacDoze">
+                <key name="Config">
+                    <value name="ClearSavesEnabled" type="integer">0</value>
+                    <value name="DisableClearSaveDataAlert" type="integer">0</value>
+                    <value name="Miles7MaxSamples" type="integer">256</value>
+                    <value name="OutOfStorageSpaceSizeMB" type="integer">500</value>
+                    <value name="RemapCommandToControl" type="integer">1</value>
+                </key>
+            </key>
+            <key name="SystemMonitor">
+                <key name="Config">
+                    <value name="AppVersion" type="integer">16974848</value>
+                    <value name="Backgrounded" type="integer">1</value>
+                    <value name="OSVersion" type="string">17.0</value>
+                    <value name="QuitIntentional" type="integer">0</value>
+                </key>
+            </key>
+            <key name="The Creative Assembly">
+                <key name="Empire">
+                    <value name="ep_unlock" type="integer">1</value>
+                </key>
+            </key>
+            <key name="The Creative Assembly Limited">
+                <key name="Napoleon Total War - Mobile">
+                    <key name="Setup">
+                        <value name="AddSteamCloudAlias" type="integer">0</value>
+                        <value name="AdjustVideoSpriteUV" type="integer">1</value>
+                        <value name="AffinitiseTBBThreadsToFastCores" type="integer">1</value>
+                        <value name="AllocateAvailableUnitsOpt" type="integer">1</value>
+                        <value name="AllowAutorotate" type="integer">1</value>
+                        <value name="AllowPausing" type="integer">1</value>
+                        <value name="AllowPushNotifications" type="integer">1</value>
+                        <value name="AllowReloadStrings" type="integer">0</value>
+                        <value name="AllowRG16FloatSeaSurface" type="integer">1</value>
+                        <value name="AllowTribalPlayableBuildingEffects" type="integer">1</value>
+                        <value name="ApplyShadowMapFix" type="integer">1</value>
+                        <value name="AssignSurplusResearch" type="integer">1</value>
+                        <value name="AttackWithPathChargeThreshold" type="double">10.000000</value>
+                        <value name="AutosaveIntervalInMinutes" type="integer">10</value>
+                        <value name="AuxiliaryNavalUnitsFile" type="string">auxiliary_naval_units.txt</value>
+                        <value name="AuxiliaryOption" type="integer">3</value>
+                        <value name="AuxiliaryUnitsFile" type="string">auxiliary_units.txt</value>
+                        <value name="AvoidAlmostZeroDivision" type="integer">0</value>
+                        <value name="AvoidARGB" type="integer">1</value>
+                        <value name="AvoidDownsizingCampaignStratSelector" type="integer">1</value>
+                        <value name="BattleCameraAutoTiltMax" type="double">-6.000000</value>
+                        <value name="BattleCameraAutoTiltMin" type="double">-36.000000</value>
+                        <value name="BattleCameraLandHeightMax" type="double">60.000000</value>
+                        <value name="BattleCameraLandHeightMin" type="double">2.500000</value>
+                        <value name="BattleCameraManualTiltMax" type="double">0.000000</value>
+                        <value name="BattleCameraManualTiltMin" type="double">-80.000000</value>
+                        <value name="BattleCameraNavalHeightMax" type="double">150.000000</value>
+                        <value name="BattleCameraNavalHeightMin" type="double">15.000000</value>
+                        <value name="BattleCameraPanBase" type="double">10.000000</value>
+                        <value name="BattleCameraPanScale" type="double">8.000000</value>
+                        <value name="BattleHitboxBelowGround" type="integer">1</value>
+                        <value name="BattleHitboxDebugLines" type="integer">0</value>
+                        <value name="BattleHitboxDistanceMax" type="double">200.000000</value>
+                        <value name="BattleHitboxDistanceMin" type="double">100.000000</value>
+                        <value name="BattleHitboxMultiplier" type="double">2.000000</value>
+                        <value name="BattleMaxPathSearchCost" type="integer">5000</value>
+                        <value name="BattleMaxZonePathSearchCost" type="integer">5000</value>
+                        <value name="BattleMouseWheelSensitivity" type="double">40.000000</value>
+                        <value name="BattleSelectionState" type="integer">0</value>
+                        <value name="BattleThreadSafety" type="integer">1</value>
+                        <value name="BattleTickUpdateThreadAffinity" type="integer">0</value>
+                        <value name="BigPicture" type="integer">0</value>
+                        <value name="CalicoRefreshKeychain" type="integer">1</value>
+                        <value name="CameraMomentumCutoff" type="integer">20</value>
+                        <value name="CameraMomentumDeceleration" type="integer">10</value>
+                        <value name="CameraSmoothness" type="double">-25.000000</value>
+                        <value name="CampaignBuildingHitboxMultiplier" type="double">1.000000</value>
+                        <value name="CampaignCameraMomentumDeceleration" type="integer">5</value>
+                        <value name="CampaignCameraPanMultiplier" type="double">1.000000</value>
+                        <value name="CampaignCharacterHitboxMultiplier" type="double">1.000000</value>
+                        <value name="CampaignLightDirectionX" type="double">-1.000000</value>
+                        <value name="CampaignLightDirectionY" type="double">-1.000000</value>
+                        <value name="CampaignLightDirectionZ" type="double">0.600000</value>
+                        <value name="CampaignMajorSettlementHitboxMultiplier" type="double">0.000000</value>
+                        <value name="CampaignMultiplayerFaction" type="string">britain</value>
+                        <value name="CampaignMultiplayerMode" type="integer">0</value>
+                        <value name="CampaignOverrideLightDirection" type="integer">0</value>
+                        <value name="CampaignPendingBattleOffset" type="integer">30</value>
+                        <value name="CampaignTerrainOverlayAdjustFoV" type="integer">1</value>
+                        <value name="CampaignTerrainOverlaySizeMultiplier" type="double">1.250000</value>
+                        <value name="CampaignTreeDisplayCheckNodeIsLeaf" type="integer">1</value>
+                        <value name="CampaignUnitDragRadius" type="double">8.000000</value>
+                        <value name="CardRenderer" type="string">Test GPU</value>
+                        <value name="CheckShadowMapTextureBounds" type="integer">1</value>
+                        <value name="ConsoleTriggerPercentScreenWidth" type="double">25.000000</value>
+                        <value name="ControlSchemePreset" type="string">wasd_style</value>
+                        <value name="ConvexHullMathFix" type="integer">1</value>
+                        <value name="CustomBattleWeatherFix" type="integer">1</value>
+                        <value name="CustomScenarioBattleCount" type="integer">0</value>
+                        <value name="DeferredAutosaveTimeout" type="integer">5</value>
+                        <value name="DisableBattleBuildingInstancing" type="integer">1</value>
+                        <value name="DisableEP2CH1StuckFix" type="integer">0</value>
+                        <value name="DisableFeralNetOverlay" type="integer">1</value>
+                        <value name="DisableFoamTextureMips" type="integer">1</value>
+                        <value name="DisableNavalFormationReLockFix" type="integer">0</value>
+                        <value name="DisableOSShortcuts" type="integer">1</value>
+                        <value name="DisableQuantizeSceneBounds" type="integer">1</value>
+                        <value name="DisableRememberTechsUnderResearch" type="integer">0</value>
+                        <value name="DisableRemoteResources" type="integer">0</value>
+                        <value name="DisableShadowViewFocus" type="integer">0</value>
+                        <value name="DisableShipsFormationOnMovementWithPaths" type="integer">1</value>
+                        <value name="DisableUiOcclusion" type="integer">1</value>
+                        <value name="DisableVegetationFarQuadtree" type="integer">1</value>
+                        <value name="DisplayControlsPrompt" type="integer">1</value>
+                        <value name="DoneMinOS" type="integer">0</value>
+                        <value name="DonePromotional" type="integer">0</value>
+                        <value name="DoneUnsupported" type="integer">0</value>
+                        <value name="DoShowBatteryOptimisationsWarning" type="integer">1</value>
+                        <value name="EarliestReviewRequestTime" type="integer">0</value>
+                        <value name="EmpireTooltipSafety" type="integer">1</value>
+                        <value name="EnableAllNotificationsCheat" type="integer">0</value>
+                        <value name="EnableAsynchronousSaving" type="integer">0</value>
+                        <value name="EnableAttackWithPathChanges" type="integer">1</value>
+                        <value name="EnableAutosaveCoordinator" type="integer">1</value>
+                        <value name="EnableBattleResultShouts" type="integer">0</value>
+                        <value name="EnableBug13055workaround" type="integer">0</value>
+                        <value name="EnableCameraMomentum" type="integer">1</value>
+                        <value name="EnableCampaignHitboxDebug" type="integer">0</value>
+                        <value name="EnableCinematics" type="integer">1</value>
+                        <value name="EnableConsole" type="integer">1</value>
+                        <value name="EnableCustomBattles" type="integer">0</value>
+                        <value name="EnableDebugLines" type="integer">0</value>
+                        <value name="EnableDeferredAutosaves" type="integer">1</value>
+                        <value name="EnableDynamicTranslation" type="integer">0</value>
+                        <value name="EnableFeralNetNotificationSounds" type="integer">1</value>
+                        <value name="EnableFixedFleetMax" type="integer">1</value>
+                        <value name="EnableKBAndMouseExpandCardBar" type="integer">0</value>
+                        <value name="EnableNewDataDownloadUI" type="integer">1</value>
+                        <value name="EnablePathfindingEarlyOut" type="integer">1</value>
+                        <value name="EnablePathfindingWorkaround" type="integer">0</value>
+                        <value name="EnablePiPViews" type="integer">0</value>
+                        <value name="EnableProtectorateAnnexation" type="integer">1</value>
+                        <value name="EnableQuickBattles" type="integer">0</value>
+                        <value name="EnableSafetyAutosave" type="integer">1</value>
+                        <value name="EnableShipsTurnOnSpot" type="integer">0</value>
+                        <value name="EnableSimultaneousPanning" type="integer">0</value>
+                        <value name="EnableSoundCaching" type="integer">0</value>
+                        <value name="EnableSoundGameSpeedPitch" type="integer">1</value>
+                        <value name="EnableVoiceChat" type="integer">0</value>
+                        <value name="EscBackButton" type="integer">1</value>
+                        <value name="FactionSelectVCColourNeeded" type="integer">-16777024</value>
+                        <value name="FactionSelectVCColourOwned" type="integer">-16728064</value>
+                        <value name="FactionSelectVCColourOwnedNeeded" type="integer">-16727872</value>
+                        <value name="FeralAnalyticsInstallID" type="string">SANITIZED</value>
+                        <value name="FeralCampaignData" type="integer">0</value>
+                        <value name="FixedScreenHeight" type="integer">1080</value>
+                        <value name="FlushBeforeImposterGen" type="integer">0</value>
+                        <value name="ForceMultiThreadModel" type="integer">1</value>
+                        <value name="ForceMusketSmokeVolumetrics" type="integer">1</value>
+                        <value name="ForceOttomanFortRandomWeather" type="integer">1</value>
+                        <value name="ForceTouchControls" type="integer">0</value>
+                        <value name="FortsFix" type="integer">1</value>
+                        <value name="FullScreen" type="integer">1</value>
+                        <value name="GameInstallVersion" type="integer">16974848</value>
+                        <value name="GameInstallVersionString" type="string">NAPOLEON v1.3.4</value>
+                        <value name="GameInstallVersionWithStages" type="integer">20217856</value>
+                        <value name="GameOptionsDialogShouldShow" type="integer">0</value>
+                        <value name="GameOptionsDialogShown" type="integer">1</value>
+                        <value name="GameResolutionMultiplier" type="double">1.000000</value>
+                        <value name="GameVersionNew" type="integer">16974848</value>
+                        <value name="GameVersionString" type="string">NAPOLEON v1.3.4</value>
+                        <value name="GestureDoubleTapDuration" type="double">0.200000</value>
+                        <value name="GestureLongPressMinDuration" type="double">2.000000</value>
+                        <value name="GesturePressMinDuration" type="double">0.450000</value>
+                        <value name="GestureShortHoldAndDragDuration" type="double">0.200000</value>
+                        <value name="GraphicsQuality" type="integer">0</value>
+                        <value name="HasSimilarHardwareToSupportedDevice" type="integer">1</value>
+                        <value name="HideOptionDepthOfField" type="integer">0</value>
+                        <value name="HideOptionDistortion" type="integer">0</value>
+                        <value name="HideSystemUIInFullscreen" type="integer">1</value>
+                        <value name="ImposterGenRenderpassVertexLimit" type="integer">0</value>
+                        <value name="iOSMouseAcceleration" type="double">0.000000</value>
+                        <value name="IsDeploymentSafety" type="integer">1</value>
+                        <value name="IsLanguageAutoDetectSelected" type="integer">0</value>
+                        <value name="LandBattleDrawingCloseDistance" type="integer">20</value>
+                        <value name="LandBattleDrawingFarAwayDistance" type="integer">100</value>
+                        <value name="LandBattleMaxDrawingHitRadius" type="integer">24</value>
+                        <value name="LandBattleMinDrawingHitRadius" type="integer">10</value>
+                        <value name="LandBattleMovementPathExtensionRadius" type="integer">10</value>
+                        <value name="LaunchesSinceReviewRequest" type="integer">6</value>
+                        <value name="LogStringHandles" type="integer">0</value>
+                        <value name="MapsOverlayOpacityCap" type="integer">255</value>
+                        <value name="MaxSoundCachingSizeKb" type="integer">10000</value>
+                        <value name="MaxTotalSoundAllocationSizeKb" type="integer">200000</value>
+                        <value name="MaxTotalSoundCacheSizeKb" type="integer">150000</value>
+                        <value name="MinSoundCachingSizeKb" type="integer">100</value>
+                        <value name="MinSplitUnits" type="integer">3</value>
+                        <value name="MouseCursorIconScale" type="double">2.500000</value>
+                        <value name="MouseSensitivity" type="double">0.400000</value>
+                        <value name="MouseSensitivityMultiplier" type="double">12.000000</value>
+                        <value name="NaturalMouseScroll" type="integer">0</value>
+                        <value name="NavalBattleDrawingCloseDistance" type="integer">100</value>
+                        <value name="NavalBattleDrawingFarAwayDistance" type="integer">400</value>
+                        <value name="NavalBattleMaxDrawingHitRadius" type="integer">55</value>
+                        <value name="NavalBattleMinDrawingHitRadius" type="integer">15</value>
+                        <value name="NavalReplenishStyle" type="integer">2</value>
+                        <value name="NoMultithreadedDevice" type="integer">1</value>
+                        <value name="NumTBBThreadsOverride" type="integer">3</value>
+                        <value name="NumUnitsToAnalyseAttack" type="integer">2</value>
+                        <value name="NumUnitsToAnalyseOutflank" type="integer">2</value>
+                        <value name="PauseMoviesOnPause" type="integer">1</value>
+                        <value name="PauseOnSuspend" type="integer">1</value>
+                        <value name="PauseSoundOnPause" type="integer">1</value>
+                        <value name="PauseTimersOnPause" type="integer">1</value>
+                        <value name="PositioningModeCloseDistance" type="integer">30</value>
+                        <value name="PositioningModeFarAwayDistance" type="integer">80</value>
+                        <value name="PositioningModeMaxHitRadius" type="integer">8</value>
+                        <value name="PositioningModeMinHitRadius" type="integer">3</value>
+                        <value name="QuickCampaign" type="integer">0</value>
+                        <value name="QuickCampaignAllAi" type="integer">0</value>
+                        <value name="QuickCampaignAllAiTurnLimit" type="integer">200</value>
+                        <value name="QuickCampaignFaction" type="string">britain</value>
+                        <value name="QuickCampaignHotseat" type="integer">0</value>
+                        <value name="QuickCampaignType" type="string">Coalition</value>
+                        <value name="RC_VEGETATION_COMPOSITE_DIFFUSE_MaxMipsDownsize" type="integer">0</value>
+                        <value name="RC_VEGETATION_DETAIL_MaxMipsDownsize" type="integer">0</value>
+                        <value name="RC_VEGETATION_DIFFUSE_MaxMipsDownsize" type="integer">0</value>
+                        <value name="RC_VEGETATION_NORMAL_MaxMipsDownsize" type="integer">0</value>
+                        <value name="RC_VEGETATION_SPECULAR_MaxMipsDownsize" type="integer">0</value>
+                        <value name="RegionDefenseFix" type="integer">1</value>
+                        <value name="RenderUnderNotch" type="integer">1</value>
+                        <value name="ReplenishStyle" type="integer">1</value>
+                        <value name="RepositioningFingerChangeDelay" type="integer">2</value>
+                        <value name="RequirePostDownloadRestart" type="integer">0</value>
+                        <value name="RequireStrictDataCheck" type="integer">0</value>
+                        <value name="ResearchPointValuesFix" type="integer">1</value>
+                        <value name="RestoreMouseOnSuspend" type="integer">0</value>
+                        <value name="ReverseSplinesDisplayOrder" type="integer">1</value>
+                        <value name="RmlAtlasNodeMaxSize" type="integer">2048</value>
+                        <value name="RmlAtlasPageSize" type="integer">4096</value>
+                        <value name="RmlCalicoDisableFriendRequestSharing" type="integer">1</value>
+                        <value name="RmlDPRatioVersion" type="integer">2</value>
+                        <value name="RmlIsBatchingEnabled" type="integer">1</value>
+                        <value name="RmlRootVFSPath" type="string">feral</value>
+                        <value name="ScreenDensityMax" type="integer">320</value>
+                        <value name="SeaBattleMovementPathExtensionRadius" type="integer">25</value>
+                        <value name="SeenSpecificationAlertUUIDAdreno700seriesworkarounds" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDAdreno750HardwareSpecificationsClass_1_3_4RC3" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDInternalEventsDisabled" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDMipOverrides_1_3_1b8" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDPerRendererMappedSettings" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDUntestedCapableHardware" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDUpdateBattleCameraRestriction_1_7a2" type="integer">1</value>
+                        <value name="ShipCollisionDebugLines" type="integer">0</value>
+                        <value name="ShipCollisionTestSails" type="integer">1</value>
+                        <value name="ShowCampaignCoordinates" type="integer">1</value>
+                        <value name="ShowStringHandles" type="integer">0</value>
+                        <value name="SmoothUnitStatusUpdate" type="integer">1</value>
+                        <value name="SoundGameSpeedPitchIntensity" type="integer">100</value>
+                        <value name="SoundMasterVolumeMultiplier" type="integer">75</value>
+                        <value name="SoundSFXVolumeMultiplier" type="integer">115</value>
+                        <value name="SpecificationFirstLaunchCheck" type="integer">1</value>
+                        <value name="SpecificationLastUpdateCheckTime" type="binary">908eeb6a00000000</value>
+                        <value name="SpecificationUpdateURL" type="string">https://u1.feralinteractive.com/autoupdate/napoleontwmobile/specifications_android_1_3_4.xml</value>
+                        <value name="SpecificationUpdateURLBlockedComponents" type="integer">2</value>
+                        <value name="TechnologyOsmosisFix" type="integer">1</value>
+                        <value name="TotalLaunchCount" type="integer">1</value>
+                        <value name="TownWealthFormulaFix" type="integer">1</value>
+                        <value name="UnitBannerSizeLarge" type="double">3.000000</value>
+                        <value name="UnitBannerSizeNormal" type="double">2.000000</value>
+                        <value name="UnitBannerSizeSmall" type="double">1.000000</value>
+                        <value name="UnitGroupFix" type="integer">1</value>
+                        <value name="UnitHighlightDurationOnTap" type="double">1.500000</value>
+                        <value name="UnlockUnplayableFactions" type="integer">1</value>
+                        <value name="UpdateServerDomain" type="string">u1.feralinteractive.com</value>
+                        <value name="UpdateServerPath" type="string">/autoupdate/</value>
+                        <value name="UpdateServerProtocol" type="string">https://</value>
+                        <value name="UseAutosaveIconIfAvailable" type="integer">1</value>
+                        <value name="UseCustomMultiFingerPressRecogniser" type="integer">1</value>
+                        <value name="UseDriveSaveSync" type="integer">0</value>
+                        <value name="UseDynamicBattleMinimap" type="integer">1</value>
+                        <value name="UseDynamicGrassVB" type="integer">1</value>
+                        <value name="UseFeralMods" type="integer">1</value>
+                        <value name="UseGoogleSignIn" type="integer">1</value>
+                        <value name="UseNewUI" type="integer">1</value>
+                        <value name="UseOfflineEvents" type="integer">1</value>
+                        <value name="UseOriginalTheme" type="integer">0</value>
+                        <value name="UseRMLDataDownloadUI" type="integer">1</value>
+                        <value name="WarnCornerCutout" type="integer">1</value>
+                        <value name="WealthGrowthFix" type="integer">1</value>
+                        <key name="BlockedAchievements">
+                            <value name="MP_ACHIEVEMENT_B_BOARD_5_SHIPS_1_BATTLE" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_B_PLAY_100_NAVAL_BATTLES" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_B_PLAY_LAND_BATTLE_EVERY_FACTION" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_B_PLAY_NAVAL_BATTLE_EVERY_FACTION" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_B_WIN_10_DECISIVE_VICTORIES" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_B_WIN_10_LAND_BATTLES" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_B_WIN_10_LAND_BATTLES_CONSECUTIVELY" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_B_WIN_50_LAND_BATTLES" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_B_WIN_6_NAVAL_BATTLES_CONSECUTIVELY" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_B_WIN_BATTLE_WITH_JUST_LIGHT_INF_AND_ART" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_B_WIN_LAND_BATTLE_WITH_NO_INFANTRY" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_B_WIN_NAVAL_BATTLE" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_B_WIN_NAVAL_ONLY_USING_FIRST_RATES" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_B_WIN_ONLINE_AGAINST_DOUBLE_SKILL_RATING" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_B_WIN_USING_0_SHIPS_OF_THE_LINE" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_B_WIN_USING_HALF_OPPONENTS_FUNDS" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_C_CAPTURE_OPPONENTS_CAPITAL_IN_20_TURNS" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_C_GIVE_OPPONENT_50000_THEN_WIN" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_C_OPPONENTS_FACTION_LAST_TO_DIE" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_C_PLAY_A_MULTIPLAYER_CAMPAIGN" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_C_WIN_EGYPT_CAMPAIGN_AS_FRANCE" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_C_WIN_EGYPT_CAMPAIGN_AS_OTTOMANS" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_C_WIN_EUROPEAN_CAMPAIGN" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_C_WIN_EUROPEAN_CAMPAIGN_AUSTRIA" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_C_WIN_EUROPEAN_CAMPAIGN_ENGLAND" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_C_WIN_EUROPEAN_CAMPAIGN_PRUSSIA" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_C_WIN_EUROPEAN_CAMPAIGN_RUSSIA" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_C_WIN_ITALIAN_CAMPAIGN_AS_AUSTRIA" type="integer">1</value>
+                            <value name="MP_ACHIEVEMENT_C_WIN_ITALIAN_CAMPAIGN_AS_FRANCE" type="integer">1</value>
+                            <value name="NAPOLEON_MP_ACHIEVEMENT_B_WIN_ONLINE_AGAINST_DOUBLE_SKILL_RATING" type="integer">1</value>
+                            <value name="NAPOLEON_SPANISH_CAMPAIGN_ACHIEVEMENT_C_START_MULTIPLAYER" type="integer">1</value>
+                        </key>
+                        <key name="GraphicsSettings">
+                            <value name="AntiAliasing" type="integer">0</value>
+                            <value name="Brightness" type="double">1.200000</value>
+                            <value name="BuildingDetail" type="integer">2</value>
+                            <value name="DepthOfField" type="integer">0</value>
+                            <value name="Distortion" type="integer">1</value>
+                            <value name="FirstRun" type="integer">0</value>
+                            <value name="Gamma" type="double">2.000000</value>
+                            <value name="gfx_dead_unit_render_time" type="integer">3</value>
+                            <value name="GrassQuality" type="integer">2</value>
+                            <value name="HDR" type="integer">1</value>
+                            <value name="ParticleEffects" type="integer">3</value>
+                            <value name="ShaderModel" type="integer">1</value>
+                            <value name="ShaderModelLow" type="integer">0</value>
+                            <value name="ShadowsQuality" type="integer">2</value>
+                            <value name="ShipQuality" type="integer">0</value>
+                            <value name="SkyQuality" type="integer">1</value>
+                            <value name="SoftShadows" type="integer">0</value>
+                            <value name="SSAO" type="integer">0</value>
+                            <value name="TerrainQuality" type="integer">0</value>
+                            <value name="TextureFiltering" type="integer">2</value>
+                            <value name="TextureQuality" type="integer">2</value>
+                            <value name="TreesQuality" type="integer">2</value>
+                            <value name="UnitDetail" type="integer">2</value>
+                            <value name="UnitSize" type="integer">2</value>
+                            <value name="VolumetricEffects" type="integer">1</value>
+                            <value name="WaterQuality" type="integer">2</value>
+                        </key>
+                        <key name="MainMenuSettings">
+                            <value name="AutoDeselectUnits" type="integer">0</value>
+                            <value name="AutoManageCity" type="integer">0</value>
+                            <value name="BatterySaver" type="integer">0</value>
+                            <value name="BattleAdviceLevel" type="integer">3</value>
+                            <value name="BattleDifficulty" type="integer">0</value>
+                            <value name="BattleTimeLimit" type="integer">0</value>
+                            <value name="CameraPanSpeed" type="double">65.000000</value>
+                            <value name="CameraRotateSpeed" type="double">3.000000</value>
+                            <value name="CameraTilt" type="integer">0</value>
+                            <value name="CameraZoomSpeed" type="integer">75</value>
+                            <value name="CampaignAdviceLevel" type="integer">3</value>
+                            <value name="CampaignDifficulty" type="integer">0</value>
+                            <value name="CommandSlowdown" type="integer">0</value>
+                            <value name="DisableFTH" type="integer">0</value>
+                            <value name="DyslexicFont" type="integer">0</value>
+                            <value name="EnableAdvisorReport" type="integer">1</value>
+                            <value name="ExpandingCardBar" type="integer">0</value>
+                            <value name="GroupSelection" type="integer">0</value>
+                            <value name="InvertCameraX" type="integer">0</value>
+                            <value name="InvertCameraY" type="integer">0</value>
+                            <value name="LocationBasedZoom" type="integer">3</value>
+                            <value name="MinimapBattleTransparency" type="integer">0</value>
+                            <value name="MinimapTransparency" type="integer">0</value>
+                            <value name="ShowCPUMoves" type="integer">1</value>
+                            <value name="SoundMasterVolume" type="integer">100</value>
+                            <value name="SoundMusicVolume" type="integer">100</value>
+                            <value name="SoundSFXVolume" type="integer">100</value>
+                            <value name="SoundSpeechVolume" type="integer">100</value>
+                            <value name="SpeedControls" type="integer">0</value>
+                            <value name="Subtitles" type="integer">1</value>
+                        </key>
+                        <key name="SpecificationAlerts">
+                            <value name="DefaultHardwareSpecificationsClass_1_3_4RC3" type="integer">1</value>
+                        </key>
+                    </key>
+                </key>
+                <key name="Total War EMPIRE">
+                    <key name="Setup">
+                        <key name="Analytics">
+                            <value name="Feral.Napoleon.AncillaryDiceRoll" type="integer">0</value>
+                            <value name="Feral.Napoleon.BattleEnd" type="integer">0</value>
+                            <value name="Feral.Napoleon.BattleStart.Details" type="integer">0</value>
+                            <value name="Feral.Napoleon.BattleStart.Units" type="integer">0</value>
+                            <value name="Feral.Napoleon.CampaignEnd" type="integer">0</value>
+                            <value name="Feral.Napoleon.TraitDiceRoll" type="integer">0</value>
+                            <value name="Feral.Napoleon.TurnEndAIMode" type="integer">0</value>
+                            <value name="Feral.Rml.ScreensOpened" type="integer">0</value>
+                        </key>
+                    </key>
+                </key>
+            </key>
+        </key>
+    </key>
+    <key name="HKEY_LOCAL_MACHINE">
+        <key name="Hardware">
+            <key name="Description">
+                <key name="System">
+                    <key name="CentralProcessor">
+                        <key name="0">
+                            <value name="Identifier" type="string">SANITIZED-CPU</value>
+                            <value name="ProcessorNameString" type="string">SANITIZED-CPU</value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="1">
+                            <value name="Identifier" type="string">SANITIZED-CPU</value>
+                            <value name="ProcessorNameString" type="string">SANITIZED-CPU</value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="2">
+                            <value name="Identifier" type="string">SANITIZED-CPU</value>
+                            <value name="ProcessorNameString" type="string">SANITIZED-CPU</value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="3">
+                            <value name="Identifier" type="string">SANITIZED-CPU</value>
+                            <value name="ProcessorNameString" type="string">SANITIZED-CPU</value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="4">
+                            <value name="Identifier" type="string">SANITIZED-CPU</value>
+                            <value name="ProcessorNameString" type="string">SANITIZED-CPU</value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="5">
+                            <value name="Identifier" type="string">SANITIZED-CPU</value>
+                            <value name="ProcessorNameString" type="string">SANITIZED-CPU</value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="6">
+                            <value name="Identifier" type="string">SANITIZED-CPU</value>
+                            <value name="ProcessorNameString" type="string">SANITIZED-CPU</value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="7">
+                            <value name="Identifier" type="string">SANITIZED-CPU</value>
+                            <value name="ProcessorNameString" type="string">SANITIZED-CPU</value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                    </key>
+                </key>
+            </key>
+        </key>
+        <key name="Software">
+        </key>
+    </key>
+    <key name="HKEY_USERS">
+    </key>
+</registry>

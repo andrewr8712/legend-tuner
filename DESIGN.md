@@ -1,5 +1,10 @@
 # Legend Tuner — design & build plan
 
+> **Historical.** This document describes the GRID Legends-only 1.x design. For the multi-title
+> 1.2.0 model (title profiles, catalogues, preset families, access sessions) see
+> `docs/superpowers/specs/2026-11-05-feral-multi-title-design.md` and `docs/CHANGELOG-1.2.0.md`.
+> The GRID Legends schema notes below are still current.
+
 An unofficial, native Android editor for the `preferences` file used by **GRID™ Legends** on Android.
 
 - **Status:** implemented — signed debug APK built (runtime verification on the tablet still pending)

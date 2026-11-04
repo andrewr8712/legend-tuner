@@ -1,6 +1,6 @@
 # Security
 
-Legend Tuner has no network permission and does not collect telemetry. It does read and write a file in another app's storage when the user grants Root or Shizuku access.
+Config Tuner (formerly Legend Tuner) has no network permission and does not collect telemetry. It does read and write a file in another app's storage when the user grants Root or Shizuku access.
 
 If you find a security issue, please **do not open a public issue**. Use GitHub's private vulnerability reporting:
 
