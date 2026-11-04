@@ -2,6 +2,24 @@
 
 All notable changes to Config Tuner (formerly Legend Tuner) are documented here. The project follows [Semantic Versioning](https://semver.org/).
 
+## [1.2.1] — 2026-11-05
+
+### Fixed
+
+- Hitman's inverted `Disable*` toggles now select the option they display. The inspector previously
+  compared the raw stored token against the option list, so a stored `1` could show **Off** while
+  highlighting **On**.
+- The inspector footer now labels the raw token as **Stored value**, keeping the inverted storage
+  visible without contradicting the displayed state.
+
+### Verified
+
+- TB520FU, Android 17: installed over 1.2.0; Hitman Performance+ Bloom showed **On** with the **On**
+  option selected while `DisableBloom_plus = 0`.
+- 19/19 unit tests passing; debug APK builds.
+
+Release notes: [`docs/CHANGELOG-1.2.1.md`](docs/CHANGELOG-1.2.1.md).
+
 ## [1.2.0] — 2026-11-05
 
 ### Added
