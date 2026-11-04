@@ -1,0 +1,217 @@
+<?xml version='1.0' encoding='utf-8'?>
+<registry>
+    <key name="HKEY_CLASSES_ROOT">
+    </key>
+    <key name="HKEY_CURRENT_CONFIG">
+    </key>
+    <key name="HKEY_CURRENT_USER">
+        <key name="AutoValueRemap">
+            <key name="GPURemap">
+                <key name="keys">
+                    <value name="Software\IndirectX\Direct3D\Config" type="integer">1</value>
+                </key>
+                <key name="values">
+                    <value name="Software\Feral Interactive\Alien Isolation\Setup\FullScreen" type="integer">1</value>
+                    <value name="Software\Feral Interactive\Alien Isolation\Setup\ScreenH" type="integer">1</value>
+                    <value name="Software\Feral Interactive\Alien Isolation\Setup\ScreenW" type="integer">1</value>
+                </key>
+            </key>
+        </key>
+        <key name="Software">
+            <key name="Feral Interactive">
+                <key name="Alien Isolation">
+                    <key name="Setup">
+                        <value name="AddSteamCloudAlias" type="integer">1</value>
+                        <value name="AllowPausing" type="integer">1</value>
+                        <value name="CardRenderer" type="string">unknown 0MB</value>
+                        <value name="ConstrainLiveWindowResize" type="integer">1</value>
+                        <value name="CrashCounter" type="integer">2</value>
+                        <value name="DeepColour" type="integer">0</value>
+                        <value name="DisallowCustomFOV" type="integer">1</value>
+                        <value name="DoneMinOS" type="integer">0</value>
+                        <value name="DonePromotional" type="integer">0</value>
+                        <value name="DoneUnsupported" type="integer">0</value>
+                        <value name="DrawSortMethod" type="integer">1</value>
+                        <value name="EnableTiledCaching" type="integer">1</value>
+                        <value name="FeralAnalyticsInstallID" type="string">SANITIZED</value>
+                        <value name="ForceLowResAlpha" type="integer">1</value>
+                        <value name="ForceVolumetricLightingLevels" type="string">Production\HAB_Airport</value>
+                        <value name="FullScreen" type="integer">1</value>
+                        <value name="GameInstallVersion" type="integer">16843008</value>
+                        <value name="GameInstallVersionString" type="string">Alien: Isolation™ v1.1.1</value>
+                        <value name="GameInstallVersionWithStages" type="integer">17924096</value>
+                        <value name="GameLanguageId_Current" type="integer">7</value>
+                        <value name="GameLanguageId_Pending" type="integer">7</value>
+                        <value name="GameVersionNew" type="integer">16843008</value>
+                        <value name="GameVersionString" type="string">Alien: Isolation™ v1.1.1</value>
+                        <value name="GenerateUILayerMips" type="integer">1</value>
+                        <value name="HardcodeShadowSettings" type="integer">1</value>
+                        <value name="HighResSoftwareZLevels" type="string">Production\ENG_ReactorCore</value>
+                        <value name="LanguageSelectMultiValue" type="string">pl</value>
+                        <value name="LiveWindowResizePercentage" type="integer">0</value>
+                        <value name="LiveWindowResizeThreshold" type="integer">0</value>
+                        <value name="LowQualityDoF" type="integer">1</value>
+                        <value name="LowResPlanarReflections" type="integer">1</value>
+                        <value name="MaxMessagesPerFrame" type="integer">200</value>
+                        <value name="MinWindowedHeight" type="integer">0</value>
+                        <value name="MinWindowedWidth" type="integer">0</value>
+                        <value name="ModelStreamingPlacedBuffers" type="integer">1</value>
+                        <value name="MotionControls" type="integer">0</value>
+                        <value name="MotionSensitivity" type="binary">000000000000f03f</value>
+                        <value name="OptimisedHairShader" type="integer">1</value>
+                        <value name="ParallelScaleformAndEntityTick" type="integer">1</value>
+                        <value name="PauseMoviesOnPause" type="integer">1</value>
+                        <value name="PauseOnSuspend" type="integer">1</value>
+                        <value name="PauseSoundOnPause" type="integer">1</value>
+                        <value name="PauseTimersOnPause" type="integer">1</value>
+                        <value name="RadiosityCubemapPS" type="integer">1</value>
+                        <value name="RumbleMode" type="integer">1</value>
+                        <value name="RumbleStrength" type="binary">000000000000f03f</value>
+                        <value name="ScreenH" type="integer">720</value>
+                        <value name="ScreenW" type="integer">1280</value>
+                        <value name="SeenSpecificationAlertUUIDSwitchDefaultSpecificationsClass11a25_2" type="integer">1</value>
+                        <value name="ShowAssertAlerts" type="integer">0</value>
+                        <value name="ShowTheHideDockCheckbox" type="integer">1</value>
+                        <value name="SoftwareZBufferHeight" type="integer">2</value>
+                        <value name="SoftwareZBufferWidth" type="integer">4</value>
+                        <value name="SpecificationFirstLaunchCheck" type="integer">0</value>
+                        <value name="SpecificationUpdateURL" type="string">https://u1.feralinteractive.com/autoupdate/alienisolation/specifications_switch_1_1_1.xml</value>
+                        <value name="TaskWorkerThreadCount" type="integer">2</value>
+                        <value name="TextureStreamingStagingHeap" type="integer">1</value>
+                        <value name="UpdateServerDomain" type="string">u1.feralinteractive.com</value>
+                        <value name="UpdateServerPath" type="string">/autoupdate/</value>
+                        <value name="UpdateServerProtocol" type="string">https://</value>
+                        <value name="VideoSetting_AntiAliasing" type="integer">0</value>
+                        <value name="VideoSetting_AntiAliasing_Visible" type="integer">0</value>
+                        <value name="VideoSetting_ChromaticAberrations" type="integer">1</value>
+                        <value name="VideoSetting_ChromaticAberrations_Visible" type="integer">1</value>
+                        <value name="VideoSetting_Deep Colour (30bpp)" type="integer">0</value>
+                        <value name="VideoSetting_Depth of Field" type="integer">1</value>
+                        <value name="VideoSetting_Depth of Field_Visible" type="integer">0</value>
+                        <value name="VideoSetting_Field Of View" type="integer">6</value>
+                        <value name="VideoSetting_Field Of View_Visible" type="integer">0</value>
+                        <value name="VideoSetting_FilmGrainIntensity" type="integer">10</value>
+                        <value name="VideoSetting_FilmGrainIntensity_Visible" type="integer">1</value>
+                        <value name="VideoSetting_Full Screen_Visible" type="integer">0</value>
+                        <value name="VideoSetting_FullScreen Resolution 24bpp_Visible" type="integer">0</value>
+                        <value name="VideoSetting_FullScreen Resolution 30bpp_Visible" type="integer">0</value>
+                        <value name="VideoSetting_GammaDocked" type="integer">4</value>
+                        <value name="VideoSetting_GammaUndocked" type="integer">8</value>
+                        <value name="VideoSetting_Level of Detail" type="integer">1</value>
+                        <value name="VideoSetting_Level of Detail_Visible" type="integer">0</value>
+                        <value name="VideoSetting_MotionBlur" type="integer">0</value>
+                        <value name="VideoSetting_MotionBlur_Visible" type="integer">0</value>
+                        <value name="VideoSetting_Particles" type="integer">0</value>
+                        <value name="VideoSetting_Particles_Visible" type="integer">0</value>
+                        <value name="VideoSetting_Planar Reflections" type="integer">1</value>
+                        <value name="VideoSetting_Planar Reflections_Visible" type="integer">0</value>
+                        <value name="VideoSetting_Screen Space Ambient Occlusion" type="integer">0</value>
+                        <value name="VideoSetting_Screen Space Ambient Occlusion_Visible" type="integer">0</value>
+                        <value name="VideoSetting_ShadowMapping" type="integer">1</value>
+                        <value name="VideoSetting_ShadowMapping_Visible" type="integer">0</value>
+                        <value name="VideoSetting_ShadowMapResolution" type="integer">1</value>
+                        <value name="VideoSetting_ShadowMapResolution_Visible" type="integer">0</value>
+                        <value name="VideoSetting_Texture Filtering" type="integer">2</value>
+                        <value name="VideoSetting_Texture Filtering_Visible" type="integer">0</value>
+                        <value name="VideoSetting_Vertical Sync" type="integer">0</value>
+                        <value name="VideoSetting_Vertical Sync_Visible" type="integer">0</value>
+                        <value name="VideoSetting_Volumetric Lighting" type="integer">0</value>
+                        <value name="VideoSetting_Volumetric Lighting_Visible" type="integer">0</value>
+                        <value name="VideoSetting_Windowed Resolution_Visible" type="integer">0</value>
+                        <key name="DynamicResolutionScaling">
+                            <value name="CPUFrameTimeSmoothing" type="integer">10</value>
+                            <value name="DropDelayFrames" type="integer">2</value>
+                            <value name="DropTimeMargin" type="binary">000000000000f03f</value>
+                            <value name="Enable" type="integer">1</value>
+                            <value name="FastDropTimeMargin" type="binary">00000000000000c0</value>
+                            <value name="MinScaling" type="binary">666666666666e63f</value>
+                            <value name="RaiseDelayFrames" type="integer">3</value>
+                            <value name="RaiseDelayFramesInRace" type="integer">4</value>
+                            <value name="RaiseTimeMargin" type="binary">0000000000000040</value>
+                            <value name="StepCount" type="integer">10</value>
+                            <value name="SwitchLevel3GPUClock" type="string">460MHz</value>
+                            <value name="SwitchLevel8GPUClock" type="string">384MHz</value>
+                            <value name="UseGPUTime" type="integer">1</value>
+                        </key>
+                        <key name="TemporalAntiAliasing">
+                            <value name="Enable" type="integer">1</value>
+                            <value name="ShaderVariant" type="string">optimized</value>
+                        </key>
+                        <key name="Upscaler">
+                            <value name="CASUsePixelShader" type="integer">1</value>
+                            <value name="SharpenAmount" type="binary">000000000000f03f</value>
+                            <value name="Technique" type="integer">2</value>
+                        </key>
+                    </key>
+                </key>
+            </key>
+            <key name="IndirectX">
+                <key name="Direct3D">
+                    <key name="Config">
+                        <value name="AllowSM5" type="integer">1</value>
+                        <value name="EnableF3DWarmer" type="integer">1</value>
+                        <value name="EnableIdxD3D11Threaded" type="integer">1</value>
+                        <value name="EnableLoopTransformations" type="integer">1</value>
+                        <value name="EnableShaderDeduplicator" type="integer">1</value>
+                        <value name="IdxD3D11ThreadedThreadAffinity" type="integer">6</value>
+                        <value name="IdxD3D11ThreadedThreadPriority" type="integer">-1</value>
+                        <value name="IdxD3D11WaitOnPresentMode" type="integer">1</value>
+                        <value name="LazyShaderCreation" type="integer">0</value>
+                        <value name="MaxFramesPerSecond" type="integer">60</value>
+                        <value name="NVNEnableZCullSaveRestore" type="integer">1</value>
+                        <value name="NVNRenderToBackbuffer" type="integer">1</value>
+                        <value name="UseBufferForICB" type="integer">8</value>
+                        <value name="UseFastDivByZero" type="integer">1</value>
+                        <value name="UseInMemoryWarmerDB" type="integer">1</value>
+                    </key>
+                </key>
+            </key>
+            <key name="MacDoze">
+                <key name="Config">
+                    <value name="ClearSavesEnabled" type="integer">0</value>
+                    <value name="DisableClearSaveDataAlert" type="integer">0</value>
+                </key>
+            </key>
+            <key name="SystemMonitor">
+                <key name="Config">
+                    <value name="AppVersion" type="integer">16843008</value>
+                    <value name="Backgrounded" type="integer">0</value>
+                    <value name="OSVersion" type="string">0.0</value>
+                    <value name="QuitIntentional" type="integer">0</value>
+                </key>
+            </key>
+        </key>
+    </key>
+    <key name="HKEY_LOCAL_MACHINE">
+        <key name="Hardware">
+            <key name="Description">
+                <key name="System">
+                    <key name="CentralProcessor">
+                        <key name="0">
+                            <value name="Identifier" type="string">SANITIZED-CPU</value>
+                            <value name="ProcessorNameString" type="string">SANITIZED-CPU</value>
+                            <value name="VendorIdentifier" type="string">ARM</value>
+                            <value name="~MHz" type="integer">1020</value>
+                        </key>
+                        <key name="1">
+                            <value name="Identifier" type="string">SANITIZED-CPU</value>
+                            <value name="ProcessorNameString" type="string">SANITIZED-CPU</value>
+                            <value name="VendorIdentifier" type="string">ARM</value>
+                            <value name="~MHz" type="integer">1020</value>
+                        </key>
+                        <key name="2">
+                            <value name="Identifier" type="string">SANITIZED-CPU</value>
+                            <value name="ProcessorNameString" type="string">SANITIZED-CPU</value>
+                            <value name="VendorIdentifier" type="string">ARM</value>
+                            <value name="~MHz" type="integer">1020</value>
+                        </key>
+                    </key>
+                </key>
+            </key>
+        </key>
+        <key name="Software">
+        </key>
+    </key>
+    <key name="HKEY_USERS">
+    </key>
+</registry>

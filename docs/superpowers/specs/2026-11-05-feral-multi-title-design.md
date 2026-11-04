@@ -300,22 +300,31 @@ sealed interface Control {
     val description: String
     val visibleFlag: String? get() = null  // Alien-style *_Visible gate, written to 1 alongside the value
     data class Toggle(override val name: String, override val label: String, override val description: String,
-                      override val visibleFlag: String? = null) : Control
-    data class Level(override val name: String, override val label: String, override val description: String,
-                     val max: Int, val labels: Map<Int, String>) : Control
-    data class Slider(override val name: String, override val label: String, override val description: String,
-                      val min: Int, val max: Int, val step: Int, val unit: String = "") : Control
-    data class Choice(override val name: String, override val label: String, override val description: String,
-                      val options: List<Int>, val labels: Map<Int, String>) : Control
+                      val onValue: String = "1", val offValue: String = "0") : Control
+    data class Select(override val name: String, override val label: String, override val description: String,
+                      val options: List<Option>) : Control
+    data class Stepper(override val name: String, override val label: String, override val description: String,
+                       val min: Int, val max: Int, val step: Int, val unit: String = "") : Control
     data class Text(override val name: String, override val label: String, override val description: String) : Control
 }
+
+data class Option(val stored: String, val label: String)   // "ultra" / "Ultra"; "60" / "60 fps"
 
 sealed interface PresetModel {
     object None : PresetModel                                             // one flat settings block
     data class Blocks(val livePath: List<String>, val presetKeys: List<String>) : PresetModel
+    data class Prefixed(val livePrefix: String, val variants: List<PresetVariant>,
+                        val nameKey: String? = null) : PresetModel
     data class Suffixed(val suffixes: List<String>, val labels: Map<String, String>) : PresetModel
 }
+
+data class PresetVariant(val label: String, val prefix: String)
 ```
+
+Values are stored as text in the file, so every control reads and writes `String`. `Toggle` carries its
+own on/off tokens because the same idea is `1`/`0` in GRID Legends and Alien but `on`/`off` in GRID
+Autosport; `Stepper` parses and formats an `Int`; `Select` maps stored tokens to labels and is what
+the quality dropdowns use.
 
 `CatalogEngine` turns the catalogue plus the active preset into registry reads and writes:
 
@@ -327,27 +336,38 @@ sealed interface Target {
 }
 
 class CatalogEngine(val catalog: TitleCatalog) {
-    fun read(doc: ConfigDocument, target: Target): Map<String, Int?>
-    fun write(doc: ConfigDocument, target: Target, control: Control, value: Int): Boolean
+    fun read(doc: ConfigDocument, target: Target): Map<String, String?>
+    fun write(doc: ConfigDocument, target: Target, control: Control, stored: String): Boolean
     fun applyToLive(doc: ConfigDocument, target: Target)                  // Blocks model only
 }
 ```
 
-- `None` — controls live at `group.keyPath`; reads and writes go straight there.
+- `None` — controls live at `group.keyPath`; reads and writes go straight there (Alien's `Setup`).
 - `Blocks` — controls live in each preset block; read/write the first token of the comma-separated
   value and preserve the tail (the GRID Legends behaviour today); `applyToLive` mirrors the chosen
   preset into the live block on save.
+- `Prefixed` — a control's registry name is `prefix + name`. `livePrefix` is what the game currently
+  uses; each `PresetVariant` stores another set under its own prefix (GRID Autosport: `gfxconfig_`,
+  `gfxconfig_high_`, `gfxconfigpowersaver_`). Editing a variant writes that variant's keys; editing
+  the live set writes `gfxconfig_*`. `nameKey` (`gfxconfig_preset_name`) is shown as the active
+  preset name and is not a control. No mirroring until on-device behaviour is confirmed.
 - `Suffixed` — a control's registry name is `name + suffix` (`""`, `_battery`, `_graphics`);
   `Target.Suffix` selects which one the editor is showing; no mirroring.
 
-Preset models known so far, with confidence:
+Preset models and value shapes, with what each rests on:
 
-| Title | Model | Basis |
-|---|---|---|
-| GRID Legends | `Blocks(BatterySaver, Graphics, Performance)` | real sample; verified first-token mirroring |
-| XCOM 2 | `Suffixed("", "_battery", "_graphics")` | community posts naming `GFXTextureDetail`, `_battery`, `_graphics`; **provisional until a sample confirms grouping and ranges** |
-| Alien: Isolation | `None`, flat `VideoSetting_*` plus `_Visible` flags | documented file dump; **provisional** |
-| GRID Autosport and the rest | unknown | not shipped as guided until a sample exists |
+| Title | Model | Value shape | Basis |
+|---|---|---|---|
+| GRID Legends | `Blocks(BatterySaver, Graphics, Performance)` | `"1, 1, 1"` integer triples | Android sample in the repo; mirroring verified |
+| GRID Autosport | `Prefixed("gfxconfig_", [High, Power saver])`, `nameKey = gfxconfig_preset_name` | string enums (`ultra`, `high`, `off`, `8xmsaa`, `custom`) | public Switch 1.10.1 file; **Android key set still to verify** |
+| Alien: Isolation | `None`, flat `VideoSetting_*` + `_Visible` | integers with `_Visible` gates | public Switch 1.1.1 file; **Android key set still to verify** |
+| XCOM 2 | `Suffixed("", "_battery", "_graphics")` | integers, levels 0–4 | community posts only; **provisional, no full file** |
+| Railroads, Hitman BM, Lara Croft GoL/ToO | unknown | unknown | no public copy found; not guided |
+
+GRID Autosport is the clearest argument for per-title catalogues: same publisher, same file name and
+the same hives, but no `GraphicsSettings` blocks at all — the settings are flat `Setup` values with
+string quality tokens, plus three prefixed copies of the graphics set. Reusing GRID Legends' integer
+triple model there would produce nonsense.
 
 Catalogue coverage is deliberately partial. The guided screen shows what the catalogue covers;
 everything else in the document stays editable under "All values". This is what lets a title ship
@@ -516,17 +536,22 @@ in the investigation.
 
 ## 8. Test fixtures and tests
 
-Every supported title needs a fixture: the existing sanitised GRID Legends sample, plus one file per
-added title. `alien-isolation-sample.xml` is synthetic, uses the documented Alien: Isolation key
-names (`Setup`, `VideoSetting_*`, `VideoSetting_*_Visible`, `DynamicResolutionScaling`,
-`TemporalAntiAliasing`, `Upscaler`) and the shared framework subtrees, contains no user data, and is
-labelled synthetic in the resource header. A catalogue without a fixture fails conformance.
+Fixtures live in `testdata/` and are all sanitised real files:
 
-Samples are pulled from a device (`adb pull /sdcard/Android/data/<pkg>/files/feral_app_support/…`)
-and sanitised before commit: replace `Setup/FeralAnalyticsInstallID`, `FeralNet/Login/LastKnownID`,
-any cloud-drive identifiers and per-device hardware values; keep every key, type and value shape so
-the fixture still exercises the real schema. Sanitised copies go in `testdata/` for reference and
-are copied into `app/src/test/resources/` for the tests.
+| Fixture | Platform | Version | Source |
+|---|---|---|---|
+| `grid-legends-preferences-sample.xml` | Android | 1.1.5 | existing repo sample |
+| `grid-autosport-preferences-sample.xml` | Switch | 1.10.1 | public pastebin copy |
+| `alien-isolation-preferences-sample.xml` | Switch | 1.1.1 | public GBAtemp save dump |
+
+The two new fixtures are console files. Hives, key names and value domains come from the same engine,
+but an Android build can add or drop keys (touch controls, Android-only setup values). The fixture is
+the schema baseline, not proof of the Android key set: every catalogue key must be re-checked against
+an Android file before the title ships.
+
+Samples are sanitised before commit: `FeralAnalyticsInstallID` and hardware identifiers are replaced;
+every key, type and value shape is kept so the fixture still exercises the real schema. A catalogue
+without a fixture fails conformance.
 
 Tests:
 
@@ -614,3 +639,7 @@ primary experience for non-GRID games. That correction is why the catalogue, `Co
    allowed alongside a privileged session, no force-stop.
 5. **Unparseable but present file.** A session-local `PRESENT_UNUSABLE` card state, set only after
    an open attempt fails. Discovery still never reads file contents.
+6. **Public samples.** GRID Autosport and Alien: Isolation catalogues are authored from public
+   Switch dumps because no Android copies are published and the tablet was unreachable. Both are
+   marked for Android key verification before release; a title stays in `CANDIDATES` until that
+   check passes.
