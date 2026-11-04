@@ -4,6 +4,25 @@
 [![Latest release](https://img.shields.io/github/v/release/andrewr8712/legend-tuner)](https://github.com/andrewr8712/legend-tuner/releases/latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+> **How this project was built.** It has been made with DeepSeek V4.1-Flash-1017, by someone who is
+> not a developer. The initial prompt was:
+>
+> > There is an android game i like to play called Grid:Legends.
+> > It has a plaintext configuration file that can be manually edited to adjust various graphical and
+> > performance options.
+> >
+> > Instead of doing this in a text editor, I would like a native android app with a gui for easy
+> > adjustments. Can you help develop this?
+>
+> The only other input was, after trying the result:
+>
+> > Can the fixed render height slider be changed - it's too difficult to set an exact value.
+> > replace it with a drop down of values that correspond to common screen resolution heights.
+>
+> The 1.2.0 overhaul was steered the same way: the guided GUI for every title, the settings missing
+> from Hitman's registry, and the resolution controls all came from comparing the app against the
+> real files.
+
 An unofficial, tablet-first Android app for editing the graphics settings of **Feral Interactive**'s
 Android ports — with readable, guided controls instead of hand-editing XML.
 

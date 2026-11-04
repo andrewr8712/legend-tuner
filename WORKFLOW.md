@@ -7,7 +7,7 @@
 > **Project:** [Legend Tuner](https://github.com/andrewr8712/legend-tuner)  
 > **Release:** [v1.1.0](https://github.com/andrewr8712/legend-tuner/releases/tag/v1.1.0)  
 > **Device:** Lenovo Yoga Tab Plus TB520FU · Android 17 · Shizuku  
-> **Companion report:** Token, Cost & Performance Report (`REPORT.md`, upload alongside)  
+> **Companion report:** Token, Cost & Performance Report (`PROJECT-REPORT.md`, upload alongside)  
 > **Prepared:** 2026-10-30
 
 ---
@@ -470,5 +470,5 @@ For a similar project:
 - [Repository](https://github.com/andrewr8712/legend-tuner)
 - [Latest release](https://github.com/andrewr8712/legend-tuner/releases/latest)
 - [GitHub Actions](https://github.com/andrewr8712/legend-tuner/actions)
-- Token, Cost & Performance Report — `REPORT.md` (upload alongside this file)
+- Token, Cost & Performance Report — `PROJECT-REPORT.md` (upload alongside this file)
 - [Design notes](DESIGN.md)
