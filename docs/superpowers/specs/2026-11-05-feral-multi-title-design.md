@@ -396,6 +396,24 @@ Authoring a title is a repeatable procedure:
 5. On device: change one control per group, relaunch, confirm each one persisted; repeat for every
    preset the model exposes.
 
+Catalogue content and provenance. Every control carries `label`, `description`, `options` and a
+source tag. Sources, strongest first:
+
+1. The game's own menu strings, extracted from the APK's
+   `assets/en.lproj/Localizable_Game.strings`. Alien: Isolation ships `AI_UI_MENU_<SETTING>` and
+   `AI_UI_MENU_<SETTING>_DESC` for every video option plus a shared `AI_UI_MENU_QUALITY_NAME_*`
+   vocabulary (Off, On, Very Low … Ultra, Anisotropic 1x–16x). GRID Autosport ships its three
+   preset names only: GRAPHICS, PERFORMANCE, PERFORMANCE PLUS.
+2. The device's `preferences` dump: key names, types, option tokens and observed values.
+3. Authored text for descriptions the game does not ship — every GRID Autosport option description
+   falls here, because its menu text is inside an encrypted OBB.
+
+Rules: never invent a range or an option token. When a mapping is unverified (for example which
+GRID Autosport prefix is which preset label, or the index order of Alien's texture-filter list),
+expose the raw value with a short note instead of a confident label. Per-title sourcing lives in
+`docs/catalogues/<title>.md`; that file is the review artifact the Kotlin catalogue is transcribed
+from.
+
 Catalogue files are Kotlin objects (`data/catalogs/GridLegendsCatalog.kt`, …), not JSON assets:
 labels, ranges and preset keys stay typed and compiled, and a malformed catalogue fails the build
 rather than at runtime.
@@ -568,11 +586,12 @@ Tests:
    `^com\.feralinteractive\.[a-z0-9_]+$`; every entry in `SUPPORTED` has a catalogue whose
    `titleId` matches; GRID Legends is supported.
 2. `CatalogConformanceTest` — for every supported title: non-empty groups and controls, unique
-   labels; every control resolves at `<group.keyPath>/<name>` in that title's fixture; numeric
-   controls sit on `integer` values; every declared level/slider bound contains the fixture value;
-   every `PresetModel.Blocks` preset key exists; `Suffixed` names exist for at least the base
-   suffix; descriptions non-blank; group paths under
-   `HKEY_CURRENT_USER/Software/Feral Interactive`.
+   labels; every control has a non-blank label and a description of at least 40 characters; every
+   control resolves at `<group.keyPath>/<name>` in that title's fixture; numeric controls sit on
+   `integer` values; every declared level/slider bound contains the fixture value; every
+   `PresetModel.Blocks` preset key exists; `Suffixed` names exist for at least the base suffix;
+   every `Select` option token appears in the fixture or in the title's declared option vocabulary;
+   group paths under `HKEY_CURRENT_USER/Software/Feral Interactive`.
 3. `RegistryModelTest` — grouping, search by name and path, `GAME` scope excludes
    `HKEY_LOCAL_MACHINE` and the engine subtrees, `ENTIRE` includes them, multi-child
    `Feral Interactive` fallback, `validateText` for integer (rejects `1.5`, accepts `-3`), binary
