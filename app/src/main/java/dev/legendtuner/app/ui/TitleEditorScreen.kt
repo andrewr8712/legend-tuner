@@ -331,6 +331,7 @@ private fun ControlInspector(
             TitleCatalogEngine.value(doc, root, catalog, control) != null
         }
         val raw = TitleCatalogEngine.value(doc, root, catalog, control)?.text?.trim()
+        val effectiveCurrent = control.effectiveToken(current)
         val ladder = control.triple && exists && current == null
 
         Column(
@@ -383,7 +384,7 @@ private fun ControlInspector(
                     else -> control.choices.forEach { choice ->
                         ChoiceRow(
                             label = choice.label,
-                            selected = choice.token.equals(current, ignoreCase = true),
+                            selected = choice.token.equals(effectiveCurrent, ignoreCase = true),
                             onClick = { onUpdate(control, choice.token) }
                         )
                         Spacer(Modifier.height(4.dp))
@@ -409,7 +410,7 @@ private fun ControlInspector(
             if (exists) {
                 Spacer(Modifier.height(6.dp))
                 Text(
-                    "Current value: ${current ?: "—"}",
+                    "Stored value: ${current ?: "—"}",
                     style = MaterialTheme.typography.labelSmall.copy(
                         fontFamily = FontFamily.Monospace,
                         fontSize = 8.sp

@@ -29,11 +29,17 @@ data class Control(
     /** Keys that live outside the preset block (ScreenW/ScreenH) skip the family path. */
     val ignoreFamilyPath: Boolean = false
 ) {
+    /**
+     * The token the user is actually choosing after [invert] is applied. The stored
+     * value stays raw in the document; only the UI compares and labels the logical state.
+     */
+    fun effectiveToken(token: String?): String? = token?.let { if (invert) flip(it) else it }
+
     fun labelFor(token: String?, raw: String? = null): String {
         if (token == null) return raw ?: "—"
         return when (kind) {
             ControlKind.TOGGLE, ControlKind.CHOICE -> {
-                val effective = if (invert) flip(token) else token
+                val effective = effectiveToken(token) ?: token
                 choices.firstOrNull { it.token.equals(effective, ignoreCase = true) }?.label ?: token
             }
             ControlKind.STEPPER -> "$token$suffix"

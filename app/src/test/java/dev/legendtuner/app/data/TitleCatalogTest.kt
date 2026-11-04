@@ -52,6 +52,19 @@ class TitleCatalogTest {
     }
 
     @Test
+    fun invertedControlsMapStoredTokenToDisplayedState() {
+        val catalog = FeralTitles.ALL.first { it.id == "hitman-blood-money" }.titleCatalog!!
+        val bloom = catalog.find("DisableBloom")!!
+        assertEquals("0", bloom.effectiveToken("1"))
+        assertEquals("1", bloom.effectiveToken("0"))
+        assertEquals("Off", bloom.labelFor("1"))
+        assertEquals("On", bloom.labelFor("0"))
+
+        val shadows = catalog.find("EnableDropShadows")!!
+        assertEquals("1", shadows.effectiveToken("1"))
+    }
+
+    @Test
     fun gridAutosportCoversItsThreePresetFamilies() {
         val catalog = FeralTitles.ALL.first { it.id == "grid-autosport" }.titleCatalog!!
         assertEquals("gfxconfig_shadows", catalog.keyFor(catalog.find("gfxconfig_shadows")!!))
