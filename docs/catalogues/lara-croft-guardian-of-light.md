@@ -1,5 +1,7 @@
 # Lara Croft: Guardian of Light — catalogue source
 
+> **Status:** implemented as `LaraGolCatalog`; rows below are the shipped controls.
+
 Platform: Android 1.2.7 (`com.feralinteractive.laracroftgol_android`), TB520FU dump.
 Root: `HKEY_CURRENT_USER/Software/Feral Interactive/Lara Croft and the Guardian of Light/Setup`.
 Model: `None` — flat integers; `GraphicsPreset` is an integer index.

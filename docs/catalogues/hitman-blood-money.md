@@ -1,5 +1,7 @@
 # Hitman: Blood Money — Reprisal — catalogue source
 
+> **Status:** implemented as `HitmanCatalog`; rows below are the shipped controls.
+
 Platform: Android 1.3.1 (`com.feralinteractive.hitmanbloodmoney_android`), TB520FU dump.
 Root: `HKEY_CURRENT_USER/Software/Feral Interactive/Hitman Blood Money/Setup`.
 Model: `Suffixed(["_battery", "_graphics", "_perf", "_plus"])`, 17 graphics keys per family.

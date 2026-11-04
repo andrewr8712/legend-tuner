@@ -1,5 +1,7 @@
 # GRID Autosport — guided catalogue source
 
+> **Status:** implemented as `GridAutosportCatalog`; rows below are the shipped controls.
+
 Platform: Android 1.10.6 (`com.feralinteractive.gridas`), TB520FU dump.
 Registry root: `HKEY_CURRENT_USER/Software/Feral Interactive/GRID Autosport/Setup`.
 Preset model: `Prefixed` — the graphics set exists three times, plus two hint keys.

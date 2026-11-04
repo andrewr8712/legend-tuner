@@ -1,5 +1,7 @@
 # Lara Croft and the Temple of Osiris — catalogue source
 
+> **Status:** implemented as `LaraTooCatalog`; rows below are the shipped controls.
+
 Platform: Android 1.2.3 (`com.feralinteractive.laracrofttoo_android`), TB520FU dump.
 Root: `HKEY_CURRENT_USER/Software/Feral Interactive/Lara Croft and the Temple of Osiris/Setup`.
 Model: `None` — flat integers, no preset blocks.

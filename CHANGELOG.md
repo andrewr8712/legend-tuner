@@ -1,6 +1,43 @@
 # Changelog
 
-All notable changes to Legend Tuner are documented here. The project follows [Semantic Versioning](https://semver.org/).
+All notable changes to Config Tuner (formerly Legend Tuner) are documented here. The project follows [Semantic Versioning](https://semver.org/).
+
+## [1.2.0] — 2026-11-05
+
+### Added
+
+- **Multi-title support.** Title picker on launch for eight Feral Interactive games; installed games
+  are cards, supported-but-absent games appear under **Also supported**.
+- **Guided catalogues** for GRID Autosport, Alien: Isolation, Saints Row: The Third, NAPOLEON,
+  Hitman: Blood Money, Lara Croft: Guardian of Light and Lara Croft: Temple of Osiris.
+- **Preset variants as tabs** — block presets, GRID Autosport's prefixed families and Hitman's four
+  suffixed families.
+- Common-value dropdowns for render height (480–2160 px) and frame caps (24–144 fps).
+- Saints Row screen resolution (`ScreenW`/`ScreenH` as a pair) and resolution scale (50–100 %).
+- Manual import keeps the selected title, so GRID Legends can be edited from a saved file while the
+  game is not installed.
+- `docs/catalogues/` inventories and eight sanitised fixtures.
+
+### Changed
+
+- Display name is now **Config Tuner**; `applicationId` is unchanged so 1.1.0 updates in place.
+- Version code 3. Registry validation is title-aware; GRID Legends keeps strict preset checks.
+- Raw XML is now the expert fallback rather than the only path for non-GRID titles.
+
+### Fixed
+
+- Non-GRID titles no longer fail on GRID-specific validation after parsing.
+- Lara Croft graphics root corrected to `Software/Crystal Dynamics/.../Graphics`.
+- Hitman's `VideoSetting_ShadowMapping` key typo.
+- Picker no longer reports "launch once" from a `canRead()` check that Android 11+ always denies.
+
+### Verified
+
+- TB520FU, Android 17, KernelSU root: GRID Autosport shading write and revert, Hitman triple write
+  and revert, Saints Row resolution write and revert, GRID Legends manual import.
+- 18/18 unit tests; debug APK builds.
+
+Detailed release notes, including remaining verification gaps: [`docs/CHANGELOG-1.2.0.md`](docs/CHANGELOG-1.2.0.md).
 
 ## [1.1.0] — 2026-10-30
 

@@ -701,3 +701,46 @@ primary experience for non-GRID games. That correction is why the catalogue, `Co
    families with triples (Hitman), and a flat block with an index (both Lara Croft titles) all exist
    alongside GRID's triples and GRID Autosport's prefixes. The catalogue model carries all of them;
    no schema is inferred from a sibling title.
+
+## 12. Implementation status (1.2.0)
+
+Shipped and verified on the TB520FU. The design's screen model, catalogue model and safety rules are
+in place; the deviations below are deliberate and are what the device proved necessary.
+
+### Delivered
+
+- Picker on launch with installed titles, plus **Also supported** rows for supported-but-absent games
+  (GRID Legends was uninstalled mid-project and stays visible this way).
+- Per-title access: root, Shizuku, direct, manual SAF; the selected title is threaded through path
+  discovery, force-stop and save messages.
+- Guided editors for all eight titles, with groups, descriptions, option lists, stored-key display
+  and a docked inspector.
+- Preset variants as tabs, driven by `PresetFamily`.
+- Raw XML, backups and typed dashboard for every title.
+- Save path: backup, write, read back, parse, restore on failure; GRID Legends additionally verifies
+  the active preset.
+
+### Deviations from the first draft
+
+1. **A second root.** Both Lara Croft titles keep graphics under
+   `Software/Crystal Dynamics/<game>/Graphics`, while engine keys stay under the Feral `Setup` root.
+   `FeralTitle` therefore carries `controlsRoot` independent of `registryRoot`.
+2. **Family model instead of three preset models.** `PresetFamily` expresses block paths (Saints Row,
+   Lara), key prefixes (GRID Autosport) and key suffixes (Hitman); `None` is simply no families.
+3. **More control kinds than planned.** `RESOLUTION` writes the `ScreenW`/`ScreenH` pair as one
+   control; `triple` marks Hitman's comma values; `invert` handles `Disable*` keys;
+   `ignoreSuffix`/`ignoreFamilyPath` keep engine-level keys out of preset scope.
+4. **Common-value lists, not steppers.** Render height, frame caps, resolution and resolution scale
+   are dropdowns of common values, because free steppers produced values like `37 fps`.
+5. **Manual import keeps title identity.** Opening a file after choosing a title now loads it *as*
+   that title. This is how GRID Legends is edited while the game is not installed.
+6. **Discovery never stats files for non-installed titles**, but installed titles are no longer marked
+   "ready" from a direct `canRead()` alone — on Android 11+ that check is always false and produced a
+   misleading "launch once" state. Cards now say Installed; access succeeds or fails at open time.
+
+### Known gaps carried forward
+
+- GRID Autosport's prefix-to-preset-name mapping still needs one in-game switch and file diff.
+- Hitman's shadow-resolution ladder and `Disable*` inversion are named from the keys, not observed.
+- Saints Row tier tokens beyond the observed value are inferred and marked with amber dots.
+- Only GRID Autosport, Hitman and Saints Row resolution have had a full write → verify → revert cycle.

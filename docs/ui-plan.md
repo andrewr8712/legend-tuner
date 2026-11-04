@@ -1,6 +1,7 @@
 # UI plan — multi-title config editor
 
-Status: draft for review. Companion to
+Status: shipped for the picker, guided editor shell, preset tabs and inspector. The type ramp,
+instrument-panel polish and quick-tune hover states remain backlog. Companion to
 `docs/superpowers/specs/2026-11-05-feral-multi-title-design.md`.
 
 Rendered direction: `prototype/multi-title.html` and `prototype/multi-title.png` (picker and guided

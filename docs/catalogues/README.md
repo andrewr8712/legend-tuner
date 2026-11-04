@@ -1,20 +1,37 @@
 # Catalogue sources
 
-Per-title review artifacts for the guided editor. Each file lists every control the app will show,
-with its registry key, label, description, option vocabulary and the evidence behind it. The Kotlin
-catalogue is transcribed from these files; the conformance test checks every key against the matching
-fixture in `testdata/`.
+Per-title review artifacts for the guided editor. Each file lists every control the app shows, with
+its registry key, label, description, option vocabulary and the evidence behind it. Every catalogue
+is implemented in Kotlin and the conformance test enforces labels, descriptions, groups and unique
+keys.
 
-| Title | File | State |
-|---|---|---|
-| GRID Legends | (existing `data/SettingsCatalog.kt`, to be ported) | reference implementation |
-| GRID Autosport | `grid-autosport.md` | catalogue ready; preset prefix mapping unverified |
-| Alien: Isolation | `alien-isolation.md` | catalogue ready; hidden-key handling documented |
-| Saints Row: The Third | `saints-row-the-third.md` | catalogue ready; preset selector observed |
-| NAPOLEON | `napoleon-total-war.md` | catalogue ready; quality index unverified |
-| Hitman: Blood Money | `hitman-blood-money.md` | partial — triple-valued keys read-only |
-| Lara Croft: Guardian of Light | `lara-croft-guardian-of-light.md` | catalogue ready; index ladders unverified |
-| Lara Croft: Temple of Osiris | `lara-croft-temple-of-osiris.md` | catalogue ready; SSAA/AA mapping provisional |
+| Title | Source | Kotlin | Controls | Variants |
+|---|---|---|---:|---|
+| GRID Legends | `DESIGN.md` + `SettingsCatalog.kt` | `data/SettingsCatalog.kt` | 28 | Battery Saver · Graphics · Performance |
+| GRID Autosport | `grid-autosport.md` | `GridAutosportCatalog` | 29 | Current · Performance cache · Power saver cache |
+| Alien: Isolation | `alien-isolation.md` | `AlienIsolationCatalog` | 12 | flat |
+| Saints Row: The Third | `saints-row-the-third.md` | `SaintsRowCatalog` | 19 | Graphics · Battery saver · Performance |
+| NAPOLEON | `napoleon-total-war.md` | `NapoleonCatalog` | 16 | flat, `GraphicsSettings` subtree |
+| Hitman: Blood Money | `hitman-blood-money.md` | `HitmanCatalog` | 18 | Live + four suffix families |
+| Lara Croft: Guardian of Light | `lara-croft-guardian-of-light.md` | `LaraGolCatalog` | 10 | four block presets |
+| Lara Croft: Temple of Osiris | `lara-croft-temple-of-osiris.md` | `LaraTooCatalog` | 11 | three block presets |
+
+Files live in `app/src/main/java/dev/legendtuner/app/data/TitleCatalog.kt` (GRID Autosport, Alien)
+and `TitleCatalogs.kt` (the rest).
+
+## Implementation notes
+
+- **Absolute roots.** NAPOLEON and both Lara Croft titles do not keep graphics values under
+  `Software/Feral Interactive/<game>/Setup`. The title profile stores the value root separately and
+  the catalogue adds a preset block path where needed.
+- **Three preset shapes.** Blocks with a selector (Saints Row, Lara Croft), prefixed families
+  (GRID Autosport) and suffixed families (Hitman) share one `PresetFamily` model.
+- **Engine keys ignore preset scope.** Render height and `ScreenW`/`ScreenH` are not part of a preset
+  block, so those controls bypass the family suffix and family path.
+- **Hitman triples.** Uniform triples are editable and written back as `a, a, a`; ladders stay
+  read-only with the raw triple shown.
+- **Resolution pair.** Saints Row's `ScreenW` + `ScreenH` are edited as one resolution control and
+  written together; other titles with only a render height use the height list.
 
 ## Sourcing rules
 
@@ -27,4 +44,16 @@ fixture in `testdata/`.
    describe the actual rendering effect and its cost, not restate the label.
 
 Never invent a range, an option token or a preset mapping. Unverified mappings are called out in the
-file's *Open verification* section and the control ships as a raw value with a note.
+file's *Open verification* section, and the control ships with a note (the amber dot in the UI).
+
+## Still unverified
+
+| Title | Open question |
+|---|---|
+| GRID Autosport | Which internal prefix maps to which in-game preset name; `ai_count` semantics |
+| Alien: Isolation | Texture-filter index order; per-setting maximums |
+| Saints Row | Allowed tier tokens beyond the observed value; selector rewrite on exit |
+| NAPOLEON | `GraphicsQuality` index range and what each index changes |
+| Hitman | Ladder semantics for shadow resolution; `Disable*` inversion confirmed by name only |
+| Lara Croft GoL | `BestTextureFilter` index order; AA mode set |
+| Lara Croft ToO | `SSAAQuality` ↔ "ANTI ALIASING" mapping; filter index order |

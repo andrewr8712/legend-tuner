@@ -1,5 +1,7 @@
 # Alien: Isolation — guided catalogue source
 
+> **Status:** implemented as `AlienIsolationCatalog`; rows below are the shipped controls.
+
 Platform: Android 1.4.3 (`com.feralinteractive.alienisolation_android`), TB520FU dump.
 Registry root: `HKEY_CURRENT_USER/Software/Feral Interactive/Alien Isolation/Setup`.
 Preset model: `None` — one flat settings block, no preset variants.
