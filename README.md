@@ -10,7 +10,7 @@ Android ports — with readable, guided controls instead of hand-editing XML.
 Formerly Legend Tuner, which edited GRID Legends only. Version 1.2 keeps the same package
 (`dev.legendtuner.app`) so existing installs update in place, and adds seven more titles.
 
-![Config Tuner title picker](prototype/multi-title.png)
+![Config Tuner title picker](docs/screenshots/picker.png)
 
 ## Why
 
@@ -63,6 +63,15 @@ and can be opened from a file pulled from a backup or another device.
 - **Manual import keeps the title** — open a GRID Legends file from anywhere and get its guided
   editor, not a generic raw view.
 - **No network permission, no analytics, no telemetry, no game assets.**
+
+## Screenshots
+
+| Guided editor | Preset families | Resolution controls |
+|---|---|---|
+| ![GRID Autosport settings](docs/screenshots/grid-autosport-settings.png) | ![Hitman preset tabs](docs/screenshots/hitman-preset-tabs.png) | ![Saints Row resolution](docs/screenshots/saints-row-resolution.png) |
+
+Captured on a Lenovo Yoga Tab Plus TB520FU. The picker shows installed titles first and any supported
+game that is not installed under **Also supported**.
 
 ## Install
 
@@ -165,6 +174,7 @@ app/src/main/aidl/  Shizuku IFileService
 docs/catalogues/    per-title control inventories and provenance
 docs/superpowers/specs/  multi-title design spec
 testdata/           eight sanitised real preferences samples
+docs/screenshots/   real device captures used in this README
 prototype/          tablet design prototype and screenshots
 DESIGN.md           schema notes and design rationale
 docs/CHANGELOG-1.2.0.md  what changed in this release, including verification
