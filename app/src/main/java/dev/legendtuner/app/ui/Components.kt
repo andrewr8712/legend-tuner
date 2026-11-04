@@ -104,6 +104,7 @@ fun NavRail(
     destinations: List<AppDestination>,
     onMonogramClick: () -> Unit,
     onSelect: (AppDestination) -> Unit,
+    editorLabel: String = "Graphics",
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -133,6 +134,7 @@ fun NavRail(
         Spacer(Modifier.height(24.dp))
         destinations.forEach { destination ->
             val active = destination == selected
+            val label = if (destination == AppDestination.EDITOR) editorLabel else destination.label
             Column(
                 Modifier
                     .padding(horizontal = 9.dp, vertical = 3.dp)
@@ -146,12 +148,12 @@ fun NavRail(
             ) {
                 Icon(
                     destination.icon,
-                    contentDescription = destination.label,
+                    contentDescription = label,
                     tint = if (active) Lime else Dim,
                     modifier = Modifier.size(19.dp)
                 )
                 Text(
-                    destination.label,
+                    label,
                     style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 0.3.sp),
                     color = if (active) Lime else Dim,
                     maxLines = 1
@@ -180,6 +182,7 @@ fun CompactNav(
     selected: AppDestination,
     destinations: List<AppDestination>,
     onSelect: (AppDestination) -> Unit,
+    editorLabel: String = "Graphics",
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -193,6 +196,7 @@ fun CompactNav(
     ) {
         destinations.forEach { destination ->
             val active = destination == selected
+            val label = if (destination == AppDestination.EDITOR) editorLabel else destination.label
             Column(
                 Modifier
                     .weight(1f)
@@ -204,12 +208,12 @@ fun CompactNav(
             ) {
                 Icon(
                     destination.icon,
-                    contentDescription = destination.label,
+                    contentDescription = label,
                     tint = if (active) Lime else Dim,
                     modifier = Modifier.size(19.dp)
                 )
                 Text(
-                    destination.label,
+                    label,
                     style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp),
                     color = if (active) Lime else Dim,
                     maxLines = 1

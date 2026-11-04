@@ -1,6 +1,7 @@
 package dev.legendtuner.app.data
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -34,7 +35,10 @@ class FeralTitlesTest {
     }
 
     @Test
-    fun onlyGridLegendsIsGuidedForNow() {
-        assertEquals(FeralTitles.GRID_LEGENDS, FeralTitles.ALL.single { it.guided })
+    fun cataloguedTitlesAreGuidedAndOthersAreNot() {
+        val catalogued = FeralTitles.ALL.filter { it.titleCatalog != null }.map { it.id }.toSet()
+        assertEquals(setOf("grid-autosport", "alien-isolation"), catalogued)
+        assertTrue(FeralTitles.GRID_LEGENDS.guided)
+        assertFalse(FeralTitles.ALL.first { it.id == "hitman-blood-money" }.guided)
     }
 }

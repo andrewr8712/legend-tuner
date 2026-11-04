@@ -12,8 +12,10 @@ data class FeralTitle(
     val label: String,
     val packageName: String,
     val registryRoot: List<String>? = null,
-    val guided: Boolean = false
+    val titleCatalog: TitleCatalog? = null,
+    val legacyGuided: Boolean = false
 ) {
+    val guided: Boolean get() = titleCatalog != null || legacyGuided
     val monogram: String
         get() {
             val words = label.replace(Regex("[^A-Za-z0-9 ]"), " ")
@@ -33,7 +35,7 @@ object FeralTitles {
         label = "GRID Legends",
         packageName = "com.feralinteractive.gridlegends_android",
         registryRoot = listOf("HKEY_CURRENT_USER", "Software", "Feral Interactive", "GRIDLegends"),
-        guided = true
+        legacyGuided = true
     )
 
     /** Titles with a verified package and registry root. Order is the picker's default order. */
@@ -41,11 +43,13 @@ object FeralTitles {
         GRID_LEGENDS,
         FeralTitle(
             "grid-autosport", "GRID Autosport", "com.feralinteractive.gridas",
-            listOf("HKEY_CURRENT_USER", "Software", "Feral Interactive", "GRID Autosport", "Setup")
+            listOf("HKEY_CURRENT_USER", "Software", "Feral Interactive", "GRID Autosport", "Setup"),
+            titleCatalog = GridAutosportCatalog.catalog
         ),
         FeralTitle(
             "alien-isolation", "Alien: Isolation", "com.feralinteractive.alienisolation_android",
-            listOf("HKEY_CURRENT_USER", "Software", "Feral Interactive", "Alien Isolation", "Setup")
+            listOf("HKEY_CURRENT_USER", "Software", "Feral Interactive", "Alien Isolation", "Setup"),
+            titleCatalog = AlienIsolationCatalog.catalog
         ),
         FeralTitle(
             "saints-row-3", "Saints Row: The Third", "com.feralinteractive.saintsrow3_android",

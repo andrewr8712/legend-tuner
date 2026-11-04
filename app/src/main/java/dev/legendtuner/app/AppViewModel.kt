@@ -21,9 +21,11 @@ import dev.legendtuner.app.access.ShizukuManager
 import dev.legendtuner.app.data.BackupInfo
 import dev.legendtuner.app.data.BackupStore
 import dev.legendtuner.app.data.ConfigDocument
+import dev.legendtuner.app.data.Control
 import dev.legendtuner.app.data.FeralTitle
 import dev.legendtuner.app.data.FeralTitles
 import dev.legendtuner.app.data.Preset
+import dev.legendtuner.app.data.TitleCatalogEngine
 import dev.legendtuner.app.data.SettingDef
 import dev.legendtuner.app.data.SettingScope
 import dev.legendtuner.app.data.SettingType
@@ -397,10 +399,30 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
      * never fail a load; they simply open without a preset model.
      */
     private fun presetFor(doc: ConfigDocument): Preset =
-        if (_state.value.guided) doc.ensureActivePresetExists() else Preset.GRAPHICS
+        if (_state.value.activeTitle?.legacyGuided == true) doc.ensureActivePresetExists() else Preset.GRAPHICS
 
     private fun validateFor(doc: ConfigDocument) {
-        if (_state.value.guided) doc.validate() else doc.validateRegistry()
+        if (_state.value.activeTitle?.legacyGuided == true) doc.validate() else doc.validateRegistry()
+    }
+
+    /** Applies a guided control for a catalogued title. Never creates a missing key. */
+    fun updateTitleControl(control: Control, token: String) {
+        val current = loaded ?: return
+        val title = _state.value.activeTitle ?: return
+        val catalog = title.titleCatalog ?: return
+        val root = title.registryRoot ?: return
+        if (current.document.value(root, catalog.keyFor(control)) == null) {
+            _state.value = _state.value.copy(
+                message = UiMessage("${control.label} is not stored in this file, so it was left untouched.", true)
+            )
+            return
+        }
+        if (!TitleCatalogEngine.write(current.document, root, catalog, control, token)) {
+            _state.value = _state.value.copy(message = UiMessage("Could not update ${control.label}.", true))
+            return
+        }
+        revision++
+        _state.value = _state.value.copy(dirty = true, revision = revision)
     }
 
     fun refreshAccessStatus() {
@@ -505,7 +527,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             var backup: BackupInfo? = null
             try {
                 val doc = current.document
-                if (applyPreset && _state.value.guided) doc.applyPresetToLive(_state.value.selectedPreset)
+                if (applyPreset && _state.value.activeTitle?.legacyGuided == true) doc.applyPresetToLive(_state.value.selectedPreset)
                 validateFor(doc)
                 val bytes = doc.serialize()
 
@@ -519,7 +541,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
                 val verifiedBytes = withContext(Dispatchers.IO) { current.access.read(current.file.path) }
                 val verified = ConfigDocument.parse(verifiedBytes)
                 validateFor(verified)
-                if (_state.value.guided && verified.activePreset() != _state.value.selectedPreset) {
+                if (_state.value.activeTitle?.legacyGuided == true && verified.activePreset() != _state.value.selectedPreset) {
                     error("Verification failed: active preset did not persist")
                 }
 

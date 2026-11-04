@@ -177,10 +177,13 @@ fun LegendTunerApp(
                     )
                 }
             } else {
-                val destinations = if (state.guided) {
-                    AppDestination.entries.toList()
-                } else {
-                    listOf(AppDestination.DASHBOARD, AppDestination.RAW, AppDestination.BACKUPS)
+                val destinations = when {
+                    state.activeTitle?.titleCatalog != null -> listOf(
+                        AppDestination.DASHBOARD, AppDestination.EDITOR,
+                        AppDestination.BACKUPS, AppDestination.RAW
+                    )
+                    state.activeTitle?.legacyGuided == true -> AppDestination.entries.toList()
+                    else -> listOf(AppDestination.DASHBOARD, AppDestination.RAW, AppDestination.BACKUPS)
                 }
                 Row(
                     Modifier
@@ -194,13 +197,14 @@ fun LegendTunerApp(
                             monogram = state.activeTitle?.monogram ?: "CT",
                             destinations = destinations,
                             onMonogramClick = viewModel::backToPicker,
-                            onSelect = selectDestination
+                            onSelect = selectDestination,
+                            editorLabel = if (state.activeTitle?.titleCatalog != null) "Settings" else "Graphics"
                         )
                     }
                     Column(Modifier.weight(1f).fillMaxSize()) {
                         Box(Modifier.weight(1f).fillMaxSize()) {
                             when (destination) {
-                                AppDestination.DASHBOARD -> if (state.guided) {
+                                AppDestination.DASHBOARD -> if (state.activeTitle?.legacyGuided == true) {
                                     DashboardScreen(
                                         state = state,
                                         wide = twoColumns,
@@ -220,25 +224,47 @@ fun LegendTunerApp(
                                     GenericDashboardScreen(
                                         state = state,
                                         wide = twoColumns,
+                                        onEdit = {
+                                            viewModel.selectSetting(null)
+                                            destination = AppDestination.EDITOR
+                                        },
                                         onRaw = { selectDestination(AppDestination.RAW) },
                                         onBackups = { selectDestination(AppDestination.BACKUPS) },
                                         onOpenAccess = viewModel::openAccessSheet,
                                         onChooseGame = viewModel::backToPicker
                                     )
                                 }
-                                AppDestination.EDITOR -> EditorScreen(
-                                    state = state,
-                                    dockedInspector = dockedInspector,
-                                    twoColumns = twoColumns,
-                                    onSelectPreset = viewModel::selectPreset,
-                                    onSelectSetting = viewModel::selectSetting,
-                                    onUpdate = viewModel::updateSetting,
-                                    onSave = { viewModel.save() },
-                                    onDiscard = viewModel::discardChanges,
-                                    onOpenAccess = viewModel::openAccessSheet,
-                                    onForceStop = viewModel::forceStopGame,
-                                    onReload = viewModel::refreshAccess
-                                )
+                                AppDestination.EDITOR -> {
+                                    val title = state.activeTitle
+                                    if (title?.titleCatalog != null && title.registryRoot != null) {
+                                        TitleEditorScreen(
+                                            state = state,
+                                            catalog = title.titleCatalog,
+                                            root = title.registryRoot,
+                                            dockedInspector = dockedInspector,
+                                            twoColumns = twoColumns,
+                                            onSelect = viewModel::selectSetting,
+                                            onUpdate = viewModel::updateTitleControl,
+                                            onSave = { viewModel.save(applyPreset = false) },
+                                            onDiscard = viewModel::discardChanges,
+                                            onOpenAccess = viewModel::openAccessSheet
+                                        )
+                                    } else {
+                                        EditorScreen(
+                                            state = state,
+                                            dockedInspector = dockedInspector,
+                                            twoColumns = twoColumns,
+                                            onSelectPreset = viewModel::selectPreset,
+                                            onSelectSetting = viewModel::selectSetting,
+                                            onUpdate = viewModel::updateSetting,
+                                            onSave = { viewModel.save() },
+                                            onDiscard = viewModel::discardChanges,
+                                            onOpenAccess = viewModel::openAccessSheet,
+                                            onForceStop = viewModel::forceStopGame,
+                                            onReload = viewModel::refreshAccess
+                                        )
+                                    }
+                                }
                                 AppDestination.BACKUPS -> BackupsScreen(
                                     state = state,
                                     onRestore = viewModel::restoreBackup,
@@ -265,7 +291,8 @@ fun LegendTunerApp(
                             CompactNav(
                                 selected = destination,
                                 destinations = destinations,
-                                onSelect = selectDestination
+                                onSelect = selectDestination,
+                                editorLabel = if (state.activeTitle?.titleCatalog != null) "Settings" else "Graphics"
                             )
                         }
                     }

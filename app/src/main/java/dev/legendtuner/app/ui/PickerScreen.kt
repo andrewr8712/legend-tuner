@@ -220,6 +220,7 @@ private fun TitleCard(status: TitleStatus, modifier: Modifier, onClick: () -> Un
 fun GenericDashboardScreen(
     state: AppState,
     wide: Boolean,
+    onEdit: () -> Unit,
     onRaw: () -> Unit,
     onBackups: () -> Unit,
     onOpenAccess: () -> Unit,
@@ -227,6 +228,7 @@ fun GenericDashboardScreen(
 ) {
     val config = state.config ?: return
     val doc = config.document
+    val catalog = state.activeTitle?.titleCatalog
     val version = doc.value(state.activeTitle?.registryRoot?.dropLast(1) ?: emptyList(), "GameVersionString")?.text
         ?: doc.value(state.activeTitle?.registryRoot?.dropLast(1) ?: emptyList(), "GameInstallVersionString")?.text
         ?: state.activeLabel
@@ -263,13 +265,20 @@ fun GenericDashboardScreen(
                         )
                         Spacer(Modifier.height(14.dp))
                         Text(
-                            "The guided editor for this title is not built yet. Browse the whole registry in Raw XML; writes are backed up and verified like GRID Legends.",
+                            if (catalog != null) {
+                                "${catalog.controls.size} settings are editable with plain-language controls. Raw XML stays available for anything the catalogue does not cover."
+                            } else {
+                                "The guided editor for this title is not built yet. Browse the whole registry in Raw XML; writes are backed up and verified like GRID Legends."
+                            },
                             style = MaterialTheme.typography.bodySmall.copy(lineHeight = 17.sp),
                             color = Muted
                         )
                     }
                 }
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                    if (catalog != null) {
+                        ActionTile("Edit settings", "${catalog.controls.size} controls", LegendIcons.Tune, Modifier.weight(1f), onEdit)
+                    }
                     ActionTile("Raw XML", "$values values", LegendIcons.Code, Modifier.weight(1f), onRaw)
                     ActionTile("Backups", "${state.backups.size} snapshots", LegendIcons.Backups, Modifier.weight(1f), onBackups)
                 }
