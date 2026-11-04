@@ -15,21 +15,26 @@ correctly for GRID Legends, with root / Shizuku / SAF access, backups, read-back
 a raw XML view. The file format, the access layer and the safety pipeline are game-agnostic; only
 the package, the registry key path, the preset model and the settings catalogue are GRID-specific.
 
-The goal is one app that opens any Feral title's registry, edits it with the same safety
-guarantees, and keeps GRID Legends' guided preset editor as the reference experience. The user
-reaches a game through a picker on launch, not a tab bar.
+The goal is one app that opens any supported Feral title and presents the same guided editor GRID
+Legends has: labelled groups, sensible controls, preset cards where the game has presets, and the
+same safety guarantees. The guided editor is data-driven — a per-title catalogue, not per-title
+code — so adding a game is a spec file plus a fixture. The registry browser stays, as an "All
+values" view inside each game for anything the catalogue does not cover.
 
-Success looks like: launch → pick a detected Feral game → edit values (guided for GRID Legends,
-raw-but-typed for everything else) → save → the game keeps the change. No regression for existing
-GRID Legends users.
+Success looks like: launch → pick a detected Feral game → the guided editor opens on that game's
+settings → change a labelled control, save → the game keeps the change. Raw editing is available
+but never the first thing you see. No regression for existing GRID Legends users.
 
 ## 2. Goals
 
 - A title table replaces the hardcoded package, path and key root.
 - A picker screen on launch listing installed/readable Feral titles plus "open a file".
-- Generic registry browsing and editing for any Feral `preferences` file: search, grouped by key
-  path, type-aware validation, in-place mutation.
-- GRID Legends keeps the current dashboard, preset cards, settings grid, inspector and raw editor.
+- A guided editor for every supported title, driven by a declarative catalogue: groups, labels,
+  controls, ranges, option labels and that title's preset model.
+- An "All values" registry browser per title for keys the catalogue does not cover: search,
+  grouped by key path, type-aware validation, in-place mutation.
+- GRID Legends keeps its current dashboard, preset cards, settings grid, inspector and raw editor;
+  its catalogue is the reference implementation the others follow.
 - Backups, force-stop and verification continue to work per title.
 - Existing unit tests keep passing; new tests cover the generic path.
 
@@ -39,7 +44,9 @@ GRID Legends users.
   `VFS/User/Settings.ini`), e.g. Total War MEDIEVAL II. They stay out of the picker and are
   reachable only through "open a file" if the user supplies one.
 - Editing `cache/specifications.xml`, save files, `SaveData/`, mod folders or `RemoteResources/`.
-- Friendly per-title catalogues beyond GRID Legends (no Alien or XCOM 2 labelled controls).
+- A guided catalogue for a title whose `preferences` file we have not inspected. Such a title is
+  not shipped as guided; it stays reachable through "open a file" and the "All values" view until a
+  sample arrives.
 - iOS, desktop or Switch paths.
 - Renaming the `applicationId`, the Kotlin package, or the GitHub repository.
 - `QUERY_ALL_PACKAGES`.
@@ -50,6 +57,8 @@ GRID Legends users.
   an invariant the save/verify/backup pipeline depends on.
 - Guessing a game's registry key from its title, or inventing per-title key names that were never
   verified against a real file.
+- Guessing a control's label, range, step or option text from a PC version, a console version or
+  another title. A wrong range clamps a legal value; a wrong label lies.
 - Presenting a title as supported when its config path is unverified.
 - Silently regenerating a registry document. Unknown keys, types, comments and ordering survive
   every edit.
@@ -93,7 +102,7 @@ data class FeralTitle(
     val label: String,        // display name
     val packageName: String,
     val gameKey: String?,     // registry key under Software/Feral Interactive; null = auto-detect
-    val guided: Boolean       // true only for GRID Legends
+    val catalog: TitleCatalog? // null until a verified sample + catalogue exist
 )
 
 object FeralTitles {
@@ -102,34 +111,38 @@ object FeralTitles {
         label = "GRID Legends",
         packageName = "com.feralinteractive.gridlegends_android",
         gameKey = "GRIDLegends",
-        guided = true
+        catalog = GridLegendsCatalog
     )
-    val ALL: List<FeralTitle> = listOf(
+    // Candidates: package IDs confirmed from Feral's Play listing, no catalogue yet.
+    val CANDIDATES: List<FeralTitle> = listOf(
         GRID_LEGENDS,
-        FeralTitle("grid-autosport", "GRID Autosport", "com.feralinteractive.gridas", null, false),
-        FeralTitle("alien-isolation", "Alien: Isolation", "com.feralinteractive.alienisolation_android", null, false),
-        FeralTitle("xcom2", "XCOM 2 Collection", "com.feralinteractive.xcom2_android", null, false),
-        FeralTitle("company-of-heroes", "Company of Heroes", "com.feralinteractive.companyofheroes_android", null, false),
-        FeralTitle("empire", "Total War: EMPIRE", "com.feralinteractive.empire_android", null, false),
-        FeralTitle("railroads", "Sid Meier's Railroads!", "com.feralinteractive.railroads_android", null, false),
-        FeralTitle("rome", "ROME: Total War", "com.feralinteractive.rometw", null, false),
-        FeralTitle("rome-bi", "ROME: Total War – BI", "com.feralinteractive.rometwbi", null, false),
-        FeralTitle("rome-alexander", "ROME: Total War – Alexander", "com.feralinteractive.rometwalex", null, false),
-        FeralTitle("napoleon", "Total War: NAPOLEON", "com.feralinteractive.napoleon_android", null, false)
+        FeralTitle("grid-autosport", "GRID Autosport", "com.feralinteractive.gridas", null, null),
+        FeralTitle("alien-isolation", "Alien: Isolation", "com.feralinteractive.alienisolation_android", null, null),
+        FeralTitle("xcom2", "XCOM 2 Collection", "com.feralinteractive.xcom2_android", null, null),
+        FeralTitle("company-of-heroes", "Company of Heroes", "com.feralinteractive.companyofheroes_android", null, null),
+        FeralTitle("empire", "Total War: EMPIRE", "com.feralinteractive.empire_android", null, null),
+        FeralTitle("railroads", "Sid Meier's Railroads!", "com.feralinteractive.railroads_android", null, null),
+        FeralTitle("rome", "ROME: Total War", "com.feralinteractive.rometw", null, null),
+        FeralTitle("rome-bi", "ROME: Total War – BI", "com.feralinteractive.rometwbi", null, null),
+        FeralTitle("rome-alexander", "ROME: Total War – Alexander", "com.feralinteractive.rometwalex", null, null),
+        FeralTitle("napoleon", "Total War: NAPOLEON", "com.feralinteractive.napoleon_android", null, null),
+        FeralTitle("hitman-blood-money", "Hitman: Blood Money — Reprisal", "com.feralinteractive.hitmanbloodmoney_android", null, null),
+        FeralTitle("lara-croft-gol", "Lara Croft: Guardian of Light", "com.feralinteractive.laracroftgol_android", null, null),
+        FeralTitle("lara-croft-too", "Lara Croft and the Temple of Osiris", "com.feralinteractive.laracrofttoo_android", null, null)
     )
-    fun byPackage(pkg: String): FeralTitle? = ALL.firstOrNull { it.packageName == pkg }
+    val SUPPORTED: List<FeralTitle> get() = CANDIDATES.filter { it.catalog != null }
+    fun byPackage(pkg: String): FeralTitle? = CANDIDATES.firstOrNull { it.packageName == pkg }
 }
 ```
 
-Only GRID Legends carries a `gameKey`, because it is the only one verified against a real Android
-sample. For everything else the key is resolved at load time: if
-`HKEY_CURRENT_USER/Software/Feral Interactive` has exactly one child key, that child is the game
-key; otherwise the browser starts at `Feral Interactive` and the user sees all children. No title
-key is invented.
+`gameKey` is a shortcut for the default browse scope and for GRID's guided paths; a catalogue's
+group paths are absolute, so a title without it still renders correctly.
 
-The package list comes from Feral's Play developer listing. Titles whose config path was never
-confirmed (Tropico, Hitman, Saints Row, Lara Croft, GRID Autosport Custom Edition) are deliberately
-absent: the picker must not promise a file it cannot name.
+"Supported" means: package and config path confirmed, a real `preferences` sample inspected, and a
+catalogue authored against it. The picker lists `FeralTitles.SUPPORTED` only, because every card
+must open into a guided editor. Candidates without a catalogue stay out of the picker and remain
+reachable through "open a file" — which gives All values and Raw XML, but no guided screen. Which
+candidates join `SUPPORTED` in 1.2.0 depends on the samples available at build time; see §11.
 
 ### 7.2 Access layer and sessions
 
@@ -261,10 +274,110 @@ inspector, with a hint that raw XML editing is available. This keeps a future Fe
 making a title impossible to open or save.
 
 
-### 7.5 Editing and saving
+### 7.5 Guided catalogue model
 
-The generic editor mutates values in place and marks the document dirty. There is no semantic
-clamping outside the guided catalogue — but there is type validation and a mandatory backup.
+The guided editor is data, not code. One catalogue per supported title describes what the screen
+shows; the same composables render every game, so a new title is a catalogue plus a fixture.
+
+```kotlin
+data class TitleCatalog(
+    val titleId: String,
+    val groups: List<CatalogGroup>,
+    val presetModel: PresetModel,
+    val versionKeys: List<String>          // Setup keys for the dashboard subtitle
+)
+
+data class CatalogGroup(
+    val label: String,                     // "Frame rate", "Visuals", ...
+    val shortLabel: String,
+    val keyPath: List<String>,             // absolute registry path of the block
+    val controls: List<Control>
+)
+
+sealed interface Control {
+    val name: String                       // registry value name
+    val label: String
+    val description: String
+    val visibleFlag: String? get() = null  // Alien-style *_Visible gate, written to 1 alongside the value
+    data class Toggle(override val name: String, override val label: String, override val description: String,
+                      override val visibleFlag: String? = null) : Control
+    data class Level(override val name: String, override val label: String, override val description: String,
+                     val max: Int, val labels: Map<Int, String>) : Control
+    data class Slider(override val name: String, override val label: String, override val description: String,
+                      val min: Int, val max: Int, val step: Int, val unit: String = "") : Control
+    data class Choice(override val name: String, override val label: String, override val description: String,
+                      val options: List<Int>, val labels: Map<Int, String>) : Control
+    data class Text(override val name: String, override val label: String, override val description: String) : Control
+}
+
+sealed interface PresetModel {
+    object None : PresetModel                                             // one flat settings block
+    data class Blocks(val livePath: List<String>, val presetKeys: List<String>) : PresetModel
+    data class Suffixed(val suffixes: List<String>, val labels: Map<String, String>) : PresetModel
+}
+```
+
+`CatalogEngine` turns the catalogue plus the active preset into registry reads and writes:
+
+```kotlin
+sealed interface Target {
+    object Live : Target
+    data class Block(val key: String) : Target
+    data class Suffix(val suffix: String) : Target
+}
+
+class CatalogEngine(val catalog: TitleCatalog) {
+    fun read(doc: ConfigDocument, target: Target): Map<String, Int?>
+    fun write(doc: ConfigDocument, target: Target, control: Control, value: Int): Boolean
+    fun applyToLive(doc: ConfigDocument, target: Target)                  // Blocks model only
+}
+```
+
+- `None` — controls live at `group.keyPath`; reads and writes go straight there.
+- `Blocks` — controls live in each preset block; read/write the first token of the comma-separated
+  value and preserve the tail (the GRID Legends behaviour today); `applyToLive` mirrors the chosen
+  preset into the live block on save.
+- `Suffixed` — a control's registry name is `name + suffix` (`""`, `_battery`, `_graphics`);
+  `Target.Suffix` selects which one the editor is showing; no mirroring.
+
+Preset models known so far, with confidence:
+
+| Title | Model | Basis |
+|---|---|---|
+| GRID Legends | `Blocks(BatterySaver, Graphics, Performance)` | real sample; verified first-token mirroring |
+| XCOM 2 | `Suffixed("", "_battery", "_graphics")` | community posts naming `GFXTextureDetail`, `_battery`, `_graphics`; **provisional until a sample confirms grouping and ranges** |
+| Alien: Isolation | `None`, flat `VideoSetting_*` plus `_Visible` flags | documented file dump; **provisional** |
+| GRID Autosport and the rest | unknown | not shipped as guided until a sample exists |
+
+Catalogue coverage is deliberately partial. The guided screen shows what the catalogue covers;
+everything else in the document stays editable under "All values". This is what lets a title ship
+guided on day one with a defensible set of controls instead of an invented one.
+
+Alien-style titles gate options behind `VideoSetting_*_Visible` flags: a control with `visibleFlag`
+set writes `1` to that value when it writes its own, because otherwise the game keeps the option
+hidden and the change looks lost. The flag is catalogue data, not a special case in the screen.
+
+Authoring a title is a repeatable procedure:
+
+1. Pull `preferences` from a device that has run the game once, and record the game version from
+   `Setup/GameVersionString`.
+2. List every value with its path and type. Values that are clearly this game's settings become
+   catalogue candidates; engine, hardware and bookkeeping subtrees stay out.
+3. Group the candidates, give each a label and description, choose the control type, and take ranges
+   and option labels from observed values and the game's own menu wording.
+4. Add a sanitised fixture and the catalogue object, then run the conformance test.
+5. On device: change one control per group, relaunch, confirm each one persisted; repeat for every
+   preset the model exposes.
+
+Catalogue files are Kotlin objects (`data/catalogs/GridLegendsCatalog.kt`, …), not JSON assets:
+labels, ranges and preset keys stay typed and compiled, and a malformed catalogue fails the build
+rather than at runtime.
+
+### 7.6 Editing and saving
+
+Guided controls write through `CatalogEngine`; the "All values" editor mutates values in place.
+Both mark the document dirty. There is no semantic clamping outside the guided catalogue — but
+there is type validation and a mandatory backup.
 
 Save path, shared by both modes:
 
@@ -280,7 +393,7 @@ Save path, shared by both modes:
 Step 5 replaces the current GRID-only "did the preset persist" check and is strictly stronger: any
 dropped key, changed type or mangled text fails the save.
 
-### 7.6 State and navigation
+### 7.7 State and navigation
 
 `AppState` gains:
 
@@ -294,15 +407,16 @@ dropped key, changed type or mangled text fails the save.
 
 `LoadedConfig` gains `title: FeralTitle?` and holds a `DocumentSource`.
 
-`AppDestination` becomes `PICKER, DASHBOARD, GRID_EDITOR, VALUES, RAW, BACKUPS`. The rail shows:
+`AppDestination` becomes `PICKER, DASHBOARD, SETTINGS, ALL_VALUES, RAW, BACKUPS`. The rail is the
+same for every title:
 
-| Destination | Guided (GRID) | Generic |
-|---|---|---|
-| Dashboard | ✓ | ✓ |
-| Graphics | ✓ | — |
-| Values | — | ✓ |
-| Raw XML | ✓ | ✓ |
-| Backups | ✓ | ✓ |
+| Destination | What it shows |
+|---|---|
+| Dashboard | title, version, path, access, value count, shortcuts |
+| Settings | guided catalogue groups; preset cards only when the model has presets |
+| All values | registry browser: scope switch, search, typed editor |
+| Raw XML | the whole document |
+| Backups | snapshots for this title |
 
 The rail header carries the active title's label plus a chevron; tapping it returns to the picker
 (confirming first if the document is dirty). Compact widths mirror this in the bottom bar.
@@ -321,7 +435,7 @@ document has no package, so force-stop and discovery are unavailable while it is
 Switching titles reuses the one session. Closing a document returns to the picker without tearing
 down the session; the session is closed when the process ends.
 
-### 7.7 Screens
+### 7.8 Screens
 
 **PickerScreen** (new). Wordmark, "Choose a game", access chip (mode + change), refresh.
 `LazyVerticalGrid` of cards, minimum 260 dp wide, so 2 up on a tablet in portrait and 3 up in
@@ -341,7 +455,7 @@ once" with no Edit affordance; `PRESENT_UNUSABLE` → "File present but not a Fe
 the resolved path and an option to open a different file. A footer row opens SAF; a hint below
 explains root/Shizuku when no title is readable.
 
-**RegistryScreen** (new). Header: scope switch (`This game` / `Entire registry`), search field, value
+**AllValuesScreen** (new). Header: scope switch (`This game` / `Entire registry`), search field, value
 count. Then a `LazyColumn` grouped by key path. Group header is the path relative to the game root
 (e.g. `Setup`); each row shows name, type badge and a truncated value. Tapping a row opens the
 inspector: type, current raw text, a field (numeric keyboard for `integer`, monospace for `binary`),
@@ -352,18 +466,22 @@ matches name and path inside the active scope; an empty result states the query 
 Switching to `Entire registry` shows a one-line warning above the list; the choice is remembered for
 the session, not persisted.
 
-**DashboardScreen** becomes title-aware. Common: title label, path, access mode, size/mtime,
-Backups, Raw XML. Guided adds the preset snapshot, quick-tune shortcuts and "Edit graphics".
-Generic adds a value count and "Browse values", and shows `GameVersionString` /
-`GameInstallVersionString` when the game's `Setup` key contains it.
+**DashboardScreen** becomes title-aware. Every title shows the label, path, access mode, size/mtime,
+value count, the version from `catalog.versionKeys` when present, and shortcuts to Settings, All
+values, Backups and Raw XML. When the preset model has presets, the dashboard also shows the active
+preset snapshot and quick-tune shortcuts.
 
-**EditorScreen, SettingInspector, RawXmlScreen** keep their layout. Copy loses "GRID Legends"
-where it refers to the app's scope, keeps it where it refers to the game.
+**SettingsScreen** is today's `EditorScreen` generalised: preset cards render only when the preset
+model has presets, and group sections plus the settings grid are driven by the catalogue, reading
+and writing through `CatalogEngine`. `SettingInspector` takes a `Control` instead of a `SettingDef`;
+labels, descriptions, ranges, option labels and tips all come from the catalogue. `RawXmlScreen`
+is unchanged. Copy loses "GRID Legends" where it refers to the app's scope and keeps it where it
+refers to the game.
 
 **AccessScreens** copy generalises to "the selected game's preferences file"; the three-route
 explanation is unchanged.
 
-### 7.8 Backups
+### 7.9 Backups
 
 `BackupStore` takes a namespace and a root directory:
 
@@ -380,49 +498,63 @@ the GRID namespace is first opened, move legacy `files/backups/preferences-*.xml
 empty. Backup labels: preset key name when guided, `values` otherwise. The Backups screen only
 lists the active namespace.
 
-### 7.9 Manifest and naming
+### 7.10 Manifest and naming
 
-`<queries>` gains one `<package>` per entry in `FeralTitles.ALL` (11 entries plus Shizuku).
+`<queries>` gains one `<package>` per entry in `FeralTitles.CANDIDATES` (11 entries plus Shizuku), so
+installed candidates are visible even before they gain a catalogue.
 
 Display name: the launcher label and the loading wordmark become **Config Tuner**; the subtitle in
 the README explains the Feral scope. The `applicationId`, Kotlin package and repository name stay
 as they are, so existing installs update in place and the release links keep working. This is a
 string change and is easy to revert if a different name is preferred.
 
-### 7.10 Version
+### 7.11 Version
 
-1.2.0, versionCode 3. CHANGELOG entry covering the picker, generic editor and title table;
-README gains a "Supported titles" table with the same confirmed/unverified distinction used in the
-investigation.
+1.2.0, versionCode 3. CHANGELOG entry covering the picker, the guided editor and the catalogue
+system; README gains a "Supported titles" table with the same confirmed/unverified distinction used
+in the investigation.
 
 ## 8. Test fixtures and tests
 
-New fixture `app/src/test/resources/alien-isolation-sample.xml`: a synthetic registry using the
-documented Alien: Isolation key names (`Setup`, `VideoSetting_*`, `VideoSetting_*_Visible`,
-`DynamicResolutionScaling`, `TemporalAntiAliasing`, `Upscaler`) and the shared framework subtrees.
-It is authored for schema coverage, contains no user data, and is labelled synthetic in the test
-resource header.
+Every supported title needs a fixture: the existing sanitised GRID Legends sample, plus one file per
+added title. `alien-isolation-sample.xml` is synthetic, uses the documented Alien: Isolation key
+names (`Setup`, `VideoSetting_*`, `VideoSetting_*_Visible`, `DynamicResolutionScaling`,
+`TemporalAntiAliasing`, `Upscaler`) and the shared framework subtrees, contains no user data, and is
+labelled synthetic in the resource header. A catalogue without a fixture fails conformance.
+
+Samples are pulled from a device (`adb pull /sdcard/Android/data/<pkg>/files/feral_app_support/…`)
+and sanitised before commit: replace `Setup/FeralAnalyticsInstallID`, `FeralNet/Login/LastKnownID`,
+any cloud-drive identifiers and per-device hardware values; keep every key, type and value shape so
+the fixture still exercises the real schema. Sanitised copies go in `testdata/` for reference and
+are copied into `app/src/test/resources/` for the tests.
 
 Tests:
 
 1. `FeralTitlesTest` — unique ids and packages; every package matches
-   `^com\.feralinteractive\.[a-z0-9_]+$`; exactly one guided title; GRID Legends is it.
-2. `RegistryModelTest` — grouping, search by name and path, `GAME` scope excludes
+   `^com\.feralinteractive\.[a-z0-9_]+$`; every entry in `SUPPORTED` has a catalogue whose
+   `titleId` matches; GRID Legends is supported.
+2. `CatalogConformanceTest` — for every supported title: non-empty groups and controls, unique
+   labels; every control resolves at `<group.keyPath>/<name>` in that title's fixture; numeric
+   controls sit on `integer` values; every declared level/slider bound contains the fixture value;
+   every `PresetModel.Blocks` preset key exists; `Suffixed` names exist for at least the base
+   suffix; descriptions non-blank; group paths under
+   `HKEY_CURRENT_USER/Software/Feral Interactive`.
+3. `RegistryModelTest` — grouping, search by name and path, `GAME` scope excludes
    `HKEY_LOCAL_MACHINE` and the engine subtrees, `ENTIRE` includes them, multi-child
    `Feral Interactive` fallback, `validateText` for integer (rejects `1.5`, accepts `-3`), binary
    (rejects odd length and non-hex, accepts empty), string, and an unknown type (validated as
    read-only, not as text).
-3. `GenericDocumentTest` — the Alien fixture parses, round-trips byte-for-byte through
-   parse→serialize→parse with identical snapshots, rejects `validateGuided`, accepts
+4. `GenericDocumentTest` — the Alien fixture parses, round-trips byte-for-byte through
+   parse→serialize→parse with identical snapshots, fails GRID-specific validation, accepts
    `validateRegistry`, preserves a `type="float"` value through an edit and a save cycle, and a
    changed value is caught by snapshot comparison.
-4. `TitleDiscoveryTest` — the pure state mapping: installed + located → `READABLE`; installed + no
+5. `TitleDiscoveryTest` — the pure state mapping: installed + located → `READABLE`; installed + no
    file → `INSTALLED_ONLY`; open attempt failed → `PRESENT_UNUSABLE`; not installed → omitted.
-5. `BackupStoreTest` — namespace isolation (two namespaces cannot see each other's files), legacy
+6. `BackupStoreTest` — namespace isolation (two namespaces cannot see each other's files), legacy
    migration runs once and is idempotent, prune keeps 12 per namespace. Runs against a temp dir.
-6. `SaveVerificationTest` — snapshot equality detects a removed key, a changed type, a changed
+7. `SaveVerificationTest` — snapshot equality detects a removed key, a changed type, a changed
    value, and an unknown-type value.
-7. Existing `ConfigDocumentTest`, `SettingsCatalogTest`, `HeightDropdownTest` pass unchanged except
+8. Existing `ConfigDocumentTest`, `SettingsCatalogTest`, `HeightDropdownTest` pass unchanged except
    for the root-validation message.
 
 The session layer itself is verified on device rather than in JVM tests: one Shizuku bind and a
@@ -436,10 +568,12 @@ save → relaunch; manual SAF path on a copied file; migration of existing 1.1.0
 
 | Risk | Mitigation |
 |---|---|
-| Guided GRID regression while generalising paths | Existing 10 tests stay; GRID golden fixture unchanged; guided branch is the only caller of preset helpers |
+| Guided GRID regression while generalising paths | Existing 10 tests stay; GRID golden fixture unchanged; its catalogue reproduces today's controls |
 | Generic edit corrupts a game's config | Type validation, exact snapshot verify, automatic restore, backup before every write, unknown-node preservation |
-| Unverified title lacks `preferences` | Only confirmed titles are listed; unreadable ones show as installed-only; "open a file" always available |
-| Package name reaching a shell command | Force-stop accepts only `FeralTitles.ALL` packages |
+| Catalogue points at a key a game update removed | Conformance test against the fixture; a control whose key is missing at runtime is hidden, not crashed; All values still exposes everything |
+| A guessed range clamps a legal value | Ranges come from the inspected sample; clamping applies only inside declared bounds; All values bypasses the catalogue |
+| A candidate title has no `preferences` | It never enters `SUPPORTED`; the picker lists supported titles only; "open a file" covers the rest |
+| Package name reaching a shell command | Force-stop accepts only `FeralTitles.CANDIDATES` packages |
 | Package visibility hides installed games | Explicit `<queries>` entries; no `QUERY_ALL_PACKAGES` |
 | Scoped storage makes a readable file look absent | Card copy says "not readable with the current access mode"; access sheet reachable from the picker |
 | Two games' backups collide | Per-namespace directories, migrated legacy folder |
@@ -460,6 +594,11 @@ save → relaunch; manual SAF path on a copied file; migration of existing 1.1.0
 
 These were open in the first draft and settled by the author; they are listed so they can be
 overruled cheaply before implementation.
+
+A correction after the review replaced the first draft's premise: the guided editor is the default
+for every supported title, and the raw registry browser is an expert fallback rather than the
+primary experience for non-GRID games. That correction is why the catalogue, `Control` and
+`PresetModel` layers exist, and why `SUPPORTED` is gated on an inspected sample.
 
 1. **Generic browser scope.** Default to the game's subtree, with an explicit "Entire registry"
    toggle for engine and hardware sections. Chosen over game-only (hides `IndirectX`,
