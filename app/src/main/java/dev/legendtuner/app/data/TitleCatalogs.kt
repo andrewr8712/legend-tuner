@@ -20,13 +20,14 @@ object SaintsRowCatalog {
     private const val IMAGE = "Image quality"
     private const val SCENE = "Scene detail"
     private const val PERF = "Performance"
+    private const val DISPLAY = "Display"
     private const val TIERS = "Tier names are inferred from the stored value; verify in-game."
 
     private fun scene(key: String, label: String, description: String) =
         Control(key, label, description, SCENE, ControlKind.CHOICE, tier3, note = TIERS)
 
     val catalog = TitleCatalog(
-        groups = listOf(IMAGE, SCENE, PERF),
+        groups = listOf(IMAGE, SCENE, PERF, DISPLAY),
         families = listOf(
             PresetFamily("graphics", "Graphics", pathSuffix = listOf("GraphicsPreset")),
             PresetFamily("battery", "Battery saver", pathSuffix = listOf("BatterySaverPreset")),
@@ -116,18 +117,48 @@ object SaintsRowCatalog {
             Control(
                 "GfxIdleFps", "Idle frame cap",
                 "Frame cap while nothing is happening on screen. Lower values save battery in menus and cutscenes.",
-                PERF, ControlKind.STEPPER, min = 30, max = 60, suffix = " fps"
+                PERF, ControlKind.CHOICE, fpsChoices()
             ),
             Control(
                 "GfxResponsiveFps", "Active frame cap",
                 "Frame cap while the player is moving or driving. This is the cap that matters during play.",
-                PERF, ControlKind.STEPPER, min = 30, max = 60, suffix = " fps"
+                PERF, ControlKind.CHOICE, fpsChoices()
             ),
             Control(
                 "GfxResolutionScale", "Resolution scale",
-                "Internal render scale multiplier. 1.0 renders at the panel resolution; lower values are softer but faster.",
-                PERF, ControlKind.STEPPER, min = 1, max = 1,
-                note = "Stored as a decimal (1.000000); edit it in Raw XML until the decimal path is verified."
+                "Internal render scale multiplier. 1.00 renders at the panel resolution; lower values are softer but faster.",
+                PERF, ControlKind.CHOICE,
+                listOf(
+                    ControlChoice("0.500000", "50%"),
+                    ControlChoice("0.600000", "60%"),
+                    ControlChoice("0.700000", "70%"),
+                    ControlChoice("0.750000", "75%"),
+                    ControlChoice("0.800000", "80%"),
+                    ControlChoice("0.900000", "90%"),
+                    ControlChoice("1.000000", "100%")
+                )
+            ),
+
+            Control(
+                "Resolution", "Screen resolution",
+                "Buffer size the game writes into ScreenW and ScreenH. It scales to the panel, and may clamp values above the panel height.",
+                DISPLAY, ControlKind.RESOLUTION,
+                listOf(
+                    ControlChoice("1280x720", "1280 × 720"),
+                    ControlChoice("1280x800", "1280 × 800"),
+                    ControlChoice("1600x900", "1600 × 900"),
+                    ControlChoice("1920x1080", "1920 × 1080"),
+                    ControlChoice("1920x1200", "1920 × 1200"),
+                    ControlChoice("2560x1440", "2560 × 1440"),
+                    ControlChoice("2560x1600", "2560 × 1600")
+                ),
+                note = "The observed file held 1280 × 800. The game may recalculate these on launch.",
+                ignoreFamilyPath = true
+            ),
+            Control(
+                "FixedScreenHeight", "Render height",
+                "Internal vertical resolution. Lower values raise frame rate at the cost of sharpness.",
+                DISPLAY, ControlKind.CHOICE, heightChoices(), ignoreSuffix = true, ignoreFamilyPath = true
             )
         )
     )
@@ -249,15 +280,15 @@ object HitmanCatalog {
             PresetFamily("plus", "Performance+", keySuffix = "_plus")
         ),
         controls = listOf(
-            step(
+            Control(
                 "IdleFPS", "Idle frame cap",
                 "Frame cap when the player is still or the scene is static. Lower values save battery in quiet moments.",
-                120, FRAME
+                FRAME, ControlKind.CHOICE, fpsChoices(), triple = true
             ),
-            step(
+            Control(
                 "ResponsiveFPS", "Active frame cap",
                 "Frame cap while input is active. This is the cap that matters during play and in firefights.",
-                120, FRAME
+                FRAME, ControlKind.CHOICE, fpsChoices(), triple = true
             ),
 
             Control(
@@ -345,7 +376,7 @@ object HitmanCatalog {
             Control(
                 "FixedScreenHeight", "Render height",
                 "Internal vertical resolution. Higher values are sharper; lower values raise frame rate on this tablet.",
-                DISPLAY, ControlKind.STEPPER, min = 480, max = 2160, suffix = " px"
+                DISPLAY, ControlKind.CHOICE, heightChoices(), ignoreSuffix = true
             )
         )
     )
@@ -419,7 +450,7 @@ object LaraGolCatalog {
             Control(
                 "FixedScreenHeight", "Render height",
                 "Internal vertical resolution. The panel is 2K; lower values raise frame rate at the cost of sharpness.",
-                DISPLAY, ControlKind.STEPPER, min = 480, max = 2160, suffix = " px"
+                DISPLAY, ControlKind.CHOICE, heightChoices()
             )
         )
     )
@@ -493,7 +524,7 @@ object LaraTooCatalog {
             Control(
                 "FixedScreenHeight", "Render height",
                 "Internal vertical resolution. Lower values raise frame rate at the cost of sharpness.",
-                DISPLAY, ControlKind.STEPPER, min = 480, max = 2160, suffix = " px"
+                DISPLAY, ControlKind.CHOICE, heightChoices()
             )
         )
     )

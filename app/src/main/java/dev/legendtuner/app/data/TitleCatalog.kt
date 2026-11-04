@@ -5,7 +5,7 @@ package dev.legendtuner.app.data
  * stored text to a human label. Controls are read-only unless a catalogue row was verified against
  * a real device file — nothing here creates keys that the game did not write itself.
  */
-enum class ControlKind { TOGGLE, CHOICE, STEPPER, READONLY }
+enum class ControlKind { TOGGLE, CHOICE, STEPPER, RESOLUTION, READONLY }
 
 data class ControlChoice(val token: String, val label: String)
 
@@ -23,7 +23,11 @@ data class Control(
     /** Hitman stores "a, b, c" per preset; uniform triples are editable, ladders are not. */
     val triple: Boolean = false,
     /** Keys named Disable* store the inverse of the label. */
-    val invert: Boolean = false
+    val invert: Boolean = false,
+    /** Engine-level keys (render height) have no preset suffix even when a family is selected. */
+    val ignoreSuffix: Boolean = false,
+    /** Keys that live outside the preset block (ScreenW/ScreenH) skip the family path. */
+    val ignoreFamilyPath: Boolean = false
 ) {
     fun labelFor(token: String?, raw: String? = null): String {
         if (token == null) return raw ?: "—"
@@ -33,6 +37,7 @@ data class Control(
                 choices.firstOrNull { it.token.equals(effective, ignoreCase = true) }?.label ?: token
             }
             ControlKind.STEPPER -> "$token$suffix"
+            ControlKind.RESOLUTION -> token
             ControlKind.READONLY -> token
         }
     }
@@ -67,13 +72,19 @@ data class TitleCatalog(
     val keySuffix: String = "",
     /** Keys between the title's registry root and the values, e.g. `Setup/GraphicsPreset`. */
     val pathSuffix: List<String> = emptyList(),
+    /** Path contributed by the selected preset family; engine-level controls can skip it. */
+    val familyPathSuffix: List<String> = emptyList(),
     val families: List<PresetFamily> = emptyList()
 ) {
     fun controlsFor(group: String): List<Control> = controls.filter { it.group == group }
 
     fun find(key: String): Control? = controls.firstOrNull { it.key == key }
 
-    fun keyFor(control: Control): String = keyPrefix + control.key.removePrefix(stripPrefix) + keySuffix
+    fun keyFor(control: Control): String =
+        keyPrefix + control.key.removePrefix(stripPrefix) + if (control.ignoreSuffix) "" else keySuffix
+
+    fun pathFor(control: Control): List<String> =
+        pathSuffix + if (control.ignoreFamilyPath) emptyList() else familyPathSuffix
 
     fun family(id: String?): PresetFamily? =
         families.firstOrNull { it.id == id } ?: families.firstOrNull()
@@ -85,14 +96,14 @@ data class TitleCatalog(
             keyPrefix = family.keyPrefix.ifEmpty { keyPrefix },
             stripPrefix = family.stripPrefix.ifEmpty { stripPrefix },
             keySuffix = family.keySuffix,
-            pathSuffix = pathSuffix + family.pathSuffix
+            familyPathSuffix = family.pathSuffix
         )
     }
 }
 
 object TitleCatalogEngine {
     fun value(doc: ConfigDocument, root: List<String>, catalog: TitleCatalog, control: Control): ConfigDocument.ConfigValue? =
-        doc.value(root + catalog.pathSuffix, catalog.keyFor(control))
+        doc.value(root + catalog.pathFor(control), catalog.keyFor(control))
 
     fun tokens(raw: String?): List<String> =
         raw?.split(',')?.map { it.trim() }?.filter { it.isNotEmpty() } ?: emptyList()
@@ -110,10 +121,39 @@ object TitleCatalogEngine {
     }
 
     fun display(doc: ConfigDocument, root: List<String>, catalog: TitleCatalog, control: Control): String {
+        if (control.kind == ControlKind.RESOLUTION) {
+            return resolutionToken(doc, root, catalog, control) ?: "—"
+        }
         val raw = value(doc, root, catalog, control)?.text
         val token = token(doc, root, catalog, control)
         if (token == null) return raw?.trim() ?: "—"
         return control.labelFor(token, raw)
+    }
+
+    /** ScreenW/ScreenH pair, surfaced as one "1280x800" token. */
+    fun resolutionToken(doc: ConfigDocument, root: List<String>, catalog: TitleCatalog, control: Control): String? {
+        val path = root + catalog.pathFor(control)
+        val width = doc.value(path, "ScreenW")?.firstIntOrNull ?: return null
+        val height = doc.value(path, "ScreenH")?.firstIntOrNull ?: return null
+        return "${width}x$height"
+    }
+
+    fun writeResolution(
+        doc: ConfigDocument,
+        root: List<String>,
+        catalog: TitleCatalog,
+        control: Control,
+        token: String
+    ): Boolean {
+        val parts = token.lowercase().split('x')
+        if (parts.size != 2) return false
+        val width = parts[0].trim().toIntOrNull() ?: return false
+        val height = parts[1].trim().toIntOrNull() ?: return false
+        val path = root + catalog.pathFor(control)
+        if (doc.value(path, "ScreenW") == null || doc.value(path, "ScreenH") == null) return false
+        val okWidth = doc.setValue(path, "ScreenW", width.toString())
+        val okHeight = doc.setValue(path, "ScreenH", height.toString())
+        return okWidth && okHeight
     }
 
     fun write(
@@ -125,7 +165,7 @@ object TitleCatalogEngine {
     ): Boolean {
         val stored = if (control.invert) flip(token) else token
         val text = if (control.triple) "$stored, $stored, $stored" else stored
-        return doc.setValue(root + catalog.pathSuffix, catalog.keyFor(control), text)
+        return doc.setValue(root + catalog.pathFor(control), catalog.keyFor(control), text)
     }
 }
 
@@ -141,6 +181,15 @@ private fun onOffText(): List<ControlChoice> = listOf(
     ControlChoice("off", "Off"),
     ControlChoice("on", "On")
 )
+
+internal val commonScreenHeights = listOf(480, 540, 600, 720, 768, 800, 900, 1080, 1200, 1440, 1600, 1800, 2160)
+internal val commonFrameRates = listOf(24, 30, 40, 45, 48, 60, 72, 90, 120, 144)
+
+internal fun heightChoices(): List<ControlChoice> =
+    commonScreenHeights.map { ControlChoice(it.toString(), "$it px") }
+
+internal fun fpsChoices(): List<ControlChoice> =
+    commonFrameRates.map { ControlChoice(it.toString(), "$it fps") }
 
 private fun qualityLadder(): List<ControlChoice> = listOf(
     ControlChoice("0", "Very Low"),
@@ -396,7 +445,7 @@ object AlienIsolationCatalog {
             Control(
                 "FixedScreenHeight", "Render height",
                 "Internal render height in pixels. The game scales to the panel; lower values raise frame rate at the cost of sharpness.",
-                DISPLAY, ControlKind.STEPPER, min = 480, max = 2160, suffix = " px"
+                DISPLAY, ControlKind.CHOICE, heightChoices()
             )
         )
     )

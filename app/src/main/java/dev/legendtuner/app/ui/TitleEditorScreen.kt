@@ -228,10 +228,15 @@ private fun GroupCard(
         }
         DividerLine()
         controls.forEachIndexed { index, control ->
+            val exists = if (control.kind == ControlKind.RESOLUTION) {
+                TitleCatalogEngine.resolutionToken(doc, root, catalog, control) != null
+            } else {
+                TitleCatalogEngine.value(doc, root, catalog, control) != null
+            }
             ControlRow(
                 control = control,
                 value = TitleCatalogEngine.display(doc, root, catalog, control),
-                hasKey = TitleCatalogEngine.value(doc, root, catalog, control) != null,
+                hasKey = exists,
                 onClick = { onSelect(control.key) }
             )
             if (index != controls.lastIndex) DividerLine(Modifier.padding(start = 15.dp))
@@ -315,8 +320,16 @@ private fun ControlInspector(
             return@Surface
         }
 
-        val current = TitleCatalogEngine.token(doc, root, catalog, control)
-        val exists = TitleCatalogEngine.value(doc, root, catalog, control) != null
+        val current = if (control.kind == ControlKind.RESOLUTION) {
+            TitleCatalogEngine.resolutionToken(doc, root, catalog, control)
+        } else {
+            TitleCatalogEngine.token(doc, root, catalog, control)
+        }
+        val exists = if (control.kind == ControlKind.RESOLUTION) {
+            TitleCatalogEngine.resolutionToken(doc, root, catalog, control) != null
+        } else {
+            TitleCatalogEngine.value(doc, root, catalog, control) != null
+        }
         val raw = TitleCatalogEngine.value(doc, root, catalog, control)?.text?.trim()
         val ladder = control.triple && exists && current == null
 
@@ -412,6 +425,7 @@ private fun stateCased(kind: ControlKind): String = when (kind) {
     ControlKind.TOGGLE -> "TOGGLE"
     ControlKind.CHOICE -> "OPTIONS"
     ControlKind.STEPPER -> "VALUE"
+    ControlKind.RESOLUTION -> "RESOLUTION"
     ControlKind.READONLY -> "READ ONLY"
 }
 

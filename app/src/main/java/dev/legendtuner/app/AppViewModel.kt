@@ -22,6 +22,7 @@ import dev.legendtuner.app.data.BackupInfo
 import dev.legendtuner.app.data.BackupStore
 import dev.legendtuner.app.data.ConfigDocument
 import dev.legendtuner.app.data.Control
+import dev.legendtuner.app.data.ControlKind
 import dev.legendtuner.app.data.FeralTitle
 import dev.legendtuner.app.data.FeralTitles
 import dev.legendtuner.app.data.Preset
@@ -415,7 +416,18 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         val base = title.titleCatalog ?: return
         val catalog = base.withFamily(base.family(_state.value.activeFamilyId))
         val root = title.valueRoot ?: return
-        if (current.document.value(root + catalog.pathSuffix, catalog.keyFor(control)) == null) {
+        if (control.kind == ControlKind.RESOLUTION) {
+            if (!TitleCatalogEngine.writeResolution(current.document, root, catalog, control, token)) {
+                _state.value = _state.value.copy(
+                    message = UiMessage("This file does not store ScreenW and ScreenH together; nothing was changed.", true)
+                )
+                return
+            }
+            revision++
+            _state.value = _state.value.copy(dirty = true, revision = revision)
+            return
+        }
+        if (current.document.value(root + catalog.pathFor(control), catalog.keyFor(control)) == null) {
             _state.value = _state.value.copy(
                 message = UiMessage("${control.label} is not stored in this file, so it was left untouched.", true)
             )
