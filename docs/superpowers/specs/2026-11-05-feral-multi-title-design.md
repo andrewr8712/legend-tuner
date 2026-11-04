@@ -350,7 +350,9 @@ class CatalogEngine(val catalog: TitleCatalog) {
   uses; each `PresetVariant` stores another set under its own prefix (GRID Autosport: `gfxconfig_`,
   `gfxconfig_high_`, `gfxconfigpowersaver_`). Editing a variant writes that variant's keys; editing
   the live set writes `gfxconfig_*`. `nameKey` (`gfxconfig_preset_name`) is shown as the active
-  preset name and is not a control. No mirroring until on-device behaviour is confirmed.
+  preset name and is not a control. Android also carries two `gfxconfig_default_*` hints
+  (`gfxconfig_default_preset_name`, `gfxconfig_default_multisampling`); they are ordinary values,
+  not a third variant. No mirroring until on-device behaviour is confirmed.
 - `Suffixed` — a control's registry name is `name + suffix` (`""`, `_battery`, `_graphics`);
   `Target.Suffix` selects which one the editor is showing; no mirroring.
 
@@ -359,8 +361,8 @@ Preset models and value shapes, with what each rests on:
 | Title | Model | Value shape | Basis |
 |---|---|---|---|
 | GRID Legends | `Blocks(BatterySaver, Graphics, Performance)` | `"1, 1, 1"` integer triples | Android sample in the repo; mirroring verified |
-| GRID Autosport | `Prefixed("gfxconfig_", [High, Power saver])`, `nameKey = gfxconfig_preset_name` | string enums (`ultra`, `high`, `off`, `8xmsaa`, `custom`) | public Switch 1.10.1 file; **Android key set still to verify** |
-| Alien: Isolation | `None`, flat `VideoSetting_*` + `_Visible` | integers with `_Visible` gates | public Switch 1.1.1 file; **Android key set still to verify** |
+| GRID Autosport | `Prefixed("gfxconfig_", [High, Power saver])`, `nameKey = gfxconfig_preset_name` | string enums (`ultra`, `high`, `off`, `8xmsaa`, `custom`) | Android 1.10.6 dump from the TB520FU |
+| Alien: Isolation | `None`, flat `VideoSetting_*` + `_Visible` | integers with `_Visible` gates | Android 1.4.3 dump from the TB520FU |
 | XCOM 2 | `Suffixed("", "_battery", "_graphics")` | integers, levels 0–4 | community posts only; **provisional, no full file** |
 | Railroads, Hitman BM, Lara Croft GoL/ToO | unknown | unknown | no public copy found; not guided |
 
@@ -376,6 +378,11 @@ guided on day one with a defensible set of controls instead of an invented one.
 Alien-style titles gate options behind `VideoSetting_*_Visible` flags: a control with `visibleFlag`
 set writes `1` to that value when it writes its own, because otherwise the game keeps the option
 hidden and the change looks lost. The flag is catalogue data, not a special case in the screen.
+
+The flag can also exist without its value key: on the TB520FU, `VideoSetting_Field Of View_Visible`
+is present while `VideoSetting_Field Of View` is not, because the game never materialised that
+option. A control whose value key is absent is not rendered at all — the editor never creates a
+registry value — and the visible flag is only written when the flag key itself already exists.
 
 Authoring a title is a repeatable procedure:
 
@@ -541,13 +548,15 @@ Fixtures live in `testdata/` and are all sanitised real files:
 | Fixture | Platform | Version | Source |
 |---|---|---|---|
 | `grid-legends-preferences-sample.xml` | Android | 1.1.5 | existing repo sample |
-| `grid-autosport-preferences-sample.xml` | Switch | 1.10.1 | public pastebin copy |
-| `alien-isolation-preferences-sample.xml` | Switch | 1.1.1 | public GBAtemp save dump |
+| `grid-autosport-preferences-sample.xml` | Android | 1.10.6 | TB520FU device dump |
+| `alien-isolation-preferences-sample.xml` | Android | 1.4.3 | TB520FU device dump |
 
-The two new fixtures are console files. Hives, key names and value domains come from the same engine,
-but an Android build can add or drop keys (touch controls, Android-only setup values). The fixture is
-the schema baseline, not proof of the Android key set: every catalogue key must be re-checked against
-an Android file before the title ships.
+All three fixtures are Android dumps. Console dumps of the same two titles were used during early
+discovery and are not committed: the key sets differ materially. GRID Autosport's Android `Setup`
+carries 608 values against 540 on Switch, adding touch/virtual-pad keys, DLC enable flags and
+Android-only setup values while dropping console-only ones; Alien's Android `Setup` carries 160
+against 97, with different `VideoSetting_*` coverage. The Android file is the only catalogue
+baseline.
 
 Samples are sanitised before commit: `FeralAnalyticsInstallID` and hardware identifiers are replaced;
 every key, type and value shape is kept so the fixture still exercises the real schema. A catalogue
@@ -639,7 +648,7 @@ primary experience for non-GRID games. That correction is why the catalogue, `Co
    allowed alongside a privileged session, no force-stop.
 5. **Unparseable but present file.** A session-local `PRESENT_UNUSABLE` card state, set only after
    an open attempt fails. Discovery still never reads file contents.
-6. **Public samples.** GRID Autosport and Alien: Isolation catalogues are authored from public
-   Switch dumps because no Android copies are published and the tablet was unreachable. Both are
-   marked for Android key verification before release; a title stays in `CANDIDATES` until that
-   check passes.
+6. **Sample sources.** Public console dumps gave the first GRID Autosport and Alien schema, but the
+   committed fixtures are Android dumps pulled from the TB520FU once it was reachable. The key sets
+   differ enough (touch/virtual-pad keys, DLC flags, console-only settings) that catalogues key off
+   the Android files only.

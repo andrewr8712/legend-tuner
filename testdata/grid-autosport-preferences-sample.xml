@@ -21,34 +21,54 @@
             <key name="Feral Interactive">
                 <key name="GRID Autosport">
                     <key name="Setup">
-                        <value name="30FPSMenu3DRender" type="integer">1</value>
+                        <value name="30FPSMenu3DRender" type="integer">0</value>
                         <value name="AddSteamCloudAlias" type="integer">1</value>
+                        <value name="AllowAutorotate" type="integer">1</value>
                         <value name="AllowPausing" type="integer">1</value>
                         <value name="AllowPerformanceMode" type="integer">1</value>
+                        <value name="AllowSendCrashReports" type="integer">0</value>
                         <value name="AllowSendUsageData" type="integer">0</value>
+                        <value name="BufferedPacketData" type="binary">752f94d2e2d16b8e4a4ab093cc62dfd46582d656e451e5f32fff8981593fe3f85454ac1c65814e011ebda02703f6590ff2836a21f57b6712c6f6b67f7cde8618a9e3886a243031239b5bf5a9dee95e3582dfbf407d8f0637625e9563dbe05041506b3d3bc6a4e64de00b9c581d2e606753ce66afcf03cf695f8aed70651a026b5f8aed70651a026ba9e3886a24303123506b3d3bc6a4e64d9b5bf5a9dee95e3553ce66afcf03cf69e00b9c581d2e60676582d656e451e5f3c6f6b67f7cde8618752f94d2e2d16b8e4a4ab093cc62dfd41ebda02703f6590f2fff8981593fe3f882dfbf407d8f0637625e9563dbe05041f2836a21f57b67125454ac1c65814e01</value>
                         <value name="CapPauseMenuLuminance" type="integer">1</value>
-                        <value name="CardRenderer" type="string">unknown 0MB</value>
+                        <value name="CardRenderer" type="string">Test GPU</value>
                         <value name="CharacterIgnoresHandsIK" type="integer">1</value>
                         <value name="CommandLineText" type="string" />
-                        <value name="CompressDXTOnGPU" type="integer">1</value>
                         <value name="ConsoleUIScale" type="binary">000000000000e83f</value>
                         <value name="ConstrainLiveWindowResize" type="integer">1</value>
+                        <value name="CrowdBillboardDenominator" type="binary">0000000000000040</value>
+                        <value name="CullDistantCarCharacters" type="integer">1</value>
+                        <value name="CurrentArrowTouchMode" type="integer">4</value>
+                        <value name="CurrentTiltMode" type="integer">0</value>
+                        <value name="CurrentWheelTouchMode" type="integer">2</value>
                         <value name="DeclineSendUsageDataAnalyticsSent" type="integer">1</value>
+                        <value name="DelayedVFSInit" type="integer">1</value>
                         <value name="DisableDynamicEnvMapMSAA" type="integer">1</value>
                         <value name="DisableMainMenuReflections" type="integer">1</value>
                         <value name="DisableOSShortcuts" type="integer">1</value>
                         <value name="DisablePlayerWindshieldRendering" type="integer">1</value>
                         <value name="DisableSafetyLevelFilter" type="integer">1</value>
-                        <value name="DisableWallPhysics" type="integer">1</value>
-                        <value name="DisableWindshieldDashboardReflections" type="integer">1</value>
                         <value name="DoneMinOS" type="integer">0</value>
                         <value name="DonePromotional" type="integer">0</value>
                         <value name="DoneUnsupported" type="integer">0</value>
-                        <value name="EnableBoost" type="integer">0</value>
-                        <value name="EnableFXAA3" type="integer">1</value>
+                        <value name="Enable.DLC.BestOfBritish" type="integer">1</value>
+                        <value name="Enable.DLC.BlackEdition" type="integer">1</value>
+                        <value name="Enable.DLC.Coupe" type="integer">1</value>
+                        <value name="Enable.DLC.DLC_and" type="integer">1</value>
+                        <value name="Enable.DLC.Drag_and" type="integer">1</value>
+                        <value name="Enable.DLC.RoadAndTrack" type="integer">1</value>
+                        <value name="Enable.DLC.Sprint_and" type="integer">1</value>
+                        <value name="Enable.DLC.Touring_and" type="integer">1</value>
+                        <value name="Enable.HQTextures.Endurance" type="integer">1</value>
+                        <value name="Enable.HQTextures.HQTextures" type="integer">1</value>
+                        <value name="Enable.HQTextures.OpenWheel" type="integer">1</value>
+                        <value name="Enable.HQTextures.Party" type="integer">1</value>
+                        <value name="Enable.HQTextures.Street" type="integer">1</value>
+                        <value name="Enable.HQTextures.Touring" type="integer">1</value>
+                        <value name="Enable.HQTextures.Tuner" type="integer">1</value>
+                        <value name="EnableBoost" type="integer">1</value>
                         <value name="EnableImprovedShadowsSampling" type="integer">1</value>
-                        <value name="EnableQuickChat" type="integer">1</value>
-                        <value name="EnableSplitscreen" type="integer">1</value>
+                        <value name="EscBackButton" type="integer">1</value>
+                        <value name="ExtraContentDownloaded" type="integer">1</value>
                         <value name="FeralAccelGaugeOffsetX" type="binary">0000008019a8a4bf</value>
                         <value name="FeralAccelGaugeOffsetY" type="binary">0000000000000000</value>
                         <value name="FeralAnalyticsInstallID" type="string">SANITIZED</value>
@@ -72,8 +92,8 @@
                         <value name="FeralArrowTouchInvertFlickGearsCustom" type="integer">0</value>
                         <value name="FeralArrowTouchInvertFlickGearsPro" type="integer">0</value>
                         <value name="FeralArrowTouchInvertFlickGearsStandard" type="integer">0</value>
-                        <value name="FeralAudioDynamicRange" type="string">high</value>
-                        <value name="FeralAudioSystemEQ" type="string">flat</value>
+                        <value name="FeralAudioDynamicRange" type="string">low</value>
+                        <value name="FeralAudioSystemEQ" type="string">tv</value>
                         <value name="FeralAutoPedalsHigh" type="integer">0</value>
                         <value name="FeralAutoPedalsHighDerby" type="integer">0</value>
                         <value name="FeralAutoPedalsHighDrag" type="integer">0</value>
@@ -146,20 +166,37 @@
                         <value name="FeralEnableReplayKit" type="integer">0</value>
                         <value name="FeralEnableRuntimeASTCCompression" type="integer">1</value>
                         <value name="FeralEnableUI" type="integer">1</value>
+                        <value name="FeralExpertAIAssist" type="integer">0</value>
+                        <value name="FeralFlattenTonemapTexture" type="integer">0</value>
+                        <value name="FeralFlickRecogniserAntiClockwiseClockwiseStartDeviation" type="binary">b81e85eb51b89e3f</value>
+                        <value name="FeralFlickRecogniserAntiClockwiseOutwardTimeout" type="binary">333333333333d33f</value>
+                        <value name="FeralFlickRecogniserAntiClockwiseRequiredDeviation" type="binary">333333333333d33f</value>
+                        <value name="FeralFlickRecogniserAntiClockwiseReturnThreshold" type="binary">333333333333c33f</value>
+                        <value name="FeralFlickRecogniserAntiClockwiseReturnTime" type="binary">333333333333d33f</value>
+                        <value name="FeralFlickRecogniserAntiClockwiseStartDeviation" type="binary">b81e85eb51b89e3f</value>
+                        <value name="FeralFlickRecogniserAntiClockwiseStartTime" type="binary">0000000000000000</value>
+                        <value name="FeralFlickRecogniserClockwiseOutwardTimeout" type="binary">333333333333d33f</value>
+                        <value name="FeralFlickRecogniserClockwiseRequiredDeviation" type="binary">000000000000d03f</value>
+                        <value name="FeralFlickRecogniserClockwiseReturnThreshold" type="binary">9a9999999999c93f</value>
+                        <value name="FeralFlickRecogniserClockwiseReturnTime" type="binary">333333333333d33f</value>
+                        <value name="FeralFlickRecogniserClockwiseStartTime" type="binary">0000000000000000</value>
+                        <value name="FeralFlickRecogniserHistoryCutoff" type="binary">000000000000f03f</value>
+                        <value name="FeralFlickRecogniserMinGestureSpeedFactor" type="binary">0000000000000840</value>
+                        <value name="FeralFlickRecogniserOppDirectionCooldown" type="binary">000000000000e03f</value>
+                        <value name="FeralFlickRecogniserSameDirectionCooldown" type="binary">0000000000000000</value>
                         <value name="FeralFPSCap" type="binary">000000000000f0bf</value>
                         <value name="FeralFXAAEdgeDetection" type="binary">000000000000d03f</value>
                         <value name="FeralFXAASmoothing" type="integer">1</value>
                         <value name="FeralGamepadDeadzone" type="binary">0000000000000000</value>
                         <value name="FeralGamepadNonLinearity" type="binary">000000403333e33f</value>
                         <value name="FeralGamepadSaturation" type="binary">000000000000e03f</value>
-                        <value name="FeralGamepadSensitivity" type="integer">1</value>
                         <value name="FeralGaugeTargetSize" type="binary">0000000000003440</value>
-                        <value name="FeralGyroCamFollowRate" type="binary">0000000000002440</value>
-                        <value name="FeralGyroCamLimitFollowRate" type="integer">1</value>
+                        <value name="FeralGyroCamFollowRate" type="binary">0000000000804640</value>
+                        <value name="FeralGyroCamLimitFollowRate" type="integer">0</value>
                         <value name="FeralGyroCamProFollowRate" type="binary">00000000bde92140</value>
                         <value name="FeralGyroCamProLimitFollowRate" type="integer">0</value>
                         <value name="FeralGyroCamProSaturation" type="binary">0000002016b24440</value>
-                        <value name="FeralGyroCamSaturation" type="binary">0000000000002440</value>
+                        <value name="FeralGyroCamSaturation" type="binary">0000000000804340</value>
                         <value name="FeralHapticEnableFeedback1" type="integer">1</value>
                         <value name="FeralHapticEnableFeedback2" type="integer">0</value>
                         <value name="FeralHapticFeedback" type="integer">1</value>
@@ -185,7 +222,7 @@
                         <value name="FeralPreserveGripOnBrakingVeryLowDerby" type="integer">1</value>
                         <value name="FeralPreserveGripOnBrakingVeryLowDrag" type="integer">1</value>
                         <value name="FeralPreserveGripOnBrakingVeryLowDrift" type="integer">1</value>
-                        <value name="FeralSplitscreenFPSCap" type="binary">0000000000003e40</value>
+                        <value name="FeralSplitscreenFPSCap" type="binary">000000000000f0bf</value>
                         <value name="FeralThrottleAssistEnabled" type="integer">0</value>
                         <value name="FeralThrottleAssistEnabledHigh" type="integer">1</value>
                         <value name="FeralThrottleAssistEnabledHighDerby" type="integer">1</value>
@@ -363,6 +400,7 @@
                         <value name="FeralTouchSensitivity" type="integer">85</value>
                         <value name="FeralTouchWheelRatio" type="binary">000000000000e83f</value>
                         <value name="FeralTrailerMode" type="integer">0</value>
+                        <value name="FeralUIResolutionWarningThreshold" type="integer">3686400</value>
                         <value name="FeralUseFXAA" type="integer">0</value>
                         <value name="FeralVeryEasyAICatchupModifierHigh" type="binary">666666666666e63f</value>
                         <value name="FeralVeryEasyAICatchupModifierHighDerby" type="binary">666666666666e63f</value>
@@ -417,44 +455,44 @@
                         <value name="FeralWheelTouchForceTouchPro" type="integer">0</value>
                         <value name="FeralWheelTouchForceTouchStandard" type="integer">0</value>
                         <value name="FeralWheelTouchGearControl" type="integer">0</value>
-                        <value name="FeralWheelTouchGearControlCustom" type="integer">0</value>
                         <value name="FeralWheelTouchInvertFlickGears" type="integer">0</value>
                         <value name="FeralWheelTouchInvertFlickGearsCustom" type="integer">0</value>
                         <value name="FeralWheelTouchInvertFlickGearsPro" type="integer">0</value>
                         <value name="FeralWheelTouchInvertFlickGearsStandard" type="integer">0</value>
+                        <value name="FixedScreenHeight" type="integer">1080</value>
+                        <value name="FlickRecogniserVer" type="integer">1</value>
                         <value name="ForcePerformanceModeInMenus" type="integer">1</value>
                         <value name="FullScreen" type="integer">1</value>
-                        <value name="FXAA3EdgeThreshold" type="binary">000000000000c03f</value>
-                        <value name="FXAA3EdgeThresholdMin" type="binary">000000000000b03f</value>
-                        <value name="FXAA3Quality" type="integer">39</value>
-                        <value name="FXAA3Subpixel" type="binary">cdcccccccccce43f</value>
-                        <value name="GameInstallVersion" type="integer">17432832</value>
-                        <value name="GameInstallVersionString" type="string">GRID™ Autosport v1.10.1</value>
-                        <value name="GameInstallVersionWithStages" type="integer">27361280</value>
-                        <value name="GameOptionsDialogShouldShow" type="integer">1</value>
+                        <value name="GameInstallVersion" type="integer">17434112</value>
+                        <value name="GameInstallVersionString" type="string">GRID™ Autosport v1.10.6</value>
+                        <value name="GameInstallVersionWithStages" type="integer">27688960</value>
+                        <value name="GameOptionsDialogShouldShow" type="integer">0</value>
+                        <value name="GameOptionsDialogShown" type="integer">1</value>
                         <value name="GameSelected" type="integer">1</value>
-                        <value name="GameVersionNew" type="integer">17432832</value>
-                        <value name="GameVersionString" type="string">GRID™ Autosport v1.10.1</value>
-                        <value name="gfxconfig_advanced_fog" type="string">on</value>
+                        <value name="GameVersionNew" type="integer">17434112</value>
+                        <value name="GameVersionString" type="string">GRID™ Autosport v1.10.6</value>
+                        <value name="gfxconfig_advanced_fog" type="string">off</value>
                         <value name="gfxconfig_advanced_lighting" type="string">off</value>
-                        <value name="gfxconfig_ai_count" type="string">high</value>
-                        <value name="gfxconfig_anisotropic_filtering" type="string">ultra</value>
+                        <value name="gfxconfig_ai_count" type="string">low</value>
+                        <value name="gfxconfig_anisotropic_filtering" type="string">high</value>
                         <value name="gfxconfig_avsm" type="string">off</value>
                         <value name="gfxconfig_car_reflection" type="string">high</value>
                         <value name="gfxconfig_cloth" type="string">high</value>
-                        <value name="gfxconfig_crowd" type="string">ultra</value>
-                        <value name="gfxconfig_dynamic_ambient_occ" type="string">ultra</value>
+                        <value name="gfxconfig_crowd" type="string">low</value>
+                        <value name="gfxconfig_default_multisampling" type="string">off</value>
+                        <value name="gfxconfig_default_preset_name" type="string">ultralow</value>
+                        <value name="gfxconfig_dynamic_ambient_occ" type="string">low</value>
                         <value name="gfxconfig_dynamic_ambient_occ_soft" type="string">off</value>
-                        <value name="gfxconfig_global_illumination" type="string">on</value>
-                        <value name="gfxconfig_groundCover" type="string">ultra</value>
+                        <value name="gfxconfig_global_illumination" type="string">off</value>
+                        <value name="gfxconfig_groundCover" type="string">off</value>
                         <value name="gfxconfig_high_advanced_fog" type="string">off</value>
                         <value name="gfxconfig_high_advanced_lighting" type="string">off</value>
                         <value name="gfxconfig_high_ai_count" type="string">low</value>
-                        <value name="gfxconfig_high_anisotropic_filtering" type="string">high</value>
+                        <value name="gfxconfig_high_anisotropic_filtering" type="string">off</value>
                         <value name="gfxconfig_high_avsm" type="string">off</value>
                         <value name="gfxconfig_high_car_reflection" type="string">low</value>
                         <value name="gfxconfig_high_cloth" type="string">high</value>
-                        <value name="gfxconfig_high_crowd" type="string">ultralow</value>
+                        <value name="gfxconfig_high_crowd" type="string">low</value>
                         <value name="gfxconfig_high_dynamic_ambient_occ" type="string">low</value>
                         <value name="gfxconfig_high_dynamic_ambient_occ_soft" type="string">off</value>
                         <value name="gfxconfig_high_global_illumination" type="string">off</value>
@@ -467,8 +505,8 @@
                         <value name="gfxconfig_high_objects" type="string">medium</value>
                         <value name="gfxconfig_high_particles" type="string">low</value>
                         <value name="gfxconfig_high_second_screen" type="string">low</value>
-                        <value name="gfxconfig_high_shaders" type="string">medium</value>
-                        <value name="gfxconfig_high_shadows" type="string">low</value>
+                        <value name="gfxconfig_high_shaders" type="string">ultralow</value>
+                        <value name="gfxconfig_high_shadows" type="string">ultralow</value>
                         <value name="gfxconfig_high_skidmarks" type="string">on</value>
                         <value name="gfxconfig_high_textures" type="string">high</value>
                         <value name="gfxconfig_high_track" type="string">medium</value>
@@ -476,30 +514,31 @@
                         <value name="gfxconfig_high_vehicles" type="string">low</value>
                         <value name="gfxconfig_high_voice_count" type="string">low</value>
                         <value name="gfxconfig_high_water" type="string">low</value>
+                        <value name="gfxconfig_high_window_scale" type="integer">80</value>
                         <value name="gfxconfig_intel_aoit" type="string">off</value>
-                        <value name="gfxconfig_max_fps" type="integer">60</value>
-                        <value name="gfxconfig_mirrors" type="string">ultra</value>
-                        <value name="gfxconfig_multisampling" type="string">8xmsaa</value>
-                        <value name="gfxconfig_night_lighting" type="string">ultra</value>
-                        <value name="gfxconfig_objects" type="string">high</value>
-                        <value name="gfxconfig_particles" type="string">high</value>
+                        <value name="gfxconfig_max_fps" type="integer">30</value>
+                        <value name="gfxconfig_mirrors" type="string">off</value>
+                        <value name="gfxconfig_multisampling" type="string">4xmsaa</value>
+                        <value name="gfxconfig_night_lighting" type="string">medium</value>
+                        <value name="gfxconfig_objects" type="string">medium</value>
+                        <value name="gfxconfig_particles" type="string">low</value>
                         <value name="gfxconfig_preset_name" type="string">custom</value>
                         <value name="gfxconfig_second_screen" type="string">low</value>
-                        <value name="gfxconfig_shaders" type="string">high</value>
-                        <value name="gfxconfig_shadows" type="string">ultra</value>
+                        <value name="gfxconfig_shaders" type="string">medium</value>
+                        <value name="gfxconfig_shadows" type="string">medium</value>
                         <value name="gfxconfig_skidmarks" type="string">on</value>
                         <value name="gfxconfig_textures" type="string">high</value>
-                        <value name="gfxconfig_track" type="string">high</value>
-                        <value name="gfxconfig_trees" type="string">high</value>
-                        <value name="gfxconfig_vehicles" type="string">high</value>
+                        <value name="gfxconfig_track" type="string">medium</value>
+                        <value name="gfxconfig_trees" type="string">medium</value>
+                        <value name="gfxconfig_vehicles" type="string">medium</value>
                         <value name="gfxconfig_voice_count" type="string">low</value>
-                        <value name="gfxconfig_water" type="string">ultra</value>
+                        <value name="gfxconfig_water" type="string">low</value>
                         <value name="gfxconfigpowersaver_advanced_fog" type="string">off</value>
                         <value name="gfxconfigpowersaver_advanced_lighting" type="string">off</value>
                         <value name="gfxconfigpowersaver_ai_count" type="string">low</value>
                         <value name="gfxconfigpowersaver_anisotropic_filtering" type="string">low</value>
                         <value name="gfxconfigpowersaver_avsm" type="string">off</value>
-                        <value name="gfxconfigpowersaver_car_reflection" type="string">low</value>
+                        <value name="gfxconfigpowersaver_car_reflection" type="string">high</value>
                         <value name="gfxconfigpowersaver_cloth" type="string">high</value>
                         <value name="gfxconfigpowersaver_crowd" type="string">ultralow</value>
                         <value name="gfxconfigpowersaver_dynamic_ambient_occ" type="string">ultralow</value>
@@ -512,7 +551,7 @@
                         <value name="gfxconfigpowersaver_multisampling" type="string">off</value>
                         <value name="gfxconfigpowersaver_night_lighting" type="string">low</value>
                         <value name="gfxconfigpowersaver_objects" type="string">medium</value>
-                        <value name="gfxconfigpowersaver_particles" type="string">low</value>
+                        <value name="gfxconfigpowersaver_particles" type="string">off</value>
                         <value name="gfxconfigpowersaver_preset_name" type="string">custom</value>
                         <value name="gfxconfigpowersaver_second_screen" type="string">low</value>
                         <value name="gfxconfigpowersaver_shaders" type="string">ultralow</value>
@@ -521,9 +560,15 @@
                         <value name="gfxconfigpowersaver_textures" type="string">high</value>
                         <value name="gfxconfigpowersaver_track" type="string">medium</value>
                         <value name="gfxconfigpowersaver_trees" type="string">medium</value>
-                        <value name="gfxconfigpowersaver_vehicles" type="string">low</value>
+                        <value name="gfxconfigpowersaver_vehicles" type="string">medium</value>
                         <value name="gfxconfigpowersaver_voice_count" type="string">low</value>
                         <value name="gfxconfigpowersaver_water" type="string">low</value>
+                        <value name="gfxconfigpowersaver_window_scale" type="integer">80</value>
+                        <value name="HapticDeviceStrength" type="string">0.4</value>
+                        <value name="HapticDeviceStrength_google" type="string">0.3</value>
+                        <value name="HapticDeviceStrength_samsung" type="string">0.3</value>
+                        <value name="HelpScreenMinimumWidthInches" type="integer">4</value>
+                        <value name="HelpScreenReferenceDPI" type="integer">150</value>
                         <value name="LiveWindowResizePercentage" type="integer">25</value>
                         <value name="LiveWindowResizeThreshold" type="integer">3</value>
                         <value name="MaxFramesPerSecond" type="integer">0</value>
@@ -531,78 +576,98 @@
                         <value name="MinWindowedWidth" type="integer">400</value>
                         <value name="MobileGraphicBoost" type="integer">1</value>
                         <value name="MobileParticlesLevel" type="integer">0</value>
+                        <value name="MobileShaderBoost" type="integer">0</value>
                         <value name="MultisampleResolveOnStoreEnabled" type="integer">1</value>
-                        <value name="OnlineUsernameChosen" type="integer">0</value>
+                        <value name="NextReviewPrompt" type="integer">30</value>
+                        <value name="NonInteractiveCrashReporter" type="integer">0</value>
                         <value name="OptimizeLoadStoreActions" type="integer">1</value>
+                        <value name="OverrideInterferenceEffect" type="integer">1</value>
                         <value name="PauseMoviesOnPause" type="integer">1</value>
                         <value name="PauseOnSuspend" type="integer">1</value>
                         <value name="PauseSoundOnPause" type="integer">1</value>
                         <value name="PauseTimersOnPause" type="integer">1</value>
+                        <value name="RenderUnderNotch" type="integer">1</value>
+                        <value name="RestartRequired" type="integer">0</value>
+                        <value name="ScaleOrnamentLOD" type="integer">0</value>
+                        <value name="ScreenDensityMax" type="integer">320</value>
                         <value name="ScreenH" type="integer">1080</value>
-                        <value name="ScreenW" type="integer">1920</value>
-                        <value name="SeenSpecificationAlertUUIDSwitchDefaultSpecificationsClass181RC1" type="integer">1</value>
+                        <value name="ScreenW" type="integer">1728</value>
+                        <value name="SeenSpecificationAlertUUIDAdreno750HardwareSpecifications_1_10_5RC1" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDDefaultDeadzone16rc2" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDDefaultHardwareSpecification_1_10_5RC1" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDDisableCrashReportPopUp161RC1" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDhaptic_device_strength_19R30" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDhighmemory_load_times_16RC7" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDInitialReviewCount147rc4" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDSetFeralTestServerMPPatch" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDUnsupportedDevice_1_10_10_RC4spec" type="integer">1</value>
                         <value name="SeenVersion122Update" type="integer">1</value>
                         <value name="ShadowBias" type="string">0.0004</value>
-                        <value name="ShadowMaskDivisor" type="integer">0</value>
-                        <value name="ShouldPrioritiseLobbyStateInSearches" type="integer">1</value>
-                        <value name="ShowAnalyticsMenuItem" type="integer">0</value>
-                        <value name="ShowFeralGUI" type="integer">1</value>
-                        <value name="SkipEnvMapNegativeYFace" type="integer">1</value>
-                        <value name="SpecificationFirstLaunchCheck" type="integer">0</value>
-                        <value name="SpecificationUpdateURL" type="string">https://u1.feralinteractive.com/autoupdate/gridautosport/specifications_switch_1_10_1.xml</value>
+                        <value name="ShadowMaskDivisor" type="integer">2</value>
+                        <value name="ShouldIgnoreUnsupportedAspect" type="integer">1</value>
+                        <value name="ShowFeralGUI" type="integer">0</value>
+                        <value name="SpecificationFirstLaunchCheck" type="integer">1</value>
+                        <value name="SpecificationLastUpdateCheckTime" type="binary">7078eb6a00000000</value>
+                        <value name="SpecificationUpdateURL" type="string">https://u1.feralinteractive.com/autoupdate/gridautosport/specifications_android_1_10_6.xml</value>
                         <value name="SuperSampleBase" type="integer">8</value>
+                        <value name="SuperSampleLevel" type="integer">8</value>
                         <value name="SuperSampleScale" type="integer">8</value>
+                        <value name="ThreadedASTCEncoding" type="integer">1</value>
+                        <value name="TouchUIDeadZone" type="integer">5</value>
                         <value name="UIReduceTextShadow" type="integer">1</value>
                         <value name="UltraLowInterior" type="integer">1</value>
                         <value name="UpdateServerDomain" type="string">u1.feralinteractive.com</value>
                         <value name="UpdateServerPath" type="string">/autoupdate/</value>
                         <value name="UpdateServerProtocol" type="string">https://</value>
+                        <value name="Use3DWarmerAnalytics" type="integer">0</value>
+                        <value name="UseDriveSaveSync" type="integer">1</value>
+                        <value name="UseGoogleSignIn" type="integer">1</value>
+                        <value name="UseMultipleGestureRecognisers" type="integer">1</value>
                         <value name="UseOfflineEvents" type="integer">1</value>
                         <value name="UseUltraLowBloomPrePass" type="integer">1</value>
                         <value name="UseUltraLowParticlesBlending" type="integer">1</value>
                         <value name="WideProximityCockpitCamera" type="integer">1</value>
+                        <value name="WwisePluginSafetyFixes" type="integer">1</value>
+                        <value name="WwiseSoundBundlePluginSoundCutFix" type="integer">1</value>
                         <key name="DynamicResolutionScaling">
                             <value name="CPUFrameTimeSmoothing" type="integer">10</value>
                             <value name="DropDelayFrames" type="integer">2</value>
                             <value name="DropTimeMargin" type="binary">000000000000f83f</value>
-                            <value name="Enable" type="integer">0</value>
-                            <value name="FastDropTimeMargin" type="binary">00000000000000c0</value>
+                            <value name="Enable" type="integer">1</value>
+                            <value name="FastDropTimeMargin" type="binary">000000000000f8bf</value>
                             <value name="FPSTarget" type="binary">0000000000003e40</value>
-                            <value name="MinScaling" type="binary">000000000000e03f</value>
-                            <value name="RaiseDelayFrames" type="integer">3</value>
-                            <value name="RaiseDelayFramesInRace" type="integer">4</value>
-                            <value name="RaiseTimeMargin" type="binary">0000000000000840</value>
-                            <value name="StepCount" type="integer">11</value>
-                            <value name="SwitchLevel10GPUClock" type="string">460MHz</value>
+                            <value name="MinScaling" type="binary">9a9999999999e93f</value>
+                            <value name="RaiseDelayFrames" type="integer">6</value>
+                            <value name="RaiseDelayFramesInRace" type="integer">120</value>
+                            <value name="RaiseTimeMargin" type="binary">000000000000f03f</value>
+                            <value name="StepCount" type="integer">5</value>
                             <value name="UseGPUTime" type="integer">1</value>
                         </key>
+                        <key name="SpecificationAlerts">
+                            <value name="ReminderToConnectUUID" type="integer">1</value>
+                        </key>
                     </key>
-                </key>
-            </key>
-            <key name="FeralNet">
-                <key name="Login">
-                    <value name="DisableAutoReauthentication" type="integer">1</value>
                 </key>
             </key>
             <key name="IndirectX">
                 <key name="Direct3D">
                     <key name="Config">
                         <value name="AllowSM5" type="integer">1</value>
-                        <value name="CompactFeralGUI" type="integer">1</value>
+                        <value name="CompactFeralGUI" type="integer">0</value>
                         <value name="DisablePositionFixup" type="integer">1</value>
                         <value name="EnableF3DWarmer" type="integer">1</value>
                         <value name="EnableIdxD3D11Threaded" type="integer">1</value>
-                        <value name="EnableLoopTransformations" type="integer">1</value>
                         <value name="EnableShaderDeduplicator" type="integer">1</value>
                         <value name="LazyShaderCreation" type="integer">1</value>
                         <value name="MaxFramesPerSecond" type="integer">60</value>
-                        <value name="NVNRenderToBackbuffer" type="integer">1</value>
-                        <value name="NVNTexturePoolSize" type="integer">32768</value>
-                        <value name="ShowFeralGUI" type="integer">1</value>
-                        <value name="UseFastFMA" type="integer">0</value>
+                        <value name="ShowFeralGUI" type="integer">0</value>
+                        <value name="UseFastFMA" type="integer">1</value>
                         <value name="UseImmediateDiscard" type="integer">1</value>
-                        <value name="UseInMemoryWarmerDB" type="integer">1</value>
                         <value name="UseSeparatePresentSubmission" type="integer">1</value>
+                        <value name="VulkanDescriptorSetCleanup" type="integer">0</value>
+                        <value name="VulkanRenderToBackbuffer" type="integer">1</value>
+                        <value name="VulkanRobustBufferAccess" type="integer">0</value>
+                        <value name="VulkanUseSeparateSubmitThread" type="integer">1</value>
                     </key>
                 </key>
                 <key name="DirectInput">
@@ -618,6 +683,14 @@
                     <value name="InitialWindowBackgroundColor" type="integer">-16777216</value>
                 </key>
             </key>
+            <key name="SystemMonitor">
+                <key name="Config">
+                    <value name="AppVersion" type="integer">17434112</value>
+                    <value name="Backgrounded" type="integer">1</value>
+                    <value name="OSVersion" type="string">17.0</value>
+                    <value name="QuitIntentional" type="integer">1</value>
+                </key>
+            </key>
         </key>
     </key>
     <key name="HKEY_LOCAL_MACHINE">
@@ -626,22 +699,52 @@
                 <key name="System">
                     <key name="CentralProcessor">
                         <key name="0">
-                            <value name="Identifier" type="string">SANITIZED-CPU</value>
-                            <value name="ProcessorNameString" type="string">SANITIZED-CPU</value>
-                            <value name="VendorIdentifier" type="string">ARM</value>
-                            <value name="~MHz" type="integer">1020</value>
+                            <value name="Identifier" type="string" />
+                            <value name="ProcessorNameString" type="string" />
+                            <value name="VendorIdentifier" type="string" />
+                            <value name="~MHz" type="integer">2265</value>
                         </key>
                         <key name="1">
-                            <value name="Identifier" type="string">SANITIZED-CPU</value>
-                            <value name="ProcessorNameString" type="string">SANITIZED-CPU</value>
-                            <value name="VendorIdentifier" type="string">ARM</value>
-                            <value name="~MHz" type="integer">1020</value>
+                            <value name="Identifier" type="string" />
+                            <value name="ProcessorNameString" type="string" />
+                            <value name="VendorIdentifier" type="string" />
+                            <value name="~MHz" type="integer">2265</value>
                         </key>
                         <key name="2">
-                            <value name="Identifier" type="string">SANITIZED-CPU</value>
-                            <value name="ProcessorNameString" type="string">SANITIZED-CPU</value>
-                            <value name="VendorIdentifier" type="string">ARM</value>
-                            <value name="~MHz" type="integer">1020</value>
+                            <value name="Identifier" type="string" />
+                            <value name="ProcessorNameString" type="string" />
+                            <value name="VendorIdentifier" type="string" />
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="3">
+                            <value name="Identifier" type="string" />
+                            <value name="ProcessorNameString" type="string" />
+                            <value name="VendorIdentifier" type="string" />
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="4">
+                            <value name="Identifier" type="string" />
+                            <value name="ProcessorNameString" type="string" />
+                            <value name="VendorIdentifier" type="string" />
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="5">
+                            <value name="Identifier" type="string" />
+                            <value name="ProcessorNameString" type="string" />
+                            <value name="VendorIdentifier" type="string" />
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="6">
+                            <value name="Identifier" type="string" />
+                            <value name="ProcessorNameString" type="string" />
+                            <value name="VendorIdentifier" type="string" />
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="7">
+                            <value name="Identifier" type="string" />
+                            <value name="ProcessorNameString" type="string" />
+                            <value name="VendorIdentifier" type="string" />
+                            <value name="~MHz" type="integer">2265</value>
                         </key>
                     </key>
                 </key>
