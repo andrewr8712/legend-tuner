@@ -173,6 +173,18 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun openMissingTitle(title: FeralTitle) {
+        _state.value = _state.value.copy(
+            loading = false,
+            activeTitle = title,
+            activeFamilyId = null,
+            manualFile = true,
+            setupVisible = true,
+            showAccessSheet = false,
+            message = null
+        )
+    }
+
     fun backToPicker() {
         loaded = null
         _state.value = _state.value.copy(
@@ -343,7 +355,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     private suspend fun importUri(uri: Uri, silent: Boolean): Boolean {
         return try {
-            _state.value = _state.value.copy(activeTitle = null, manualFile = true)
+            _state.value = _state.value.copy(manualFile = true)
             val flags = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
             runCatching { app.contentResolver.takePersistableUriPermission(uri, flags) }
                 .onFailure { runCatching { app.contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION) } }

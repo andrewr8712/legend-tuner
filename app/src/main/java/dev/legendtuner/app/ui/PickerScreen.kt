@@ -48,6 +48,7 @@ fun PickerScreen(
     state: AppState,
     wide: Boolean,
     onOpenTitle: (FeralTitle) -> Unit,
+    onOpenMissing: (FeralTitle) -> Unit,
     onOpenFile: () -> Unit,
     onOpenAccess: () -> Unit,
     onRefresh: () -> Unit
@@ -154,7 +155,10 @@ fun PickerScreen(
                 Column {
                     missing.forEachIndexed { index, status ->
                         Row(
-                            Modifier.fillMaxWidth().padding(horizontal = 15.dp, vertical = 12.dp),
+                            Modifier
+                                .fillMaxWidth()
+                                .clickable { onOpenMissing(status.title) }
+                                .padding(horizontal = 15.dp, vertical = 12.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Box(
@@ -170,7 +174,7 @@ fun PickerScreen(
                             Column(Modifier.weight(1f)) {
                                 Text(status.title.label, style = MaterialTheme.typography.bodyMedium, color = Muted)
                                 Text(
-                                    "Install and launch once to edit",
+                                    "Not installed · tap to open a saved file",
                                     style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp),
                                     color = Dim
                                 )

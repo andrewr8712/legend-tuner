@@ -158,6 +158,7 @@ fun LegendTunerApp(
                         state = state,
                         wide = twoColumns,
                         onOpenTitle = viewModel::openTitle,
+                        onOpenMissing = viewModel::openMissingTitle,
                         onOpenFile = pickManual,
                         onOpenAccess = viewModel::openAccessSheet,
                         onRefresh = viewModel::refreshTitleStatuses

@@ -86,7 +86,11 @@ fun DashboardScreen(
         PageHeader(
             crumb = "Config Tuner / Dashboard",
             title = "Dashboard",
-            subtitle = if (state.gameInstalled) "GRID Legends detected on this tablet" else "GRID Legends is not installed",
+            subtitle = when {
+                state.manualFile -> "Editing an imported preferences file"
+                state.gameInstalled -> "GRID Legends detected on this tablet"
+                else -> "GRID Legends is not installed"
+            },
             mode = state.accessMode,
             onSettings = onOpenAccess,
             actions = {

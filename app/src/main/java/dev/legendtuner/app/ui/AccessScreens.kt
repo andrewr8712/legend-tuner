@@ -58,6 +58,10 @@ fun SetupScreen(
     onPickManual: () -> Unit,
     onConnectDirect: () -> Unit
 ) {
+    val installed = state.titleStatuses
+        .firstOrNull { it.title.id == state.activeTitle?.id }
+        ?.installed
+        ?: state.gameInstalled
     Column(
         Modifier
             .fillMaxSize()
@@ -77,10 +81,6 @@ fun SetupScreen(
                     color = Lime
                 )
             }
-            val installed = state.titleStatuses
-                .firstOrNull { it.title.id == state.activeTitle?.id }
-                ?.installed
-                ?: state.gameInstalled
             StatusChip(if (installed) "Game installed" else "Game not detected", lime = installed)
         }
         Spacer(Modifier.height(30.dp))
@@ -96,6 +96,15 @@ fun SetupScreen(
             color = Muted,
             modifier = Modifier.widthIn(max = 720.dp)
         )
+        if (!installed) {
+            Spacer(Modifier.height(10.dp))
+            Text(
+                "${state.activeLabel} is not installed on this tablet. Tap Manual file to open a preferences file from a backup or another device — edits save straight back to it.",
+                style = MaterialTheme.typography.bodyMedium.copy(fontSize = 11.sp, lineHeight = 17.sp),
+                color = Amber,
+                modifier = Modifier.widthIn(max = 720.dp)
+            )
+        }
         Spacer(Modifier.height(18.dp))
         Surface(
             color = BgElevated,
