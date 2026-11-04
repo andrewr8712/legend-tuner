@@ -236,11 +236,12 @@ fun LegendTunerApp(
                                 }
                                 AppDestination.EDITOR -> {
                                     val title = state.activeTitle
-                                    if (title?.titleCatalog != null && title.registryRoot != null) {
+                                    val valueRoot = title?.valueRoot
+                                    if (title?.titleCatalog != null && valueRoot != null) {
                                         TitleEditorScreen(
                                             state = state,
                                             catalog = title.titleCatalog,
-                                            root = title.registryRoot,
+                                            root = valueRoot,
                                             dockedInspector = dockedInspector,
                                             twoColumns = twoColumns,
                                             onSelect = viewModel::selectSetting,

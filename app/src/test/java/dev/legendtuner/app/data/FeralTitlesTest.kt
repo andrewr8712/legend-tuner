@@ -37,8 +37,14 @@ class FeralTitlesTest {
     @Test
     fun cataloguedTitlesAreGuidedAndOthersAreNot() {
         val catalogued = FeralTitles.ALL.filter { it.titleCatalog != null }.map { it.id }.toSet()
-        assertEquals(setOf("grid-autosport", "alien-isolation"), catalogued)
+        assertEquals(
+            setOf(
+                "grid-autosport", "alien-isolation", "saints-row-3", "napoleon",
+                "hitman-blood-money", "lara-croft-gol", "lara-croft-too"
+            ),
+            catalogued
+        )
         assertTrue(FeralTitles.GRID_LEGENDS.guided)
-        assertFalse(FeralTitles.ALL.first { it.id == "hitman-blood-money" }.guided)
+        assertTrue(FeralTitles.ALL.all { it.guided })
     }
 }

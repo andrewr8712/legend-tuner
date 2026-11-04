@@ -12,10 +12,13 @@ data class FeralTitle(
     val label: String,
     val packageName: String,
     val registryRoot: List<String>? = null,
+    /** Where the guided controls live when it differs from [registryRoot] (both Lara titles). */
+    val controlsRoot: List<String>? = null,
     val titleCatalog: TitleCatalog? = null,
     val legacyGuided: Boolean = false
 ) {
     val guided: Boolean get() = titleCatalog != null || legacyGuided
+    val valueRoot: List<String>? get() = controlsRoot ?: registryRoot
     val monogram: String
         get() {
             val words = label.replace(Regex("[^A-Za-z0-9 ]"), " ")
@@ -53,32 +56,44 @@ object FeralTitles {
         ),
         FeralTitle(
             "saints-row-3", "Saints Row: The Third", "com.feralinteractive.saintsrow3_android",
-            listOf("HKEY_CURRENT_USER", "Software", "Feral Interactive", "Saints Row The Third", "Setup")
+            listOf("HKEY_CURRENT_USER", "Software", "Feral Interactive", "Saints Row The Third", "Setup"),
+            titleCatalog = SaintsRowCatalog.catalog
         ),
         FeralTitle(
             "napoleon", "NAPOLEON", "com.feralinteractive.napoleon_android",
             listOf(
                 "HKEY_CURRENT_USER", "Software", "The Creative Assembly Limited",
                 "Napoleon Total War - Mobile", "Setup"
-            )
+            ),
+            titleCatalog = NapoleonCatalog.catalog
         ),
         FeralTitle(
             "hitman-blood-money", "Hitman: Blood Money", "com.feralinteractive.hitmanbloodmoney_android",
-            listOf("HKEY_CURRENT_USER", "Software", "Feral Interactive", "Hitman Blood Money", "Setup")
+            listOf("HKEY_CURRENT_USER", "Software", "Feral Interactive", "Hitman Blood Money", "Setup"),
+            titleCatalog = HitmanCatalog.catalog
         ),
         FeralTitle(
             "lara-croft-gol", "Lara Croft: Guardian of Light", "com.feralinteractive.laracroftgol_android",
             listOf(
                 "HKEY_CURRENT_USER", "Software", "Feral Interactive",
                 "Lara Croft and the Guardian of Light", "Setup"
-            )
+            ),
+            controlsRoot = listOf(
+                "HKEY_CURRENT_USER", "Software", "Crystal Dynamics", "Lara Croft: GoL", "Graphics"
+            ),
+            titleCatalog = LaraGolCatalog.catalog
         ),
         FeralTitle(
             "lara-croft-too", "Lara Croft: Temple of Osiris", "com.feralinteractive.laracrofttoo_android",
             listOf(
                 "HKEY_CURRENT_USER", "Software", "Feral Interactive",
                 "Lara Croft and the Temple of Osiris", "Setup"
-            )
+            ),
+            controlsRoot = listOf(
+                "HKEY_CURRENT_USER", "Software", "Crystal Dynamics",
+                "Lara Croft and the Temple of Osiris", "Graphics"
+            ),
+            titleCatalog = LaraTooCatalog.catalog
         )
     )
 

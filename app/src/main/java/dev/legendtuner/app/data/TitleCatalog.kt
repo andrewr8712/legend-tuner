@@ -41,7 +41,9 @@ data class TitleCatalog(
     val groups: List<String>,
     val controls: List<Control>,
     val keyPrefix: String = "",
-    val stripPrefix: String = ""
+    val stripPrefix: String = "",
+    /** Keys between the title's registry root and the values, e.g. `Setup/GraphicsPreset`. */
+    val pathSuffix: List<String> = emptyList()
 ) {
     fun controlsFor(group: String): List<Control> = controls.filter { it.group == group }
 
@@ -52,7 +54,7 @@ data class TitleCatalog(
 
 object TitleCatalogEngine {
     fun value(doc: ConfigDocument, root: List<String>, catalog: TitleCatalog, control: Control): ConfigDocument.ConfigValue? =
-        doc.value(root, catalog.keyFor(control))
+        doc.value(root + catalog.pathSuffix, catalog.keyFor(control))
 
     fun token(doc: ConfigDocument, root: List<String>, catalog: TitleCatalog, control: Control): String? =
         value(doc, root, catalog, control)?.text?.trim()
@@ -66,7 +68,7 @@ object TitleCatalogEngine {
         catalog: TitleCatalog,
         control: Control,
         token: String
-    ): Boolean = doc.setValue(root, catalog.keyFor(control), token)
+    ): Boolean = doc.setValue(root + catalog.pathSuffix, catalog.keyFor(control), token)
 }
 
 private fun quality5(prefix: String = "q"): List<ControlChoice> = listOf(

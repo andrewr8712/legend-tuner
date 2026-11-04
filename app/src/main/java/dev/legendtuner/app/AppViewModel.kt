@@ -410,7 +410,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         val current = loaded ?: return
         val title = _state.value.activeTitle ?: return
         val catalog = title.titleCatalog ?: return
-        val root = title.registryRoot ?: return
+        val root = title.valueRoot ?: return
         if (current.document.value(root, catalog.keyFor(control)) == null) {
             _state.value = _state.value.copy(
                 message = UiMessage("${control.label} is not stored in this file, so it was left untouched.", true)
