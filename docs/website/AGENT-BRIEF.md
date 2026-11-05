@@ -14,7 +14,7 @@ layout, accessibility and colour decisions through the coordinator.
 
 Config Tuner is an unofficial, tablet-first Android app for editing the graphics settings of Feral
 Interactive's Android ports. It replaces hand-editing the games' plaintext XML registry with guided
-controls, validated writes, automatic backups and a raw XML fallback. It supports **17 titles** and
+controls, validated writes, automatic backups and a raw XML fallback. It supports **18 titles** and
 is distributed as a debug-signed APK through GitHub Releases.
 
 Former name: **Legend Tuner**. The package identity stayed the same between 1.1.0 and 1.2.x so debug
