@@ -17,6 +17,10 @@ keystore/*.keystore
 # Local release artifacts — distributed through GitHub Releases
 dist/
 
+# Python
+__pycache__/
+*.pyc
+
 # IDE / OS
 .DS_Store
 .idea/

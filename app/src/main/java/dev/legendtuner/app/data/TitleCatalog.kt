@@ -65,6 +65,13 @@ private fun flip(token: String): String = when (token.trim()) {
     else -> token
 }
 
+/** Maps a title's stored active-profile selector value to one of its [PresetFamily] ids. */
+data class FamilySelector(
+    val absolutePath: List<String>,
+    val key: String,
+    val tokens: Map<String, String>
+)
+
 /** One selectable setting set inside a title: a preset block, a prefix or a suffix family. */
 data class PresetFamily(
     val id: String,
@@ -90,7 +97,9 @@ data class TitleCatalog(
     val pathSuffix: List<String> = emptyList(),
     /** Path contributed by the selected preset family; engine-level controls can skip it. */
     val familyPathSuffix: List<String> = emptyList(),
-    val families: List<PresetFamily> = emptyList()
+    val families: List<PresetFamily> = emptyList(),
+    /** Optional selector that names the active family; null when the file does not expose one. */
+    val familySelector: FamilySelector? = null
 ) {
     fun controlsFor(group: String): List<Control> = controls.filter { it.group == group }
 
@@ -104,6 +113,13 @@ data class TitleCatalog(
 
     fun family(id: String?): PresetFamily? =
         families.firstOrNull { it.id == id } ?: families.firstOrNull()
+
+    /** The active family id from the stored selector, or null when it cannot be determined. */
+    fun activeFamilyId(doc: ConfigDocument): String? {
+        val selector = familySelector ?: return null
+        val raw = doc.value(selector.absolutePath, selector.key)?.text?.trim() ?: return null
+        return selector.tokens.entries.firstOrNull { it.value == raw }?.key
+    }
 
     /** Applies a preset family on top of this catalogue's base paths. */
     fun withFamily(family: PresetFamily?): TitleCatalog {

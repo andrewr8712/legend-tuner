@@ -107,6 +107,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     private val prefs = app.getSharedPreferences("legend_tuner", Context.MODE_PRIVATE)
     private val backupStore = BackupStore(app)
     private val operationMutex = Mutex()
+    private val configLoader = ConfigFileLoader()
     private val _state = MutableStateFlow(AppState())
     val state: StateFlow<AppState> = _state.asStateFlow()
 
@@ -455,56 +456,36 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     private suspend fun loadWith(access: FileAccess, silent: Boolean): Boolean {
         val title = _state.value.activeTitle
-        val label = title?.label ?: "Manual file"
         val scope = title?.id ?: MANUAL_BACKUP_SCOPE
-        val file = try {
-            access.locate()
-        } catch (e: Exception) {
-            failLoad("Could not inspect the $label preferences file: ${e.message ?: "read failed"}")
-            return false
-        }
-        if (file == null) {
-            _state.value = _state.value.copy(loading = false, connecting = false, setupVisible = true)
-            if (!silent) {
-                _state.value = _state.value.copy(
-                    message = UiMessage("The $label preferences file was not found. Launch the game once, or use manual mode.", true)
-                )
+        val result = configLoader.load(access, title)
+        if (result is ConfigLoadResult.Failure) {
+            val failure = result.failure
+            if (failure.notFound) {
+                _state.value = _state.value.copy(loading = false, connecting = false, setupVisible = true)
+                if (!silent) _state.value = _state.value.copy(message = UiMessage(failure.message, true))
+            } else {
+                failLoad(failure.message)
             }
             return false
         }
-        val bytes = try {
-            access.read(file.path)
-        } catch (e: Exception) {
-            failLoad("Could not read the $label preferences file: ${e.message ?: "read failed"}")
-            return false
-        }
-        val doc = try {
-            ConfigDocument.parse(bytes)
-        } catch (e: Exception) {
-            failLoad("Could not parse the $label preferences file: ${e.message ?: "invalid XML"}")
-            return false
-        }
-        try {
-            validateFor(doc, title)
-        } catch (e: Exception) {
-            failLoad("The $label preferences file is not valid: ${e.message ?: "validation failed"}")
-            return false
-        }
-        loaded = LoadedConfig(doc, access, file, bytes)
+        val loaded = (result as ConfigLoadResult.Success).config
+        this.loaded = loaded
         prefs.edit()
             .putString(KEY_MODE, access.mode.name)
             .apply()
-        val preset = presetFor(doc, title)
+        val preset = presetFor(loaded.document, title)
         val backups = try {
             withContext(Dispatchers.IO) { backupStore.list(scope) }
         } catch (e: Exception) {
             emptyList()
         }
+        val activeFamily = title?.titleCatalog?.activeFamilyId(loaded.document)
         revision++
         _state.value = _state.value.copy(
             loading = false,
             connecting = false,
             config = loaded,
+            activeFamilyId = activeFamily,
             selectedPreset = preset,
             selectedSettingKey = null,
             dirty = false,
@@ -678,6 +659,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             revision++
             _state.value = _state.value.copy(
                 config = loaded,
+                activeFamilyId = _state.value.activeTitle?.titleCatalog?.activeFamilyId(doc),
                 selectedPreset = presetFor(doc),
                 selectedSettingKey = null,
                 dirty = false,

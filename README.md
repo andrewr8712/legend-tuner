@@ -71,7 +71,10 @@ and can be opened from a file pulled from a backup or another device.
 - **Guided editors for all twelve titles** — grouped cards, plain-language labels, a description for
   every control, option lists with the stored key shown for provenance.
 - **Preset variants as tabs** — per-preset blocks (Saints Row, Lara Croft), prefixed families
-  (GRID Autosport) and suffixed families (Hitman) are first-class, not raw keys.
+  (GRID Autosport) and suffixed families (Hitman) are first-class, not raw keys. Tomb Raider opens
+  on the game’s active preset; titles that do not expose an active selector show a clear warning.
+- **Unsaved-change protection** — system Back and “choose another game” ask before discarding a
+  draft.
 - **Common-value dropdowns** — render height (480–2160 px) and frame caps (24–144 fps) are lists of
   common values rather than free steppers.
 - **Screen resolution and resolution scale** — Saints Row exposes `ScreenW`/`ScreenH` as a paired
@@ -108,7 +111,7 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 
 - Package: `dev.legendtuner.app` (debug builds install as `dev.legendtuner.app.debug`)
 - Minimum Android: 8.0 (API 26) · Target: Android 15 (API 35)
-- Version 1.2.3 (versionCode 6)
+- Version 1.2.4 (versionCode 7)
 - Signed debug build
 
 ## First run
@@ -184,10 +187,19 @@ artifact is `app/build/outputs/apk/release/app-release.apk`. See
 ./gradlew :app:testDebugUnitTest
 ```
 
-19 tests cover registry parsing and round-trip preservation, preset edits, live-value mirroring,
-unknown keys and types, malformed XML, icon vectors, the title table, inverted-toggle selection, and
-catalogue conformance. Every guided control must have a label, a description of at least 40
-characters, a known group, and unique keys with at least two options for selectable controls.
+43 tests cover registry parsing and round-trip preservation, preset edits, live-value mirroring,
+unknown keys and types, malformed XML, icon vectors, the title table, inverted-toggle selection,
+catalogue conformance and the config-loading boundary. Every guided control must have a label, a
+description of at least 40 characters, a known group, and unique keys with at least two options for
+selectable controls.
+
+For a real UI pass on the host, use the Waydroid smoke harness:
+
+```bash
+python3 scripts/waydroid_ui_smoke.py
+```
+
+It imports a fixture, edits and saves a value, verifies the XML, and checks the unsaved-Back dialog.
 
 ## Project layout
 
@@ -200,10 +212,13 @@ app/src/main/aidl/  Shizuku IFileService
 docs/catalogues/    per-title control inventories and provenance
 docs/superpowers/specs/  multi-title design record
 testdata/           twelve sanitised real preferences samples
+docs/WAYDROID-TESTING.md  Waydroid ADB setup and automated UI smoke
+scripts/            Waydroid UI smoke harness
 docs/screenshots/   real device captures used in this README
 prototype/          tablet design prototype and screenshots
 DESIGN.md           historical GRID Legends schema notes and design rationale
-docs/CHANGELOG-1.2.3.md  current release notes (Railroads, Tomb Raider, Hitman: Absolution)
+docs/CHANGELOG-1.2.4.md  current release notes (Company of Heroes, unsaved changes, Waydroid smoke)
+docs/CHANGELOG-1.2.3.md  previous release notes (Railroads, Tomb Raider, Hitman: Absolution)
 docs/CHANGELOG-1.2.2.md  previous release notes (backup safety, FPS/resolution, motion controls)
 docs/CHANGELOG-1.2.1.md  older patch notes (inverted-toggle fix)
 docs/CHANGELOG-1.2.0.md  previous release notes, verification and known gaps

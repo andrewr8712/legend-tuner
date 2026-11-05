@@ -289,6 +289,12 @@ object TombRaiderCatalog {
             PresetFamily("performance", "Performance", pathSuffix = listOf("PerformancePreset")),
             PresetFamily("performance-plus", "Performance+", pathSuffix = listOf("PerformancePlusPreset"))
         ),
+        familySelector = FamilySelector(
+            absolutePath = SETUP + "GraphicsSettings",
+            key = "GraphicsPreset",
+            // The block order is the observed preset index order; verify the selector in-game.
+            tokens = mapOf("battery" to "0", "graphics" to "1", "performance" to "2", "performance-plus" to "3")
+        ),
         controls = listOf(
             Control(
                 "Resolution", "Screen resolution",

@@ -115,6 +115,14 @@ fun TitleEditorScreen(
                 }
             }
             Spacer(Modifier.height(12.dp))
+            if (catalog.familySelector == null) {
+                Text(
+                    "The active in-game profile is not exposed for this title; these tabs edit the stored preset blocks.",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = Amber
+                )
+                Spacer(Modifier.height(10.dp))
+            }
         } else {
             Spacer(Modifier.height(2.dp))
         }

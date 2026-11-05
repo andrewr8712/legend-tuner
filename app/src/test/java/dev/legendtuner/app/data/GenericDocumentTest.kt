@@ -150,6 +150,7 @@ class GenericDocumentTest {
         assertNotNull("Tomb Raider must expose resolution", resolution)
         assertNotNull("Tomb Raider must expose shadow mode", shadow)
         assertNotNull("Tomb Raider must expose the engine frame cap", fps)
+        assertEquals("graphics", catalog.activeFamilyId(doc))
 
         assertEquals("1526x1080", TitleCatalogEngine.display(doc, root, catalog, resolution!!))
         assertTrue(TitleCatalogEngine.writeResolution(doc, root, catalog, resolution, "1920x1080"))

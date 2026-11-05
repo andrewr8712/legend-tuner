@@ -3,6 +3,7 @@ package dev.legendtuner.app.ui
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
@@ -19,6 +20,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Snackbar
@@ -26,6 +28,7 @@ import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -55,6 +58,9 @@ import dev.legendtuner.app.ui.theme.Ink
 import dev.legendtuner.app.ui.theme.Lime
 import dev.legendtuner.app.ui.theme.Muted
 import dev.legendtuner.app.ui.theme.Red
+import dev.legendtuner.app.ui.theme.SurfaceHigh
+
+private enum class LeaveTarget { DASHBOARD, PICKER }
 
 @Composable
 fun LegendTunerApp(
@@ -66,6 +72,30 @@ fun LegendTunerApp(
     val snackbarHostState = remember { SnackbarHostState() }
     val focusRequester = remember { FocusRequester() }
     var destination by rememberSaveable { mutableStateOf(AppDestination.DASHBOARD) }
+    var pendingLeave by remember { mutableStateOf<LeaveTarget?>(null) }
+
+    val leave: (LeaveTarget) -> Unit = { target ->
+        if (state.dirty) {
+            pendingLeave = target
+        } else {
+            when (target) {
+                LeaveTarget.DASHBOARD -> destination = AppDestination.DASHBOARD
+                LeaveTarget.PICKER -> viewModel.backToPicker()
+            }
+        }
+    }
+
+    BackHandler(
+        enabled = (state.config == null && state.activeTitle != null) ||
+            (state.config != null && destination != AppDestination.DASHBOARD) ||
+            state.dirty
+    ) {
+        when {
+            state.config == null -> viewModel.backToPicker()
+            state.dirty -> pendingLeave = LeaveTarget.DASHBOARD
+            destination != AppDestination.DASHBOARD -> destination = AppDestination.DASHBOARD
+        }
+    }
 
     val openLauncher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         val uri = result.data?.data ?: return@rememberLauncherForActivityResult
@@ -197,7 +227,7 @@ fun LegendTunerApp(
                             mode = state.accessMode,
                             monogram = state.activeTitle?.monogram ?: "CT",
                             destinations = destinations,
-                            onMonogramClick = viewModel::backToPicker,
+                            onMonogramClick = { leave(LeaveTarget.PICKER) },
                             onSelect = selectDestination,
                             editorLabel = if (state.activeTitle?.titleCatalog != null) "Settings" else "Graphics"
                         )
@@ -232,7 +262,7 @@ fun LegendTunerApp(
                                         onRaw = { selectDestination(AppDestination.RAW) },
                                         onBackups = { selectDestination(AppDestination.BACKUPS) },
                                         onOpenAccess = viewModel::openAccessSheet,
-                                        onChooseGame = viewModel::backToPicker
+                                        onChooseGame = { leave(LeaveTarget.PICKER) }
                                     )
                                 }
                                 AppDestination.EDITOR -> {
@@ -315,6 +345,37 @@ fun LegendTunerApp(
                     containerColor = dev.legendtuner.app.ui.theme.SurfaceHigh,
                     contentColor = Ink,
                     actionColor = Lime
+                )
+            }
+
+            pendingLeave?.let { target ->
+                AlertDialog(
+                    onDismissRequest = { pendingLeave = null },
+                    containerColor = SurfaceHigh,
+                    titleContentColor = Ink,
+                    textContentColor = Muted,
+                    title = { Text("Discard unsaved changes?") },
+                    text = {
+                        Text(
+                            "You have edits that have not been written to the config. " +
+                                "Leaving now will discard this draft."
+                        )
+                    },
+                    confirmButton = {
+                        TextButton(
+                            onClick = {
+                                viewModel.discardChanges()
+                                pendingLeave = null
+                                when (target) {
+                                    LeaveTarget.DASHBOARD -> destination = AppDestination.DASHBOARD
+                                    LeaveTarget.PICKER -> viewModel.backToPicker()
+                                }
+                            }
+                        ) { Text("Discard", color = Red) }
+                    },
+                    dismissButton = {
+                        TextButton(onClick = { pendingLeave = null }) { Text("Keep editing", color = Lime) }
+                    }
                 )
             }
 
