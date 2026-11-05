@@ -54,7 +54,8 @@ fun PickerScreen(
     onRefresh: () -> Unit
 ) {
     val installed = state.titleStatuses.filter { it.installed }
-    val columns = if (wide) 3 else 2
+    // Compact cards need more horizontal room; a phone reads better as one full-width row.
+    val columns = if (wide) 3 else 1
 
     Column(
         Modifier
@@ -125,8 +126,8 @@ fun PickerScreen(
         } else {
             installed.chunked(columns).forEach { rowItems ->
                 Row(
-                    Modifier.fillMaxWidth().padding(bottom = 12.dp),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    Modifier.fillMaxWidth().padding(bottom = 8.dp),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
                     rowItems.forEach { status ->
                         TitleCard(status, Modifier.weight(1f)) { onOpenTitle(status.title) }
@@ -223,47 +224,61 @@ fun PickerScreen(
 @Composable
 private fun TitleCard(status: TitleStatus, modifier: Modifier, onClick: () -> Unit) {
     val ready = status.readable
+    val title = status.title
+    val detail = when {
+        title.titleCatalog != null -> "${title.titleCatalog.controls.size} controls"
+        title.legacyGuided -> "Guided + raw XML"
+        else -> "Raw XML"
+    }
+
     Surface(
         onClick = onClick,
         modifier = modifier,
         color = SurfaceColor,
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(12.dp),
         border = BorderStroke(1.dp, if (ready) Lime.copy(alpha = 0.22f) else Line)
     ) {
-        Column(Modifier.padding(16.dp)) {
+        Row(
+            Modifier.padding(horizontal = 14.dp, vertical = 12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             Box(
                 Modifier
-                    .size(40.dp)
-                    .clip(RoundedCornerShape(10.dp))
-                    .border(1.dp, if (ready) Lime else Line, RoundedCornerShape(10.dp)),
+                    .size(38.dp)
+                    .clip(RoundedCornerShape(9.dp))
+                    .border(1.dp, if (ready) Lime else Line, RoundedCornerShape(9.dp)),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    status.title.monogram,
-                    style = MaterialTheme.typography.headlineSmall.copy(fontSize = 16.sp),
+                    title.monogram,
+                    style = MaterialTheme.typography.headlineSmall.copy(fontSize = 15.sp),
                     color = if (ready) Lime else Muted
                 )
             }
-            Spacer(Modifier.height(14.dp))
-            Text(
-                status.title.label,
-                style = MaterialTheme.typography.headlineSmall.copy(fontSize = 20.sp),
-                color = Ink,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis
-            )
-            Spacer(Modifier.height(6.dp))
-            Text(
-                if (ready) "Config readable" else "Installed",
-                style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 0.5.sp),
-                color = if (ready) Muted else Amber
-            )
-            Spacer(Modifier.height(14.dp))
-            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                StatusChip(if (ready) "Ready" else "Installed", lime = ready)
-                Spacer(Modifier.weight(1f))
-                Text("›", color = Dim, fontSize = 16.sp)
+            Spacer(Modifier.width(12.dp))
+            Column(Modifier.weight(1f)) {
+                Text(
+                    title.label,
+                    style = MaterialTheme.typography.titleMedium.copy(fontSize = 15.sp),
+                    color = Ink,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+                Spacer(Modifier.height(4.dp))
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    StatusChip(if (ready) "Ready" else "Installed", lime = ready)
+                    Spacer(Modifier.width(8.dp))
+                    Text(
+                        detail,
+                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 0.4.sp),
+                        color = Dim,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
             }
+            Spacer(Modifier.width(6.dp))
+            Text("›", color = Dim, fontSize = 17.sp)
         }
     }
 }
