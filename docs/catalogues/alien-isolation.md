@@ -49,7 +49,7 @@ Screen`, `VideoSetting_FullScreen Resolution 24bpp`, `VideoSetting_FullScreen Re
 
 | Registry key | Label | Description | Type | Observed |
 |---|---|---|---|---|
-| `MaxFramesPerSecond` | Frame rate cap | Engine-level cap in `Software/IndirectX/Direct3D/Config`; 60/120 unlocks the 30 FPS mode. The game may re-clamp on launch. | Dropdown (30/60/120) | 33 |
+| `MaxFramesPerSecond` | Frame rate cap | Engine-level cap in `Software/IndirectX/Direct3D/Config`, mirrored to `PerformancePresets/GraphicsMaxFramerate`; 60/120 unlocks the 30 FPS mode. The game may re-clamp on launch. | Dropdown (30/60/120) | 33 |
 | `FixedScreenHeight` | Render height | Internal render height in pixels. The game scales to the panel; lower values raise frame rate. | Dropdown (480–2160 px) | 1080 |
 | `FullScreen` | Fullscreen | Engine fullscreen flag. On Android the surface is always full-bleed; kept for parity. | Toggle | 1 |
 

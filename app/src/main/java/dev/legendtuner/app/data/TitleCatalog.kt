@@ -9,6 +9,9 @@ enum class ControlKind { TOGGLE, CHOICE, STEPPER, RESOLUTION, READONLY }
 
 data class ControlChoice(val token: String, val label: String)
 
+/** An additional value that must be kept in step with a control, e.g. an engine cap and its preset mirror. */
+data class LinkedWrite(val absolutePath: List<String>, val key: String)
+
 data class Control(
     val key: String,
     val label: String,
@@ -32,7 +35,9 @@ data class Control(
     val absolutePath: List<String>? = null,
     /** Resolution controls can target a title-specific pair instead of ScreenW/ScreenH. */
     val widthKey: String = "ScreenW",
-    val heightKey: String = "ScreenH"
+    val heightKey: String = "ScreenH",
+    /** Values written with the same text when this control changes, such as a preset FPS mirror. */
+    val linkedWrites: List<LinkedWrite> = emptyList()
 ) {
     /**
      * The token the user is actually choosing after [invert] is applied. The stored
@@ -180,7 +185,12 @@ object TitleCatalogEngine {
     ): Boolean {
         val stored = if (control.invert) flip(token) else token
         val text = if (control.triple) "$stored, $stored, $stored" else stored
-        return doc.setValue(targetPath(root, catalog, control), catalog.keyFor(control), text)
+        val targets = buildList {
+            add(targetPath(root, catalog, control) to catalog.keyFor(control))
+            control.linkedWrites.forEach { add(it.absolutePath to it.key) }
+        }
+        if (targets.any { (path, key) -> doc.value(path, key) == null }) return false
+        return targets.all { (path, key) -> doc.setValue(path, key, text) }
     }
 }
 
@@ -399,6 +409,10 @@ object AlienIsolationCatalog {
     private const val EFFECTS = "Effects"
     private const val DISPLAY = "Display"
     private val DIRECT3D_CONFIG = listOf("HKEY_CURRENT_USER", "Software", "IndirectX", "Direct3D", "Config")
+    private val PERFORMANCE_PRESETS = listOf(
+        "HKEY_CURRENT_USER", "Software", "Feral Interactive", "Alien Isolation",
+        "Setup", "PerformancePresets"
+    )
 
     private fun toggle(key: String, label: String, description: String, group: String) =
         Control(
@@ -475,7 +489,8 @@ object AlienIsolationCatalog {
                 listOf(ControlChoice("30", "30 fps"), ControlChoice("60", "60 fps"), ControlChoice("120", "120 fps")),
                 absolutePath = DIRECT3D_CONFIG,
                 ignoreSuffix = true,
-                note = "Engine key in IndirectX/Direct3D/Config. The game may re-clamp on launch."
+                linkedWrites = listOf(LinkedWrite(PERFORMANCE_PRESETS, "GraphicsMaxFramerate")),
+                note = "Also updates the Graphics preset cap in PerformancePresets; the game may re-clamp on launch."
             ),
             Control(
                 "FixedScreenHeight", "Render height",

@@ -52,9 +52,15 @@ class GenericDocumentTest {
         assertNotNull("Alien must expose the engine FPS cap", control)
         val doc = load("alien-isolation-preferences-sample.xml")
 
+        val presetCap = listOf(
+            "HKEY_CURRENT_USER", "Software", "Feral Interactive", "Alien Isolation",
+            "Setup", "PerformancePresets"
+        )
         assertEquals("33", TitleCatalogEngine.value(doc, root, catalog, control!!)?.text)
+        assertEquals("33", doc.value(presetCap, "GraphicsMaxFramerate")?.text)
         assertTrue(TitleCatalogEngine.write(doc, root, catalog, control, "60"))
         assertEquals("60", TitleCatalogEngine.value(doc, root, catalog, control)?.text)
+        assertEquals("60", doc.value(presetCap, "GraphicsMaxFramerate")?.text)
     }
 
     @Test
