@@ -146,7 +146,7 @@ with the app.
 |---|---|---|
 | App mark (SVG) | `docs/website/config-tuner-mark.svg` | Lime “L + signal bars” on near-black; derived from the launcher icon |
 | Design tokens | `docs/website/design-tokens.css` | Exact app palette, type stacks, spacing |
-| Current picker | `docs/website/picker-1.2.9.png` | 1600×1000; 17 installed titles visible |
+| Current picker | `docs/website/picker-1.2.9.png` | 1600×900; 17 installed titles visible |
 | Older screenshots | `docs/screenshots/*.png` | Real device captures; picker is from an older release |
 | App icon vector | `app/src/main/res/drawable/ic_launcher_foreground.xml` | Source for the mark |
 | Title list | `README.md` | Authoritative 18-title table |
