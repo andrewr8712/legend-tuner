@@ -208,6 +208,89 @@ object SaintsRowCatalog {
     )
 }
 
+object RailroadsCatalog {
+    private const val DISPLAY = "Display"
+    private const val QUALITY = "Graphics"
+    private const val PERFORMANCE = "Performance"
+    private const val ENGINE = "Engine"
+    private const val INFERRED = "Tier labels are inferred from the stored integer; verify in-game."
+    private val D3D_CONFIG = listOf("HKEY_CURRENT_USER", "Software", "IndirectX", "Direct3D", "Config")
+    private val SCREEN_SIZES = listOf(
+        ControlChoice("1280x720", "1280 × 720"),
+        ControlChoice("1440x900", "1440 × 900"),
+        ControlChoice("1920x1080", "1920 × 1080"),
+        ControlChoice("2560x1440", "2560 × 1440")
+    )
+    private val aaChoices = listOf(
+        ControlChoice("0", "Off"),
+        ControlChoice("1", "2×"),
+        ControlChoice("2", "4×")
+    )
+
+    val catalog = TitleCatalog(
+        groups = listOf(DISPLAY, QUALITY, PERFORMANCE, ENGINE),
+        controls = listOf(
+            Control(
+                "Resolution", "Screen resolution",
+                "Backbuffer size written as ScreenW and ScreenH. The observed device file held 1440 × 900.",
+                DISPLAY, ControlKind.RESOLUTION, SCREEN_SIZES,
+                note = "The game also has a separate FixedScreenHeight internal render height."
+            ),
+            Control(
+                "FixedScreenHeight", "Render height",
+                "Internal vertical resolution. Lower values raise frame rate at the cost of sharpness.",
+                DISPLAY, ControlKind.CHOICE, heightChoices()
+            ),
+            Control("FullScreen", "Fullscreen", "Run the game fullscreen instead of windowed.", DISPLAY, ControlKind.TOGGLE, intToggle()),
+            Control(
+                "RenderUnderNotch", "Render under notch",
+                "Let the game draw under a display cutout instead of letterboxing around it.",
+                DISPLAY, ControlKind.TOGGLE, intToggle()
+            ),
+
+            Control("ShaderQuality", "Shader quality", "Complexity of the world and vehicle shaders.", QUALITY, ControlKind.CHOICE, intLevels(2), note = INFERRED),
+            Control("ShadowQuality", "Shadow quality", "Resolution and filtering of shadow maps.", QUALITY, ControlKind.CHOICE, intLevels(2), note = INFERRED),
+            Control("TextureQuality", "Texture quality", "Texture resolution and filtering for terrain, trains and buildings.", QUALITY, ControlKind.CHOICE, intLevels(2), note = INFERRED),
+            Control("TreeDensity", "Tree density", "Density of the tree layer around the map.", QUALITY, ControlKind.CHOICE, intLevels(2), note = INFERRED),
+            Control(
+                "FSAALevel", "Anti-aliasing",
+                "Full-screen anti-aliasing level. Off, 2× and 4× are the inferred labels for the three stored values.",
+                QUALITY, ControlKind.CHOICE, aaChoices, absolutePath = D3D_CONFIG,
+                note = "Labels inferred from the stored level; verify in-game."
+            ),
+
+            Control(
+                "EnableFramerateManager", "Dynamic frame-rate manager",
+                "Let the game switch between idle and responsive frame caps.",
+                PERFORMANCE, ControlKind.TOGGLE, intToggle(), absolutePath = D3D_CONFIG
+            ),
+            Control(
+                "MaxFramesPerSecond", "Frame cap",
+                "Hard engine frame cap. This is the value the game exposes as the main FPS limit.",
+                PERFORMANCE, ControlKind.CHOICE, fpsChoices(), absolutePath = D3D_CONFIG
+            ),
+            Control(
+                "FramerateManagerNormalIdleFPS", "Idle frame cap",
+                "Frame cap used while the game is idle or in menus.",
+                PERFORMANCE, ControlKind.CHOICE, fpsChoices(), absolutePath = D3D_CONFIG
+            ),
+            Control(
+                "FramerateManagerNormalResponsiveFPS", "Responsive frame cap",
+                "Frame cap used while the camera is moving or the game is active.",
+                PERFORMANCE, ControlKind.CHOICE, fpsChoices(), absolutePath = D3D_CONFIG
+            ),
+            Control("UseBatterySaver", "Battery saver", "Enable the battery-saver preset, including its lower frame cap and reduced tree density.", PERFORMANCE, ControlKind.TOGGLE, intToggle()),
+            Control("BatterySaverModeMaxFPS", "Battery saver frame cap", "Frame cap used while battery saver is enabled.", PERFORMANCE, ControlKind.CHOICE, fpsChoices()),
+
+            Control(
+                "VulkanUseSeparateSubmitThread", "Separate Vulkan submit thread",
+                "Submit rendering work from a dedicated thread. Can help frame pacing on some GPUs.",
+                ENGINE, ControlKind.TOGGLE, intToggle(), absolutePath = D3D_CONFIG
+            )
+        )
+    )
+}
+
 object NapoleonCatalog {
     private const val QUALITY = "Battle quality"
     private const val FRAME = "Frame rate"

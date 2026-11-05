@@ -113,6 +113,34 @@ class GenericDocumentTest {
     }
 
     @Test
+    fun railroadsExposesDisplayQualityAndFrameCapControls() {
+        val title = FeralTitles.ALL.first { it.id == "railroads" }
+        val catalog = title.titleCatalog!!
+        val root = title.valueRoot!!
+        val doc = load("railroads-preferences-sample.xml")
+        val resolution = catalog.find("Resolution")
+        val shader = catalog.find("ShaderQuality")
+        val fps = catalog.find("MaxFramesPerSecond")
+        assertNotNull("Railroads must expose resolution", resolution)
+        assertNotNull("Railroads must expose shader quality", shader)
+        assertNotNull("Railroads must expose the frame cap", fps)
+
+        assertEquals("1440x900", TitleCatalogEngine.display(doc, root, catalog, resolution!!))
+        assertTrue(TitleCatalogEngine.writeResolution(doc, root, catalog, resolution, "1920x1080"))
+        assertEquals("1920x1080", TitleCatalogEngine.display(doc, root, catalog, resolution))
+        assertEquals("1920", doc.value(root, "ScreenW")?.text)
+        assertEquals("1080", doc.value(root, "ScreenH")?.text)
+
+        assertEquals("2", TitleCatalogEngine.value(doc, root, catalog, shader!!)?.text)
+        assertTrue(TitleCatalogEngine.write(doc, root, catalog, shader, "1"))
+        assertEquals("1", TitleCatalogEngine.value(doc, root, catalog, shader)?.text)
+
+        assertEquals("40", TitleCatalogEngine.value(doc, root, catalog, fps!!)?.text)
+        assertTrue(TitleCatalogEngine.write(doc, root, catalog, fps, "60"))
+        assertEquals("60", TitleCatalogEngine.value(doc, root, catalog, fps)?.text)
+    }
+
+    @Test
     fun saintsRowExposesMotionAimAndGyroControls() {
         val title = FeralTitles.ALL.first { it.id == "saints-row-3" }
         val catalog = title.titleCatalog!!

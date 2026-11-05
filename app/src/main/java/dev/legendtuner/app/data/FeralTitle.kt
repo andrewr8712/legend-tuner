@@ -94,6 +94,14 @@ object FeralTitles {
                 "Lara Croft and the Temple of Osiris", "Graphics"
             ),
             titleCatalog = LaraTooCatalog.catalog
+        ),
+        FeralTitle(
+            "railroads", "Sid Meier's Railroads!", "com.feralinteractive.railroads_android",
+            listOf(
+                "HKEY_CURRENT_USER", "Software", "Original Developer",
+                "Sid Meier's Railroads!", "Setup"
+            ),
+            titleCatalog = RailroadsCatalog.catalog
         )
     )
 

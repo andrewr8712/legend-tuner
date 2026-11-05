@@ -14,6 +14,7 @@ have been replaced; every key, type and value shape is preserved.
 | `hitman-blood-money-preferences-sample.xml` | Android | Hitman: BMR v1.3.1 | TB520FU dump |
 | `lara-croft-gol-preferences-sample.xml` | Android | Lara Croft: Guardian of Light v1.2.7 | TB520FU dump |
 | `lara-croft-too-preferences-sample.xml` | Android | Lara Croft: Temple of Osiris v1.2.3 | TB520FU dump |
+| `railroads-preferences-sample.xml` | Android | Sid Meier's Railroads! v1.4.3 | TB520FU dump |
 
 `preferences-sample.xml` is a sanitized copy of a publicly shared GRID Legends Android file.
 
@@ -52,6 +53,9 @@ rather than a game key.
   block (136 values) and a Crystal Dynamics `Graphics` block with `BatterySaverPreset`,
   `GraphicsPreset` and `PerformancePreset`, including `FullscreenWidth`/`FullscreenHeight`
   (1728×1080 in the committed sample) and `MaxFramesPerSecond`.
+- **Sid Meier's Railroads!** — `Original Developer/Sid Meier's Railroads!/Setup` (flat, mixed
+  integer/binary/string values), with engine FPS and FSAA values under
+  `IndirectX/Direct3D/Config`. No preset blocks.
 
 ## Value types seen
 

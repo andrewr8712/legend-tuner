@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<registry>
+    <key name="HKEY_CLASSES_ROOT">
+    </key>
+    <key name="HKEY_CURRENT_CONFIG">
+    </key>
+    <key name="HKEY_CURRENT_USER">
+        <key name="AutoValueRemap">
+            <key name="GPURemap">
+                <key name="keys">
+                    <value name="Software\IndirectX\Direct3D\Config" type="integer">1</value>
+                </key>
+                <key name="values">
+                    <value name="Software\Original Developer\Sid Meier&apos;s Railroads!\Setup\FullScreen" type="integer">1</value>
+                    <value name="Software\Original Developer\Sid Meier&apos;s Railroads!\Setup\ScreenH" type="integer">1</value>
+                    <value name="Software\Original Developer\Sid Meier&apos;s Railroads!\Setup\ScreenW" type="integer">1</value>
+                </key>
+            </key>
+        </key>
+        <key name="Software">
+            <key name="IndirectX">
+                <key name="Direct3D">
+                    <key name="Config">
+                        <value name="BatterySaveFSAALevel" type="integer">0</value>
+                        <value name="EnableFramerateManager" type="integer">1</value>
+                        <value name="FramerateManagerBatterySaverIdleFPS" type="integer">20</value>
+                        <value name="FramerateManagerBatterySaverResponsive" type="integer">30</value>
+                        <value name="FramerateManagerNormalIdleFPS" type="integer">30</value>
+                        <value name="FramerateManagerNormalResponsiveFPS" type="integer">40</value>
+                        <value name="FramerateManagerResponsiveFPSDuration" type="integer">5000</value>
+                        <value name="FSAALevel" type="integer">2</value>
+                        <value name="MaxFramesPerSecond" type="integer">40</value>
+                        <value name="VulkanUseSeparateSubmitThread" type="integer">1</value>
+                    </key>
+                </key>
+                <key name="DirectInput">
+                    <key name="Config">
+                        <value name="DisableUSB" type="integer">1</value>
+                    </key>
+                </key>
+            </key>
+            <key name="MacDoze">
+                <key name="Config">
+                    <value name="BinkWebmUseLibvpx" type="integer">1</value>
+                    <value name="ClearSavesEnabled" type="integer">0</value>
+                    <value name="DisableClearSaveDataAlert" type="integer">0</value>
+                    <value name="RemapCommandToControl" type="integer">1</value>
+                    <value name="VerboseFindFile" type="integer">1</value>
+                </key>
+            </key>
+            <key name="Original Developer">
+                <key name="Sid Meier&apos;s Railroads!">
+                    <key name="Setup">
+                        <value name="3DSoundFadeInRate" type="binary">000000000000e03f</value>
+                        <value name="AddSteamCloudAlias" type="integer">1</value>
+                        <value name="AllowAutorotate" type="integer">1</value>
+                        <value name="AllowPausing" type="integer">1</value>
+                        <value name="AllowSendCrashReports" type="integer">0</value>
+                        <value name="AllowSendUsageData" type="integer">0</value>
+                        <value name="AmbienceVolumeValue" type="binary">000000000000f03f</value>
+                        <value name="AuctionAlert" type="integer">1</value>
+                        <value name="AutoSaveEnabled" type="integer">1</value>
+                        <value name="AutoSaveInterval" type="integer">0</value>
+                        <value name="AutoSaveIntervalMinutes" type="integer">0</value>
+                        <value name="AvoidFBOsWithBGRAFormat" type="integer">1</value>
+                        <value name="BatterySaverModeMaxFPS" type="integer">30</value>
+                        <value name="BatterySaveTreeDensity" type="integer">1</value>
+                        <value name="CameraGesturePixelThreshold" type="binary">000000000000f03f</value>
+                        <value name="CameraGestureRotateThreshold" type="binary">7b14ae47e17a843f</value>
+                        <value name="CameraSpeedShiftModifier" type="binary">0000000000001040</value>
+                        <value name="CardRenderer" type="string">Sanitized GPU 0MB</value>
+                        <value name="CityFalloffDistance" type="integer">3000</value>
+                        <value name="CloudOfflineMode" type="integer">1</value>
+                        <value name="CloudSyncVersion" type="binary">000000000000f03f</value>
+                        <value name="ConstrainLiveWindowResize" type="integer">1</value>
+                        <value name="CopyCargoChanges" type="integer">1</value>
+                        <value name="DeclineSendUsageDataAnalyticsSent" type="integer">1</value>
+                        <value name="DelayCitiesGeometryUpdate" type="integer">1</value>
+                        <value name="DisableCloudCellularAlert" type="integer">0</value>
+                        <value name="DisableCloudDisabledAlert" type="integer">0</value>
+                        <value name="DisableClouds" type="integer">0</value>
+                        <value name="DisableMomentumScrolling" type="integer">1</value>
+                        <value name="DisableOSShortcuts" type="integer">1</value>
+                        <value name="DisableTreesBackfaceCulling" type="integer">1</value>
+                        <value name="DisplayControlsPrompt" type="integer">1</value>
+                        <value name="DisplayRoutemasterTrain" type="integer">1</value>
+                        <value name="DoneMinOS" type="integer">0</value>
+                        <value name="DonePromotional" type="integer">0</value>
+                        <value name="DoneUnsupported" type="integer">1</value>
+                        <value name="EnableCompetingDepotAlert" type="integer">1</value>
+                        <value name="EnableCongestionAlert" type="integer">1</value>
+                        <value name="EnabledDetailedTrackInfo" type="integer">1</value>
+                        <value name="EnableDepotAlert" type="integer">1</value>
+                        <value name="EnableEditor" type="integer">0</value>
+                        <value name="EnableEraIntro" type="integer">1</value>
+                        <value name="EnableFirstTimeHelp" type="integer">1</value>
+                        <value name="EnableGrowthAlert" type="integer">1</value>
+                        <value name="EnableManualCameraTilt" type="integer">0</value>
+                        <value name="EnableMissionAlert" type="integer">1</value>
+                        <value name="EnableNotMovingAlert" type="integer">1</value>
+                        <value name="EnableOldTrainAlert" type="integer">1</value>
+                        <value name="EnableSaveCamera" type="integer">0</value>
+                        <value name="EnableStocksAlert" type="integer">1</value>
+                        <value name="EnableTaunts" type="integer">1</value>
+                        <value name="EnableTutorialCheck" type="integer">1</value>
+                        <value name="EnableUnprofitableAlert" type="integer">1</value>
+                        <value name="EnableUnusedTrackAlert" type="integer">1</value>
+                        <value name="EscBackButton" type="integer">1</value>
+                        <value name="FastestTrainAlert" type="integer">1</value>
+                        <value name="FeralAnalyticsInstallID" type="string">SANITIZED_ANALYTICS_ID</value>
+                        <value name="FirstTimeHelpHoldOpenTime" type="integer">350</value>
+                        <value name="FixedScreenHeight" type="integer">900</value>
+                        <value name="FixOverlappingVertices" type="integer">1</value>
+                        <value name="ForceUniqueReroutes" type="integer">1</value>
+                        <value name="FullScreen" type="integer">1</value>
+                        <value name="GameInstallVersion" type="integer">17040128</value>
+                        <value name="GameInstallVersionString" type="string">Sid Meier&apos;s Railroads! v1.4.3</value>
+                        <value name="GameInstallVersionWithStages" type="integer">21200896</value>
+                        <value name="GameOptionsDialogShouldShow" type="integer">0</value>
+                        <value name="GameOptionsDialogShown" type="integer">1</value>
+                        <value name="GameVersionNew" type="integer">17040128</value>
+                        <value name="GameVersionString" type="string">Sid Meier&apos;s Railroads! v1.4.3</value>
+                        <value name="GesturePressMinDuration" type="binary">9a9999999999d93f</value>
+                        <value name="HasSimilarHardwareToSupportedDevice" type="integer">1</value>
+                        <value name="HideSystemUIInFullscreen" type="integer">1</value>
+                        <value name="InterfaceVolumeValue" type="binary">000000000000f03f</value>
+                        <value name="KeyboardCameraPanSpeed" type="binary">000000000088a340</value>
+                        <value name="KeyboardCameraRotateSpeed" type="binary">000000000000e03f</value>
+                        <value name="KeyboardCameraZoomSpeed" type="binary">000000000088a340</value>
+                        <value name="LiveWindowResizePercentage" type="integer">25</value>
+                        <value name="LiveWindowResizeThreshold" type="integer">3</value>
+                        <value name="MasterVolumeValue" type="binary">000000000000f03f</value>
+                        <value name="MergeOverlappingBridges" type="integer">1</value>
+                        <value name="MinWindowedHeight" type="integer">300</value>
+                        <value name="MinWindowedWidth" type="integer">400</value>
+                        <value name="MouseCameraRotateSpeed" type="binary">000000000000f03f</value>
+                        <value name="MouseCameraRotateUnit" type="integer">1</value>
+                        <value name="MouseCameraZoomSpeed" type="binary">0000000000406f40</value>
+                        <value name="MouseCursorIconScale" type="binary">00000080db68e03f</value>
+                        <value name="MouseScrollSpeed" type="binary">0000000000709740</value>
+                        <value name="MouseSensitivity" type="binary">000000000000e03f</value>
+                        <value name="MouseSensitivityMultiplier" type="binary">0000000000001840</value>
+                        <value name="MusicVolumeValue" type="binary">000000000000f03f</value>
+                        <value name="MuteAllAudio" type="integer">0</value>
+                        <value name="NewsNotifications" type="integer">0</value>
+                        <value name="NewspaperAlerts" type="integer">1</value>
+                        <value name="NewTrainAlert" type="integer">1</value>
+                        <value name="NoDepotAndTrainMarkersDisplayMode" type="integer">0</value>
+                        <value name="PauseMoviesOnPause" type="integer">1</value>
+                        <value name="PauseOnSuspend" type="integer">1</value>
+                        <value name="PauseSoundOnPause" type="integer">1</value>
+                        <value name="PauseTimersOnPause" type="integer">1</value>
+                        <value name="RenderUnderNotch" type="integer">1</value>
+                        <value name="RepeatedNotificationIntervalSeconds" type="binary">0000000000004e40</value>
+                        <value name="RmlEnableHarfbuzz" type="integer">0</value>
+                        <value name="ScenarioObjectiveAlert" type="integer">1</value>
+                        <value name="ScreenDensityMax" type="integer">320</value>
+                        <value name="ScreenH" type="integer">900</value>
+                        <value name="ScreenW" type="integer">1440</value>
+                        <value name="SeenSpecificationAlertUUIDAdreno740HardwareSpecifications_1_3_1RC2" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDMiscGameInfoSettings" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDUntestedCapableHardware" type="integer">1</value>
+                        <value name="SfxVolumeValue" type="binary">000000000000f03f</value>
+                        <value name="ShaderQuality" type="integer">2</value>
+                        <value name="ShadowQuality" type="integer">2</value>
+                        <value name="ShowPanelTransitions" type="integer">1</value>
+                        <value name="SkipTrackGeometryGeneration" type="integer">1</value>
+                        <value name="SkipTrackGeometryGenerationThresholdLow" type="integer">20</value>
+                        <value name="SpecificationFirstLaunchCheck" type="integer">1</value>
+                        <value name="SpecificationLastUpdateCheckTime" type="binary">6e53ec6a00000000</value>
+                        <value name="SpecificationUpdateURL" type="string">https://u1.feralinteractive.com/autoupdate/railroads/specifications_android_1_4_3.xml</value>
+                        <value name="SupportEmail" type="string">railroadssupport@feralinteractive.com</value>
+                        <value name="TextureQuality" type="integer">2</value>
+                        <value name="TreeDensity" type="integer">2</value>
+                        <value name="UIScaling" type="integer">1</value>
+                        <value name="UpdateServerDomain" type="string">u1.feralinteractive.com</value>
+                        <value name="UpdateServerPath" type="string">/autoupdate/</value>
+                        <value name="UpdateServerProtocol" type="string">https://</value>
+                        <value name="UseBatterySaver" type="integer">0</value>
+                        <value name="UseDriveSaveSync" type="integer">0</value>
+                        <value name="UseDyslexiaFont" type="integer">0</value>
+                        <value name="UseGoogleSignIn" type="integer">0</value>
+                        <value name="UseImprovedTrackIntersections" type="integer">1</value>
+                        <value name="UseImprovedTrackModels" type="integer">1</value>
+                        <value name="UseImprovedTrackPlacement" type="integer">1</value>
+                        <value name="UseMetricSystem" type="integer">0</value>
+                        <value name="UseOfflineEvents" type="integer">1</value>
+                        <value name="VulkanVertexCountThreshold" type="integer">243000</value>
+                        <value name="WMRetVal" type="integer">0</value>
+                        <value name="ZoomLevel" type="binary">0000000000002e40</value>
+                        <key name="SpecificationAlerts">
+                            <value name="DefaultHardwareSpecificationsClass_1_3RC30" type="integer">1</value>
+                        </key>
+                    </key>
+                </key>
+            </key>
+            <key name="SystemMonitor">
+                <key name="Config">
+                    <value name="AppVersion" type="integer">17040128</value>
+                    <value name="Backgrounded" type="integer">0</value>
+                    <value name="OSVersion" type="string">17.0</value>
+                    <value name="QuitIntentional" type="integer">1</value>
+                </key>
+            </key>
+        </key>
+    </key>
+    <key name="HKEY_LOCAL_MACHINE">
+        <key name="Hardware">
+            <key name="Description">
+                <key name="System">
+                    <key name="CentralProcessor">
+                        <key name="0">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string"></value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="1">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string"></value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="2">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string"></value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="3">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string"></value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="4">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string"></value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="5">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string"></value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="6">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string"></value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="7">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string"></value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                    </key>
+                </key>
+            </key>
+        </key>
+        <key name="Software">
+        </key>
+    </key>
+    <key name="HKEY_USERS">
+    </key>
+</registry>

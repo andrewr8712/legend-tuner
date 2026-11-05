@@ -15,6 +15,7 @@ keys and options for selectable controls.
 | Hitman: Blood Money | `hitman-blood-money.md` | `HitmanCatalog` | 18 | Live + four suffix families |
 | Lara Croft: Guardian of Light | `lara-croft-guardian-of-light.md` | `LaraGolCatalog` | 10 | four block presets |
 | Lara Croft: Temple of Osiris | `lara-croft-temple-of-osiris.md` | `LaraTooCatalog` | 11 | three block presets |
+| Sid Meier's Railroads! | `sid-meiers-railroads.md` | `RailroadsCatalog` | 16 | flat, engine subtree |
 
 Files live in `app/src/main/java/dev/legendtuner/app/data/TitleCatalog.kt` (GRID Autosport, Alien)
 and `TitleCatalogs.kt` (the rest).
@@ -57,3 +58,4 @@ file's *Open verification* section, and the control ships with a note (the amber
 | Hitman | Ladder semantics for shadow resolution; `Disable*` inversion verified in the editor/file, not in-game |
 | Lara Croft GoL | `BestTextureFilter` index order; AA mode set |
 | Lara Croft ToO | `SSAAQuality` ↔ "ANTI ALIASING" mapping; filter index order |
+| Railroads | Quality and FSAA tier labels; whether `MaxFramesPerSecond` or the responsive cap is the in-game limiter |
