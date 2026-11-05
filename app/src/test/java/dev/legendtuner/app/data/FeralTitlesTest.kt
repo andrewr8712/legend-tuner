@@ -39,6 +39,7 @@ class FeralTitlesTest {
         assertEquals("TW", FeralTitles.ALL.first { it.id == "empire-total-war" }.monogram)
         assertEquals("T3", FeralTitles.ALL.first { it.id == "tropico-3" }.monogram)
         assertEquals("RT", FeralTitles.ALL.first { it.id == "rome-total-war" }.monogram)
+        assertEquals("RB", FeralTitles.ALL.first { it.id == "rome-barbarian-invasion" }.monogram)
         assertEquals("MI", FeralTitles.ALL.first { it.id == "medieval-2-total-war" }.monogram)
     }
 
@@ -50,7 +51,8 @@ class FeralTitlesTest {
                 "grid-autosport", "alien-isolation", "saints-row-3", "napoleon",
                 "hitman-blood-money", "lara-croft-gol", "lara-croft-too", "railroads",
                 "tomb-raider", "hitman-absolution", "company-of-heroes",
-                "empire-total-war", "tropico-3", "rome-total-war", "medieval-2-total-war"
+                "empire-total-war", "tropico-3", "rome-total-war", "medieval-2-total-war",
+                "rome-barbarian-invasion"
             ),
             catalogued
         )

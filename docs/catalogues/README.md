@@ -23,6 +23,7 @@ keys and options for selectable controls.
 | Tropico 3 | `tropico-3.md` | `Tropico3Catalog` | 15 | flat, `GFX` + engine subtree |
 | ROME: Total War | `rome-total-war.md` | `RomeTotalWarCatalog` | 24 | flat live values, stored presets not exposed |
 | Medieval II: Total War | `medieval-2-total-war.md` | `Medieval2TotalWarCatalog` | 24 | flat, `VideoSettings` subtree |
+| ROME: Barbarian Invasion | `rome-barbarian-invasion.md` | `RomeTotalWarCatalog` | 24 | shares ROME catalogue; own root/build |
 
 Files live in `app/src/main/java/dev/legendtuner/app/data/TitleCatalog.kt` (GRID Autosport, Alien)
 and `TitleCatalogs.kt` (the rest).

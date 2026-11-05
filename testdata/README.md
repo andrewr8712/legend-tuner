@@ -22,6 +22,7 @@ have been replaced; every key, type and value shape is preserved.
 | `tropico-3-preferences-sample.xml` | Android | Tropico 3 v1.4.4 | TB520FU dump |
 | `rome-total-war-preferences-sample.xml` | Android | ROME: Total War v2.0.6RC3 | TB520FU dump |
 | `medieval-2-total-war-preferences-sample.xml` | Android | Medieval II: Total War v1.5.3RC2 | TB520FU dump |
+| `rome-barbarian-invasion-preferences-sample.xml` | Android | ROME: Barbarian Invasion v2.0.6RC2 | TB520FU dump |
 
 `preferences-sample.xml` is a sanitized copy of a publicly shared GRID Legends Android file.
 
@@ -81,6 +82,8 @@ rather than a game key.
   same Setup block.
 - **Medieval II: Total War** — `Original Developer/Medieval II Total War/Setup` with the string
   quality ladder in `VideoSettings` and idle/responsive frame caps in the parent Setup block.
+- **ROME: Barbarian Invasion** — `The Creative Assembly Limited/Rome Total War - Barbarian Invasion/
+  Setup`, sharing ROME's live `feral_*` layout and `RomeGraphicsPresets` blocks.
 
 ## Value types seen
 

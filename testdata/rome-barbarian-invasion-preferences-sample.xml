@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<registry>
+    <key name="HKEY_CLASSES_ROOT">
+    </key>
+    <key name="HKEY_CURRENT_CONFIG">
+    </key>
+    <key name="HKEY_CURRENT_USER">
+        <key name="AutoValueRemap">
+            <key name="GPURemap">
+                <key name="keys">
+                    <value name="Software\IndirectX\Direct3D\Config" type="integer">1</value>
+                </key>
+                <key name="values">
+                    <value name="Software\The Creative Assembly Limited\Rome Total War - Barbarian Invasion\Setup\FullScreen" type="integer">1</value>
+                    <value name="Software\The Creative Assembly Limited\Rome Total War - Barbarian Invasion\Setup\ScreenH" type="integer">1</value>
+                    <value name="Software\The Creative Assembly Limited\Rome Total War - Barbarian Invasion\Setup\ScreenW" type="integer">1</value>
+                </key>
+            </key>
+        </key>
+        <key name="RomeGraphicsPresets">
+            <key name="High">
+                <value name="feral_aa_quality" type="integer">0</value>
+                <value name="feral_battle_map_shadows" type="integer">1</value>
+                <value name="feral_building_quality" type="integer">5</value>
+                <value name="feral_campaign_map_shadows" type="integer">1</value>
+                <value name="feral_campaign_terrain_pixel_density" type="integer">23</value>
+                <value name="feral_desync_anim" type="integer">0</value>
+                <value name="feral_detailed_unit_shadows" type="integer">1</value>
+                <value name="feral_effect_quality" type="integer">4</value>
+                <value name="feral_grass_quality" type="integer">75</value>
+                <value name="feral_grass_quantity_modifier" type="binary">000000000000f83f</value>
+                <value name="feral_show_ai_movements" type="integer">1</value>
+                <value name="feral_smoke_dust" type="integer">1</value>
+                <value name="feral_terrain_quality" type="integer">3</value>
+                <value name="feral_unit_quality" type="integer">3</value>
+                <value name="feral_unit_size" type="integer">80</value>
+                <value name="feral_unit_size_massive_enabled" type="integer">0</value>
+                <value name="feral_use_unit_shaders" type="integer">1</value>
+                <value name="feral_vegetation_quality" type="integer">3</value>
+            </key>
+            <key name="Highest">
+                <value name="feral_aa_quality" type="integer">0</value>
+                <value name="feral_battle_map_shadows" type="integer">1</value>
+                <value name="feral_building_quality" type="integer">5</value>
+                <value name="feral_campaign_map_shadows" type="integer">1</value>
+                <value name="feral_campaign_terrain_pixel_density" type="integer">23</value>
+                <value name="feral_desync_anim" type="integer">0</value>
+                <value name="feral_detailed_unit_shadows" type="integer">1</value>
+                <value name="feral_effect_quality" type="integer">4</value>
+                <value name="feral_grass_quality" type="integer">75</value>
+                <value name="feral_grass_quantity_modifier" type="binary">000000000000f83f</value>
+                <value name="feral_show_ai_movements" type="integer">1</value>
+                <value name="feral_smoke_dust" type="integer">1</value>
+                <value name="feral_terrain_quality" type="integer">3</value>
+                <value name="feral_unit_quality" type="integer">3</value>
+                <value name="feral_unit_size" type="integer">160</value>
+                <value name="feral_unit_size_massive_enabled" type="integer">1</value>
+                <value name="feral_use_unit_shaders" type="integer">1</value>
+                <value name="feral_vegetation_quality" type="integer">3</value>
+            </key>
+            <key name="Low">
+                <value name="feral_aa_quality" type="integer">0</value>
+                <value name="feral_battle_map_shadows" type="integer">0</value>
+                <value name="feral_building_quality" type="integer">1</value>
+                <value name="feral_campaign_map_shadows" type="integer">0</value>
+                <value name="feral_campaign_terrain_pixel_density" type="integer">15</value>
+                <value name="feral_desync_anim" type="integer">0</value>
+                <value name="feral_detailed_unit_shadows" type="integer">0</value>
+                <value name="feral_effect_quality" type="integer">0</value>
+                <value name="feral_grass_quality" type="integer">0</value>
+                <value name="feral_grass_quantity_modifier" type="binary">0000000000000040</value>
+                <value name="feral_show_ai_movements" type="integer">0</value>
+                <value name="feral_smoke_dust" type="integer">0</value>
+                <value name="feral_terrain_quality" type="integer">2</value>
+                <value name="feral_unit_quality" type="integer">3</value>
+                <value name="feral_unit_size" type="integer">80</value>
+                <value name="feral_unit_size_massive_enabled" type="integer">0</value>
+                <value name="feral_use_unit_shaders" type="integer">1</value>
+                <value name="feral_vegetation_quality" type="integer">2</value>
+            </key>
+            <key name="Medium">
+                <value name="feral_aa_quality" type="integer">0</value>
+                <value name="feral_battle_map_shadows" type="integer">1</value>
+                <value name="feral_building_quality" type="integer">2</value>
+                <value name="feral_campaign_map_shadows" type="integer">1</value>
+                <value name="feral_campaign_terrain_pixel_density" type="integer">15</value>
+                <value name="feral_desync_anim" type="integer">0</value>
+                <value name="feral_detailed_unit_shadows" type="integer">1</value>
+                <value name="feral_effect_quality" type="integer">4</value>
+                <value name="feral_grass_quality" type="integer">0</value>
+                <value name="feral_grass_quantity_modifier" type="binary">000000000000f83f</value>
+                <value name="feral_show_ai_movements" type="integer">1</value>
+                <value name="feral_smoke_dust" type="integer">1</value>
+                <value name="feral_terrain_quality" type="integer">2</value>
+                <value name="feral_unit_quality" type="integer">3</value>
+                <value name="feral_unit_size" type="integer">80</value>
+                <value name="feral_unit_size_massive_enabled" type="integer">0</value>
+                <value name="feral_use_unit_shaders" type="integer">1</value>
+                <value name="feral_vegetation_quality" type="integer">3</value>
+            </key>
+        </key>
+        <key name="Software">
+            <key name="IndirectX">
+                <key name="Direct3D">
+                    <key name="Config">
+                        <value name="FeralGUIWatermarkText" type="string"></value>
+                        <value name="MaxFramesPerSecond" type="integer">60</value>
+                        <value name="MetalAsyncPipelineStateCreation" type="integer">1</value>
+                        <value name="MetalAsyncShaderCreation" type="integer">1</value>
+                        <value name="MetalUseThreadedEncoding" type="integer">1</value>
+                        <value name="ShowFeralGUIWatermark" type="integer">0</value>
+                        <value name="VulkanUseSeparateSubmitThread" type="integer">1</value>
+                    </key>
+                </key>
+            </key>
+            <key name="MacDoze">
+                <key name="Config">
+                    <value name="BinkWebmUseLibvpx" type="integer">1</value>
+                    <value name="ClearSavesEnabled" type="integer">0</value>
+                    <value name="DisableClearSaveDataAlert" type="integer">0</value>
+                </key>
+            </key>
+            <key name="SystemMonitor">
+                <key name="Config">
+                    <value name="AppVersion" type="integer">33555968</value>
+                    <value name="Backgrounded" type="integer">1</value>
+                    <value name="OSVersion" type="string">17.0</value>
+                    <value name="QuitIntentional" type="integer">0</value>
+                </key>
+            </key>
+            <key name="The Creative Assembly Limited">
+                <key name="Rome Total War - Barbarian Invasion">
+                    <key name="Setup">
+                        <value name="AddSteamCloudAlias" type="integer">1</value>
+                        <value name="AllowAutorotate" type="integer">1</value>
+                        <value name="AllowPausing" type="integer">1</value>
+                        <value name="AllowPushNotifications" type="integer">1</value>
+                        <value name="AllowSendCrashReports" type="integer">0</value>
+                        <value name="AllowSendUsageData" type="integer">0</value>
+                        <value name="AlternativeFormationGesture" type="integer">0</value>
+                        <value name="AvoidARGBBackbuffer" type="integer">0</value>
+                        <value name="BattleCameraCurveBackZoom" type="integer">0</value>
+                        <value name="BattleCameraHorizontalOffsetZoom" type="integer">5</value>
+                        <value name="BattleCameraMaxZoom" type="integer">195</value>
+                        <value name="BattleCameraPanSensitivity" type="integer">100</value>
+                        <value name="BattleCameraSlopeZoom" type="integer">120</value>
+                        <value name="BattleMaxFramesPerSecond" type="integer">60</value>
+                        <value name="BattlePathExtendRadius" type="integer">20</value>
+                        <value name="BattleUnitInfoPeriod" type="integer">1500</value>
+                        <value name="CacheCampaignTerrainTextures" type="integer">1</value>
+                        <value name="CameraSensitivityMultiplier" type="binary">0000000000001440</value>
+                        <value name="CampaignAerialMapVBReplace" type="integer">1</value>
+                        <value name="CampaignCameraMaxHeight" type="integer">100</value>
+                        <value name="CampaignCameraMaxVertical" type="integer">60</value>
+                        <value name="CampaignCameraMinHeight" type="integer">100</value>
+                        <value name="CampaignCameraRateToVertical" type="integer">100</value>
+                        <value name="CampaignCharacterHeightScale" type="integer">200</value>
+                        <value name="CampaignCharacterHitboxScale" type="integer">500</value>
+                        <value name="CampaignDeferAITurnRadarUpdate" type="integer">1</value>
+                        <value name="CampaignFullTexturePageTileUpdate" type="integer">0</value>
+                        <value name="CampaignLockWholeTileModelBuffer" type="integer">1</value>
+                        <value name="CampaignMaxFramesPerSecond" type="integer">60</value>
+                        <value name="CampaignRegenerateBlankCacheEntry" type="integer">0</value>
+                        <value name="CampaignSettlementHitboxScale" type="integer">150</value>
+                        <value name="CardRenderer" type="string">Test GPU</value>
+                        <value name="CloudSyncVersion" type="binary">000000000000f03f</value>
+                        <value name="CloudUseCellularAlert" type="integer">0</value>
+                        <value name="CloudUseDisabledAlert" type="integer">0</value>
+                        <value name="CloudUseOfflineMode" type="integer">1</value>
+                        <value name="ConstrainLiveWindowResize" type="integer">1</value>
+                        <value name="DisableNoActionCursorModifier" type="integer">1</value>
+                        <value name="DisableOSShortcuts" type="integer">1</value>
+                        <value name="DisablePinchSmoothingForCurvedCamera" type="integer">1</value>
+                        <value name="DisplayControlsPrompt" type="integer">1</value>
+                        <value name="DoneMinOS" type="integer">0</value>
+                        <value name="DonePromotional" type="integer">0</value>
+                        <value name="DoneUnsupported" type="integer">1</value>
+                        <value name="DoubleLeftClickDelay" type="integer">200</value>
+                        <value name="EnableExpandingCardBarTablets" type="integer">0</value>
+                        <value name="EnableFeralUI" type="integer">1</value>
+                        <value name="EnableHapticFeedback" type="integer">0</value>
+                        <value name="EnableHelpOverlayCache" type="integer">1</value>
+                        <value name="EnableHighRes" type="integer">1</value>
+                        <value name="EnableModernPathfindingClosestPoint" type="integer">1</value>
+                        <value name="EnableMultiTextureReset" type="integer">0</value>
+                        <value name="EnablePinchThresholdSmoothCameraCurve" type="integer">0</value>
+                        <value name="EnableReducedDoubleLeftClickDelay" type="integer">0</value>
+                        <value name="EnableRomeShell" type="integer">1</value>
+                        <value name="EnableSMOSelectionAssist" type="integer">0</value>
+                        <value name="EnableTutorials" type="integer">0</value>
+                        <value name="EnableVSync" type="integer">1</value>
+                        <value name="EscBackButton" type="integer">1</value>
+                        <value name="feral_aa_quality" type="integer">0</value>
+                        <value name="feral_battle_map_shadows" type="integer">1</value>
+                        <value name="feral_building_quality" type="integer">5</value>
+                        <value name="feral_campaign_map_shadows" type="integer">1</value>
+                        <value name="feral_campaign_terrain_pixel_density" type="integer">23</value>
+                        <value name="feral_desync_anim" type="integer">0</value>
+                        <value name="feral_detailed_unit_shadows" type="integer">1</value>
+                        <value name="feral_effect_quality" type="integer">4</value>
+                        <value name="feral_grass_quality" type="integer">75</value>
+                        <value name="feral_grass_quantity_modifier" type="binary">000000000000f83f</value>
+                        <value name="feral_show_ai_movements" type="integer">1</value>
+                        <value name="feral_smoke_dust" type="integer">1</value>
+                        <value name="feral_terrain_quality" type="integer">3</value>
+                        <value name="feral_unit_quality" type="integer">3</value>
+                        <value name="feral_unit_size" type="integer">160</value>
+                        <value name="feral_unit_size_massive_enabled" type="integer">1</value>
+                        <value name="feral_use_unit_shaders" type="integer">1</value>
+                        <value name="feral_vegetation_quality" type="integer">3</value>
+                        <value name="FeralAnalyticsInstallID" type="string">TEST-INSTALL-ID</value>
+                        <value name="FeralCloudDriveMigrateSaves" type="integer">0</value>
+                        <value name="FeralCloudDriveSuppressMissingXMLAlerts" type="integer">0</value>
+                        <value name="FeralPanDelay" type="binary">000000a09999b93f</value>
+                        <value name="FeralTweakAIChariotAttackBonus" type="integer">-7</value>
+                        <value name="FeralTweakAIChariotDefenceBonus" type="integer">0</value>
+                        <value name="FeralTweakChariotHP" type="integer">0</value>
+                        <value name="FeralUIMode" type="integer">1</value>
+                        <value name="FixedScreenHeight" type="integer">1080</value>
+                        <value name="ForceTouchControls" type="integer">1</value>
+                        <value name="FPSCapMode" type="string">dynamic</value>
+                        <value name="FullScreen" type="integer">1</value>
+                        <value name="GameInstallVersion" type="integer">33555968</value>
+                        <value name="GameInstallVersionString" type="string">ROME: Total War - Barbarian Invasion v2.0.6</value>
+                        <value name="GameInstallVersionWithStages" type="integer">33980416</value>
+                        <value name="GameOptionsDialogShouldShow" type="integer">0</value>
+                        <value name="GameOptionsDialogShown" type="integer">1</value>
+                        <value name="GameSelected" type="integer">2</value>
+                        <value name="GameVersionNew" type="integer">33555968</value>
+                        <value name="GameVersionString" type="string">ROME: Total War - Barbarian Invasion v2.0.6</value>
+                        <value name="GestureThreshold" type="integer">35</value>
+                        <value name="GraphicsPreset" type="string"></value>
+                        <value name="HasSimilarHardwareToSupportedDevice" type="integer">1</value>
+                        <value name="HideBattleUIOnPan" type="integer">1</value>
+                        <value name="HideNotchRecalibration" type="integer">1</value>
+                        <value name="HideSystemUIInFullscreen" type="integer">1</value>
+                        <value name="iCloudSyncing" type="integer">0</value>
+                        <value name="IsAlwaysShowingPatchScreen" type="integer">0</value>
+                        <value name="IsLanguageAutoDetectSelected" type="integer">0</value>
+                        <value name="IsModernPathfindingTapAndHoldOnly" type="integer">1</value>
+                        <value name="IsTabletSmoothingPinchGestureIntensity" type="integer">1</value>
+                        <value name="kBug_Android_Vulkan_Adreno_AvoidBGRATextures" type="integer">1</value>
+                        <value name="LaunchSendUsageDataAnalyticsSent" type="integer">1</value>
+                        <value name="LiveWindowResizePercentage" type="integer">25</value>
+                        <value name="LiveWindowResizeThreshold" type="integer">3</value>
+                        <value name="LoadingScreenRenderOver" type="integer">0</value>
+                        <value name="LockResolution" type="integer">1</value>
+                        <value name="MainMenuFPS" type="integer">30</value>
+                        <value name="MaxFramesPerSecond" type="integer">60</value>
+                        <value name="MinAspectRatioForPhoneUIHeight" type="integer">10</value>
+                        <value name="MinAspectRatioForPhoneUIWidth" type="integer">15</value>
+                        <value name="MinAspectRatioForUnstretchedUI" type="binary">000000000000fc3f</value>
+                        <value name="MinWindowedHeight" type="integer">300</value>
+                        <value name="MinWindowedWidth" type="integer">400</value>
+                        <value name="MouseCursorIconScale" type="binary">0000000000000040</value>
+                        <value name="MouseSensitivityMultiplier" type="binary">0000000000001840</value>
+                        <value name="MultiThreadedCampaignTileUpdates" type="integer">0</value>
+                        <value name="OverrideFOV" type="binary">0000000000c05240</value>
+                        <value name="PatchScreenHasBeenShown" type="integer">0</value>
+                        <value name="PatchScreenMTWOTWStoreURL" type="string">https://play.google.com/store/apps/details?id=com.feralinteractive.medieval2_android</value>
+                        <value name="PatchScreenVersionMinisiteURL" type="string">https://www.feralinteractive.com/xx/games/rometw/android-ios/patch-2-0/</value>
+                        <value name="PauseMoviesOnPause" type="integer">1</value>
+                        <value name="PauseOnSuspend" type="integer">1</value>
+                        <value name="PauseSoundOnPause" type="integer">1</value>
+                        <value name="PauseTimersOnPause" type="integer">1</value>
+                        <value name="PrefillCampaignCache" type="integer">1</value>
+                        <value name="PreviousFeralUIMode" type="integer">1</value>
+                        <value name="PreviousGraphicsPreset" type="string">Highest</value>
+                        <value name="RenderUnderNotch" type="integer">1</value>
+                        <value name="RestoreMouseOnSuspend" type="integer">0</value>
+                        <value name="RmlDPRatioVersion" type="integer">3</value>
+                        <value name="RmlRootVFSPath" type="string">feral</value>
+                        <value name="RomeHelpOverlayCacheDownload" type="integer">0</value>
+                        <value name="ScaleScriptedBattles" type="integer">1</value>
+                        <value name="ScreenDensityMax" type="integer">320</value>
+                        <value name="ScreenH" type="integer">1080</value>
+                        <value name="ScreenW" type="integer">1728</value>
+                        <value name="SeenSpecificationAlertUUIDandroid_adreno830_spec_2_0RC6" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDnotch_calibration_2_0a24" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDRTW_10326_workaround_2_0_2RC1" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDSnapdragon8Gen5_Crash_Workaround_2_0_6RC2" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDUIModeWorkaround" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDUntestedCapableHardware" type="integer">1</value>
+                        <value name="ShouldIgnoreUnsupportedAspect" type="integer">0</value>
+                        <value name="ShouldOverrideNotchSize" type="integer">0</value>
+                        <value name="SizeHitboxToggleCheatConsole" type="integer">110</value>
+                        <value name="SpecificationFirstLaunchCheck" type="integer">1</value>
+                        <value name="SpecificationLastUpdateCheckTime" type="binary">d4f3ec6a00000000</value>
+                        <value name="SpecificationUpdateURL" type="string">https://u1.feralinteractive.com/autoupdate/rometwbi/specifications_android_2_0_6.xml</value>
+                        <value name="UIModeMultiValue" type="string">default</value>
+                        <value name="UniStringCrashObserved" type="integer">0</value>
+                        <value name="UpdateServerDomain" type="string">u1.feralinteractive.com</value>
+                        <value name="UpdateServerPath" type="string">/autoupdate/</value>
+                        <value name="UpdateServerProtocol" type="string">https://</value>
+                        <value name="use_low_res_annotations" type="integer">0</value>
+                        <value name="UseAdviceManual" type="integer">1</value>
+                        <value name="UseDriveSaveSync" type="integer">0</value>
+                        <value name="UseFeralDateTimeFormatter" type="integer">1</value>
+                        <value name="UseGoogleSignIn" type="integer">1</value>
+                        <value name="UseNonDefaultGestureDetectionLogic" type="integer">1</value>
+                        <value name="UseOfflineEvents" type="integer">1</value>
+                        <value name="UsePreciseMousePositionOnPanStart" type="integer">1</value>
+                        <value name="UseStyledWebSupportPage" type="integer">1</value>
+                        <value name="WarnCornerCutout" type="integer">1</value>
+                        <value name="WillScaleOverlayElements" type="integer">0</value>
+                        <value name="WillVerifyLoadedSaves" type="integer">1</value>
+                        <key name="SpecificationAlerts">
+                            <value name="android_base_settings_2_0a24" type="integer">1</value>
+                        </key>
+                    </key>
+                </key>
+            </key>
+            <key name="TheCreativeAssembly">
+                <key name="WinApp">
+                    <key name="progress_bars">
+                        <key name="Rome : Total War - Front End Menu Progress">
+                            <value name="duration_0" type="string">38</value>
+                            <value name="duration_1" type="string">1</value>
+                            <value name="duration_10" type="string">20</value>
+                            <value name="duration_11" type="string">28</value>
+                            <value name="duration_12" type="string">23</value>
+                            <value name="duration_13" type="string">18</value>
+                            <value name="duration_2" type="string">3</value>
+                            <value name="duration_3" type="string">528</value>
+                            <value name="duration_4" type="string">322</value>
+                            <value name="duration_5" type="string">151</value>
+                            <value name="duration_6" type="string">53</value>
+                            <value name="duration_7" type="string">52</value>
+                            <value name="duration_8" type="string">85</value>
+                            <value name="duration_9" type="string">67</value>
+                            <value name="section_count" type="string">14</value>
+                        </key>
+                    </key>
+                </key>
+            </key>
+        </key>
+    </key>
+    <key name="HKEY_LOCAL_MACHINE">
+        <key name="Hardware">
+            <key name="Description">
+                <key name="System">
+                    <key name="CentralProcessor">
+                        <key name="0">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="1">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="2">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="3">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="4">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="5">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="6">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="7">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                    </key>
+                </key>
+            </key>
+        </key>
+        <key name="Software">
+        </key>
+    </key>
+    <key name="HKEY_USERS">
+    </key>
+</registry>

@@ -19,7 +19,8 @@ class GenericDocumentTest {
         "empire-total-war" to "total-war-empire-preferences-sample.xml",
         "tropico-3" to "tropico-3-preferences-sample.xml",
         "rome-total-war" to "rome-total-war-preferences-sample.xml",
-        "medieval-2-total-war" to "medieval-2-total-war-preferences-sample.xml"
+        "medieval-2-total-war" to "medieval-2-total-war-preferences-sample.xml",
+        "rome-barbarian-invasion" to "rome-barbarian-invasion-preferences-sample.xml"
     )
 
     private fun load(name: String): ConfigDocument {
@@ -357,6 +358,22 @@ class GenericDocumentTest {
 
         assertTrue(TitleCatalogEngine.write(doc, root, catalog, catalog.find("Bloom")!!, "0"))
         assertEquals("0", doc.value(root + "VideoSettings", "Bloom")?.text)
+    }
+
+    @Test
+    fun romeBarbarianInvasionUsesTheRomeCatalogueWithItsOwnRoot() {
+        val title = FeralTitles.ALL.first { it.id == "rome-barbarian-invasion" }
+        val catalog = title.titleCatalog!!
+        val root = title.valueRoot!!
+        val doc = load("rome-barbarian-invasion-preferences-sample.xml")
+
+        val resolution = catalog.find("Resolution")!!
+        assertEquals("1728x1080", TitleCatalogEngine.display(doc, root, catalog, resolution))
+        assertEquals("60 fps", TitleCatalogEngine.display(doc, root, catalog, catalog.find("BattleMaxFramesPerSecond")!!))
+        assertEquals("Ultra", TitleCatalogEngine.display(doc, root, catalog, catalog.find("feral_building_quality")!!))
+
+        assertTrue(TitleCatalogEngine.write(doc, root, catalog, catalog.find("feral_battle_map_shadows")!!, "0"))
+        assertEquals("0", doc.value(root, "feral_battle_map_shadows")?.text)
     }
 
     @Test

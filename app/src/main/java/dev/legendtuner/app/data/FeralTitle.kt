@@ -92,6 +92,14 @@ object FeralTitles {
             titleCatalog = Medieval2TotalWarCatalog.catalog
         ),
         FeralTitle(
+            "rome-barbarian-invasion", "ROME: Barbarian Invasion", "com.feralinteractive.rometwbi",
+            listOf(
+                "HKEY_CURRENT_USER", "Software", "The Creative Assembly Limited",
+                "Rome Total War - Barbarian Invasion", "Setup"
+            ),
+            titleCatalog = RomeTotalWarCatalog.catalog
+        ),
+        FeralTitle(
             "tropico-3", "Tropico 3", "com.feralinteractive.tropico3",
             listOf(
                 "HKEY_CURRENT_USER", "Software", "Haemimont Games",

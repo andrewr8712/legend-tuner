@@ -12,7 +12,7 @@ The website agent can append questions here. Keep them specific.
 
 ## Answered
 
-- **Current release:** 1.2.7, versionCode 10, debug-signed.
-- **Supported titles:** 16; see README for packages and control counts.
+- **Current release:** 1.2.8, versionCode 11, debug-signed.
+- **Supported titles:** 17; see README for packages and control counts.
 - **Network/analytics:** none.
 - **Android support:** 8.0+.

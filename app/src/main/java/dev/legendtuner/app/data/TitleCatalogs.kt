@@ -1243,10 +1243,6 @@ object RomeTotalWarCatalog {
     private const val FRAME = "Frame rate"
     private const val QUALITY = "Battle quality"
     private const val CAMPAIGN = "Campaign quality"
-    private val SETUP = listOf(
-        "HKEY_CURRENT_USER", "Software", "The Creative Assembly Limited", "Rome Total War", "Setup"
-    )
-    private val D3D_CONFIG = listOf("HKEY_CURRENT_USER", "Software", "IndirectX", "Direct3D", "Config")
     private val sixTiers = listOf("Very Low", "Low", "Medium", "High", "Very High", "Ultra")
 
     private fun toggle(key: String, label: String, description: String, group: String = QUALITY) =
@@ -1268,43 +1264,42 @@ object RomeTotalWarCatalog {
                 "Resolution", "Screen resolution",
                 "Fullscreen width and height stored in ScreenW and ScreenH. The engine may recalculate the pair on launch.",
                 DISPLAY, ControlKind.RESOLUTION, resolutionChoices(),
-                absolutePath = SETUP, ignoreSuffix = true
             ),
             Control(
                 "FullScreen", "Fullscreen",
                 "Runs the game fullscreen instead of in a windowed surface.",
-                DISPLAY, ControlKind.TOGGLE, intToggle(), absolutePath = SETUP, ignoreSuffix = true
+                DISPLAY, ControlKind.TOGGLE, intToggle()
             ),
             Control(
                 "RenderUnderNotch", "Render under notch",
                 "Extends the render surface below the display cutout on edge-to-edge devices.",
-                DISPLAY, ControlKind.TOGGLE, intToggle(), absolutePath = SETUP, ignoreSuffix = true
+                DISPLAY, ControlKind.TOGGLE, intToggle()
             ),
             Control(
                 "FixedScreenHeight", "Render height",
                 "Internal vertical resolution. Lower values raise frame rate at the cost of sharpness.",
-                DISPLAY, ControlKind.CHOICE, heightChoices(), absolutePath = SETUP, ignoreSuffix = true
+                DISPLAY, ControlKind.CHOICE, heightChoices()
             ),
             Control(
                 "MaxFramesPerSecond", "Engine frame cap",
                 "Main engine frame cap used outside battles and the campaign map.",
-                FRAME, ControlKind.CHOICE, fpsChoices(), absolutePath = SETUP, ignoreSuffix = true,
+                FRAME, ControlKind.CHOICE, fpsChoices(),
                 note = "Engine key in the live Setup block."
             ),
             Control(
                 "BattleMaxFramesPerSecond", "Battle frame cap",
                 "Frame cap applied during real-time battles. Raise this to 60 or 120 to unlock smoother battles.",
-                FRAME, ControlKind.CHOICE, fpsChoices(), absolutePath = SETUP, ignoreSuffix = true
+                FRAME, ControlKind.CHOICE, fpsChoices()
             ),
             Control(
                 "CampaignMaxFramesPerSecond", "Campaign frame cap",
                 "Frame cap applied on the campaign map, which is usually lighter than a full battle.",
-                FRAME, ControlKind.CHOICE, fpsChoices(), absolutePath = SETUP, ignoreSuffix = true
+                FRAME, ControlKind.CHOICE, fpsChoices()
             ),
             Control(
                 "MainMenuFPS", "Menu frame cap",
                 "Frame cap used in menus and the front end. A low cap saves power without affecting battles.",
-                FRAME, ControlKind.CHOICE, fpsChoices(), absolutePath = SETUP, ignoreSuffix = true
+                FRAME, ControlKind.CHOICE, fpsChoices()
             ),
             level(
                 "feral_aa_quality", "Anti-aliasing",
