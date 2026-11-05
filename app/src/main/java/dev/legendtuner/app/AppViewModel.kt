@@ -11,6 +11,7 @@ import androidx.lifecycle.viewModelScope
 import dev.legendtuner.app.access.AccessMode
 import dev.legendtuner.app.access.AccessFactory
 import dev.legendtuner.app.access.FileAccess
+import dev.legendtuner.app.access.FileReplaceException
 import dev.legendtuner.app.access.GamePaths
 import dev.legendtuner.app.access.LocatedFile
 import dev.legendtuner.app.access.RootAccess
@@ -18,6 +19,7 @@ import dev.legendtuner.app.access.RootShell
 import dev.legendtuner.app.access.SafAccess
 import dev.legendtuner.app.access.ShizukuAccess
 import dev.legendtuner.app.access.ShizukuManager
+import dev.legendtuner.app.access.replaceWithRollback
 import dev.legendtuner.app.data.BackupInfo
 import dev.legendtuner.app.data.BackupStore
 import dev.legendtuner.app.data.ConfigDocument
@@ -36,6 +38,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import java.nio.charset.StandardCharsets
 
@@ -68,6 +72,7 @@ data class AppState(
     val loading: Boolean = true,
     val connecting: Boolean = false,
     val saving: Boolean = false,
+    val restoring: Boolean = false,
     val config: LoadedConfig? = null,
     val titleStatuses: List<TitleStatus> = emptyList(),
     val activeTitle: FeralTitle? = null,
@@ -101,6 +106,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     private val app = application
     private val prefs = app.getSharedPreferences("legend_tuner", Context.MODE_PRIVATE)
     private val backupStore = BackupStore(app)
+    private val operationMutex = Mutex()
     private val _state = MutableStateFlow(AppState())
     val state: StateFlow<AppState> = _state.asStateFlow()
 
@@ -111,8 +117,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         _state.value = _state.value.copy(
             gameInstalled = GamePaths.isInstalled(app, FeralTitles.GRID_LEGENDS.packageName),
             shizukuInstalled = ShizukuManager.isInstalled(app),
-            displayInfo = readDisplayInfo(),
-            backups = backupStore.list()
+            displayInfo = readDisplayInfo()
         )
         viewModelScope.launch {
             refreshAccessOptions()
@@ -140,40 +145,67 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun openTitle(title: FeralTitle) {
+        if (_state.value.loading) return
+        if (rejectIfBusy("Opening ${title.label}")) return
+        _state.value = _state.value.copy(
+            loading = true,
+            activeTitle = title,
+            activeFamilyId = null,
+            manualFile = false,
+            message = null,
+            setupVisible = false,
+            showAccessSheet = false,
+            restoring = false,
+            backups = emptyList()
+        )
         viewModelScope.launch {
-            _state.value = _state.value.copy(
-                loading = true,
-                activeTitle = title,
-                activeFamilyId = null,
-                manualFile = false,
-                message = null,
-                setupVisible = false,
-                showAccessSheet = false
-            )
-            val saved = prefs.getString(KEY_MODE, null)
-            val order = buildList {
-                if (saved != null) add(saved)
-                add(AccessMode.ROOT.name)
-                add(AccessMode.DIRECT.name)
-                add(AccessMode.SHIZUKU.name)
-            }.distinct()
+            var lastError: String? = null
+            try {
+                operationMutex.withLock {
+                    val saved = prefs.getString(KEY_MODE, null)
+                    val order = buildList {
+                        if (saved != null) add(saved)
+                        add(AccessMode.ROOT.name)
+                        add(AccessMode.DIRECT.name)
+                        add(AccessMode.SHIZUKU.name)
+                    }.distinct()
 
-            for (mode in order) {
-                val access = when (mode) {
-                    AccessMode.ROOT.name -> AccessFactory.tryRoot(app, title.packageName)
-                    AccessMode.SHIZUKU.name ->
-                        runCatching { ShizukuAccess.connect(app, title.packageName) }.getOrNull()
-                    AccessMode.DIRECT.name -> AccessFactory.tryDirect(app, title.packageName)
-                    else -> null
-                } ?: continue
-                if (loadWith(access, silent = true)) return@launch
+                    for (mode in order) {
+                        val access = try {
+                            when (mode) {
+                                AccessMode.ROOT.name -> AccessFactory.tryRoot(app, title.packageName)
+                                AccessMode.SHIZUKU.name -> ShizukuAccess.connect(app, title.packageName)
+                                AccessMode.DIRECT.name -> AccessFactory.tryDirect(app, title.packageName)
+                                else -> null
+                            }
+                        } catch (e: Exception) {
+                            lastError = e.message ?: "access failed"
+                            null
+                        } ?: continue
+                        if (loadWith(access, silent = true)) return@withLock
+                    }
+
+                    val error = _state.value.message
+                        ?: lastError?.let { UiMessage("Could not open ${title.label}: $it", true) }
+                    _state.value = _state.value.copy(
+                        loading = false,
+                        connecting = false,
+                        setupVisible = true,
+                        message = error
+                    )
+                }
+            } catch (e: Exception) {
+                failLoad("Could not open ${title.label}: ${e.message ?: "unknown error"}")
+            } finally {
+                if (_state.value.loading) {
+                    _state.value = _state.value.copy(loading = false, connecting = false, setupVisible = true)
+                }
             }
-
-            _state.value = _state.value.copy(loading = false, setupVisible = true)
         }
     }
 
     fun openMissingTitle(title: FeralTitle) {
+        if (rejectIfBusy("Opening ${title.label}")) return
         _state.value = _state.value.copy(
             loading = false,
             activeTitle = title,
@@ -181,11 +213,14 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             manualFile = true,
             setupVisible = true,
             showAccessSheet = false,
-            message = null
+            message = null,
+            restoring = false,
+            backups = emptyList()
         )
     }
 
     fun backToPicker() {
+        if (rejectIfBusy("Returning to the title picker")) return
         loaded = null
         _state.value = _state.value.copy(
             config = null,
@@ -194,13 +229,15 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             manualFile = false,
             loading = false,
             saving = false,
+            restoring = false,
             connecting = false,
             dirty = false,
             rawXml = "",
             rawError = null,
             selectedSettingKey = null,
             showAccessSheet = false,
-            setupVisible = false
+            setupVisible = false,
+            backups = emptyList()
         )
         refreshTitleStatuses()
     }
@@ -226,9 +263,18 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     fun connectRoot() {
         val title = _state.value.activeTitle ?: return
+        if (rejectIfBusy("Root connection")) return
+        _state.value = _state.value.copy(connecting = true, showAccessSheet = false)
         viewModelScope.launch {
-            _state.value = _state.value.copy(connecting = true, showAccessSheet = false)
-            connectRootInternal(title, silent = false)
+            try {
+                operationMutex.withLock { connectRootInternal(title, silent = false) }
+            } catch (e: Exception) {
+                failLoad(e.message ?: "Root access failed.")
+            } finally {
+                if (_state.value.connecting) {
+                    _state.value = _state.value.copy(connecting = false)
+                }
+            }
         }
     }
 
@@ -241,7 +287,9 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
                 _state.value = _state.value.copy(
                     connecting = false,
                     setupVisible = true,
-                    message = if (silent) null else UiMessage("Root is available, but the ${title.label} config file was not found.", true)
+                    message = _state.value.message
+                        ?: if (silent) null
+                        else UiMessage("Root is available, but the ${title.label} config could not be loaded.", true)
                 )
             }
             ok
@@ -258,9 +306,18 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     fun connectShizuku() {
         val title = _state.value.activeTitle ?: return
+        if (rejectIfBusy("Shizuku connection")) return
+        _state.value = _state.value.copy(connecting = true, showAccessSheet = false)
         viewModelScope.launch {
-            _state.value = _state.value.copy(connecting = true, showAccessSheet = false)
-            connectShizukuInternal(title, silent = false)
+            try {
+                operationMutex.withLock { connectShizukuInternal(title, silent = false) }
+            } catch (e: Exception) {
+                failLoad(e.message ?: "Shizuku connection failed.")
+            } finally {
+                if (_state.value.connecting) {
+                    _state.value = _state.value.copy(connecting = false)
+                }
+            }
         }
     }
 
@@ -278,7 +335,9 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
                 _state.value = _state.value.copy(
                     connecting = false,
                     setupVisible = true,
-                    message = if (silent) null else UiMessage("Shizuku is connected, but the ${title.label} config file was not found.", true)
+                    message = _state.value.message
+                        ?: if (silent) null
+                        else UiMessage("Shizuku is connected, but the ${title.label} config could not be loaded.", true)
                 )
             }
             ok
@@ -325,30 +384,50 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     fun connectDirect() {
         val title = _state.value.activeTitle ?: return
+        if (rejectIfBusy("Direct connection")) return
+        _state.value = _state.value.copy(connecting = true, showAccessSheet = false)
         viewModelScope.launch {
-            _state.value = _state.value.copy(connecting = true, showAccessSheet = false)
-            val access = withContext(Dispatchers.IO) { AccessFactory.tryDirect(app, title.packageName) }
-            if (access == null) {
-                _state.value = _state.value.copy(
-                    connecting = false,
-                    loading = false,
-                    setupVisible = true,
-                    message = UiMessage(
-                        "Direct access is not available. Android 11+ blocks Android/data for normal apps; use Root, Shizuku, or manual import.",
-                        true
-                    )
-                )
-            } else {
-                loadWith(access, silent = false)
+            try {
+                operationMutex.withLock {
+                    val access = withContext(Dispatchers.IO) { AccessFactory.tryDirect(app, title.packageName) }
+                    if (access == null) {
+                        _state.value = _state.value.copy(
+                            connecting = false,
+                            loading = false,
+                            setupVisible = true,
+                            message = UiMessage(
+                                "Direct access is not available. Android 11+ blocks Android/data for normal apps; use Root, Shizuku, or manual import.",
+                                true
+                            )
+                        )
+                    } else {
+                        if (!loadWith(access, silent = false)) {
+                            _state.value = _state.value.copy(connecting = false, setupVisible = true)
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                failLoad(e.message ?: "Direct access failed.")
+            } finally {
+                if (_state.value.connecting) {
+                    _state.value = _state.value.copy(connecting = false)
+                }
             }
         }
     }
 
     fun importManual(uri: Uri) {
+        if (rejectIfBusy("Importing a file")) return
+        _state.value = _state.value.copy(connecting = true, showAccessSheet = false)
         viewModelScope.launch {
-            _state.value = _state.value.copy(connecting = true, showAccessSheet = false)
-            if (importUri(uri, silent = false)) {
-                _state.value = _state.value.copy(connecting = false)
+            try {
+                operationMutex.withLock { importUri(uri, silent = false) }
+            } catch (e: Exception) {
+                failLoad(e.message ?: "Could not open that file.")
+            } finally {
+                if (_state.value.connecting) {
+                    _state.value = _state.value.copy(connecting = false)
+                }
             }
         }
     }
@@ -375,10 +454,17 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private suspend fun loadWith(access: FileAccess, silent: Boolean): Boolean {
-        val label = _state.value.activeLabel
-        val file = access.locate()
+        val title = _state.value.activeTitle
+        val label = title?.label ?: "Manual file"
+        val scope = title?.id ?: MANUAL_BACKUP_SCOPE
+        val file = try {
+            access.locate()
+        } catch (e: Exception) {
+            failLoad("Could not inspect the $label preferences file: ${e.message ?: "read failed"}")
+            return false
+        }
         if (file == null) {
-            _state.value = _state.value.copy(loading = false, setupVisible = true)
+            _state.value = _state.value.copy(loading = false, connecting = false, setupVisible = true)
             if (!silent) {
                 _state.value = _state.value.copy(
                     message = UiMessage("The $label preferences file was not found. Launch the game once, or use manual mode.", true)
@@ -386,14 +472,34 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             }
             return false
         }
-        val bytes = access.read(file.path)
-        val doc = ConfigDocument.parse(bytes)
-        validateFor(doc)
+        val bytes = try {
+            access.read(file.path)
+        } catch (e: Exception) {
+            failLoad("Could not read the $label preferences file: ${e.message ?: "read failed"}")
+            return false
+        }
+        val doc = try {
+            ConfigDocument.parse(bytes)
+        } catch (e: Exception) {
+            failLoad("Could not parse the $label preferences file: ${e.message ?: "invalid XML"}")
+            return false
+        }
+        try {
+            validateFor(doc, title)
+        } catch (e: Exception) {
+            failLoad("The $label preferences file is not valid: ${e.message ?: "validation failed"}")
+            return false
+        }
         loaded = LoadedConfig(doc, access, file, bytes)
         prefs.edit()
             .putString(KEY_MODE, access.mode.name)
             .apply()
-        val preset = presetFor(doc)
+        val preset = presetFor(doc, title)
+        val backups = try {
+            withContext(Dispatchers.IO) { backupStore.list(scope) }
+        } catch (e: Exception) {
+            emptyList()
+        }
         revision++
         _state.value = _state.value.copy(
             loading = false,
@@ -405,6 +511,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             revision = revision,
             setupVisible = false,
             showAccessSheet = false,
+            backups = backups,
             message = if (silent) null else UiMessage("Connected using ${access.mode.label}.")
         )
         return true
@@ -414,15 +521,35 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
      * GRID Legends presets only. Other titles are flat registries, so a missing preset block must
      * never fail a load; they simply open without a preset model.
      */
-    private fun presetFor(doc: ConfigDocument): Preset =
-        if (_state.value.activeTitle?.legacyGuided == true) doc.ensureActivePresetExists() else Preset.GRAPHICS
+    private fun presetFor(doc: ConfigDocument, title: FeralTitle? = _state.value.activeTitle): Preset =
+        if (title?.legacyGuided == true) doc.ensureActivePresetExists() else Preset.GRAPHICS
 
-    private fun validateFor(doc: ConfigDocument) {
-        if (_state.value.activeTitle?.legacyGuided == true) doc.validate() else doc.validateRegistry()
+    private fun validateFor(doc: ConfigDocument, title: FeralTitle? = _state.value.activeTitle) {
+        if (title?.legacyGuided == true) doc.validate() else doc.validateRegistry()
+    }
+
+    private fun backupScope(): String = _state.value.activeTitle?.id ?: MANUAL_BACKUP_SCOPE
+
+    private fun rejectIfBusy(action: String): Boolean {
+        if (!_state.value.saving && !_state.value.restoring && !_state.value.connecting) return false
+        _state.value = _state.value.copy(
+            message = UiMessage("$action is unavailable while another file operation is running.", true)
+        )
+        return true
+    }
+
+    private fun failLoad(message: String) {
+        _state.value = _state.value.copy(
+            loading = false,
+            connecting = false,
+            setupVisible = true,
+            message = UiMessage(message, true)
+        )
     }
 
     /** Applies a guided control for a catalogued title. Never creates a missing key. */
     fun updateTitleControl(control: Control, token: String) {
+        if (rejectIfBusy("Editing")) return
         val current = loaded ?: return
         val title = _state.value.activeTitle ?: return
         val base = title.titleCatalog ?: return
@@ -454,6 +581,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun selectFamily(id: String) {
+        if (rejectIfBusy("Changing the selected family")) return
         _state.value = _state.value.copy(activeFamilyId = id, selectedSettingKey = null)
     }
 
@@ -472,15 +600,18 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun refreshAccess() {
+        if (rejectIfBusy("Reloading the file")) return
+        _state.value = _state.value.copy(connecting = true)
         viewModelScope.launch {
-            _state.value = _state.value.copy(connecting = true)
             try {
-                refreshAccessOptions()
-                val access = loaded?.access
-                if (access != null) {
-                    loadWith(access, silent = false)
-                } else {
-                    _state.value = _state.value.copy(connecting = false, loading = false)
+                operationMutex.withLock {
+                    refreshAccessOptions()
+                    val access = loaded?.access
+                    if (access != null) {
+                        loadWith(access, silent = false)
+                    } else {
+                        _state.value = _state.value.copy(connecting = false, loading = false)
+                    }
                 }
             } catch (e: Exception) {
                 _state.value = _state.value.copy(
@@ -488,6 +619,10 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
                     loading = false,
                     message = UiMessage("Could not reload: ${e.message}", true)
                 )
+            } finally {
+                if (_state.value.connecting) {
+                    _state.value = _state.value.copy(connecting = false)
+                }
             }
         }
     }
@@ -495,6 +630,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     // --------------------------------------------------------------- editing
 
     fun selectPreset(preset: Preset) {
+        if (rejectIfBusy("Changing the selected preset")) return
         if (loaded == null) return
         _state.value = _state.value.copy(selectedPreset = preset, selectedSettingKey = null)
     }
@@ -504,6 +640,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun updateSetting(def: SettingDef, value: Int) {
+        if (rejectIfBusy("Editing")) return
         val current = loaded ?: return
         val doc = current.document
         val clamped = when (def.type) {
@@ -532,6 +669,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun discardChanges() {
+        if (rejectIfBusy("Discarding changes")) return
         val current = loaded ?: return
         runCatching {
             val doc = ConfigDocument.parse(current.originalBytes)
@@ -553,41 +691,56 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     fun save(applyPreset: Boolean = true) {
         val current = loaded ?: return
-        if (_state.value.saving) return
+        if (rejectIfBusy("Saving")) return
+        val title = _state.value.activeTitle
+        val scope = title?.id ?: MANUAL_BACKUP_SCOPE
+        _state.value = _state.value.copy(saving = true)
         viewModelScope.launch {
-            _state.value = _state.value.copy(saving = true)
             var backup: BackupInfo? = null
             try {
-                val doc = current.document
-                if (applyPreset && _state.value.activeTitle?.legacyGuided == true) doc.applyPresetToLive(_state.value.selectedPreset)
-                validateFor(doc)
-                val bytes = doc.serialize()
+                operationMutex.withLock {
+                    if (loaded !== current) {
+                        _state.value = _state.value.copy(
+                            message = UiMessage("Save cancelled because the active file changed.", true)
+                        )
+                        return@withLock
+                    }
+                    val preset = _state.value.selectedPreset
+                    val doc = current.document
+                    if (applyPreset && title?.legacyGuided == true) doc.applyPresetToLive(preset)
+                    validateFor(doc, title)
+                    val bytes = doc.serialize()
 
-                backup = withContext(Dispatchers.IO) {
-                    backupStore.save(current.originalBytes, _state.value.selectedPreset.keyName)
+                    backup = withContext(Dispatchers.IO) {
+                        backupStore.save(scope, current.originalBytes, preset.keyName)
+                    }
+
+                    withContext(Dispatchers.IO) { current.access.write(current.file.path, bytes) }
+
+                    // Verify the write by reading it back and parsing it.
+                    val verifiedBytes = withContext(Dispatchers.IO) { current.access.read(current.file.path) }
+                    val verified = ConfigDocument.parse(verifiedBytes)
+                    validateFor(verified, title)
+                    if (title?.legacyGuided == true && verified.activePreset() != preset) {
+                        error("Verification failed: active preset did not persist")
+                    }
+
+                    val newFile = withContext(Dispatchers.IO) { current.access.locate() } ?: current.file
+                    loaded = LoadedConfig(verified, current.access, newFile, verifiedBytes)
+                    revision++
+                    val backups = try {
+                        withContext(Dispatchers.IO) { backupStore.list(scope) }
+                    } catch (e: Exception) {
+                        emptyList()
+                    }
+                    _state.value = _state.value.copy(
+                        config = loaded,
+                        dirty = false,
+                        revision = revision,
+                        backups = backups,
+                        message = UiMessage("Saved. Launch ${title?.label ?: "the game"} to apply the changes.")
+                    )
                 }
-
-                withContext(Dispatchers.IO) { current.access.write(current.file.path, bytes) }
-
-                // Verify the write by reading it back and parsing it.
-                val verifiedBytes = withContext(Dispatchers.IO) { current.access.read(current.file.path) }
-                val verified = ConfigDocument.parse(verifiedBytes)
-                validateFor(verified)
-                if (_state.value.activeTitle?.legacyGuided == true && verified.activePreset() != _state.value.selectedPreset) {
-                    error("Verification failed: active preset did not persist")
-                }
-
-                val newFile = withContext(Dispatchers.IO) { current.access.locate() } ?: current.file
-                loaded = LoadedConfig(verified, current.access, newFile, verifiedBytes)
-                revision++
-                _state.value = _state.value.copy(
-                    config = loaded,
-                    saving = false,
-                    dirty = false,
-                    revision = revision,
-                    backups = withContext(Dispatchers.IO) { backupStore.list() },
-                    message = UiMessage("Saved. Launch ${_state.value.activeLabel} to apply the changes.")
-                )
             } catch (e: Exception) {
                 var restored = false
                 if (backup != null) {
@@ -596,7 +749,6 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
                     }.isSuccess
                 }
                 _state.value = _state.value.copy(
-                    saving = false,
                     message = UiMessage(
                         buildString {
                             append("Save failed: ")
@@ -608,11 +760,14 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
                         true
                     )
                 )
+            } finally {
+                _state.value = _state.value.copy(saving = false)
             }
         }
     }
 
     fun forceStopGame() {
+        if (rejectIfBusy("Force-stopping the game")) return
         val current = loaded ?: return
         viewModelScope.launch {
             val ok = runCatching { withContext(Dispatchers.IO) { current.access.forceStop() } }.getOrDefault(false)
@@ -639,6 +794,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun applyRawXml(): Boolean {
+        if (rejectIfBusy("Applying raw XML")) return false
         val current = loaded ?: return false
         return try {
             val doc = ConfigDocument.parse(_state.value.rawXml)
@@ -664,42 +820,121 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     // ---------------------------------------------------------------- backups
 
     fun refreshBackups() {
-        _state.value = _state.value.copy(backups = backupStore.list())
+        viewModelScope.launch {
+            val backups = try {
+                operationMutex.withLock {
+                    withContext(Dispatchers.IO) { backupStore.list(backupScope()) }
+                }
+            } catch (e: Exception) {
+                emptyList()
+            }
+            _state.value = _state.value.copy(backups = backups)
+        }
     }
 
     fun restoreBackup(name: String) {
         val current = loaded ?: return
+        if (rejectIfBusy("Restoring a backup")) return
+        val title = _state.value.activeTitle
+        val scope = title?.id ?: MANUAL_BACKUP_SCOPE
+        _state.value = _state.value.copy(restoring = true)
         viewModelScope.launch {
+            var backupCreated = false
             try {
-                val backupBytes = withContext(Dispatchers.IO) { backupStore.read(name) }
-                val doc = ConfigDocument.parse(backupBytes)
-                validateFor(doc)
-                withContext(Dispatchers.IO) {
-                    backupStore.save(current.originalBytes, "before-restore")
-                    current.access.write(current.file.path, backupBytes)
+                operationMutex.withLock {
+                    if (loaded !== current) {
+                        _state.value = _state.value.copy(
+                            message = UiMessage("Restore cancelled because the active file changed.", true)
+                        )
+                        return@withLock
+                    }
+
+                    val backupBytes = withContext(Dispatchers.IO) { backupStore.read(scope, name) }
+                    val backupDoc = ConfigDocument.parse(backupBytes)
+                    validateFor(backupDoc, title)
+
+                    val draftBytes = if (_state.value.dirty) {
+                        withContext(Dispatchers.IO) { current.document.serialize() }
+                    } else {
+                        current.originalBytes
+                    }
+                    val label = if (_state.value.dirty) "before-restore-draft" else "before-restore"
+
+                    val verifiedBytes = withContext(Dispatchers.IO) {
+                        backupStore.save(scope, draftBytes, label)
+                        backupCreated = true
+                        replaceWithRollback(
+                            access = current.access,
+                            path = current.file.path,
+                            replacement = backupBytes,
+                            rollback = current.originalBytes
+                        ) { bytes ->
+                            val parsed = ConfigDocument.parse(bytes)
+                            validateFor(parsed, title)
+                        }
+                    }
+
+                    val verified = ConfigDocument.parse(verifiedBytes)
+                    validateFor(verified, title)
+                    loaded = current.copy(document = verified, originalBytes = verifiedBytes)
+                    revision++
+                    val backups = try {
+                        withContext(Dispatchers.IO) { backupStore.list(scope) }
+                    } catch (e: Exception) {
+                        emptyList()
+                    }
+                    _state.value = _state.value.copy(
+                        config = loaded,
+                        selectedPreset = presetFor(verified, title),
+                        dirty = false,
+                        revision = revision,
+                        backups = backups,
+                        message = UiMessage("Backup restored.")
+                    )
                 }
-                val verifiedBytes = withContext(Dispatchers.IO) { current.access.read(current.file.path) }
-                val verified = ConfigDocument.parse(verifiedBytes)
-                validateFor(verified)
-                loaded = current.copy(document = verified, originalBytes = verifiedBytes)
-                revision++
-                _state.value = _state.value.copy(
-                    config = loaded,
-                    selectedPreset = presetFor(verified),
-                    dirty = false,
-                    revision = revision,
-                    backups = backupStore.list(),
-                    message = UiMessage("Backup restored.")
-                )
             } catch (e: Exception) {
-                _state.value = _state.value.copy(message = UiMessage("Restore failed: ${e.message}", true))
+                val replaceFailure = e as? FileReplaceException
+                val suffix = when {
+                    replaceFailure?.rolledBack == true && replaceFailure.rollbackVerified ->
+                        ". The previous file was restored."
+                    replaceFailure?.rolledBack == true ->
+                        ". The previous file was rewritten, but verification failed."
+                    backupCreated ->
+                        ". A backup is available in Backups."
+                    else -> ""
+                }
+                val backups = try {
+                    withContext(Dispatchers.IO) { backupStore.list(scope) }
+                } catch (listFailure: Exception) {
+                    emptyList()
+                }
+                _state.value = _state.value.copy(
+                    backups = backups,
+                    message = UiMessage(
+                        "Restore failed: ${e.cause?.message ?: e.message ?: "unknown error"}$suffix",
+                        true
+                    )
+                )
+            } finally {
+                _state.value = _state.value.copy(restoring = false)
             }
         }
     }
 
     fun deleteBackup(name: String) {
-        backupStore.delete(name)
-        _state.value = _state.value.copy(backups = backupStore.list(), message = UiMessage("Backup deleted."))
+        if (rejectIfBusy("Deleting a backup")) return
+        val scope = backupScope()
+        viewModelScope.launch {
+            try {
+                operationMutex.withLock {
+                    withContext(Dispatchers.IO) { backupStore.delete(scope, name) }
+                    val backups = withContext(Dispatchers.IO) { backupStore.list(scope) }
+                    _state.value = _state.value.copy(backups = backups, message = UiMessage("Backup deleted."))
+                }
+            } catch (e: Exception) {
+                _state.value = _state.value.copy(message = UiMessage("Could not delete the backup: ${e.message}", true))
+            }
+        }
     }
 
     fun exportCopy(uri: Uri) {
@@ -755,5 +990,6 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     companion object {
         private const val KEY_MODE = "access_mode"
         private const val KEY_MANUAL_URI = "manual_uri"
+        private const val MANUAL_BACKUP_SCOPE = "manual"
     }
 }

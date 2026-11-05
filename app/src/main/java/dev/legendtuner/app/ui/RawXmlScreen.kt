@@ -51,8 +51,8 @@ fun RawXmlScreen(
             onSettings = onOpenAccess,
             actions = {
                 GhostButton("Reload", onReload)
-                LegendButton("Apply to draft", onApply, enabled = !state.saving)
-                LegendButton("Save", onSave, enabled = !state.saving)
+                LegendButton("Apply to draft", onApply, enabled = !state.saving && !state.restoring && !state.connecting)
+                LegendButton("Save", onSave, enabled = !state.saving && !state.restoring && !state.connecting)
             }
         )
         Spacer(Modifier.height(14.dp))

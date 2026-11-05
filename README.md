@@ -77,7 +77,8 @@ and can be opened from a file pulled from a backup or another device.
 - **Inverted keys handled correctly** — Hitman's `DisableBloom`/`DisableDepthOfField`/
   `DisableFinishFilter` are shown as Bloom/DOF/Finish filter, On meaning enabled.
 - **Raw XML fallback** — full registry editing with validation and unknown-key preservation.
-- **Automatic backups** — the previous file is stored before every save and restore; 12 snapshots kept.
+- **Automatic backups** — the previous file is stored before every save and restore; each title keeps
+  its own 12 snapshots and restores are scoped to that title.
 - **Safe writes** — validate, back up, write, read back, parse, restore on failure.
 - **Manual import keeps the title** — open a GRID Legends file from anywhere and get its guided
   editor, not a generic raw view.

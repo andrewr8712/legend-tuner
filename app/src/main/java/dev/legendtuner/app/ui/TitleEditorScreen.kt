@@ -96,7 +96,7 @@ fun TitleEditorScreen(
                 LegendButton(
                     text = if (state.saving) "Saving…" else "Save changes",
                     onClick = onSave,
-                    enabled = !state.saving && state.dirty
+                    enabled = !state.saving && !state.restoring && !state.connecting && state.dirty
                 )
             }
         )

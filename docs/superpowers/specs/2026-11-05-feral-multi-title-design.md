@@ -547,20 +547,22 @@ explanation is unchanged.
 
 ### 7.9 Backups
 
-`BackupStore` takes a namespace and a root directory:
+`BackupStore` is rooted at `files/backups` and groups snapshots by title id:
 
 ```kotlin
-class BackupStore(private val root: File, private val namespace: String) {
-    constructor(context: Context, namespace: String) : this(File(context.filesDir, "backups"), namespace)
-    // files land in root/<namespace>/, prune(12) per namespace
+class BackupStore(private val rootDir: File) {
+    constructor(context: Context) : this(File(context.filesDir, "backups"))
+    fun save(titleId: String, bytes: ByteArray, label: String): BackupInfo
+    fun list(titleId: String): List<BackupInfo>
+    // files land in rootDir/<titleId>/ and prune(12) is per title
 }
 ```
 
-Namespace is the title's package name, or `manual` for SAF-opened files. One-time migration: when
-the GRID namespace is first opened, move legacy `files/backups/preferences-*.xml` into
-`backups/com.feralinteractive.gridlegends_android/`; idempotent, and a no-op once the directory is
-empty. Backup labels: preset key name when guided, `values` otherwise. The Backups screen only
-lists the active namespace.
+The title id is the active `FeralTitle.id`, or `manual` for SAF-opened files. The Backups screen
+only lists the active title's namespace, and restore/read/delete are rejected through another
+title's directory. Backups created before this scoping are left untouched but are not exposed,
+because they carry no title identity and cannot be restored safely. Backup labels: preset key name
+when guided, `values` otherwise.
 
 ### 7.10 Manifest and naming
 
@@ -628,8 +630,8 @@ Tests:
    changed value is caught by snapshot comparison.
 5. `TitleDiscoveryTest` — the pure state mapping: installed + located → `READABLE`; installed + no
    file → `INSTALLED_ONLY`; open attempt failed → `PRESENT_UNUSABLE`; not installed → omitted.
-6. `BackupStoreTest` — namespace isolation (two namespaces cannot see each other's files), legacy
-   migration runs once and is idempotent, prune keeps 12 per namespace. Runs against a temp dir.
+6. `BackupStoreTest` — title isolation (two titles cannot see or read each other's files), pruning
+   keeps 12 per title, and pre-scoping backups are not exposed. Runs against a temp dir.
 7. `SaveVerificationTest` — snapshot equality detects a removed key, a changed type, a changed
    value, and an unknown-type value.
 8. Existing `ConfigDocumentTest`, `SettingsCatalogTest`, `HeightDropdownTest` pass unchanged except
@@ -640,7 +642,7 @@ bounded number of `su` calls for a full discovery pass, measured on the TB520FU.
 
 Manual verification on the TB520FU: GRID Legends guided flow end-to-end (preset change, fixed
 height, save, relaunch); one generic title (Alien: Isolation or GRID Autosport) browse → edit →
-save → relaunch; manual SAF path on a copied file; migration of existing 1.1.0 backups.
+save → relaunch; manual SAF path on a copied file; backup isolation across two titles.
 
 ## 9. Risks
 
@@ -654,7 +656,7 @@ save → relaunch; manual SAF path on a copied file; migration of existing 1.1.0
 | Package name reaching a shell command | Force-stop accepts only `FeralTitles.CANDIDATES` packages |
 | Package visibility hides installed games | Explicit `<queries>` entries; no `QUERY_ALL_PACKAGES` |
 | Scoped storage makes a readable file look absent | Card copy says "not readable with the current access mode"; access sheet reachable from the picker |
-| Two games' backups collide | Per-namespace directories, migrated legacy folder |
+| Two games' backups collide | Per-title directories; legacy unlabelled backups are hidden |
 | Generic editor encourages blind binary edits | Type badge, hex validation, monospace field, backup + verify behind every save |
 
 ## 10. Left to the builder

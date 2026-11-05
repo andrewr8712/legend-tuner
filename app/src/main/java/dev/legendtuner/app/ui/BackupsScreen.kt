@@ -27,7 +27,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -51,6 +50,8 @@ fun BackupsScreen(
     onOpenAccess: () -> Unit
 ) {
     var pendingDelete by remember { mutableStateOf<BackupInfo?>(null) }
+    var pendingRestore by remember { mutableStateOf<BackupInfo?>(null) }
+    val busy = state.saving || state.restoring || state.connecting
 
     Column(
         Modifier
@@ -64,7 +65,7 @@ fun BackupsScreen(
             mode = state.accessMode,
             onSettings = onOpenAccess,
             actions = {
-                GhostButton("Export copy", onExport, icon = LegendIcons.Download)
+                GhostButton("Export copy", onExport, icon = LegendIcons.Download, enabled = !busy)
             }
         )
         Spacer(Modifier.height(16.dp))
@@ -75,7 +76,9 @@ fun BackupsScreen(
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(
-                "A backup is written before every save, restore and manual write. The 12 most recent snapshots are kept. Restoring also backs up the current file first.",
+                "A backup is written before every save, restore and manual write. " +
+                    "The 12 most recent snapshots for ${state.activeLabel} are kept. " +
+                    "Restoring also backs up the current file first.",
                 style = MaterialTheme.typography.bodySmall.copy(fontSize = 9.5.sp, lineHeight = 15.sp),
                 color = Muted,
                 modifier = Modifier.padding(13.dp)
@@ -100,11 +103,42 @@ fun BackupsScreen(
                 verticalArrangement = Arrangement.spacedBy(9.dp)
             ) {
                 items(state.backups, key = { it.name }) { backup ->
-                    BackupRow(backup, onRestore) { pendingDelete = it }
+                    BackupRow(
+                        backup = backup,
+                        enabled = !busy,
+                        onRestore = { pendingRestore = backup },
+                        onDelete = { pendingDelete = it }
+                    )
                 }
                 item { Spacer(Modifier.height(18.dp)) }
             }
         }
+    }
+
+    if (pendingRestore != null) {
+        val backup = pendingRestore!!
+        AlertDialog(
+            onDismissRequest = { pendingRestore = null },
+            containerColor = Surface,
+            titleContentColor = Ink,
+            textContentColor = Muted,
+            title = { Text("Restore this backup?") },
+            text = {
+                Text(
+                    "This replaces ${state.activeLabel}'s preferences with the snapshot from " +
+                        "${backup.displayTime()}. A backup of the current file is written first."
+                )
+            },
+            confirmButton = {
+                TextButton(onClick = {
+                    pendingRestore = null
+                    onRestore(backup.name)
+                }) { Text("Restore", color = Lime) }
+            },
+            dismissButton = {
+                TextButton(onClick = { pendingRestore = null }) { Text("Cancel", color = Muted) }
+            }
+        )
     }
 
     if (pendingDelete != null) {
@@ -131,16 +165,14 @@ fun BackupsScreen(
 @Composable
 private fun BackupRow(
     backup: BackupInfo,
-    onRestore: (String) -> Unit,
+    enabled: Boolean,
+    onRestore: () -> Unit,
     onDelete: (BackupInfo) -> Unit
 ) {
     Panel(Modifier.fillMaxWidth()) {
         Row(Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
             Box(
-                Modifier
-                    .size(38.dp)
-                    .padding(0.dp)
-                    .then(Modifier),
+                Modifier.size(38.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Surface(
@@ -168,10 +200,11 @@ private fun BackupRow(
                     maxLines = 1
                 )
             }
-            GhostButton("Restore", { onRestore(backup.name) }, icon = LegendIcons.Restore)
+            GhostButton("Restore", onRestore, icon = LegendIcons.Restore, enabled = enabled)
             Spacer(Modifier.size(6.dp))
             Surface(
                 onClick = { onDelete(backup) },
+                enabled = enabled,
                 color = BgElevated,
                 shape = RoundedCornerShape(9.dp),
                 border = BorderStroke(1.dp, Line)

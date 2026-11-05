@@ -111,7 +111,8 @@ fun EditorScreen(
                 LegendButton(
                     text = if (state.saving) "Saving…" else "Save changes",
                     onClick = onSave,
-                    enabled = !state.saving && (state.dirty || state.selectedPreset != doc.activePreset())
+                    enabled = !state.saving && !state.restoring && !state.connecting &&
+                        (state.dirty || state.selectedPreset != doc.activePreset())
                 )
                 Box {
                     IconButton(onClick = { menuOpen = true }) {

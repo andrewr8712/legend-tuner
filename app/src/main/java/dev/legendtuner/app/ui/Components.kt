@@ -372,10 +372,12 @@ fun GhostButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    icon: ImageVector? = null
+    icon: ImageVector? = null,
+    enabled: Boolean = true
 ) {
     Surface(
         onClick = onClick,
+        enabled = enabled,
         modifier = modifier,
         color = BgElevated,
         shape = RoundedCornerShape(9.dp),
@@ -386,8 +388,8 @@ fun GhostButton(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(6.dp)
         ) {
-            if (icon != null) Icon(icon, null, tint = Muted, modifier = Modifier.size(14.dp))
-            Text(text, style = MaterialTheme.typography.labelMedium, color = Muted)
+            if (icon != null) Icon(icon, null, tint = if (enabled) Muted else Dim, modifier = Modifier.size(14.dp))
+            Text(text, style = MaterialTheme.typography.labelMedium, color = if (enabled) Muted else Dim)
         }
     }
 }
