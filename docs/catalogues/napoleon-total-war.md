@@ -39,9 +39,12 @@ settings; those are authored from the key. The game does ship the option words
 | Key | Label | Description | Observed |
 |---|---|---|---|
 | `GraphicsQuality` | Quality preset | Index written by the preset picker; individual GraphicsSettings values are what the engine reads. | `0` |
-| `GameResolutionMultiplier` | Resolution multiplier | Internal render scale relative to the panel. | `1.000000` |
+| `GameResolutionMultiplier` | Resolution scale | Internal render scale relative to the panel; 50/75/100% choices. | `1.000000` |
 | `FixedScreenHeight` | Render height | Internal vertical resolution. | `1080` |
-| `FramerateManager*` keys | Frame-rate manager | Idle/responsive caps for campaign and battle, with `_Battery` variants for the battery-saver mode. | `30`–`60` |
+| `EnableFramerateManager` | Dynamic frame-rate manager | Master toggle for the engine's idle/responsive FPS manager. Turning it off may remove soft caps; VSync or the display mode may still limit the result. | `1` |
+| `FramerateManagerBattleResponsiveFPS` | Battle frame cap | Maximum responsive FPS during battles. Raise to 60/120 to unlock the 30 FPS battle cap. | `30` |
+| `FramerateManagerCampaignResponsiveFPS` | Campaign frame cap | Maximum responsive FPS on the campaign map. | `30` |
+| `FramerateManager*` keys | Other frame-rate manager keys | Idle caps and `_Battery` variants remain engine-internal where not exposed. | `30`–`60` |
 | `HideSystemUIInFullscreen` | Immersive mode | Hides Android system bars in fullscreen. | `1` |
 
 ## Tooltips the game does ship

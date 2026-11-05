@@ -399,7 +399,10 @@ private fun ControlInspector(
 
             Spacer(Modifier.height(16.dp))
             Text(
-                "Stored key: ${catalog.keyFor(control)}",
+                "Stored key: ${
+                    if (control.kind == ControlKind.RESOLUTION) "${control.widthKey} / ${control.heightKey}"
+                    else catalog.keyFor(control)
+                }",
                 style = MaterialTheme.typography.labelSmall.copy(
                     fontFamily = FontFamily.Monospace,
                     fontSize = 8.sp,

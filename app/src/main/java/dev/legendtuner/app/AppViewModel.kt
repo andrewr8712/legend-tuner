@@ -566,7 +566,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             _state.value = _state.value.copy(dirty = true, revision = revision)
             return
         }
-        if (current.document.value(root + catalog.pathFor(control), catalog.keyFor(control)) == null) {
+        if (current.document.value(TitleCatalogEngine.targetPath(root, catalog, control), catalog.keyFor(control)) == null) {
             _state.value = _state.value.copy(
                 message = UiMessage("${control.label} is not stored in this file, so it was left untouched.", true)
             )

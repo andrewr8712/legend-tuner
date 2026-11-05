@@ -30,6 +30,8 @@
                 <key name="Lara Croft and the Temple of Osiris">
                     <key name="Graphics">
                         <value name="PerformancePresetAvailable" type="integer">1</value>
+                        <value name="FullscreenWidth" type="integer">1728</value>
+                        <value name="FullscreenHeight" type="integer">1080</value>
                         <key name="BatterySaverPreset">
                             <value name="AmbientOcclusionQuality" type="integer">1</value>
                             <value name="Bloom" type="integer">1</value>

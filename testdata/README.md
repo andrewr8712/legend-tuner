@@ -48,9 +48,10 @@ rather than a game key.
 - **Lara Croft: Guardian of Light** — `Lara Croft and the Guardian of Light` → `Setup` (91 flat
   integers) plus `DynamicResolutionScaling`. `GraphicsPreset` is an integer index; the file has
   1,895 values overall, most of them outside the graphics block.
-- **Lara Croft: Temple of Osiris** — `Lara Croft and the Temple of Osiris` → `Setup` (136 values):
-  `ShadowQuality`, `ReflectionQuality`, `AmbientOcclusionQuality`, `DOFQuality`, `SSAAQuality`,
-  `TextureQuality`, `TextureFiltering`, `VSync`, `MaxFramesPerSecond`. Flat, no presets.
+- **Lara Croft: Temple of Osiris** — `Lara Croft and the Temple of Osiris` has a Feral `Setup`
+  block (136 values) and a Crystal Dynamics `Graphics` block with `BatterySaverPreset`,
+  `GraphicsPreset` and `PerformancePreset`, including `FullscreenWidth`/`FullscreenHeight`
+  (1728×1080 in the committed sample) and `MaxFramesPerSecond`.
 
 ## Value types seen
 

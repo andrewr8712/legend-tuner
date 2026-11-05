@@ -27,7 +27,12 @@ data class Control(
     /** Engine-level keys (render height) have no preset suffix even when a family is selected. */
     val ignoreSuffix: Boolean = false,
     /** Keys that live outside the preset block (ScreenW/ScreenH) skip the family path. */
-    val ignoreFamilyPath: Boolean = false
+    val ignoreFamilyPath: Boolean = false,
+    /** Full path from HKEY_CURRENT_USER for engine controls that live in another registry subtree. */
+    val absolutePath: List<String>? = null,
+    /** Resolution controls can target a title-specific pair instead of ScreenW/ScreenH. */
+    val widthKey: String = "ScreenW",
+    val heightKey: String = "ScreenH"
 ) {
     /**
      * The token the user is actually choosing after [invert] is applied. The stored
@@ -108,8 +113,12 @@ data class TitleCatalog(
 }
 
 object TitleCatalogEngine {
+    /** Resolves an absolute engine path when present, otherwise the title root plus catalogue path. */
+    fun targetPath(root: List<String>, catalog: TitleCatalog, control: Control): List<String> =
+        control.absolutePath ?: root + catalog.pathFor(control)
+
     fun value(doc: ConfigDocument, root: List<String>, catalog: TitleCatalog, control: Control): ConfigDocument.ConfigValue? =
-        doc.value(root + catalog.pathFor(control), catalog.keyFor(control))
+        doc.value(targetPath(root, catalog, control), catalog.keyFor(control))
 
     fun tokens(raw: String?): List<String> =
         raw?.split(',')?.map { it.trim() }?.filter { it.isNotEmpty() } ?: emptyList()
@@ -136,11 +145,11 @@ object TitleCatalogEngine {
         return control.labelFor(token, raw)
     }
 
-    /** ScreenW/ScreenH pair, surfaced as one "1280x800" token. */
+    /** A configured width/height pair, surfaced as one "1280x800" token. */
     fun resolutionToken(doc: ConfigDocument, root: List<String>, catalog: TitleCatalog, control: Control): String? {
-        val path = root + catalog.pathFor(control)
-        val width = doc.value(path, "ScreenW")?.firstIntOrNull ?: return null
-        val height = doc.value(path, "ScreenH")?.firstIntOrNull ?: return null
+        val path = targetPath(root, catalog, control)
+        val width = doc.value(path, control.widthKey)?.firstIntOrNull ?: return null
+        val height = doc.value(path, control.heightKey)?.firstIntOrNull ?: return null
         return "${width}x$height"
     }
 
@@ -155,10 +164,10 @@ object TitleCatalogEngine {
         if (parts.size != 2) return false
         val width = parts[0].trim().toIntOrNull() ?: return false
         val height = parts[1].trim().toIntOrNull() ?: return false
-        val path = root + catalog.pathFor(control)
-        if (doc.value(path, "ScreenW") == null || doc.value(path, "ScreenH") == null) return false
-        val okWidth = doc.setValue(path, "ScreenW", width.toString())
-        val okHeight = doc.setValue(path, "ScreenH", height.toString())
+        val path = targetPath(root, catalog, control)
+        if (doc.value(path, control.widthKey) == null || doc.value(path, control.heightKey) == null) return false
+        val okWidth = doc.setValue(path, control.widthKey, width.toString())
+        val okHeight = doc.setValue(path, control.heightKey, height.toString())
         return okWidth && okHeight
     }
 
@@ -171,7 +180,7 @@ object TitleCatalogEngine {
     ): Boolean {
         val stored = if (control.invert) flip(token) else token
         val text = if (control.triple) "$stored, $stored, $stored" else stored
-        return doc.setValue(root + catalog.pathFor(control), catalog.keyFor(control), text)
+        return doc.setValue(targetPath(root, catalog, control), catalog.keyFor(control), text)
     }
 }
 
@@ -193,6 +202,16 @@ internal val commonFrameRates = listOf(24, 30, 40, 45, 48, 60, 72, 90, 120, 144)
 
 internal fun heightChoices(): List<ControlChoice> =
     commonScreenHeights.map { ControlChoice(it.toString(), "$it px") }
+
+internal fun resolutionChoices(): List<ControlChoice> = listOf(
+    ControlChoice("1280x720", "1280 × 720"),
+    ControlChoice("1280x800", "1280 × 800"),
+    ControlChoice("1600x900", "1600 × 900"),
+    ControlChoice("1920x1080", "1920 × 1080"),
+    ControlChoice("1920x1200", "1920 × 1200"),
+    ControlChoice("2560x1440", "2560 × 1440"),
+    ControlChoice("2560x1600", "2560 × 1600")
+)
 
 internal fun fpsChoices(): List<ControlChoice> =
     commonFrameRates.map { ControlChoice(it.toString(), "$it fps") }
@@ -379,6 +398,7 @@ object AlienIsolationCatalog {
     private const val IMAGE = "Image quality"
     private const val EFFECTS = "Effects"
     private const val DISPLAY = "Display"
+    private val DIRECT3D_CONFIG = listOf("HKEY_CURRENT_USER", "Software", "IndirectX", "Direct3D", "Config")
 
     private fun toggle(key: String, label: String, description: String, group: String) =
         Control(
@@ -447,6 +467,15 @@ object AlienIsolationCatalog {
                 "FullScreen", "Fullscreen",
                 "Engine fullscreen flag. On Android the surface is always full-bleed; kept for parity with the desktop config.",
                 DISPLAY
+            ),
+            Control(
+                "MaxFramesPerSecond", "Frame rate cap",
+                "Engine-level FPS cap stored outside the Alien Setup block. 60 unlocks the 30 FPS mode; 120 is useful on a high-refresh display.",
+                DISPLAY, ControlKind.CHOICE,
+                listOf(ControlChoice("30", "30 fps"), ControlChoice("60", "60 fps"), ControlChoice("120", "120 fps")),
+                absolutePath = DIRECT3D_CONFIG,
+                ignoreSuffix = true,
+                note = "Engine key in IndirectX/Direct3D/Config. The game may re-clamp on launch."
             ),
             Control(
                 "FixedScreenHeight", "Render height",

@@ -166,13 +166,19 @@ object SaintsRowCatalog {
 
 object NapoleonCatalog {
     private const val QUALITY = "Battle quality"
+    private const val FRAME = "Frame rate"
     private const val DISPLAY = "Display"
+    private val DIRECT3D_CONFIG = listOf("HKEY_CURRENT_USER", "Software", "IndirectX", "Direct3D", "Config")
+    private val SETUP = listOf(
+        "HKEY_CURRENT_USER", "Software", "The Creative Assembly Limited",
+        "Napoleon Total War - Mobile", "Setup"
+    )
 
     private fun q(key: String, label: String, description: String) =
         Control(key, label, description, QUALITY, ControlKind.CHOICE, intLevels(3))
 
     val catalog = TitleCatalog(
-        groups = listOf(QUALITY, DISPLAY),
+        groups = listOf(QUALITY, FRAME, DISPLAY),
         pathSuffix = listOf("GraphicsSettings"),
         controls = listOf(
             q(
@@ -243,6 +249,49 @@ object NapoleonCatalog {
                 "gfx_dead_unit_render_time", "Dead unit render time",
                 "Seconds corpses stay on the field. Not a quality setting, but a battle-load control.",
                 DISPLAY, ControlKind.STEPPER, min = 0, max = 10, suffix = " s"
+            ),
+            Control(
+                "EnableFramerateManager", "Dynamic frame-rate manager",
+                "The engine's idle/responsive FPS manager. Turning it off may remove its soft caps; the game may still be limited by VSync or the display mode.",
+                FRAME, ControlKind.TOGGLE, intToggle(),
+                absolutePath = DIRECT3D_CONFIG,
+                ignoreSuffix = true,
+                note = "Engine key in IndirectX/Direct3D/Config."
+            ),
+            Control(
+                "FramerateManagerBattleResponsiveFPS", "Battle frame cap",
+                "Maximum responsive frame rate during battles. Raise this to 60 or 120 to unlock the 30 FPS battle cap.",
+                FRAME, ControlKind.CHOICE, fpsChoices(),
+                absolutePath = DIRECT3D_CONFIG,
+                ignoreSuffix = true,
+                note = "Engine key in IndirectX/Direct3D/Config."
+            ),
+            Control(
+                "FramerateManagerCampaignResponsiveFPS", "Campaign frame cap",
+                "Maximum responsive frame rate on the campaign map. The campaign is usually lighter than a full battle.",
+                FRAME, ControlKind.CHOICE, fpsChoices(),
+                absolutePath = DIRECT3D_CONFIG,
+                ignoreSuffix = true,
+                note = "Engine key in IndirectX/Direct3D/Config."
+            ),
+            Control(
+                "FixedScreenHeight", "Render height",
+                "Internal vertical resolution. Lower values raise frame rate at the cost of sharpness.",
+                DISPLAY, ControlKind.CHOICE, heightChoices(),
+                absolutePath = SETUP,
+                ignoreSuffix = true
+            ),
+            Control(
+                "GameResolutionMultiplier", "Resolution scale",
+                "Internal render scale relative to the panel. 100% is native; lower values trade sharpness for frame rate.",
+                DISPLAY, ControlKind.CHOICE,
+                listOf(
+                    ControlChoice("0.500000", "50%"),
+                    ControlChoice("0.750000", "75%"),
+                    ControlChoice("1.000000", "100%")
+                ),
+                absolutePath = SETUP,
+                ignoreSuffix = true
             )
         )
     )
@@ -459,6 +508,10 @@ object LaraGolCatalog {
 object LaraTooCatalog {
     private const val IMAGE = "Image quality"
     private const val DISPLAY = "Display"
+    private val GRAPHICS = listOf(
+        "HKEY_CURRENT_USER", "Software", "Crystal Dynamics",
+        "Lara Croft and the Temple of Osiris", "Graphics"
+    )
 
     private fun q(key: String, label: String, description: String) =
         Control(key, label, description, IMAGE, ControlKind.CHOICE, intLevels(3))
@@ -505,6 +558,16 @@ object LaraTooCatalog {
                 note = "Only 4 is observed; the index order is unverified."
             ),
 
+            Control(
+                "Resolution", "Screen resolution",
+                "Fullscreen width and height the game writes into FullscreenWidth/FullscreenHeight. The engine may recalculate the pair on launch.",
+                DISPLAY, ControlKind.RESOLUTION, resolutionChoices(),
+                absolutePath = GRAPHICS,
+                widthKey = "FullscreenWidth",
+                heightKey = "FullscreenHeight",
+                ignoreSuffix = true,
+                ignoreFamilyPath = true
+            ),
             Control(
                 "VSync", "VSync",
                 "Locks presentation to the display refresh; removes tearing, adds latency.",
