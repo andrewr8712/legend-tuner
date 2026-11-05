@@ -217,6 +217,7 @@ docs/catalogues/    per-title control inventories and provenance
 docs/superpowers/specs/  multi-title design record
 testdata/           twelve sanitised real preferences samples
 docs/WAYDROID-TESTING.md  Waydroid ADB setup and automated UI smoke
+docs/website/       website agent brief, design tokens, mark and current screenshot
 scripts/            Waydroid UI smoke harness
 docs/screenshots/   real device captures used in this README
 prototype/          tablet design prototype and screenshots
