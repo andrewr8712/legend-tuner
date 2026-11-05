@@ -1,6 +1,6 @@
 # Changelog — 1.2.2 (Config Tuner)
 
-> Supersedes [1.2.1](CHANGELOG-1.2.1.md).
+> Supersedes [1.2.1](CHANGELOG-1.2.1.md); superseded by [1.2.3](CHANGELOG-1.2.3.md).
 
 **Version:** 1.2.2 · versionCode 5
 **Package:** `dev.legendtuner.app.debug` (debug build; same package/key as 1.2.1)
