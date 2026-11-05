@@ -1,0 +1,73 @@
+name: Deploy website
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/website/**"
+      - ".github/workflows/pages.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "docs/website/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    name: Validate markup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: html-validate
+        run: |
+          npx --yes html-validate@9 \
+            docs/website/index.html \
+            docs/website/brand/index.html \
+            docs/website/404.html
+
+  deploy:
+    name: Deploy to Pages
+    needs: validate
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Keep only the served files
+        run: |
+          rm -f docs/website/*.md
+          ls -R docs/website | head -50
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/website
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
