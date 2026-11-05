@@ -16,7 +16,8 @@
   /* Text */
   --ct-ink: #F3F5EF;
   --ct-muted: #98A092;
-  --ct-dim: #5E675D;
+  --ct-dim: #5E675D;       /* app metadata */
+  --ct-dim-web: #7C857A;   /* web-only AA-safe metadata */
 
   /* Signal */
   --ct-lime: #D7FF3F;

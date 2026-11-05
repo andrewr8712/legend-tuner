@@ -134,7 +134,7 @@ Tokens come from `docs/website/design-tokens.css` unchanged — the site must no
 
 - **Surfaces:** canvas `#070908`, panel `#0C0F0B`, card `#121512`, raised `#171B17`, inset `#1D221B`.
 - **Lines:** `#272D24` (structure), `#20251F` (subtle).
-- **Ink:** `#F3F5EF` body, `#98A092` secondary, `#5E675D` metadata only (never body copy).
+- **Ink:** `#F3F5EF` body, `#98A092` secondary, `#5E675D` app metadata. The website uses `#7C857A` for small metadata so it reaches AA (5.2:1); keep that distinction documented.
 - **Signal:** lime `#D7FF3F`; dim `#B9DD31` for hover; wash `rgba(215,255,63,.08)` for selection;
   text-on-lime `#11150B` at 12.6:1.
 - **States:** amber `#FFB454` for caveats, red `#FF6259` for destructive/stop.
