@@ -7,8 +7,9 @@ plugins {
 }
 
 // A public clone has no signing key. In that case Gradle uses its normal
-// machine-local debug key. Maintainers can provide keystore.properties locally
-// to reproduce the signed release build; the key and password are never committed.
+// machine-local debug key for debug builds and leaves the release unsigned.
+// Maintainers can provide keystore.properties locally to sign both debug and
+// release builds with the same local identity; the key and password are never committed.
 val localKeystorePropertiesFile = rootProject.file("keystore.properties")
 val localKeystoreProperties = Properties().apply {
     if (localKeystorePropertiesFile.exists()) {
@@ -34,7 +35,7 @@ android {
 
     signingConfigs {
         if (hasLocalKeystore) {
-            create("localDebug") {
+            create("local") {
                 storeFile = rootProject.file(
                     localKeystoreProperties.getProperty("storeFile", "keystore/debug.jks")
                 )
@@ -50,13 +51,20 @@ android {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
             if (hasLocalKeystore) {
-                signingConfig = signingConfigs.getByName("localDebug")
+                signingConfig = signingConfigs.getByName("local")
             }
         }
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            if (hasLocalKeystore) {
+                signingConfig = signingConfigs.getByName("local")
+            }
         }
+    }
+
+    sourceSets {
+        getByName("test").resources.srcDir(rootProject.file("testdata"))
     }
 
     buildFeatures {

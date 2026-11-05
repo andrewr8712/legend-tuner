@@ -163,13 +163,15 @@ cd legend-tuner
 export JAVA_HOME=/path/to/jdk
 export ANDROID_HOME=/path/to/android-sdk
 
-./gradlew :app:testDebugUnitTest :app:assembleDebug
+./gradlew :app:testDebugUnitTest :app:lintDebug :app:assembleDebug
 ```
 
 The APK is generated at `app/build/outputs/apk/debug/app-debug.apk`.
 
-A clean checkout uses Gradle's machine-local debug signing key. Maintainers can supply a local
-`keystore.properties` (ignored by git) to reproduce the release signing identity; see
+A clean checkout uses Gradle's machine-local debug signing key and leaves the release unsigned.
+Maintainers can supply a local `keystore.properties` (ignored by git) to sign both debug and
+release builds with the same local identity, then run `./gradlew :app:assembleRelease`; the signed
+artifact is `app/build/outputs/apk/release/app-release.apk`. See
 [keystore/README.md](keystore/README.md).
 
 ## Tests
