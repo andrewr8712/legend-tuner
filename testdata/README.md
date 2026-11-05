@@ -23,6 +23,7 @@ have been replaced; every key, type and value shape is preserved.
 | `rome-total-war-preferences-sample.xml` | Android | ROME: Total War v2.0.6RC3 | TB520FU dump |
 | `medieval-2-total-war-preferences-sample.xml` | Android | Medieval II: Total War v1.5.3RC2 | TB520FU dump |
 | `rome-barbarian-invasion-preferences-sample.xml` | Android | ROME: Barbarian Invasion v2.0.6RC2 | TB520FU dump |
+| `rome-alexander-preferences-sample.xml` | Android | ROME: Alexander v2.0.6RC2 | TB520FU dump |
 
 `preferences-sample.xml` is a sanitized copy of a publicly shared GRID Legends Android file.
 
@@ -84,6 +85,8 @@ rather than a game key.
   quality ladder in `VideoSettings` and idle/responsive frame caps in the parent Setup block.
 - **ROME: Barbarian Invasion** — `The Creative Assembly Limited/Rome Total War - Barbarian Invasion/
   Setup`, sharing ROME's live `feral_*` layout and `RomeGraphicsPresets` blocks.
+- **ROME: Alexander** — `The Creative Assembly Limited/Rome Total War - Alexander/Setup`, sharing the
+  same live layout and stored presets as ROME.
 
 ## Value types seen
 

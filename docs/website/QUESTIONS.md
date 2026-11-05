@@ -51,7 +51,7 @@ Each has a default in italics; “default” is a valid answer for any of them.
 
 ## Answered — app facts
 
-- **Current release:** 1.2.8, versionCode 11, debug-signed.
-- **Supported titles:** 17; see README for packages and control counts.
+- **Current release:** 1.2.9, versionCode 12, debug-signed.
+- **Supported titles:** 18; see README for packages and control counts.
 - **Network/analytics:** none.
 - **Android support:** 8.0+.
