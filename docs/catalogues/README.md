@@ -21,6 +21,7 @@ keys and options for selectable controls.
 | Company of Heroes | `company-of-heroes.md` | `CompanyOfHeroesCatalog` | 24 | flat, split roots |
 | Total War: EMPIRE | `total-war-empire.md` | `EmpireTotalWarCatalog` | 28 | flat, `GraphicsSettings` + `MainMenuSettings` |
 | Tropico 3 | `tropico-3.md` | `Tropico3Catalog` | 15 | flat, `GFX` + engine subtree |
+| ROME: Total War | `rome-total-war.md` | `RomeTotalWarCatalog` | 24 | flat live values, stored presets not exposed |
 
 Files live in `app/src/main/java/dev/legendtuner/app/data/TitleCatalog.kt` (GRID Autosport, Alien)
 and `TitleCatalogs.kt` (the rest).
@@ -69,3 +70,4 @@ file's *Open verification* section, and the control ships with a note (the amber
 | Company of Heroes | `antialiasing` tokens; model detail mapping; whether ScreenW/H are written after a display change |
 | Total War: EMPIRE | `GraphicsQuality` preset mapping; anti-aliasing vocabulary; whether ScreenW/H appear after a display change |
 | Tropico 3 | Anisotropy 2×–16× tokens; whether BatterySaverFPS is a hard cap |
+| ROME: Total War | AA mapping; active preset/live-value rewrite behaviour; full building-quality range |

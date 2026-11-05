@@ -1237,3 +1237,163 @@ object EmpireTotalWarCatalog {
         )
     )
 }
+
+object RomeTotalWarCatalog {
+    private const val DISPLAY = "Display"
+    private const val FRAME = "Frame rate"
+    private const val QUALITY = "Battle quality"
+    private const val CAMPAIGN = "Campaign quality"
+    private val SETUP = listOf(
+        "HKEY_CURRENT_USER", "Software", "The Creative Assembly Limited", "Rome Total War", "Setup"
+    )
+    private val D3D_CONFIG = listOf("HKEY_CURRENT_USER", "Software", "IndirectX", "Direct3D", "Config")
+    private val sixTiers = listOf("Very Low", "Low", "Medium", "High", "Very High", "Ultra")
+
+    private fun toggle(key: String, label: String, description: String, group: String = QUALITY) =
+        Control(key, label, description, group, ControlKind.TOGGLE, intToggle())
+
+    private fun level(
+        key: String,
+        label: String,
+        description: String,
+        max: Int,
+        labels: List<String> = listOf("Low", "Medium", "High", "Ultra"),
+        group: String = QUALITY
+    ) = Control(key, label, description, group, ControlKind.CHOICE, intLevels(max, labels))
+
+    val catalog = TitleCatalog(
+        groups = listOf(DISPLAY, FRAME, QUALITY, CAMPAIGN),
+        controls = listOf(
+            Control(
+                "Resolution", "Screen resolution",
+                "Fullscreen width and height stored in ScreenW and ScreenH. The engine may recalculate the pair on launch.",
+                DISPLAY, ControlKind.RESOLUTION, resolutionChoices(),
+                absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "FullScreen", "Fullscreen",
+                "Runs the game fullscreen instead of in a windowed surface.",
+                DISPLAY, ControlKind.TOGGLE, intToggle(), absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "RenderUnderNotch", "Render under notch",
+                "Extends the render surface below the display cutout on edge-to-edge devices.",
+                DISPLAY, ControlKind.TOGGLE, intToggle(), absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "FixedScreenHeight", "Render height",
+                "Internal vertical resolution. Lower values raise frame rate at the cost of sharpness.",
+                DISPLAY, ControlKind.CHOICE, heightChoices(), absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "MaxFramesPerSecond", "Engine frame cap",
+                "Main engine frame cap used outside battles and the campaign map.",
+                FRAME, ControlKind.CHOICE, fpsChoices(), absolutePath = SETUP, ignoreSuffix = true,
+                note = "Engine key in the live Setup block."
+            ),
+            Control(
+                "BattleMaxFramesPerSecond", "Battle frame cap",
+                "Frame cap applied during real-time battles. Raise this to 60 or 120 to unlock smoother battles.",
+                FRAME, ControlKind.CHOICE, fpsChoices(), absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "CampaignMaxFramesPerSecond", "Campaign frame cap",
+                "Frame cap applied on the campaign map, which is usually lighter than a full battle.",
+                FRAME, ControlKind.CHOICE, fpsChoices(), absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "MainMenuFPS", "Menu frame cap",
+                "Frame cap used in menus and the front end. A low cap saves power without affecting battles.",
+                FRAME, ControlKind.CHOICE, fpsChoices(), absolutePath = SETUP, ignoreSuffix = true
+            ),
+            level(
+                "feral_aa_quality", "Anti-aliasing",
+                "Edge smoothing quality. The stored integer indexes the game's AA mode; the mapping is provisional.",
+                3,
+                group = QUALITY
+            ),
+            toggle(
+                "feral_battle_map_shadows", "Battle shadows",
+                "Enables shadow maps on the battle map for units, buildings and terrain."
+            ),
+            toggle(
+                "feral_campaign_map_shadows", "Campaign shadows",
+                "Enables shadow maps on the campaign map, where they cost battery life for little gameplay benefit."
+            ),
+            toggle(
+                "feral_detailed_unit_shadows", "Detailed unit shadows",
+                "Renders per-unit shadow detail instead of a cheaper blob or lower-resolution approximation."
+            ),
+            level(
+                "feral_building_quality", "Building detail",
+                "Mesh and texture detail for settlements, forts and campaign buildings.",
+                5,
+                sixTiers
+            ),
+            level(
+                "feral_effect_quality", "Effect quality",
+                "Particle effects, smoke, dust and impact effects during battles.",
+                4
+            ),
+            level(
+                "feral_terrain_quality", "Terrain quality",
+                "Battle-map ground mesh detail and texture blending.",
+                3
+            ),
+            level(
+                "feral_vegetation_quality", "Vegetation quality",
+                "Tree and shrub density around the battlefield and campaign map.",
+                3
+            ),
+            level(
+                "feral_unit_quality", "Unit quality",
+                "Soldier mesh and texture detail. Higher tiers scale with the number of men on screen.",
+                3
+            ),
+            Control(
+                "feral_unit_size", "Unit size",
+                "Number of soldiers in a standard unit. Larger units change battle balance as well as load.",
+                QUALITY, ControlKind.CHOICE,
+                listOf(ControlChoice("80", "80 men"), ControlChoice("160", "160 men")),
+                note = "Only 80 and 160 are observed in the preset blocks."
+            ),
+            toggle(
+                "feral_unit_size_massive_enabled", "Massive units",
+                "Allows the game's massive-unit-size option, which can multiply the number of soldiers on screen."
+            ),
+            toggle(
+                "feral_use_unit_shaders", "Unit shaders",
+                "Enables the per-unit shader path. Disabling it can help weak GPUs but changes the visual style."
+            ),
+            Control(
+                "feral_grass_quality", "Grass quality",
+                "Grass density and draw distance, stored as a percentage of the maximum.",
+                CAMPAIGN, ControlKind.CHOICE,
+                listOf(
+                    ControlChoice("0", "Off"),
+                    ControlChoice("25", "25%"),
+                    ControlChoice("50", "50%"),
+                    ControlChoice("75", "75%"),
+                    ControlChoice("100", "100%")
+                )
+            ),
+            Control(
+                "feral_campaign_terrain_pixel_density", "Campaign terrain density",
+                "Texel density for campaign terrain. Higher values sharpen the map at the cost of memory and fill rate.",
+                CAMPAIGN, ControlKind.CHOICE,
+                listOf(ControlChoice("15", "Standard"), ControlChoice("23", "High")),
+                note = "15 and 23 are the values observed in the preset blocks."
+            ),
+            toggle(
+                "feral_smoke_dust", "Smoke and dust",
+                "Battle smoke, dust clouds and similar atmospheric particles.",
+                CAMPAIGN
+            ),
+            toggle(
+                "feral_show_ai_movements", "Show AI movements",
+                "Shows AI army movement paths on the campaign map. Purely informational, not a performance control.",
+                CAMPAIGN
+            )
+        )
+    )
+}

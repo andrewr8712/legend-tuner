@@ -27,7 +27,7 @@ An unofficial, tablet-first Android app for editing the graphics settings of **F
 Android ports — with readable, guided controls instead of hand-editing XML.
 
 Formerly Legend Tuner, which edited GRID Legends only. Version 1.2.x keeps the same package
-identity as 1.1.0, so existing debug installs update in place, and adds thirteen more titles.
+identity as 1.1.0, so existing debug installs update in place, and adds fourteen more titles.
 
 ![Config Tuner title picker](docs/screenshots/picker.png)
 
@@ -62,6 +62,7 @@ a guided editor over that file, with backups and verified writes, plus a raw XML
 | Company of Heroes | `com.feralinteractive.companyofheroes_android` | 24 | flat, split roots |
 | Total War: EMPIRE | `com.feralinteractive.empire_android` | 28 | flat, quality + menu subtrees |
 | Tropico 3 | `com.feralinteractive.tropico3` | 15 | flat, `GFX` + engine subtree |
+| ROME: Total War | `com.feralinteractive.rometw` | 24 | flat live values; stored presets not exposed |
 
 Titles are detected by package. A card is only actionable when the game is installed, or when you
 open a saved `preferences` file for it. Any other supported title is listed under **Also supported**
@@ -70,7 +71,7 @@ and can be opened from a file pulled from a backup or another device.
 ## Features
 
 - **Game picker on launch** — one active document at a time, with installed titles first.
-- **Guided editors for all fourteen titles** — grouped cards, plain-language labels, a description for
+- **Guided editors for all fifteen titles** — grouped cards, plain-language labels, a description for
   every control, option lists with the stored key shown for provenance.
 - **Preset variants as tabs** — per-preset blocks (Saints Row, Lara Croft), prefixed families
   (GRID Autosport) and suffixed families (Hitman) are first-class, not raw keys. Tomb Raider opens
@@ -113,7 +114,7 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 
 - Package: `dev.legendtuner.app` (debug builds install as `dev.legendtuner.app.debug`)
 - Minimum Android: 8.0 (API 26) · Target: Android 15 (API 35)
-- Version 1.2.5 (versionCode 8)
+- Version 1.2.6 (versionCode 9)
 - Signed debug build
 
 ## First run
@@ -189,7 +190,7 @@ artifact is `app/build/outputs/apk/release/app-release.apk`. See
 ./gradlew :app:testDebugUnitTest
 ```
 
-45 tests cover registry parsing and round-trip preservation, preset edits, live-value mirroring,
+46 tests cover registry parsing and round-trip preservation, preset edits, live-value mirroring,
 unknown keys and types, malformed XML, icon vectors, the title table, inverted-toggle selection,
 catalogue conformance and the config-loading boundary. Every guided control must have a label, a
 description of at least 40 characters, a known group, and unique keys with at least two options for
@@ -219,8 +220,9 @@ scripts/            Waydroid UI smoke harness
 docs/screenshots/   real device captures used in this README
 prototype/          tablet design prototype and screenshots
 DESIGN.md           historical GRID Legends schema notes and design rationale
-docs/CHANGELOG-1.2.5.md  current release notes (Total War: EMPIRE, Tropico 3)
-docs/CHANGELOG-1.2.4.md  previous release notes (Company of Heroes, unsaved changes, Waydroid smoke)
+docs/CHANGELOG-1.2.6.md  current release notes (ROME: Total War)
+docs/CHANGELOG-1.2.5.md  previous release notes (Total War: EMPIRE, Tropico 3)
+docs/CHANGELOG-1.2.4.md  older release notes (Company of Heroes, unsaved changes, Waydroid smoke)
 docs/CHANGELOG-1.2.3.md  older release notes (Railroads, Tomb Raider, Hitman: Absolution)
 docs/CHANGELOG-1.2.2.md  previous release notes (backup safety, FPS/resolution, motion controls)
 docs/CHANGELOG-1.2.1.md  older patch notes (inverted-toggle fix)

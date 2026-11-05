@@ -20,6 +20,7 @@ have been replaced; every key, type and value shape is preserved.
 | `company-of-heroes-preferences-sample.xml` | Android | Company of Heroes v1.8.1 | TB520FU first-launch dump |
 | `total-war-empire-preferences-sample.xml` | Android | Total War: EMPIRE v1.7.1 | TB520FU dump |
 | `tropico-3-preferences-sample.xml` | Android | Tropico 3 v1.4.4 | TB520FU dump |
+| `rome-total-war-preferences-sample.xml` | Android | ROME: Total War v2.0.6RC3 | TB520FU dump |
 
 `preferences-sample.xml` is a sanitized copy of a publicly shared GRID Legends Android file.
 
@@ -74,6 +75,9 @@ rather than a game key.
   `ScreenW`/`ScreenH` are in the remap but absent from the first-launch file.
 - **Tropico 3** — `Haemimont Games/Tropico 3: Gold Edition/Setup` plus `GFX` for the string quality
   ladder; `IndirectX/Direct3D/Config` holds the engine frame cap.
+- **ROME: Total War** — `The Creative Assembly Limited/Rome Total War/Setup` with live `feral_*`
+  quality values and four preset blocks under `RomeGraphicsPresets`; engine frame caps live in the
+  same Setup block.
 
 ## Value types seen
 

@@ -76,6 +76,14 @@ object FeralTitles {
             titleCatalog = EmpireTotalWarCatalog.catalog
         ),
         FeralTitle(
+            "rome-total-war", "ROME: Total War", "com.feralinteractive.rometw",
+            listOf(
+                "HKEY_CURRENT_USER", "Software", "The Creative Assembly Limited",
+                "Rome Total War", "Setup"
+            ),
+            titleCatalog = RomeTotalWarCatalog.catalog
+        ),
+        FeralTitle(
             "tropico-3", "Tropico 3", "com.feralinteractive.tropico3",
             listOf(
                 "HKEY_CURRENT_USER", "Software", "Haemimont Games",
