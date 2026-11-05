@@ -16,6 +16,8 @@ keys and options for selectable controls.
 | Lara Croft: Guardian of Light | `lara-croft-guardian-of-light.md` | `LaraGolCatalog` | 10 | four block presets |
 | Lara Croft: Temple of Osiris | `lara-croft-temple-of-osiris.md` | `LaraTooCatalog` | 11 | three block presets |
 | Sid Meier's Railroads! | `sid-meiers-railroads.md` | `RailroadsCatalog` | 16 | flat, engine subtree |
+| Tomb Raider | `tomb-raider.md` | `TombRaiderCatalog` | 24 | four block presets |
+| Hitman: Absolution | `hitman-absolution.md` | `HitmanAbsolutionCatalog` | 25 | three suffix families |
 
 Files live in `app/src/main/java/dev/legendtuner/app/data/TitleCatalog.kt` (GRID Autosport, Alien)
 and `TitleCatalogs.kt` (the rest).
@@ -59,3 +61,5 @@ file's *Open verification* section, and the control ships with a note (the amber
 | Lara Croft GoL | `BestTextureFilter` index order; AA mode set |
 | Lara Croft ToO | `SSAAQuality` ↔ "ANTI ALIASING" mapping; filter index order |
 | Railroads | Quality and FSAA tier labels; whether `MaxFramesPerSecond` or the responsive cap is the in-game limiter |
+| Tomb Raider | Preset selector index; AA and filter ladders |
+| Hitman: Absolution | Quality-profile mapping; suffix-family rewrite on exit |

@@ -15,6 +15,8 @@ have been replaced; every key, type and value shape is preserved.
 | `lara-croft-gol-preferences-sample.xml` | Android | Lara Croft: Guardian of Light v1.2.7 | TB520FU dump |
 | `lara-croft-too-preferences-sample.xml` | Android | Lara Croft: Temple of Osiris v1.2.3 | TB520FU dump |
 | `railroads-preferences-sample.xml` | Android | Sid Meier's Railroads! v1.4.3 | TB520FU dump |
+| `tomb-raider-preferences-sample.xml` | Android | Tomb Raider v1.4 | tester-supplied dump |
+| `hitman-absolution-preferences-sample.xml` | Android | Hitman: Absolution v1.3.1 | tester-supplied dump |
 
 `preferences-sample.xml` is a sanitized copy of a publicly shared GRID Legends Android file.
 
@@ -56,6 +58,10 @@ rather than a game key.
 - **Sid Meier's Railroads!** — `Original Developer/Sid Meier's Railroads!/Setup` (flat, mixed
   integer/binary/string values), with engine FPS and FSAA values under
   `IndirectX/Direct3D/Config`. No preset blocks.
+- **Tomb Raider** — `Crystal Dynamics/Tomb Raider/Setup` with four preset blocks under
+  `GraphicsSettings` and engine values under `IndirectX/Direct3D/Config`.
+- **Hitman: Absolution** — `IO Interactive/Hitman Absolution` root with `_battery`, `_framerate` and
+  `_graphics` suffix families; display and motion values live at the root or under `Setup`.
 
 ## Value types seen
 

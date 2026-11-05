@@ -27,7 +27,7 @@ An unofficial, tablet-first Android app for editing the graphics settings of **F
 Android ports — with readable, guided controls instead of hand-editing XML.
 
 Formerly Legend Tuner, which edited GRID Legends only. Version 1.2.x keeps the same package
-identity as 1.1.0, so existing debug installs update in place, and adds eight more titles.
+identity as 1.1.0, so existing debug installs update in place, and adds ten more titles.
 
 ![Config Tuner title picker](docs/screenshots/picker.png)
 
@@ -57,6 +57,8 @@ a guided editor over that file, with backups and verified writes, plus a raw XML
 | Lara Croft: Guardian of Light | `com.feralinteractive.laracroftgol_android` | 10 | Graphics · Battery saver · Performance · Performance+ |
 | Lara Croft: Temple of Osiris | `com.feralinteractive.laracrofttoo_android` | 11 | Graphics · Battery saver · Performance |
 | Sid Meier's Railroads! | `com.feralinteractive.railroads_android` | 16 | flat |
+| Tomb Raider | `com.feralinteractive.tombraider_android` | 24 | Battery saver · Graphics · Performance · Performance+ |
+| Hitman: Absolution | `com.feralinteractive.hitmanabsolution_android` | 25 | Battery saver · Framerate · Graphics |
 
 Titles are detected by package. A card is only actionable when the game is installed, or when you
 open a saved `preferences` file for it. Any other supported title is listed under **Also supported**
@@ -65,7 +67,7 @@ and can be opened from a file pulled from a backup or another device.
 ## Features
 
 - **Game picker on launch** — one active document at a time, with installed titles first.
-- **Guided editors for all nine titles** — grouped cards, plain-language labels, a description for
+- **Guided editors for all eleven titles** — grouped cards, plain-language labels, a description for
   every control, option lists with the stored key shown for provenance.
 - **Preset variants as tabs** — per-preset blocks (Saints Row, Lara Croft), prefixed families
   (GRID Autosport) and suffixed families (Hitman) are first-class, not raw keys.

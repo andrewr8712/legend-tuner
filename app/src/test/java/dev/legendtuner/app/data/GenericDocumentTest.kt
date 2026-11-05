@@ -113,6 +113,64 @@ class GenericDocumentTest {
     }
 
     @Test
+    fun tombRaiderExposesPresetDisplayAndEngineControls() {
+        val title = FeralTitles.ALL.first { it.id == "tomb-raider" }
+        val catalog = title.titleCatalog!!
+        val root = title.valueRoot!!
+        val doc = load("tomb-raider-preferences-sample.xml")
+        val resolution = catalog.find("Resolution")
+        val shadow = catalog.find("ShadowMode")
+        val fps = catalog.find("MaxFramesPerSecond")
+        assertNotNull("Tomb Raider must expose resolution", resolution)
+        assertNotNull("Tomb Raider must expose shadow mode", shadow)
+        assertNotNull("Tomb Raider must expose the engine frame cap", fps)
+
+        assertEquals("1526x1080", TitleCatalogEngine.display(doc, root, catalog, resolution!!))
+        assertTrue(TitleCatalogEngine.writeResolution(doc, root, catalog, resolution, "1920x1080"))
+        assertEquals("1920x1080", TitleCatalogEngine.display(doc, root, catalog, resolution))
+        assertEquals("1920", doc.value(root, "ScreenW")?.text)
+        assertEquals("1080", doc.value(root, "ScreenH")?.text)
+
+        val graphics = catalog.withFamily(catalog.family("graphics"))
+        assertEquals("1", TitleCatalogEngine.value(doc, root, graphics, shadow!!)?.text)
+        assertTrue(TitleCatalogEngine.write(doc, root, graphics, shadow, "2"))
+        assertEquals("2", TitleCatalogEngine.value(doc, root, graphics, shadow)?.text)
+
+        assertEquals("60", TitleCatalogEngine.value(doc, root, catalog, fps!!)?.text)
+        assertTrue(TitleCatalogEngine.write(doc, root, catalog, fps, "40"))
+        assertEquals("40", TitleCatalogEngine.value(doc, root, catalog, fps)?.text)
+    }
+
+    @Test
+    fun hitmanAbsolutionExposesProfileDisplayAndFrameControls() {
+        val title = FeralTitles.ALL.first { it.id == "hitman-absolution" }
+        val catalog = title.titleCatalog!!
+        val root = title.valueRoot!!
+        val doc = load("hitman-absolution-preferences-sample.xml")
+        val resolution = catalog.find("Resolution")
+        val shadow = catalog.find("ShadowQuality")
+        val fps = catalog.find("FrameRateLimit")
+        assertNotNull("Hitman: Absolution must expose resolution", resolution)
+        assertNotNull("Hitman: Absolution must expose shadow quality", shadow)
+        assertNotNull("Hitman: Absolution must expose the frame limit", fps)
+
+        assertEquals("1526x1080", TitleCatalogEngine.display(doc, root, catalog, resolution!!))
+        assertTrue(TitleCatalogEngine.writeResolution(doc, root, catalog, resolution, "1920x1080"))
+        assertEquals("1920x1080", TitleCatalogEngine.display(doc, root, catalog, resolution))
+        assertEquals("1920", doc.value(root, "ResolutionWidth")?.text)
+        assertEquals("1080", doc.value(root, "ResolutionHeight")?.text)
+
+        val graphics = catalog.withFamily(catalog.family("graphics"))
+        assertEquals("4", TitleCatalogEngine.value(doc, root, graphics, shadow!!)?.text)
+        assertTrue(TitleCatalogEngine.write(doc, root, graphics, shadow, "3"))
+        assertEquals("3", TitleCatalogEngine.value(doc, root, graphics, shadow)?.text)
+
+        assertEquals("60", TitleCatalogEngine.value(doc, root, catalog, fps!!)?.text)
+        assertTrue(TitleCatalogEngine.write(doc, root, catalog, fps, "40"))
+        assertEquals("40", TitleCatalogEngine.value(doc, root, catalog, fps)?.text)
+    }
+
+    @Test
     fun railroadsExposesDisplayQualityAndFrameCapControls() {
         val title = FeralTitles.ALL.first { it.id == "railroads" }
         val catalog = title.titleCatalog!!

@@ -20,6 +20,8 @@
         <package android:name="com.feralinteractive.laracroftgol_android" />
         <package android:name="com.feralinteractive.laracrofttoo_android" />
         <package android:name="com.feralinteractive.railroads_android" />
+        <package android:name="com.feralinteractive.tombraider_android" />
+        <package android:name="com.feralinteractive.hitmanabsolution_android" />
         <package android:name="moe.shizuku.privileged.api" />
     </queries>
 

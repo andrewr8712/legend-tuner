@@ -33,6 +33,8 @@ class FeralTitlesTest {
         assertEquals("AI", FeralTitles.ALL.first { it.id == "alien-isolation" }.monogram)
         assertEquals("NA", FeralTitles.ALL.first { it.id == "napoleon" }.monogram)
         assertEquals("SM", FeralTitles.ALL.first { it.id == "railroads" }.monogram)
+        assertEquals("TR", FeralTitles.ALL.first { it.id == "tomb-raider" }.monogram)
+        assertEquals("HA", FeralTitles.ALL.first { it.id == "hitman-absolution" }.monogram)
     }
 
     @Test
@@ -41,7 +43,8 @@ class FeralTitlesTest {
         assertEquals(
             setOf(
                 "grid-autosport", "alien-isolation", "saints-row-3", "napoleon",
-                "hitman-blood-money", "lara-croft-gol", "lara-croft-too", "railroads"
+                "hitman-blood-money", "lara-croft-gol", "lara-croft-too", "railroads",
+                "tomb-raider", "hitman-absolution"
             ),
             catalogued
         )

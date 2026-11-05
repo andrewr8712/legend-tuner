@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<registry>
+    <key name="HKEY_CLASSES_ROOT">
+    </key>
+    <key name="HKEY_CURRENT_CONFIG">
+    </key>
+    <key name="HKEY_CURRENT_USER">
+        <key name="AutoValueRemap">
+            <key name="GPURemap">
+                <key name="keys">
+                    <value name="Software\IndirectX\Direct3D\Config" type="integer">1</value>
+                </key>
+                <key name="values">
+                    <value name="Software\Crystal Dynamics\Tomb Raider\Setup\FullScreen" type="integer">1</value>
+                    <value name="Software\Crystal Dynamics\Tomb Raider\Setup\ScreenH" type="integer">1</value>
+                    <value name="Software\Crystal Dynamics\Tomb Raider\Setup\ScreenW" type="integer">1</value>
+                </key>
+            </key>
+        </key>
+        <key name="Software">
+            <key name="CloudDrive">
+                <key name="Config">
+                    <value name="CloudSyncVersion" type="double">1.000000</value>
+                    <value name="CloudUseCellularAlert" type="integer">1</value>
+                    <value name="CloudUseDisabledAlert" type="integer">1</value>
+                    <value name="CloudUseOfflineMode" type="integer">0</value>
+                </key>
+            </key>
+            <key name="Crystal Dynamics">
+                <key name="Tomb Raider">
+                    <value name="TextLanguage" type="integer">-1</value>
+                    <value name="TextLanguageChineseSimplified" type="integer">0</value>
+                    <key name="Setup">
+                        <value name="AdapterId" type="integer">0</value>
+                        <value name="AddSteamCloudAlias" type="integer">1</value>
+                        <value name="AimCameraTimeDilationFix" type="integer">1</value>
+                        <value name="AllCollectibles" type="integer">0</value>
+                        <value name="AllowAutorotate" type="integer">1</value>
+                        <value name="AllowPausing" type="integer">1</value>
+                        <value name="AllowPushNotifications" type="integer">1</value>
+                        <value name="AllowRG16FloatWaterSurface" type="integer">1</value>
+                        <value name="AllowSendCrashReports" type="integer">0</value>
+                        <value name="AllowSendUsageData" type="integer">0</value>
+                        <value name="AllUpgrades" type="integer">0</value>
+                        <value name="AlwaysOnCrosshair" type="integer">0</value>
+                        <value name="AtiForceFetch4" type="integer">0</value>
+                        <value name="AudioCompressedSamplesThreshold" type="integer">100000</value>
+                        <value name="AudioLanguage" type="integer">0</value>
+                        <value name="AvoidFBOsWithBGRAFormat" type="integer">0</value>
+                        <value name="BaseMouseResponsivness" type="double">25.000000</value>
+                        <value name="BlockMotionAim" type="integer">0</value>
+                        <value name="BloomIntensity" type="integer">100</value>
+                        <value name="Brightness" type="binary">cdccac3f</value>
+                        <value name="BufferedPacketData" type="binary">625e9563dbe05041506b3d3bc6a4e64de00b9c581d2e606753ce66afcf03cf695f8aed70651a026b5454ac1c65814e011ebda02703f6590ff2836a21f57b6712c6f6b67f7cde8618a9e3886a243031239b5bf5a9dee95e3582dfbf407d8f06374a4ab093cc62dfd46582d656e451e5f32fff8981593fe3f8752f94d2e2d16b8e5f8aed70651a026ba9e3886a24303123506b3d3bc6a4e64d9b5bf5a9dee95e3553ce66afcf03cf69e00b9c581d2e60676582d656e451e5f3c6f6b67f7cde8618752f94d2e2d16b8e4a4ab093cc62dfd41ebda02703f6590f2fff8981593fe3f882dfbf407d8f0637625e9563dbe05041f2836a21f57b67125454ac1c65814e01</value>
+                        <value name="BypassSteamDLCInstallCheck" type="integer">1</value>
+                        <value name="CalicoRefreshKeychain" type="integer">1</value>
+                        <value name="CameraOffsetValue" type="integer">25</value>
+                        <value name="CameraShakeReducedScale" type="double">0.600000</value>
+                        <value name="CameraShakeScale" type="double">0.600000</value>
+                        <value name="CameraTeleportFix" type="integer">1</value>
+                        <value name="CampsiteSalvageRenderCamPitchDeg" type="double">-2.500000</value>
+                        <value name="CampsiteSalvageRenderCamYawDeg" type="integer">20</value>
+                        <value name="CampsiteSalvageRotationSpeed" type="double">0.002000</value>
+                        <value name="CampsiteSalvageZoomOverrideSquareRatio" type="double">1.333333</value>
+                        <value name="CampsiteSalvageZoomOverrideSquareRatioZoom" type="double">1.500000</value>
+                        <value name="CampsiteSalvageZoomOverrideWideRatio" type="double">2.166667</value>
+                        <value name="CampsiteSalvageZoomOverrideWideRatioZoom" type="double">1.000000</value>
+                        <value name="CardRenderer" type="string">Sanitized GPU 0MB</value>
+                        <value name="CharacterViewerOrbitScalingX" type="double">-0.004000</value>
+                        <value name="CharacterViewerOrbitScalingY" type="double">0.250000</value>
+                        <value name="CharacterViewerZoomScaling" type="double">1.000000</value>
+                        <value name="CinematicAllocationFix" type="integer">1</value>
+                        <value name="ClearNormalBeforeMergedPass" type="integer">1</value>
+                        <value name="CollisionTreeNullifyFix" type="integer">1</value>
+                        <value name="CompletedStory" type="integer">0</value>
+                        <value name="ConceptViewerAutoHideUIDelay" type="double">8.000000</value>
+                        <value name="Contrast" type="integer">500</value>
+                        <value name="DelayedWarmerWaitMode" type="integer">2</value>
+                        <value name="DisableCameraShake" type="integer">0</value>
+                        <value name="DisableDepthDownsampleLoadHints" type="integer">0</value>
+                        <value name="DisableDriverManagement" type="integer">0</value>
+                        <value name="DisableDynamicTextures" type="integer">0</value>
+                        <value name="DisableFeralNetOverlay" type="integer">1</value>
+                        <value name="DisableHardwareShadowMaps" type="integer">0</value>
+                        <value name="DisableNonPow2Textures" type="integer">0</value>
+                        <value name="DisableNullRenderTargets" type="integer">0</value>
+                        <value name="DisableOptionBloom" type="integer">0</value>
+                        <value name="DisableOptionMotionBlur" type="integer">0</value>
+                        <value name="DisableOSShortcuts" type="integer">1</value>
+                        <value name="DisablePureDevice" type="integer">0</value>
+                        <value name="DisableRemoteResources" type="integer">0</value>
+                        <value name="DisplayControlsPrompt" type="integer">1</value>
+                        <value name="DoneMinOS" type="integer">0</value>
+                        <value name="DonePromotional" type="integer">0</value>
+                        <value name="DoneUnsupported" type="integer">0</value>
+                        <value name="DoShowBatteryOptimisationsWarning" type="integer">1</value>
+                        <value name="DoubleTapToAimToggle" type="integer">0</value>
+                        <value name="DX11AdapterId" type="integer">0</value>
+                        <value name="DX11OutputId" type="integer">0</value>
+                        <value name="EarlyOARLowResPass" type="integer">1</value>
+                        <value name="EnableAccessibilityQTE" type="integer">0</value>
+                        <value name="EnableAdvancedGraphicsOption" type="integer">1</value>
+                        <value name="EnableAllDLCUnlocks" type="integer">0</value>
+                        <value name="EnableAllInputsOnHold" type="integer">0</value>
+                        <value name="EnableAlwaysOnMelee" type="integer">0</value>
+                        <value name="EnableCameraOffset" type="integer">0</value>
+                        <value name="EnableCameraPositionFix" type="integer">1</value>
+                        <value name="EnableDexForceRestartOnResize" type="integer">1</value>
+                        <value name="EnableDyslexicFont" type="integer">0</value>
+                        <value name="EnableGDI_Cursor" type="integer">1</value>
+                        <value name="EnableMotionAim" type="integer">0</value>
+                        <value name="EnableMouseSmoothing" type="integer">0</value>
+                        <value name="EnableVCP" type="integer">1</value>
+                        <value name="EnableVCPDebug" type="integer">0</value>
+                        <value name="EscBackButton" type="integer">1</value>
+                        <value name="feral_allow_compute" type="integer">1</value>
+                        <value name="feral_allow_high_precision" type="integer">0</value>
+                        <value name="feral_allow_tressfx" type="integer">1</value>
+                        <value name="FeralAnalyticsInstallID" type="string">SANITIZED_ANALYTICS_ID</value>
+                        <value name="FixDTPDataReferenceCounters" type="integer">0</value>
+                        <value name="FixedScreenHeight" type="integer">1080</value>
+                        <value name="ForceArabicAudioLanguageReset" type="integer">0</value>
+                        <value name="ForceCampsiteMenuClose" type="integer">1</value>
+                        <value name="ForceEnableOARLowResPass" type="integer">1</value>
+                        <value name="ForceReflectionsForLaraMirror" type="integer">1</value>
+                        <value name="ForceScriptedDirection" type="integer">1</value>
+                        <value name="ForceTouchControls" type="integer">1</value>
+                        <value name="FullScreen" type="integer">1</value>
+                        <value name="FullscreenRefreshRate" type="integer">60</value>
+                        <value name="GameInstallVersion" type="integer">17039360</value>
+                        <value name="GameInstallVersionString" type="string">Tomb Raider v1.4</value>
+                        <value name="GameInstallVersionWithStages" type="integer">21004288</value>
+                        <value name="GameOptionsDialogShouldShow" type="integer">0</value>
+                        <value name="GameOptionsDialogShown" type="integer">1</value>
+                        <value name="GamepadMapPanSensitivity" type="double">10.000000</value>
+                        <value name="GamepadMapPanThreshold" type="double">0.100000</value>
+                        <value name="GamepadMapZoomSensitivity" type="double">0.100000</value>
+                        <value name="GamepadRelicPanSensitivity" type="double">10.000000</value>
+                        <value name="GamepadRelicPanThreshold" type="double">0.100000</value>
+                        <value name="GamepadRelicZoomSensitivity" type="double">0.020000</value>
+                        <value name="GamepadSalvagePanSensitivity" type="double">20.000000</value>
+                        <value name="GamepadSalvagePanThreshold" type="double">0.100000</value>
+                        <value name="GamepadSupportEnabled" type="integer">1</value>
+                        <value name="GameplayHapticStrength" type="double">0.200000</value>
+                        <value name="GameVersionNew" type="integer">17039360</value>
+                        <value name="GameVersionString" type="string">Tomb Raider v1.4</value>
+                        <value name="HapticControllerFallbackToDevice" type="integer">1</value>
+                        <value name="HapticsEnabled" type="integer">1</value>
+                        <value name="HapticsSettingsMigrated1_4" type="integer">1</value>
+                        <value name="HasSimilarHardwareToSupportedDevice" type="integer">1</value>
+                        <value name="HasTriggeredFirstReviewRequest" type="integer">0</value>
+                        <value name="HasTriggeredSecondReviewRequest" type="integer">0</value>
+                        <value name="HasTriggeredThirdReviewRequest" type="integer">0</value>
+                        <value name="HideAllCombatPromptsOnComplete" type="integer">1</value>
+                        <value name="HideCursorAfterScreenCapture" type="integer">1</value>
+                        <value name="InGameDLCMenuEnabled" type="integer">0</value>
+                        <value name="InputOutputCountWorkaroundFix" type="integer">1</value>
+                        <value name="IsLanguageAutoDetectSelected" type="integer">0</value>
+                        <value name="JournalDocumentsCategories" type="integer">1</value>
+                        <value name="JournalGearCategories" type="integer">1</value>
+                        <value name="JournalRelicsCategories" type="integer">1</value>
+                        <value name="JournalSkillsCategories" type="integer">1</value>
+                        <value name="LaunchSendUsageDataAnalyticsSent" type="integer">1</value>
+                        <value name="LoadingDisplaySkipDisable" type="integer">0</value>
+                        <value name="LoadingDisplaySkipFramerate" type="double">30.000000</value>
+                        <value name="LoadStoreOptimisations" type="integer">1</value>
+                        <value name="MapScaleFactor" type="integer">3</value>
+                        <value name="MatchstickRenderHack" type="integer">1</value>
+                        <value name="MaxFPSOverride" type="integer">3</value>
+                        <value name="MenuHapticStrength" type="double">0.500000</value>
+                        <value name="MotionAimMaxSensitivity" type="double">400.000000</value>
+                        <value name="MotionAimSensitivity" type="double">0.500000</value>
+                        <value name="MotionAimXYDeltaThreshold" type="double">0.000500</value>
+                        <value name="MouseCursorIconScale" type="double">1.000000</value>
+                        <value name="MouseSensitivityMultiplier" type="double">1.000000</value>
+                        <value name="PauseMoviesOnPause" type="integer">1</value>
+                        <value name="PauseOnSuspend" type="integer">1</value>
+                        <value name="PauseSoundOnPause" type="integer">1</value>
+                        <value name="PauseTimersOnPause" type="integer">1</value>
+                        <value name="PrecreateShaders" type="integer">1</value>
+                        <value name="PreloadVCPAssets" type="integer">0</value>
+                        <value name="RadioTowerDialsOffset" type="double">0.200000</value>
+                        <value name="RegionsCompleted" type="integer">1744831382</value>
+                        <value name="RelicViewerPanSpeedMultiplier" type="double">0.300000</value>
+                        <value name="RelicViewerViewportXOffset" type="integer">250</value>
+                        <value name="RelicViewerZoomPinchMultiplier" type="double">1.000000</value>
+                        <value name="RelicViewerZoomScrollAnimSpeed" type="double">0.500000</value>
+                        <value name="RelicViewerZoomScrollMultiplier" type="double">0.200000</value>
+                        <value name="ReloadVCPOnSceneSwitch" type="integer">0</value>
+                        <value name="RenderAPI" type="integer">0</value>
+                        <value name="RenderUnderNotch" type="integer">1</value>
+                        <value name="RequireRestartOnFoldStateChange" type="integer">1</value>
+                        <value name="RequireStrictDataCheck" type="integer">0</value>
+                        <value name="RestrictShadowMapSize" type="integer">1</value>
+                        <value name="RightToLeftRMLHack" type="integer">1</value>
+                        <value name="RmlDPRatioVersion" type="integer">3</value>
+                        <value name="RmlRootVFSPath" type="string">feral</value>
+                        <value name="ScreenDensityMax" type="integer">320</value>
+                        <value name="ScreenH" type="integer">1080</value>
+                        <value name="ScreenW" type="integer">1526</value>
+                        <value name="ScriptInstantDeathFix" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDDeviceTier_SupportsPerformanceMode60FPS_1_3_2b8_Rev2" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDDeviceTier_SupportsPerformanceMode_1_3_2b8_Rev2" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDResolution_Defaults_1080p_Phone_1_3_2b8_Rev2" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDTombRaiderDRSSettings_1_3_2b8_Rev2" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDUntestedCapableHardware" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDVeryHighEndDeviceTier_Graphics_Defaults_1_3_2b8_Rev2" type="integer">1</value>
+                        <value name="ShowAimButton" type="integer">1</value>
+                        <value name="ShowButtonHints" type="integer">1</value>
+                        <value name="ShowTabletAmmoCount" type="integer">1</value>
+                        <value name="SolariiTempleSaveHack" type="integer">1</value>
+                        <value name="SpecificationFirstLaunchCheck" type="integer">1</value>
+                        <value name="SpecificationLastUpdateCheckTime" type="binary">f85fe76a00000000</value>
+                        <value name="SpecificationUpdateURL" type="string">https://u1.feralinteractive.com/autoupdate/tombraidermobile/specifications_android_1_4.xml</value>
+                        <value name="SquadIntroDataCopyFix" type="integer">1</value>
+                        <value name="StereoDepth" type="binary">0000003f</value>
+                        <value name="StereoEnabled" type="integer">0</value>
+                        <value name="StereoStrength" type="binary">0000003f</value>
+                        <value name="SubtitleSize" type="integer">1</value>
+                        <value name="TotalLaunchCount" type="integer">2</value>
+                        <value name="UpdateMatrixStateOncePerFrame" type="integer">1</value>
+                        <value name="UpdateServerDomain" type="string">u1.feralinteractive.com</value>
+                        <value name="UpdateServerPath" type="string">/autoupdate/</value>
+                        <value name="UpdateServerProtocol" type="string">https://</value>
+                        <value name="UseDepthCopyForLighting" type="integer">1</value>
+                        <value name="UseDriveSaveSync" type="integer">0</value>
+                        <value name="UseDummyCubemapHack" type="integer">1</value>
+                        <value name="UseFPUPreserve" type="integer">0</value>
+                        <value name="UseGoogleSignIn" type="integer">1</value>
+                        <value name="UseJoystickAiming" type="integer">0</value>
+                        <value name="UseOfflineEvents" type="integer">1</value>
+                        <value name="UseRefDevice" type="integer">0</value>
+                        <value name="UseReleaseButtonsFix" type="integer">1</value>
+                        <value name="UseRMLDataDownloadUI" type="integer">0</value>
+                        <value name="UseStyledWebSupportPage" type="integer">1</value>
+                        <value name="VCPInputHapticStrength" type="double">0.500000</value>
+                        <value name="VCPShootConfig" type="integer">0</value>
+                        <value name="VCPSwipeActionDurationMs" type="integer">100</value>
+                        <value name="VCPSwipeActionEnabled" type="integer">0</value>
+                        <value name="VCPSwipeActionNumPixels" type="integer">200</value>
+                        <value name="VcpTrackpadAccelerationEnabled" type="integer">0</value>
+                        <value name="VcpTrackpadAimSensitivity" type="double">0.030000</value>
+                        <value name="VcpTrackpadCameraAcceleration" type="integer">0</value>
+                        <value name="VcpTrackpadCameraSensitivity" type="integer">50</value>
+                        <value name="VcpTrackpadExplorationSensitivity" type="double">0.030000</value>
+                        <value name="WindowPlacement" type="binary">2c0000000000000001000000000000000000000000000000000000000000000000000000f605000038040000</value>
+                        <key name="AutoAim">
+                            <value name="AutoAimMode" type="integer">1</value>
+                            <value name="AutoAimSwipeThreshold" type="double">0.400000</value>
+                            <value name="DisableAlwaysOnCrosshairWithoutAutoAim" type="integer">1</value>
+                            <value name="EnableExplosivesTargeting" type="integer">0</value>
+                            <key name="Enhanced">
+                                <value name="AllowMotionAim" type="integer">0</value>
+                                <value name="AllowTargetingNonHostileAnimals" type="integer">1</value>
+                                <value name="CoverOffsetGamepadMultipiler" type="double">20.000000</value>
+                                <value name="CoverOffsetLimitX" type="double">80.000000</value>
+                                <value name="CoverOffsetLimitY" type="double">80.000000</value>
+                                <value name="CoverPeekOffset" type="double">100.000000</value>
+                                <value name="EnableCoverOffset" type="integer">1</value>
+                                <value name="EnableMicroAdjustments" type="integer">0</value>
+                                <value name="EnableStrafeLockOn" type="integer">1</value>
+                                <value name="ExtendOffsetSystem" type="integer">0</value>
+                                <value name="FeralMagnetismAngleTolerance" type="integer">45</value>
+                                <value name="FeralMagnetismRadiusMax" type="double">0.200000</value>
+                                <value name="FeralMagnetismRadiusMin" type="double">0.050000</value>
+                                <value name="FeralTargetingRadiusMax" type="double">0.400000</value>
+                                <value name="JoystickSnapBreakThreshold" type="double">0.600000</value>
+                                <value name="LockBreakThreshold" type="double">0.001000</value>
+                                <value name="LockNewTargetOnKill" type="integer">1</value>
+                                <value name="LossOfSightCountdownMS" type="integer">3000</value>
+                                <value name="MagnetismCooldownMS" type="integer">10</value>
+                                <value name="MagnetismMinAngleTolerance" type="double">5.000000</value>
+                                <value name="MagnetismProbeRadius" type="integer">75</value>
+                                <value name="MagnetismTargetSelectionFix" type="integer">0</value>
+                                <value name="Range" type="integer">2000</value>
+                                <value name="SnapTargetRequestTimeOutMs" type="integer">200</value>
+                                <value name="SnapToNextTarget" type="integer">1</value>
+                                <value name="SuppressLockTimeout" type="integer">1</value>
+                                <value name="UseFeralMagnetism" type="integer">1</value>
+                                <value name="UseFeralTargetingLogic" type="integer">1</value>
+                                <value name="UseSwipeTargetSwitch" type="integer">1</value>
+                            </key>
+                            <key name="Soft">
+                                <value name="AllowMotionAim" type="integer">1</value>
+                                <value name="AllowTargetingNonHostileAnimals" type="integer">0</value>
+                                <value name="CoverOffsetGamepadMultipiler" type="double">20.000000</value>
+                                <value name="CoverOffsetLimitX" type="double">80.000000</value>
+                                <value name="CoverOffsetLimitY" type="double">80.000000</value>
+                                <value name="CoverPeekOffset" type="double">100.000000</value>
+                                <value name="EnableCoverOffset" type="integer">1</value>
+                                <value name="EnableMicroAdjustments" type="integer">1</value>
+                                <value name="EnableStrafeLockOn" type="integer">1</value>
+                                <value name="ExtendOffsetSystem" type="integer">0</value>
+                                <value name="FeralMagnetismAngleTolerance" type="integer">45</value>
+                                <value name="FeralMagnetismRadiusMax" type="double">0.200000</value>
+                                <value name="FeralMagnetismRadiusMin" type="double">0.050000</value>
+                                <value name="FeralTargetingRadiusMax" type="double">0.400000</value>
+                                <value name="JoystickSnapBreakThreshold" type="double">0.600000</value>
+                                <value name="LockBreakThreshold" type="double">0.001000</value>
+                                <value name="LockNewTargetOnKill" type="integer">0</value>
+                                <value name="LossOfSightCountdownMS" type="integer">3000</value>
+                                <value name="MagnetismCooldownMS" type="integer">10</value>
+                                <value name="MagnetismMinAngleTolerance" type="double">5.000000</value>
+                                <value name="MagnetismProbeRadius" type="integer">75</value>
+                                <value name="MagnetismTargetSelectionFix" type="integer">0</value>
+                                <value name="Range" type="integer">2000</value>
+                                <value name="SnapTargetRequestTimeOutMs" type="integer">200</value>
+                                <value name="SnapToNextTarget" type="integer">0</value>
+                                <value name="SuppressLockTimeout" type="integer">0</value>
+                                <value name="UseFeralMagnetism" type="integer">1</value>
+                                <value name="UseFeralTargetingLogic" type="integer">1</value>
+                                <value name="UseSwipeTargetSwitch" type="integer">0</value>
+                            </key>
+                        </key>
+                        <key name="DynamicResolutionScaling">
+                            <value name="CPUFrameTimeSmoothing" type="integer">10</value>
+                            <value name="DropDelayFrames" type="integer">6</value>
+                            <value name="DropTimeMargin" type="double">-1.250000</value>
+                            <value name="Enable" type="integer">1</value>
+                            <value name="FastDropTimeMargin" type="double">-2.500000</value>
+                            <value name="FPSTarget" type="double">60.000000</value>
+                            <value name="MaxScaling" type="double">1.000000</value>
+                            <value name="MinScaling" type="double">1.000000</value>
+                            <value name="RaiseDelayFrames" type="integer">4</value>
+                            <value name="RaiseDelayFramesInRace" type="integer">4</value>
+                            <value name="RaiseTimeMargin" type="double">0.250000</value>
+                            <value name="UseGPUTime" type="integer">1</value>
+                        </key>
+                        <key name="GraphicsSettings">
+                            <value name="AntiAliasingMode" type="integer">1</value>
+                            <value name="AspectRatio" type="integer">0</value>
+                            <value name="BestTextureFilter" type="integer">6</value>
+                            <value name="DOFQuality" type="integer">1</value>
+                            <value name="EnableHighPrecisionRT" type="integer">0</value>
+                            <value name="EnableMotionBlur" type="integer">0</value>
+                            <value name="EnablePostProcess" type="integer">1</value>
+                            <value name="EnableScreenEffects" type="integer">1</value>
+                            <value name="EnableTessellation" type="integer">0</value>
+                            <value name="ExclusiveFullscreen" type="integer">1</value>
+                            <value name="Fullscreen" type="integer">1</value>
+                            <value name="GraphicsPreset" type="integer">1</value>
+                            <value name="HairQuality" type="integer">0</value>
+                            <value name="InitialGraphicsPreset" type="integer">2</value>
+                            <value name="LODScale" type="integer">2</value>
+                            <value name="PerformancePlusAvailable" type="integer">0</value>
+                            <value name="PerformancePresetAvailable" type="integer">1</value>
+                            <value name="ReflectionQuality" type="integer">0</value>
+                            <value name="ShadowMode" type="integer">1</value>
+                            <value name="ShadowResolution" type="integer">1</value>
+                            <value name="SSAOMode" type="integer">1</value>
+                            <value name="TextureQuality" type="integer">-1</value>
+                            <value name="VSyncMode" type="integer">1</value>
+                            <key name="BatterySaverPreset">
+                                <value name="AntiAliasingMode" type="integer">1</value>
+                                <value name="BestTextureFilter" type="integer">6</value>
+                                <value name="DOFQuality" type="integer">1</value>
+                                <value name="DRSMaxScaling" type="double">1.000000</value>
+                                <value name="DRSMinScaling" type="double">1.000000</value>
+                                <value name="EnableHighPrecisionRT" type="integer">0</value>
+                                <value name="EnableMotionBlur" type="integer">0</value>
+                                <value name="EnablePostProcess" type="integer">1</value>
+                                <value name="EnableScreenEffects" type="integer">1</value>
+                                <value name="EnableTessellation" type="integer">0</value>
+                                <value name="ExclusiveFullscreen" type="integer">1</value>
+                                <value name="HairQuality" type="integer">0</value>
+                                <value name="LODScale" type="integer">2</value>
+                                <value name="MaxFramesPerSecond" type="integer">30</value>
+                                <value name="OptimisationResolutionMultiplier" type="integer">75</value>
+                                <value name="ReflectionQuality" type="integer">0</value>
+                                <value name="ShadowMode" type="integer">1</value>
+                                <value name="ShadowResolution" type="integer">1</value>
+                                <value name="SSAOMode" type="integer">1</value>
+                                <value name="TextureQuality" type="integer">-1</value>
+                            </key>
+                            <key name="GraphicsPreset">
+                                <value name="AntiAliasingMode" type="integer">1</value>
+                                <value name="BestTextureFilter" type="integer">6</value>
+                                <value name="DOFQuality" type="integer">1</value>
+                                <value name="DRSMaxScaling" type="double">1.000000</value>
+                                <value name="DRSMinScaling" type="double">1.000000</value>
+                                <value name="EnableHighPrecisionRT" type="integer">0</value>
+                                <value name="EnableMotionBlur" type="integer">0</value>
+                                <value name="EnablePostProcess" type="integer">1</value>
+                                <value name="EnableScreenEffects" type="integer">1</value>
+                                <value name="EnableTessellation" type="integer">0</value>
+                                <value name="ExclusiveFullscreen" type="integer">1</value>
+                                <value name="HairQuality" type="integer">0</value>
+                                <value name="LODScale" type="integer">2</value>
+                                <value name="MaxFramesPerSecond" type="integer">30</value>
+                                <value name="OptimisationResolutionMultiplier" type="integer">100</value>
+                                <value name="ReflectionQuality" type="integer">0</value>
+                                <value name="ShadowMode" type="integer">1</value>
+                                <value name="ShadowResolution" type="integer">1</value>
+                                <value name="SSAOMode" type="integer">1</value>
+                                <value name="TextureQuality" type="integer">-1</value>
+                            </key>
+                            <key name="PerformancePlusPreset">
+                                <value name="AntiAliasingMode" type="integer">1</value>
+                                <value name="BestTextureFilter" type="integer">6</value>
+                                <value name="DOFQuality" type="integer">0</value>
+                                <value name="DRSMaxScaling" type="double">1.000000</value>
+                                <value name="DRSMinScaling" type="double">1.000000</value>
+                                <value name="EnableHighPrecisionRT" type="integer">0</value>
+                                <value name="EnableMotionBlur" type="integer">0</value>
+                                <value name="EnablePostProcess" type="integer">0</value>
+                                <value name="EnableScreenEffects" type="integer">1</value>
+                                <value name="EnableTessellation" type="integer">0</value>
+                                <value name="ExclusiveFullscreen" type="integer">1</value>
+                                <value name="HairQuality" type="integer">0</value>
+                                <value name="LODScale" type="integer">0</value>
+                                <value name="MaxFramesPerSecond" type="integer">120</value>
+                                <value name="OptimisationResolutionMultiplier" type="integer">50</value>
+                                <value name="ReflectionQuality" type="integer">0</value>
+                                <value name="ShadowMode" type="integer">1</value>
+                                <value name="ShadowResolution" type="integer">1</value>
+                                <value name="SSAOMode" type="integer">0</value>
+                                <value name="TextureQuality" type="integer">0</value>
+                            </key>
+                            <key name="PerformancePreset">
+                                <value name="AntiAliasingMode" type="integer">1</value>
+                                <value name="BestTextureFilter" type="integer">6</value>
+                                <value name="DOFQuality" type="integer">1</value>
+                                <value name="DRSMaxScaling" type="double">1.000000</value>
+                                <value name="DRSMinScaling" type="double">1.000000</value>
+                                <value name="EnableHighPrecisionRT" type="integer">0</value>
+                                <value name="EnableMotionBlur" type="integer">0</value>
+                                <value name="EnablePostProcess" type="integer">1</value>
+                                <value name="EnableScreenEffects" type="integer">1</value>
+                                <value name="EnableTessellation" type="integer">0</value>
+                                <value name="ExclusiveFullscreen" type="integer">1</value>
+                                <value name="HairQuality" type="integer">0</value>
+                                <value name="LODScale" type="integer">2</value>
+                                <value name="MaxFramesPerSecond" type="integer">60</value>
+                                <value name="OptimisationResolutionMultiplier" type="integer">75</value>
+                                <value name="ReflectionQuality" type="integer">0</value>
+                                <value name="ShadowMode" type="integer">1</value>
+                                <value name="ShadowResolution" type="integer">1</value>
+                                <value name="SSAOMode" type="integer">1</value>
+                                <value name="TextureQuality" type="integer">-1</value>
+                            </key>
+                        </key>
+                        <key name="MotionAimSettings">
+                            <value name="DeltaThresholdX" type="double">0.000500</value>
+                            <value name="DeltaThresholdY" type="double">0.000500</value>
+                            <value name="Enabled" type="integer">0</value>
+                            <value name="SensitivityX" type="double">400.000000</value>
+                            <value name="SensitivityY" type="double">400.000000</value>
+                            <value name="SmoothFrames" type="integer">3</value>
+                            <value name="SpeedAttenuation" type="double">0.000000</value>
+                            <value name="SpeedLimit" type="double">0.000000</value>
+                        </key>
+                        <key name="SpecificationAlerts">
+                            <value name="DefaultHardwareSpecificationsClass_1_3_2b8_Rev2" type="integer">1</value>
+                        </key>
+                        <key name="Upscaler">
+                            <value name="CASUsePixelShader" type="integer">0</value>
+                            <value name="SharpenAmount" type="double">0.500000</value>
+                            <value name="Technique" type="integer">0</value>
+                        </key>
+                    </key>
+                </key>
+            </key>
+            <key name="IndirectX">
+                <key name="Direct3D">
+                    <key name="Config">
+                        <value name="AllowSM5" type="integer">1</value>
+                        <value name="EnableF3DWarmer" type="integer">1</value>
+                        <value name="EnableIdxD3D11Threaded" type="integer">1</value>
+                        <value name="EnableShaderDeduplicator" type="integer">1</value>
+                        <value name="Feral_ReduceUltraTextureQuality" type="integer">0</value>
+                        <value name="FeralGUIWatermarkText" type="string"></value>
+                        <value name="MaxFramesPerSecond" type="integer">60</value>
+                        <value name="ShowFeralGUIWatermark" type="integer">0</value>
+                        <value name="VulkanUseSeparateSubmitThread" type="integer">1</value>
+                    </key>
+                </key>
+                <key name="DirectInput">
+                    <key name="Config">
+                        <value name="EnumerateDirectInputDevicesOnMobile" type="integer">1</value>
+                    </key>
+                </key>
+            </key>
+            <key name="MacDoze">
+                <key name="Config">
+                    <value name="ClearSavesEnabled" type="integer">0</value>
+                    <value name="DisableClearSaveDataAlert" type="integer">0</value>
+                </key>
+            </key>
+            <key name="SessionAnalytics">
+                <value name="DaysSinceFirstRun" type="integer">0</value>
+                <value name="Enabled" type="integer">1</value>
+                <value name="FirstLaunchTime" type="integer">815128432</value>
+                <value name="HoursSinceFirstLaunch" type="integer">0</value>
+                <value name="LongestSessionPlaytimeInForeground" type="integer">0</value>
+                <value name="NumberOfSessionBackgrounds" type="integer">0</value>
+                <value name="PlaytimeSinceInstall" type="integer">0</value>
+                <value name="TotalSessionForeground" type="integer">0</value>
+                <value name="TotalSessionTime" type="integer">0</value>
+            </key>
+            <key name="SystemMonitor">
+                <key name="Config">
+                    <value name="AppVersion" type="integer">17039360</value>
+                    <value name="Backgrounded" type="integer">1</value>
+                    <value name="OSVersion" type="string">17.0</value>
+                    <value name="QuitIntentional" type="integer">0</value>
+                </key>
+            </key>
+        </key>
+    </key>
+    <key name="HKEY_LOCAL_MACHINE">
+        <key name="Hardware">
+            <key name="Description">
+                <key name="System">
+                    <key name="CentralProcessor">
+                        <key name="0">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Qualcomm Inc</value>
+                            <value name="~MHz" type="integer">3628</value>
+                        </key>
+                        <key name="1">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Qualcomm Inc</value>
+                            <value name="~MHz" type="integer">3628</value>
+                        </key>
+                        <key name="2">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Qualcomm Inc</value>
+                            <value name="~MHz" type="integer">3628</value>
+                        </key>
+                        <key name="3">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Qualcomm Inc</value>
+                            <value name="~MHz" type="integer">3628</value>
+                        </key>
+                        <key name="4">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Qualcomm Inc</value>
+                            <value name="~MHz" type="integer">3628</value>
+                        </key>
+                        <key name="5">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Qualcomm Inc</value>
+                            <value name="~MHz" type="integer">3628</value>
+                        </key>
+                        <key name="6">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Qualcomm Inc</value>
+                            <value name="~MHz" type="integer">3628</value>
+                        </key>
+                        <key name="7">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Qualcomm Inc</value>
+                            <value name="~MHz" type="integer">3628</value>
+                        </key>
+                    </key>
+                </key>
+            </key>
+        </key>
+        <key name="Software">
+        </key>
+    </key>
+    <key name="HKEY_USERS">
+    </key>
+</registry>

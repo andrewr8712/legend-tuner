@@ -96,6 +96,20 @@ object FeralTitles {
             titleCatalog = LaraTooCatalog.catalog
         ),
         FeralTitle(
+            "tomb-raider", "Tomb Raider", "com.feralinteractive.tombraider_android",
+            listOf(
+                "HKEY_CURRENT_USER", "Software", "Crystal Dynamics", "Tomb Raider", "Setup"
+            ),
+            titleCatalog = TombRaiderCatalog.catalog
+        ),
+        FeralTitle(
+            "hitman-absolution", "Hitman: Absolution", "com.feralinteractive.hitmanabsolution_android",
+            listOf(
+                "HKEY_CURRENT_USER", "Software", "IO Interactive", "Hitman Absolution"
+            ),
+            titleCatalog = HitmanAbsolutionCatalog.catalog
+        ),
+        FeralTitle(
             "railroads", "Sid Meier's Railroads!", "com.feralinteractive.railroads_android",
             listOf(
                 "HKEY_CURRENT_USER", "Software", "Original Developer",

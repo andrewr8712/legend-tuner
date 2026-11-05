@@ -208,6 +208,210 @@ object SaintsRowCatalog {
     )
 }
 
+object TombRaiderCatalog {
+    private const val DISPLAY = "Display"
+    private const val GRAPHICS = "Graphics"
+    private const val MOTION = "Motion"
+    private const val PERFORMANCE = "Performance"
+    private const val TIERS = "Tier labels are inferred from the stored integer; verify in-game."
+    private val SETUP = listOf("HKEY_CURRENT_USER", "Software", "Crystal Dynamics", "Tomb Raider", "Setup")
+    private val MOTION_AIM = SETUP + "MotionAimSettings"
+    private val D3D_CONFIG = listOf("HKEY_CURRENT_USER", "Software", "IndirectX", "Direct3D", "Config")
+    private val SCREEN_SIZES = listOf(
+        ControlChoice("1280x720", "1280 × 720"),
+        ControlChoice("1526x1080", "1526 × 1080"),
+        ControlChoice("1920x1080", "1920 × 1080"),
+        ControlChoice("2560x1440", "2560 × 1440")
+    )
+    private val textureQuality = listOf(
+        ControlChoice("-1", "Auto"),
+        ControlChoice("0", "0"),
+        ControlChoice("1", "1"),
+        ControlChoice("2", "2"),
+        ControlChoice("3", "3")
+    )
+
+    val catalog = TitleCatalog(
+        groups = listOf(DISPLAY, GRAPHICS, MOTION, PERFORMANCE),
+        pathSuffix = listOf("GraphicsSettings"),
+        families = listOf(
+            PresetFamily("battery", "Battery saver", pathSuffix = listOf("BatterySaverPreset")),
+            PresetFamily("graphics", "Graphics", pathSuffix = listOf("GraphicsPreset")),
+            PresetFamily("performance", "Performance", pathSuffix = listOf("PerformancePreset")),
+            PresetFamily("performance-plus", "Performance+", pathSuffix = listOf("PerformancePlusPreset"))
+        ),
+        controls = listOf(
+            Control(
+                "Resolution", "Screen resolution",
+                "Backbuffer size written as ScreenW and ScreenH. The observed device file held 1526 × 1080.",
+                DISPLAY, ControlKind.RESOLUTION, SCREEN_SIZES,
+                absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "FixedScreenHeight", "Render height",
+                "Internal vertical resolution. Lower values raise frame rate at the cost of sharpness.",
+                DISPLAY, ControlKind.CHOICE, heightChoices(),
+                absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control("FullScreen", "Fullscreen", "Run the game fullscreen instead of in a windowed surface.", DISPLAY, ControlKind.TOGGLE, intToggle(), absolutePath = SETUP, ignoreSuffix = true),
+            Control("RenderUnderNotch", "Render under notch", "Draw under a display cutout instead of letterboxing around it.", DISPLAY, ControlKind.TOGGLE, intToggle(), absolutePath = SETUP, ignoreSuffix = true),
+
+            Control("ShadowMode", "Shadow mode", "Shadow filtering mode used for world and character shadows.", GRAPHICS, ControlKind.CHOICE, intLevels(2), note = TIERS),
+            Control("ShadowResolution", "Shadow resolution", "Shadow map resolution and the resulting softness of contact shadows.", GRAPHICS, ControlKind.CHOICE, intLevels(3), note = TIERS),
+            Control("SSAOMode", "Ambient occlusion", "Screen-space contact shadows in corners and under characters.", GRAPHICS, ControlKind.CHOICE, intLevels(3), note = TIERS),
+            Control("DOFQuality", "Depth of field", "Depth-of-field blur quality in cutscenes and while aiming.", GRAPHICS, ControlKind.CHOICE, intLevels(3), note = TIERS),
+            Control("LODScale", "Level of detail", "Distance at which models switch to lower detail.", GRAPHICS, ControlKind.CHOICE, intLevels(3), note = TIERS),
+            Control("TextureQuality", "Texture quality", "Texture resolution. Auto lets the game choose by video memory.", GRAPHICS, ControlKind.CHOICE, textureQuality),
+            Control(
+                "BestTextureFilter", "Texture filtering",
+                "Anisotropic filtering level for textures seen at grazing angles such as roads.",
+                GRAPHICS, ControlKind.CHOICE,
+                listOf(ControlChoice("0", "0×"), ControlChoice("2", "2×"), ControlChoice("4", "4×"), ControlChoice("6", "6×"))
+            ),
+            Control("ReflectionQuality", "Reflections", "Reflection quality on wet and polished surfaces.", GRAPHICS, ControlKind.CHOICE, intLevels(2), note = TIERS),
+            Control("HairQuality", "Hair quality (TressFX)", "Hair strand rendering; expensive on mobile GPUs.", GRAPHICS, ControlKind.CHOICE, listOf(ControlChoice("0", "Off"), ControlChoice("1", "On"))),
+            Control("AntiAliasingMode", "Anti-aliasing", "Post-process or MSAA edge smoothing, depending on the selected mode.", GRAPHICS, ControlKind.CHOICE, intLevels(3), note = TIERS),
+            Control("EnableTessellation", "Tessellation", "Extra geometry on terrain, rocks and selected surfaces.", GRAPHICS, ControlKind.TOGGLE, intToggle()),
+            Control("EnablePostProcess", "Post-processing", "Post-process effects such as colour grading and lens effects.", GRAPHICS, ControlKind.TOGGLE, intToggle()),
+            Control("EnableMotionBlur", "Motion blur", "Camera motion blur while turning or moving quickly.", GRAPHICS, ControlKind.TOGGLE, intToggle()),
+            Control("EnableScreenEffects", "Screen effects", "Lens dirt, vignette and similar full-screen effects.", GRAPHICS, ControlKind.TOGGLE, intToggle()),
+            Control("EnableHighPrecisionRT", "High-precision render targets", "Reduces banding on gradients at a rendering cost.", GRAPHICS, ControlKind.TOGGLE, intToggle()),
+            Control(
+                "OptimisationResolutionMultiplier", "Preset render scale",
+                "Extra resolution multiplier applied inside the selected graphics preset.",
+                GRAPHICS, ControlKind.CHOICE,
+                listOf(
+                    ControlChoice("50", "50%"), ControlChoice("60", "60%"), ControlChoice("70", "70%"),
+                    ControlChoice("80", "80%"), ControlChoice("90", "90%"), ControlChoice("100", "100%")
+                )
+            ),
+
+            Control(
+                "Enabled", "Motion aim",
+                "Enable tilt/motion aiming. The game uses MotionAimSettings for the active aiming controls.",
+                MOTION, ControlKind.TOGGLE, intToggle(),
+                absolutePath = MOTION_AIM, ignoreSuffix = true,
+                linkedWrites = listOf(LinkedWrite(SETUP, "EnableMotionAim")),
+                note = "Writes both MotionAimSettings.Enabled and Setup.EnableMotionAim."
+            ),
+            Control(
+                "SensitivityX", "Motion aim sensitivity",
+                "Motion-aim sensitivity. The editor writes the same value to both X and Y axes.",
+                MOTION, ControlKind.CHOICE,
+                listOf(
+                    ControlChoice("200.000000", "200"), ControlChoice("300.000000", "300"),
+                    ControlChoice("400.000000", "400"), ControlChoice("500.000000", "500"),
+                    ControlChoice("600.000000", "600"), ControlChoice("800.000000", "800"),
+                    ControlChoice("1000.000000", "1000")
+                ),
+                absolutePath = MOTION_AIM, ignoreSuffix = true,
+                linkedWrites = listOf(LinkedWrite(MOTION_AIM, "SensitivityY"))
+            ),
+
+            Control(
+                "MaxFramesPerSecond", "Frame cap",
+                "Engine-level frame cap. The game also stores a cap inside each graphics preset.",
+                PERFORMANCE, ControlKind.CHOICE, fpsChoices(),
+                absolutePath = D3D_CONFIG, ignoreSuffix = true
+            ),
+            Control(
+                "VulkanUseSeparateSubmitThread", "Separate Vulkan submit thread",
+                "Submit rendering work from a dedicated thread to improve frame pacing.",
+                PERFORMANCE, ControlKind.TOGGLE, intToggle(), absolutePath = D3D_CONFIG, ignoreSuffix = true
+            )
+        )
+    )
+}
+
+object HitmanAbsolutionCatalog {
+    private const val DISPLAY = "Display"
+    private const val GRAPHICS = "Graphics"
+    private const val MOTION = "Motion"
+    private const val PERFORMANCE = "Performance"
+    private const val TIERS = "Tier labels are inferred from the stored integer; verify in-game."
+    private val ROOT = listOf("HKEY_CURRENT_USER", "Software", "IO Interactive", "Hitman Absolution")
+    private val SETUP = ROOT + "Setup"
+    private val MOTION_AIM = SETUP + "MotionAimSettings"
+    private val D3D_CONFIG = listOf("HKEY_CURRENT_USER", "Software", "IndirectX", "Direct3D", "Config")
+    private val SCREEN_SIZES = listOf(
+        ControlChoice("1280x720", "1280 × 720"),
+        ControlChoice("1526x1080", "1526 × 1080"),
+        ControlChoice("1920x1080", "1920 × 1080"),
+        ControlChoice("2560x1440", "2560 × 1440")
+    )
+    private val scaling = listOf(
+        ControlChoice("0.500000", "50%"),
+        ControlChoice("0.600000", "60%"),
+        ControlChoice("0.700000", "70%"),
+        ControlChoice("0.800000", "80%"),
+        ControlChoice("0.900000", "90%"),
+        ControlChoice("1.000000", "100%")
+    )
+
+    val catalog = TitleCatalog(
+        groups = listOf(DISPLAY, GRAPHICS, MOTION, PERFORMANCE),
+        families = listOf(
+            PresetFamily("battery", "Battery saver", keySuffix = "_battery"),
+            PresetFamily("framerate", "Framerate", keySuffix = "_framerate"),
+            PresetFamily("graphics", "Graphics", keySuffix = "_graphics")
+        ),
+        controls = listOf(
+            Control(
+                "Resolution", "Screen resolution",
+                "Backbuffer size written as ResolutionWidth and ResolutionHeight. The observed file held 1526 × 1080.",
+                DISPLAY, ControlKind.RESOLUTION, SCREEN_SIZES,
+                absolutePath = ROOT, widthKey = "ResolutionWidth", heightKey = "ResolutionHeight", ignoreSuffix = true
+            ),
+            Control("FixedScreenHeight", "Render height", "Internal vertical resolution; lower values raise frame rate but soften the image.", DISPLAY, ControlKind.CHOICE, heightChoices(), absolutePath = SETUP, ignoreSuffix = true),
+            Control("Fullscreen", "Fullscreen", "Run the game fullscreen instead of in a window.", DISPLAY, ControlKind.TOGGLE, intToggle(), absolutePath = ROOT, ignoreSuffix = true),
+            Control("ExclusiveFullscreen", "Exclusive fullscreen", "Take exclusive control of the display instead of sharing it with the system.", DISPLAY, ControlKind.TOGGLE, intToggle(), absolutePath = ROOT, ignoreSuffix = true),
+            Control("VSync", "Vertical sync", "Limit presentation to the display refresh rate to avoid tearing.", DISPLAY, ControlKind.TOGGLE, intToggle(), absolutePath = ROOT, ignoreSuffix = true),
+
+            Control("Bloom", "Bloom", "Bloom glow around bright lights and reflective objects.", GRAPHICS, ControlKind.TOGGLE, intToggle()),
+            Control("Bokeh", "Depth of field / bokeh", "Background blur in cutscenes and aiming.", GRAPHICS, ControlKind.CHOICE, intLevels(2), note = TIERS),
+            Control("FXAA", "FXAA", "Fast post-process anti-aliasing that softens jagged edges.", GRAPHICS, ControlKind.TOGGLE, intToggle()),
+            Control("MSAA", "MSAA", "Multisample anti-aliasing; expensive on mobile GPUs.", GRAPHICS, ControlKind.CHOICE, listOf(ControlChoice("0", "Off"), ControlChoice("2", "2×"), ControlChoice("4", "4×"))),
+            Control("LevelOfDetail", "Level of detail", "Model and prop level-of-detail distance for distant objects.", GRAPHICS, ControlKind.CHOICE, intLevels(3), note = TIERS),
+            Control("ShadowQuality", "Shadow quality", "Shadow map resolution and filtering for characters and the world.", GRAPHICS, ControlKind.CHOICE, intLevels(4), note = TIERS),
+            Control("SSAO", "Ambient occlusion", "Screen-space contact shadows in corners and under characters.", GRAPHICS, ControlKind.CHOICE, intLevels(3), note = TIERS),
+            Control("LPV", "Light propagation volumes", "Global illumination approximation; expensive.", GRAPHICS, ControlKind.TOGGLE, intToggle()),
+            Control("MirrorQuality", "Mirrors and reflections", "Mirror and reflection resolution on glass and polished surfaces.", GRAPHICS, ControlKind.CHOICE, intLevels(3), note = TIERS),
+            Control("Tessellation", "Tessellation", "Extra geometry detail on selected surfaces and props.", GRAPHICS, ControlKind.TOGGLE, intToggle()),
+            Control("TextureFilter", "Texture filtering", "Anisotropic filtering level for textures seen at grazing angles such as roads.", GRAPHICS, ControlKind.CHOICE, intLevels(3), note = TIERS),
+            Control("TextureResolution", "Texture resolution", "Texture memory budget and the resulting texture resolution.", GRAPHICS, ControlKind.CHOICE, listOf(ControlChoice("0", "Low"), ControlChoice("1", "Medium"), ControlChoice("2", "High"))),
+            Control("ResolutionScalingMultiplier", "Resolution scale", "Internal render scale multiplier applied before the final upscale.", GRAPHICS, ControlKind.CHOICE, scaling),
+
+            Control(
+                "Enabled", "Motion aim",
+                "Enable tilt/motion aiming and the additional motion controls stored under Setup.",
+                MOTION, ControlKind.TOGGLE, intToggle(),
+                absolutePath = MOTION_AIM, ignoreSuffix = true,
+                linkedWrites = listOf(LinkedWrite(SETUP, "AdditionalMotionControls")),
+                note = "Writes both MotionAimSettings.Enabled and Setup.AdditionalMotionControls."
+            ),
+            Control(
+                "SensitivityX", "Motion aim sensitivity",
+                "Motion-aim sensitivity. The editor writes the same value to both X and Y axes.",
+                MOTION, ControlKind.CHOICE,
+                listOf(
+                    ControlChoice("200.000000", "200"), ControlChoice("300.000000", "300"),
+                    ControlChoice("400.000000", "400"), ControlChoice("500.000000", "500"),
+                    ControlChoice("600.000000", "600"), ControlChoice("800.000000", "800"),
+                    ControlChoice("1000.000000", "1000")
+                ),
+                absolutePath = MOTION_AIM, ignoreSuffix = true,
+                linkedWrites = listOf(LinkedWrite(MOTION_AIM, "SensitivityY"))
+            ),
+
+            Control("FrameRateLimit", "Frame cap", "Main frame-rate limit used by the engine during normal play.", PERFORMANCE, ControlKind.CHOICE, fpsChoices(), absolutePath = SETUP, ignoreSuffix = true),
+            Control("IdleFPS", "Idle frame cap", "Frame cap used in menus and while the game is otherwise idle.", PERFORMANCE, ControlKind.CHOICE, fpsChoices(), absolutePath = ROOT, ignoreSuffix = true),
+            Control("ResponsiveFPS", "Responsive frame cap", "Frame cap used while the camera is active or the player is moving.", PERFORMANCE, ControlKind.CHOICE, fpsChoices(), absolutePath = ROOT, ignoreSuffix = true),
+            Control("EnableFramerateManager", "Dynamic frame-rate manager", "Switch between the idle and responsive frame caps automatically.", PERFORMANCE, ControlKind.TOGGLE, intToggle(), absolutePath = D3D_CONFIG, ignoreSuffix = true),
+            Control("VulkanUseSeparateSubmitThread", "Separate Vulkan submit thread", "Submit rendering work from a dedicated thread to improve frame pacing.", PERFORMANCE, ControlKind.TOGGLE, intToggle(), absolutePath = D3D_CONFIG, ignoreSuffix = true)
+        )
+    )
+}
+
 object RailroadsCatalog {
     private const val DISPLAY = "Display"
     private const val QUALITY = "Graphics"
@@ -241,7 +445,7 @@ object RailroadsCatalog {
                 "Internal vertical resolution. Lower values raise frame rate at the cost of sharpness.",
                 DISPLAY, ControlKind.CHOICE, heightChoices()
             ),
-            Control("FullScreen", "Fullscreen", "Run the game fullscreen instead of windowed.", DISPLAY, ControlKind.TOGGLE, intToggle()),
+            Control("FullScreen", "Fullscreen", "Run the game fullscreen instead of in a windowed surface.", DISPLAY, ControlKind.TOGGLE, intToggle()),
             Control(
                 "RenderUnderNotch", "Render under notch",
                 "Let the game draw under a display cutout instead of letterboxing around it.",
