@@ -104,7 +104,7 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 
 - Package: `dev.legendtuner.app` (debug builds install as `dev.legendtuner.app.debug`)
 - Minimum Android: 8.0 (API 26) · Target: Android 15 (API 35)
-- Version 1.2.1 (versionCode 4)
+- Version 1.2.2 (versionCode 5)
 - Signed debug build
 
 ## First run
@@ -199,7 +199,8 @@ testdata/           eight sanitised real preferences samples
 docs/screenshots/   real device captures used in this README
 prototype/          tablet design prototype and screenshots
 DESIGN.md           historical GRID Legends schema notes and design rationale
-docs/CHANGELOG-1.2.1.md  current patch notes (inverted-toggle fix)
+docs/CHANGELOG-1.2.2.md  current release notes (backup safety, FPS/resolution, motion controls)
+docs/CHANGELOG-1.2.1.md  previous patch notes (inverted-toggle fix)
 docs/CHANGELOG-1.2.0.md  previous release notes, verification and known gaps
 ```
 
