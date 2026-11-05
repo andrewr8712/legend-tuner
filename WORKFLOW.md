@@ -1,13 +1,14 @@
 # Legend Tuner — Project Workflow Report
 
-> **Historical (v1.1.0).** The workflow below produced the single-title release. The multi-title
-> 1.2.0 work, including what the device changed in the design, is summarised in
-> [`docs/CHANGELOG-1.2.0.md`](docs/CHANGELOG-1.2.0.md) and the spec's implementation-status section.
+> **Historical (v1.1.0).** The workflow below produced the single-title release. The 1.2.x
+> multi-title work, including what the device changed in the design, is summarised in the
+> [1.2.1 release notes](docs/CHANGELOG-1.2.1.md), the [1.2.0 release notes](docs/CHANGELOG-1.2.0.md)
+> and the spec's implementation-status section.
 
 > **Project:** [Legend Tuner](https://github.com/andrewr8712/legend-tuner)  
 > **Release:** [v1.1.0](https://github.com/andrewr8712/legend-tuner/releases/tag/v1.1.0)  
 > **Device:** Lenovo Yoga Tab Plus TB520FU · Android 17 · Shizuku  
-> **Companion report:** Token, Cost & Performance Report (`PROJECT-REPORT.md`, upload alongside)  
+> **Companion report:** [Token, Cost & Performance Report](PROJECT-REPORT.md)<br>
 > **Prepared:** 2026-10-30
 
 ---
@@ -470,5 +471,5 @@ For a similar project:
 - [Repository](https://github.com/andrewr8712/legend-tuner)
 - [Latest release](https://github.com/andrewr8712/legend-tuner/releases/latest)
 - [GitHub Actions](https://github.com/andrewr8712/legend-tuner/actions)
-- Token, Cost & Performance Report — `PROJECT-REPORT.md` (upload alongside this file)
+- [Token, Cost & Performance Report](PROJECT-REPORT.md)
 - [Design notes](DESIGN.md)

@@ -2,7 +2,7 @@
 
 > **Status:** implemented as `AlienIsolationCatalog`; rows below are the shipped controls.
 
-Platform: Android 1.4.3 (`com.feralinteractive.alienisolation_android`), TB520FU dump.
+Platform: Android; game version 1.4.3 (`com.feralinteractive.alienisolation_android`), TB520FU dump.
 Registry root: `HKEY_CURRENT_USER/Software/Feral Interactive/Alien Isolation/Setup`.
 Preset model: `None` — one flat settings block, no preset variants.
 
@@ -26,8 +26,8 @@ offers the ladder but does not assume a setting's current value is its maximum.
 | `VideoSetting_ChromaticAberrations` | Chromatic Aberration | "Toggle chromatic aberration on/off". Separates red/blue channels at the frame edges for a lens effect. | Toggle | 1 | Cost is negligible; a taste setting. |
 | `VideoSetting_Deep Colour (30bpp)` | Deep Color | "Toggle deep color on/off". Requests a 10-bit swapchain where the panel supports it. | Toggle | 0 | Hidden on this device; unrelated to performance. |
 | `VideoSetting_Depth of Field` | Depth of Field | "Toggle depth of field on/off". Blurs out-of-focus depth ranges around the focal plane. | Toggle | 1 | Meaningful GPU cost in close-quarters scenes. |
-| `VideoSetting_Field Of View` | Field Of View | "Adjust field of view in game". Widens the rendered view; the game disables it in some modes. | Stepper | key absent | `_Visible = 1` but the value was never materialised. Do not create it; show a note instead. |
-| `VideoSetting_FilmGrainIntensity` | Film Grain Intensity | "Adjust the film grain intensity". Strength of the full-screen grain overlay. | Stepper | key absent | `_Visible = 1`, value absent — same rule as FOV. |
+| `VideoSetting_Field Of View` | Field Of View | "Adjust field of view in game". Widens the rendered view; the game disables it in some modes. | Not exposed | key absent | `_Visible = 1` but the value was never materialised. Do not create it; show a note instead. |
+| `VideoSetting_FilmGrainIntensity` | Film Grain Intensity | "Adjust the film grain intensity". Strength of the full-screen grain overlay. | Not exposed | key absent | `_Visible = 1`, value absent — same rule as FOV. |
 | `VideoSetting_Level of Detail` | Level of Detail | "Adjust level of detail in game". Distance at which props, debris and set dressing swap to lower-detail meshes. | Quality ladder | 1 | Streams geometry; higher values raise load on storage and CPU. |
 | `VideoSetting_MotionBlur` | Motion Blur | "Toggle motion blur on/off". Camera-space blur on fast movement. | Toggle | 0 | Off on this device. |
 | `VideoSetting_Particles` | Particles | "Adjust particle effect quality". Density and resolution of steam, sparks, smoke and ambient VFX. | Quality ladder | 0 | Heaviest in the reactor and engineering spaces. |
@@ -49,7 +49,7 @@ Screen`, `VideoSetting_FullScreen Resolution 24bpp`, `VideoSetting_FullScreen Re
 
 | Registry key | Label | Description | Type | Observed |
 |---|---|---|---|---|
-| `FixedScreenHeight` | Render height | Internal render height in pixels. The game scales to the panel; lower values raise frame rate. | Stepper (480–2160) | 1080 |
+| `FixedScreenHeight` | Render height | Internal render height in pixels. The game scales to the panel; lower values raise frame rate. | Dropdown (480–2160 px) | 1080 |
 | `FullScreen` | Fullscreen | Engine fullscreen flag. On Android the surface is always full-bleed; kept for parity. | Toggle | 1 |
 
 ## Display order

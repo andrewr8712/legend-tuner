@@ -1,9 +1,11 @@
 # Multi-title Feral config editor — design
 
-**Status:** draft, awaiting approval
+**Status:** implemented in 1.2.0; historical design record. The 1.2.1 patch fixed inverted-toggle
+selection without changing the model described here.
 **Date:** 2026-11-05
 **Supersedes:** the single-game assumptions in `DESIGN.md`
 **Builds on:** Legend Tuner 1.1.0 (`applicationId dev.legendtuner.app`)
+**Current release:** [1.2.1](../../CHANGELOG-1.2.1.md)
 
 ---
 
@@ -574,7 +576,8 @@ string change and is easy to revert if a different name is preferred.
 
 1.2.0, versionCode 3. CHANGELOG entry covering the picker, the guided editor and the catalogue
 system; README gains a "Supported titles" table with the same confirmed/unverified distinction used
-in the investigation.
+in the investigation. Superseded by the 1.2.1 patch (versionCode 4), which fixes inverted-toggle
+selection.
 
 ## 8. Test fixtures and tests
 
@@ -702,7 +705,7 @@ primary experience for non-GRID games. That correction is why the catalogue, `Co
    alongside GRID's triples and GRID Autosport's prefixes. The catalogue model carries all of them;
    no schema is inferred from a sibling title.
 
-## 12. Implementation status (1.2.0)
+## 12. Implementation status (1.2.0; patched in 1.2.1)
 
 Shipped and verified on the TB520FU. The design's screen model, catalogue model and safety rules are
 in place; the deviations below are deliberate and are what the device proved necessary.
@@ -737,10 +740,16 @@ in place; the deviations below are deliberate and are what the device proved nec
 6. **Discovery never stats files for non-installed titles**, but installed titles are no longer marked
    "ready" from a direct `canRead()` alone — on Android 11+ that check is always false and produced a
    misleading "launch once" state. Cards now say Installed; access succeeds or fails at open time.
+7. **The document model stayed in `ConfigDocument.kt`.** The sketch's separate `RegistryModel.kt`
+   was not needed; the existing path-addressable document already preserved unknown values and
+   supported every title.
+8. **The candidate set narrowed to verified titles.** The picker and manifest expose the eight
+   supported packages rather than the 15 candidates considered during discovery.
 
 ### Known gaps carried forward
 
 - GRID Autosport's prefix-to-preset-name mapping still needs one in-game switch and file diff.
-- Hitman's shadow-resolution ladder and `Disable*` inversion are named from the keys, not observed.
+- Hitman's shadow-resolution ladder remains unverified. The `Disable*` inversion was verified in the
+  editor and file in 1.2.1 (`DisableBloom_plus = 0` displays **On**), but not in-game.
 - Saints Row tier tokens beyond the observed value are inferred and marked with amber dots.
 - Only GRID Autosport, Hitman and Saints Row resolution have had a full write → verify → revert cycle.

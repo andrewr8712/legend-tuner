@@ -2,7 +2,7 @@
 
 > **Status:** implemented as `GridAutosportCatalog`; rows below are the shipped controls.
 
-Platform: Android 1.10.6 (`com.feralinteractive.gridas`), TB520FU dump.
+Platform: Android; game version 1.10.6 (`com.feralinteractive.gridas`), TB520FU dump.
 Registry root: `HKEY_CURRENT_USER/Software/Feral Interactive/GRID Autosport/Setup`.
 Preset model: `Prefixed` — the graphics set exists three times, plus two hint keys.
 
@@ -73,13 +73,17 @@ before the labels ship.
 
 ## Display and frame rate
 
+The guided catalogue exposes `FullScreen` and `FixedScreenHeight`. The remaining engine, audio and
+backbuffer keys are shown only in Raw XML.
+
 | Key | Label | Description | Type | Observed |
 |---|---|---|---|---|
-| `MaxFramesPerSecond` | Frame rate cap (engine) | Engine-level cap; the graphics presets write `gfxconfig_max_fps`. | Stepper | 0 (unset) |
+| `MaxFramesPerSecond` | Frame rate cap (engine) | Engine-level cap; the graphics presets write `gfxconfig_max_fps`. | Not exposed | 0 (unset) |
 | `FullScreen` | Fullscreen | Engine fullscreen flag; Android is always full-bleed. | Toggle | 1 |
-| `ScreenW` / `ScreenH` | Resolution | Reported backbuffer size. | read-only | 1920 × 1080 |
-| `FeralAudioDynamicRange` | Dynamic range | Audio dynamic range preset (`high`, `low`). | Select | high |
-| `FeralAudioSystemEQ` | Speaker EQ | Output equalisation profile (`tv`, `headphones`, …). | Select | flat |
+| `FixedScreenHeight` | Render height | Internal vertical resolution; lower values raise frame rate. | Dropdown (480–2160 px) | 1080 |
+| `ScreenW` / `ScreenH` | Resolution | Reported backbuffer size. | Read-only | 1920 × 1080 |
+| `FeralAudioDynamicRange` | Dynamic range | Audio dynamic range preset (`high`, `low`). | Not exposed | high |
+| `FeralAudioSystemEQ` | Speaker EQ | Output equalisation profile (`tv`, `headphones`, …). | Not exposed | flat |
 
 ## Grouping
 
@@ -92,8 +96,8 @@ before the labels ship.
 ## Open verification
 
 1. Switch each in-game preset (GRAPHICS / PERFORMANCE / PERFORMANCE PLUS) in turn, quit, and diff
-   `preferences` to bind labels to prefixes. Until then, expose the sets as **Current / High / Power
-   saver**.
+   `preferences` to bind labels to prefixes. Until then, expose the sets as **Current /
+   Performance cache / Power saver cache**.
 2. Confirm which of `ai_count`, `voice_count` and `second_screen` the in-game menu actually exposes;
    if it does not, leave them in All values only.
 3. Change one control per group, quit, and confirm the key and token that changed.

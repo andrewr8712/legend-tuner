@@ -11,7 +11,7 @@ keytool -genkeypair \
   -keypass "choose-a-password" \
   -alias legendtuner \
   -keyalg RSA -keysize 2048 -validity 10000 \
-  -dname "CN=Legend Tuner, O=Legend Tuner"
+  -dname "CN=Config Tuner, O=Config Tuner"
 ```
 
 Then create `keystore.properties` (ignored by git):

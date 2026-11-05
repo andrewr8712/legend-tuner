@@ -38,7 +38,8 @@ Release notes: [`docs/CHANGELOG-1.2.1.md`](docs/CHANGELOG-1.2.1.md).
 
 ### Changed
 
-- Display name is now **Config Tuner**; `applicationId` is unchanged so 1.1.0 updates in place.
+- Display name is now **Config Tuner**; the base `applicationId` is unchanged, and distributed
+  debug builds remain `dev.legendtuner.app.debug`, so 1.1.0 debug installs update in place.
 - Version code 3. Registry validation is title-aware; GRID Legends keeps strict preset checks.
 - Raw XML is now the expert fallback rather than the only path for non-GRID titles.
 

@@ -2,7 +2,7 @@
 
 > **Status:** implemented as `NapoleonCatalog`; rows below are the shipped controls.
 
-Platform: Android 1.3.4 (`com.feralinteractive.napoleon_android`), TB520FU dump.
+Platform: Android; game version 1.3.4 (`com.feralinteractive.napoleon_android`), TB520FU dump.
 Root: `HKEY_CURRENT_USER/Software/The Creative Assembly Limited/Napoleon Total War - Mobile/Setup`.
 Settings block: `…/Setup/GraphicsSettings` (26 integers).
 Model: `None` — flat, no preset blocks; `Setup/GraphicsQuality` is a quality index.

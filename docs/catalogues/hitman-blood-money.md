@@ -2,7 +2,7 @@
 
 > **Status:** implemented as `HitmanCatalog`; rows below are the shipped controls.
 
-Platform: Android 1.3.1 (`com.feralinteractive.hitmanbloodmoney_android`), TB520FU dump.
+Platform: Android; game version 1.3.1 (`com.feralinteractive.hitmanbloodmoney_android`), TB520FU dump.
 Root: `HKEY_CURRENT_USER/Software/Feral Interactive/Hitman Blood Money/Setup`.
 Model: `Suffixed(["_battery", "_graphics", "_perf", "_plus"])`, 17 graphics keys per family.
 
@@ -73,4 +73,5 @@ That is better than mis-writing a ladder as a single number.
    token the UI writes.
 2. Confirm the active-preset key (not found in this file; the game may derive it from the device
    preset).
-3. Confirm `Disable*` keys are inverted as their names imply.
+3. Confirm the in-game effect of the `Disable*` keys. The editor and file were verified in 1.2.1:
+   `DisableBloom_plus = 0` displays **On**; the in-game result is still unconfirmed.

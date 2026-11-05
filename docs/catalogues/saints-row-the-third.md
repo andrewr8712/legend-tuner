@@ -2,7 +2,7 @@
 
 > **Status:** implemented as `SaintsRowCatalog`; rows below are the shipped controls.
 
-Platform: Android 1.0.3 (`com.feralinteractive.saintsrow3_android`), TB520FU dump.
+Platform: Android; game version 1.0.3 (`com.feralinteractive.saintsrow3_android`), TB520FU dump.
 Root: `HKEY_CURRENT_USER/Software/Feral Interactive/Saints Row The Third/Setup`.
 Model: `Blocks(Setup, [BatterySaverPreset, GraphicsPreset, PerformancePreset],
 selector = GameOptions/GfxMobilePreset)` — 23 values per block.

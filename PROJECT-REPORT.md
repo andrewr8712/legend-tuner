@@ -1,7 +1,8 @@
 # Legend Tuner — Token, Cost & Performance Report
 
-> **Historical (v1.1.0).** Kept for the record. The 1.2.0 multi-title release and its own session
-> metrics are in [`docs/CHANGELOG-1.2.0.md`](docs/CHANGELOG-1.2.0.md).
+> **Historical (v1.1.0).** Kept for the record. The 1.2.x multi-title releases and their session
+> metrics are in the [1.2.1 release notes](docs/CHANGELOG-1.2.1.md) and
+> [1.2.0 release notes](docs/CHANGELOG-1.2.0.md).
 
 > **Snapshot:** 2026-10-30 12:35 AWST (2026-10-30 04:35 UTC)  
 > **Model:** `deepseek-flash` — DeepSeek-V4.1-Flash-1017  

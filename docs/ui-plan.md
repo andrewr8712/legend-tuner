@@ -1,7 +1,8 @@
 # UI plan — multi-title config editor
 
-Status: shipped for the picker, guided editor shell, preset tabs and inspector. The type ramp,
-instrument-panel polish and quick-tune hover states remain backlog. Companion to
+Status: historical design record. The picker, guided editor shell, preset tabs, inspector and type
+ramp shipped in 1.2.0; the 1.2.1 patch fixed inverted-toggle selection. Instrument-panel polish and
+quick-tune hover states remain backlog. Companion to
 `docs/superpowers/specs/2026-11-05-feral-multi-title-design.md`.
 
 Rendered direction: `prototype/multi-title.html` and `prototype/multi-title.png` (picker and guided
@@ -259,12 +260,11 @@ name; nothing in All values pretends to be a friendly label.
 7. Raw XML / Backups polish.
 8. Accessibility pass and font-scale layout checks.
 
-## 11. Open decisions
+## 11. Decisions resolved
 
-1. Display name: **Config Tuner** (current proposal) versus keeping Legend Tuner.
-2. Per-title accent tint: recommended **no** — one lime accent, identity comes from the title's
-   monogram and name.
-3. Density: recommended comfortable 56 dp rows; a compact 44 dp toggle could come later for
-   power users.
-4. Whether the picker shows unreadable files as cards or only as an error after tapping. Current
-   design: card, because that is the state users need to understand.
+1. Display name: **Config Tuner**.
+2. Per-title accent tint: **none**. One lime accent; identity comes from the title's monogram and
+   name.
+3. Density: comfortable rows. A compact mode remains a possible future option.
+4. Picker behaviour: installed titles appear as cards; unreadable access is explained after opening,
+   not inferred from a direct `canRead()` check that Android 11+ always denies.

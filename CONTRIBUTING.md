@@ -4,7 +4,7 @@ Thanks for taking a look at Config Tuner (formerly Legend Tuner).
 
 ## Development
 
-Requirements: JDK 17 or newer (JDK 21 is used locally), Android SDK platform 35, build-tools 35.0.0.
+Requirements: JDK 17 or 21 (JDK 21 is used locally), Android SDK platform 35, build-tools 35.0.0.
 
 ```bash
 ./gradlew :app:testDebugUnitTest :app:assembleDebug
@@ -15,7 +15,8 @@ Keep changes focused. The parser preserves unknown keys and values; avoid replac
 Guided controls are data, not code paths: add a row to the title's file in `docs/catalogues/`, then
 transcribe it into `data/TitleCatalog.kt` or `TitleCatalogs.kt`. `TitleCatalogTest` fails if a control
 lacks a label, a 40-character description, a known group, or two options where it is selectable.
-Never expose a key the game did not write; see the "no key, no control" rule in the spec.
+Never expose a key the game did not write; see the control-authoring rule in the
+[multi-title design record](docs/superpowers/specs/2026-11-05-feral-multi-title-design.md).
 
 ## Pull requests
 

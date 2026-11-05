@@ -26,8 +26,8 @@
 An unofficial, tablet-first Android app for editing the graphics settings of **Feral Interactive**'s
 Android ports — with readable, guided controls instead of hand-editing XML.
 
-Formerly Legend Tuner, which edited GRID Legends only. Version 1.2 keeps the same package
-(`dev.legendtuner.app`) so existing installs update in place, and adds seven more titles.
+Formerly Legend Tuner, which edited GRID Legends only. Version 1.2.x keeps the same package
+identity as 1.1.0, so existing debug installs update in place, and adds seven more titles.
 
 ![Config Tuner title picker](docs/screenshots/picker.png)
 
@@ -98,12 +98,12 @@ game that is not installed under **Also supported**.
 on the tablet, or:
 
 ```bash
-adb install -r app-debug.apk
+adb install -r app/build/outputs/apk/debug/app-debug.apk
 ```
 
 - Package: `dev.legendtuner.app` (debug builds install as `dev.legendtuner.app.debug`)
 - Minimum Android: 8.0 (API 26) · Target: Android 15 (API 35)
-- Version 1.2.0 (versionCode 3)
+- Version 1.2.1 (versionCode 4)
 - Signed debug build
 
 ## First run
@@ -153,7 +153,7 @@ without Root or Shizuku, and for titles that are not installed.
 
 ## Build
 
-Requirements: JDK 17 or newer (JDK 21 is used locally), Android SDK platform 35, build-tools 35.0.0.
+Requirements: JDK 17 or 21 (JDK 21 is used locally), Android SDK platform 35, build-tools 35.0.0.
 
 ```bash
 git clone https://github.com/andrewr8712/legend-tuner.git
@@ -177,10 +177,10 @@ A clean checkout uses Gradle's machine-local debug signing key. Maintainers can 
 ./gradlew :app:testDebugUnitTest
 ```
 
-18 tests cover registry parsing and round-trip preservation, preset edits, live-value mirroring,
-unknown keys and types, malformed XML, icon vectors, the title table, and catalogue conformance:
-every guided control must have a label, a description of at least 40 characters, a known group, and
-unique keys with at least two options for selectable controls.
+19 tests cover registry parsing and round-trip preservation, preset edits, live-value mirroring,
+unknown keys and types, malformed XML, icon vectors, the title table, inverted-toggle selection, and
+catalogue conformance. Every guided control must have a label, a description of at least 40
+characters, a known group, and unique keys with at least two options for selectable controls.
 
 ## Project layout
 
@@ -191,12 +191,13 @@ app/src/main/java/dev/legendtuner/app/
   ui/            picker, guided editor, dashboard, raw XML, backups
 app/src/main/aidl/  Shizuku IFileService
 docs/catalogues/    per-title control inventories and provenance
-docs/superpowers/specs/  multi-title design spec
+docs/superpowers/specs/  multi-title design record
 testdata/           eight sanitised real preferences samples
 docs/screenshots/   real device captures used in this README
 prototype/          tablet design prototype and screenshots
-DESIGN.md           schema notes and design rationale
-docs/CHANGELOG-1.2.0.md  what changed in this release, including verification
+DESIGN.md           historical GRID Legends schema notes and design rationale
+docs/CHANGELOG-1.2.1.md  current patch notes (inverted-toggle fix)
+docs/CHANGELOG-1.2.0.md  previous release notes, verification and known gaps
 ```
 
 ## Compatibility

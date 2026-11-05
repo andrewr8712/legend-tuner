@@ -2,8 +2,8 @@
 
 Per-title review artifacts for the guided editor. Each file lists every control the app shows, with
 its registry key, label, description, option vocabulary and the evidence behind it. Every catalogue
-is implemented in Kotlin and the conformance test enforces labels, descriptions, groups and unique
-keys.
+is implemented in Kotlin and the conformance test enforces labels, descriptions, groups, unique
+keys and options for selectable controls.
 
 | Title | Source | Kotlin | Controls | Variants |
 |---|---|---|---:|---|
@@ -54,6 +54,6 @@ file's *Open verification* section, and the control ships with a note (the amber
 | Alien: Isolation | Texture-filter index order; per-setting maximums |
 | Saints Row | Allowed tier tokens beyond the observed value; selector rewrite on exit |
 | NAPOLEON | `GraphicsQuality` index range and what each index changes |
-| Hitman | Ladder semantics for shadow resolution; `Disable*` inversion confirmed by name only |
+| Hitman | Ladder semantics for shadow resolution; `Disable*` inversion verified in the editor/file, not in-game |
 | Lara Croft GoL | `BestTextureFilter` index order; AA mode set |
 | Lara Croft ToO | `SSAAQuality` ↔ "ANTI ALIASING" mapping; filter index order |

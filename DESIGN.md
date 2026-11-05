@@ -1,14 +1,19 @@
 # Legend Tuner — design & build plan
 
-> **Historical.** This document describes the GRID Legends-only 1.x design. For the multi-title
-> 1.2.0 model (title profiles, catalogues, preset families, access sessions) see
-> `docs/superpowers/specs/2026-11-05-feral-multi-title-design.md` and `docs/CHANGELOG-1.2.0.md`.
-> The GRID Legends schema notes below are still current.
+> **Historical (v1.x).** This document records the GRID Legends-only design. For the current
+> multi-title app, see the [multi-title design record](docs/superpowers/specs/2026-11-05-feral-multi-title-design.md)
+> and the [1.2.1 release notes](docs/CHANGELOG-1.2.1.md). The GRID Legends schema notes below are
+> still current.
+>
+> Some sections describe the original design intent; the shipped app is authoritative where they
+> differ.
 
 An unofficial, native Android editor for the `preferences` file used by **GRID™ Legends** on Android.
 
-- **Status:** implemented — signed debug APK built (runtime verification on the tablet still pending)
-- **Target device:** Lenovo Yoga Tab Plus **TB520FU** — 12.7″, 2944 × 1840, Android 14+
+- **Status:** historical — implemented and verified on the TB520FU; retained as the single-title
+  GRID Legends design record
+- **Target device:** Lenovo Yoga Tab Plus **TB520FU** — 12.7″, 2944 × 1840, Android 14+;
+  verified on Android 17
 - **Access:** root, Shizuku (non-root), and manual import/export
 - **Tablet prototype:** [`prototype/tablet.html`](prototype/tablet.html) · [home](prototype/tablet-home.png) · [editor](prototype/tablet-editor.png)
 - **Compact fallback:** [`prototype/index.html`](prototype/index.html)
@@ -203,7 +208,8 @@ The app will not hard-code the whole file; it will parse values by path and keep
 
 `AntiAliasing`, `GroundCover`, `LightingQuality`, `LODQuality`, `TextureQuality`, `VehicleReflections`.
 
-The app shows the raw number alongside the label, and an **Expert: ignore device caps** switch for values above `_maximum`.
+The shipped app shows the raw number alongside the label and clamps to `_maximum` when present;
+Raw XML is the escape hatch for values outside the friendly range.
 
 ### Frame / resolution
 
@@ -301,8 +307,8 @@ The tablet design is in [`prototype/tablet.html`](prototype/tablet.html), with r
 | 3 | Done — Shizuku UserService + permission/setup flow |
 | 4 | Done — adaptive rail, tablet dashboard, two-column editor, docked inspector |
 | 5 | Done — manual import/export, raw XML, backups screen, portrait/split-screen layouts |
-| 6 | Done — signed debug APK, 10/10 unit tests, install instructions |
-| 7 | Pending — on-device verification with the actual TB520FU |
+| 6 | Done — signed debug APK, 10/10 unit tests at v1.1.0, install instructions |
+| 7 | Done — on-device verification with the actual TB520FU |
 
 Runtime verification on the tablet is complete. Release APKs are published through GitHub Releases; local builds land at `app/build/outputs/apk/debug/app-debug.apk`, package `dev.legendtuner.app.debug`.
 
@@ -314,12 +320,19 @@ Implementation notes:
 
 ---
 
-## 9. Decisions to confirm
+## 9. Decisions resolved
 
-1. **Name:** `Legend Tuner` (unofficial) — or a different name?
-2. **Save behaviour:** should saving a preset always make it the active preset? Recommended: yes, with a visible `ACTIVE` badge.
-3. **Shizuku:** acceptable as the non-root path? It requires installing Shizuku and starting it after each reboot via wireless debugging.
-4. **Risk controls:** keep the `Expert: ignore device caps` switch, or hide it behind a long-press?
-5. **Orientation:** landscape-first with full portrait support, or lock to landscape while editing?
+These were open in the original design and are recorded here as shipped decisions:
 
-Once these are settled, I can build phases 1–6 and produce the APK.
+1. **Name:** **Config Tuner**. The base `applicationId` remains `dev.legendtuner.app`; debug
+   artifacts use `dev.legendtuner.app.debug`.
+2. **Save behaviour:** saving a preset makes it active. The UI marks the active preset with an
+   `ACTIVE` badge and mirrors the preset values into `GraphicsSettings`.
+3. **Shizuku:** accepted as the non-root path, alongside Root and manual file access.
+4. **Risk controls:** the proposed **Expert: ignore device caps** switch was not shipped. Raw XML is
+   the expert escape hatch for values outside the friendly ranges.
+5. **Orientation:** landscape-first, with no fixed orientation. Layout follows window width and
+   supports portrait, split-screen and freeform windows.
+
+The decisions above are reflected in the shipped app. This section is retained as a historical
+record.

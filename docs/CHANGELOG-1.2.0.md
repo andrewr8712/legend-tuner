@@ -1,7 +1,10 @@
 # Changelog — 1.2.0 (Config Tuner)
 
+> Superseded by [1.2.1](CHANGELOG-1.2.1.md) for the inverted-toggle fix.
+
 **Version:** 1.2.0 · versionCode 3
-**Package:** `dev.legendtuner.app` (unchanged, so 1.1.0 installs update in place)
+**Package:** `dev.legendtuner.app` base; distributed debug builds use `dev.legendtuner.app.debug`
+(unchanged from the 1.1.0 debug build, so that install updates in place)
 **Display name:** Config Tuner
 
 This release turns the GRID Legends-only editor into a multi-title Feral config editor while keeping
@@ -61,7 +64,7 @@ the same guided experience and the same safety model.
 | Saints Row resolution | 1920 × 1080 written to `ScreenW`/`ScreenH`; restored to 2560 × 1440 |
 | GRID Legends manual file | Imported a saved registry, dashboard and three-preset editor loaded, no game installed |
 | Catalogue coverage | All eight titles render stored values; absent keys show "Not stored" |
-| Tests | 18/18 passing; debug APK builds |
+| Tests | 18/18 passing at the 1.2.0 cut; debug APK builds |
 
 Only GRID Autosport (a rendering key), Hitman (a frame cap) and Saints Row (resolution) have had a
 full write → verify → revert cycle. The other titles are verified as readers of their real files.
