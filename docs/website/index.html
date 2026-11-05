@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Config Tuner — Feral settings without the XML</title>
+<meta name="description" content="Config Tuner is an unofficial, tablet-first Android app that edits the graphics settings of Feral Interactive's Android ports with guided controls, verified writes and automatic backups. 17 titles. Formerly Legend Tuner.">
+<meta name="theme-color" content="#070908">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://andrewr8712.github.io/legend-tuner/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Config Tuner — Feral settings without the XML">
+<meta property="og:description" content="Guided controls for the graphics settings Feral Interactive's Android ports keep in a plaintext registry. Backed up, written back, verified. 17 titles, Android 8.0+, no network permission.">
+<meta property="og:url" content="https://andrewr8712.github.io/legend-tuner/">
+<meta property="og:site_name" content="Config Tuner">
+<meta property="og:image" content="https://andrewr8712.github.io/legend-tuner/assets/brand/social-card.png">
+<meta property="og:image:alt" content="Config Tuner: Feral settings without the XML, with the title picker on a tablet.">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/brand/icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="apple-mobile-web-app-title" content="Config Tuner">
+
+<link rel="preload" href="assets/fonts/barlow-condensed-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+<script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="wrap head-inner">
+    <a class="brand" href="#top" aria-label="Config Tuner, back to top">
+      <img src="assets/brand/mark.svg" alt="" width="34" height="34">
+      <span class="brand-word">Config Tuner</span>
+    </a>
+    <nav class="site-nav" aria-label="Sections">
+      <a href="#how">How it works</a>
+      <a href="#safety">Safety</a>
+      <a href="#titles">Titles</a>
+      <a href="#install">Install</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-primary btn-sm" href="https://github.com/andrewr8712/legend-tuner/releases/latest">
+      Download APK
+      <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0 3-3m-3 3L5 7M3 12v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+    </a>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- 1 · hero -->
+  <section class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="kicker">Unofficial · Android 8.0+ · 17 titles</p>
+        <h1>Feral settings<br><span class="hl">without the XML.</span></h1>
+        <p class="lede">Every Feral Android port keeps its real graphics settings in a plaintext registry
+          that Android will not let you open. Config Tuner gives you readable controls for that file —
+          backed up, written back, verified.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://github.com/andrewr8712/legend-tuner/releases/latest">
+            Download APK
+            <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0 3-3m-3 3L5 7M3 12v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="https://github.com/andrewr8712/legend-tuner">
+            <svg class="ico" viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.4 7.4 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+            View on GitHub
+          </a>
+        </div>
+        <p class="hero-note">v1.2.8 · debug-signed · 10 MB · no network permission</p>
+      </div>
+
+      <div class="hero-art">
+        <div class="term" aria-hidden="true">
+          <div class="term-bar"><span>registry</span><span class="dots"><i></i><i></i><i></i></span></div>
+          <p class="term-path">Android/data/&lt;package&gt;/files/<br>feral_app_support/preferences</p>
+          <p class="term-meta"><span class="tok-key">renderHeight</span> <span class="tok-val">1080</span>
+            <span class="tok-comment">// guided</span></p>
+          <p class="term-meta"><span class="tok-key">fullscreen</span> <span class="tok-val">1</span>
+            <span class="tok-comment">// 0 – 1</span></p>
+          <p class="term-caret" aria-hidden="true"></p>
+        </div>
+        <figure class="picker-frame">
+          <picture><source srcset="assets/shots/picker.webp" type="image/webp"><img src="assets/shots/picker.png" width="1600" height="1000"
+               alt="Config Tuner title picker on a tablet: installed Feral titles as cards, with control counts."></picture>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · proof -->
+  <section class="proof" id="proof" aria-label="At a glance">
+    <div class="wrap proof-inner">
+      <dl class="proof-list">
+        <div><dt>17</dt><dd>titles with guided controls</dd></div>
+        <div><dt>48</dt><dd>unit tests on the parser and catalogue</dd></div>
+        <div><dt>0</dt><dd>network permissions, analytics or telemetry</dd></div>
+        <div><dt>MIT</dt><dd>open source, debug-signed, on GitHub</dd></div>
+      </dl>
+      <p class="proof-note">17 titles · 48 unit tests · as of 1.2.8</p>
+    </div>
+  </section>
+
+  <!-- 3 · how it works -->
+  <section class="section" id="how">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="sec-kicker">01 — How it works</p>
+        <h2>Four steps, one file.</h2>
+        <p class="sec-lede">Config Tuner does not rewrite the game. It opens the preferences file the
+          game already reads, shows you the keys behind the labels, and writes back only what you
+          asked for.</p>
+      </header>
+
+      <ol class="steps">
+        <li>
+          <span class="step-no">1</span>
+          <h3>Pick the title</h3>
+          <p>Installed Feral games are detected by package. A supported title that is not installed can
+            be opened from a saved preferences file.</p>
+        </li>
+        <li>
+          <span class="step-no">2</span>
+          <h3>Choose a route</h3>
+          <p>Android 11 and later block normal apps from other apps' data folders. Root, Shizuku, a
+            manual file copy, or direct access on older Android — that is the honest cost.</p>
+        </li>
+        <li>
+          <span class="step-no">3</span>
+          <h3>Edit guided controls</h3>
+          <p>Grouped rows in plain language, each with the stored registry key shown for provenance.
+            Preset families stay tabs rather than flattened keys.</p>
+        </li>
+        <li>
+          <span class="step-no">4</span>
+          <h3>Save, verified</h3>
+          <p>The file is validated, backed up, written, read back and parsed. If any step fails, the
+            previous file is restored.</p>
+        </li>
+      </ol>
+
+      <div class="pipeline" role="img" aria-label="Save pipeline: validate, back up, write, read back, parse. Any failure restores the backup.">
+        <span class="pipe-box">validate</span><span class="pipe-arrow" aria-hidden="true"></span>
+        <span class="pipe-box">back up</span><span class="pipe-arrow" aria-hidden="true"></span>
+        <span class="pipe-box">write</span><span class="pipe-arrow" aria-hidden="true"></span>
+        <span class="pipe-box">read back</span><span class="pipe-arrow" aria-hidden="true"></span>
+        <span class="pipe-box">parse</span>
+        <span class="pipe-fail">any failure → previous file restored</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · safety -->
+  <section class="section section-alt" id="safety">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="sec-kicker">02 — Safety</p>
+        <h2>It refuses to lose your file.</h2>
+        <p class="sec-lede">Editing another app's data is the risk. The app is built around one rule:
+          the previous version of the file always survives a failed save.</p>
+      </header>
+
+      <div class="cards-3">
+        <article class="card">
+          <h3>Backup before every save</h3>
+          <p>A copy is written before the file is touched. Each title keeps its own twelve snapshots,
+            and restores are scoped to that title.</p>
+        </article>
+        <article class="card">
+          <h3>Written, then read back</h3>
+          <p>After writing, the app reads the file back and parses it. A successful write is a verified
+            write, not an assumption.</p>
+        </article>
+        <article class="card">
+          <h3>Automatic rollback</h3>
+          <p>If validation, writing or parsing fails, the previous file is restored. You are told what
+            happened instead of being left with a half-written registry.</p>
+        </article>
+      </div>
+
+      <div class="caveats">
+        <h3>Three things to know before you install</h3>
+        <ul>
+          <li><strong>The game rewrites its settings on exit.</strong> Fully close the game before
+            editing, or your changes may be overwritten when it closes.</li>
+          <li><strong>The APK is debug-signed.</strong> It is distributed through GitHub Releases, not
+            Google Play, and Play Protect may warn about it.</li>
+          <li><strong>It never invents keys.</strong> A setting that is absent from your file shows as
+            “Not stored in this file” and cannot be written.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · titles -->
+  <section class="section" id="titles">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="sec-kicker">03 — Titles</p>
+        <h2>Seventeen games, one editor.</h2>
+        <p class="sec-lede">Guided controls differ per title because the registries do. Counts are the
+          number of guided controls Config Tuner ships for that title.</p>
+      </header>
+
+      <div class="filter-row">
+        <label class="field">
+          <span class="vh">Filter titles</span>
+          <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m10.5 10.5 3 3" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
+          <input id="title-filter" type="search" placeholder="Filter by title or package" autocomplete="off" spellcheck="false">
+        </label>
+        <p class="filter-count" id="title-count" aria-live="polite">17 of 17 shown</p>
+      </div>
+
+      <ul class="title-grid" id="title-list">
+        <li class="title-card" data-name="GRID Legends com.feralinteractive.gridlegends_android">
+          <span class="tc-name">GRID Legends</span>
+          <span class="tc-count">28 <span>guided controls</span></span>
+          <code class="tc-pkg">com.feralinteractive.gridlegends_android</code>
+        </li>
+        <li class="title-card" data-name="GRID Autosport com.feralinteractive.gridas">
+          <span class="tc-name">GRID Autosport</span>
+          <span class="tc-count">29 <span>guided controls</span></span>
+          <code class="tc-pkg">com.feralinteractive.gridas</code>
+        </li>
+        <li class="title-card" data-name="Alien: Isolation com.feralinteractive.alienisolation_android">
+          <span class="tc-name">Alien: Isolation</span>
+          <span class="tc-count">12 <span>guided controls</span></span>
+          <code class="tc-pkg">com.feralinteractive.alienisolation_android</code>
+        </li>
+        <li class="title-card" data-name="Saints Row: The Third com.feralinteractive.saintsrow3_android">
+          <span class="tc-name">Saints Row: The Third</span>
+          <span class="tc-count">19 <span>guided controls</span></span>
+          <code class="tc-pkg">com.feralinteractive.saintsrow3_android</code>
+        </li>
+        <li class="title-card" data-name="NAPOLEON: Total War com.feralinteractive.napoleon_android">
+          <span class="tc-name">NAPOLEON: Total War</span>
+          <span class="tc-count">16 <span>guided controls</span></span>
+          <code class="tc-pkg">com.feralinteractive.napoleon_android</code>
+        </li>
+        <li class="title-card" data-name="Hitman: Blood Money com.feralinteractive.hitmanbloodmoney_android">
+          <span class="tc-name">Hitman: Blood Money</span>
+          <span class="tc-count">18 <span>guided controls</span></span>
+          <code class="tc-pkg">com.feralinteractive.hitmanbloodmoney_android</code>
+        </li>
+        <li class="title-card" data-name="Lara Croft: Guardian of Light com.feralinteractive.laracroftgol_android">
+          <span class="tc-name">Lara Croft: Guardian of Light</span>
+          <span class="tc-count">10 <span>guided controls</span></span>
+          <code class="tc-pkg">com.feralinteractive.laracroftgol_android</code>
+        </li>
+        <li class="title-card" data-name="Lara Croft: Temple of Osiris com.feralinteractive.laracrofttoo_android">
+          <span class="tc-name">Lara Croft: Temple of Osiris</span>
+          <span class="tc-count">11 <span>guided controls</span></span>
+          <code class="tc-pkg">com.feralinteractive.laracrofttoo_android</code>
+        </li>
+        <li class="title-card" data-name="Sid Meier's Railroads! com.feralinteractive.railroads_android">
+          <span class="tc-name">Sid Meier's Railroads!</span>
+          <span class="tc-count">16 <span>guided controls</span></span>
+          <code class="tc-pkg">com.feralinteractive.railroads_android</code>
+        </li>
+        <li class="title-card" data-name="Tomb Raider com.feralinteractive.tombraider_android">
+          <span class="tc-name">Tomb Raider</span>
+          <span class="tc-count">24 <span>guided controls</span></span>
+          <code class="tc-pkg">com.feralinteractive.tombraider_android</code>
+        </li>
+        <li class="title-card" data-name="Hitman: Absolution com.feralinteractive.hitmanabsolution_android">
+          <span class="tc-name">Hitman: Absolution</span>
+          <span class="tc-count">25 <span>guided controls</span></span>
+          <code class="tc-pkg">com.feralinteractive.hitmanabsolution_android</code>
+        </li>
+        <li class="title-card" data-name="Company of Heroes com.feralinteractive.companyofheroes_android">
+          <span class="tc-name">Company of Heroes</span>
+          <span class="tc-count">24 <span>guided controls</span></span>
+          <code class="tc-pkg">com.feralinteractive.companyofheroes_android</code>
+        </li>
+        <li class="title-card" data-name="Total War: EMPIRE com.feralinteractive.empire_android">
+          <span class="tc-name">Total War: EMPIRE</span>
+          <span class="tc-count">28 <span>guided controls</span></span>
+          <code class="tc-pkg">com.feralinteractive.empire_android</code>
+        </li>
+        <li class="title-card" data-name="Tropico 3 com.feralinteractive.tropico3">
+          <span class="tc-name">Tropico 3</span>
+          <span class="tc-count">15 <span>guided controls</span></span>
+          <code class="tc-pkg">com.feralinteractive.tropico3</code>
+        </li>
+        <li class="title-card" data-name="ROME: Total War com.feralinteractive.rometw">
+          <span class="tc-name">ROME: Total War</span>
+          <span class="tc-count">24 <span>guided controls</span></span>
+          <code class="tc-pkg">com.feralinteractive.rometw</code>
+        </li>
+        <li class="title-card" data-name="Medieval II: Total War com.feralinteractive.medieval2_android">
+          <span class="tc-name">Medieval II: Total War</span>
+          <span class="tc-count">24 <span>guided controls</span></span>
+          <code class="tc-pkg">com.feralinteractive.medieval2_android</code>
+        </li>
+        <li class="title-card" data-name="ROME: Barbarian Invasion com.feralinteractive.rometwbi">
+          <span class="tc-name">ROME: Barbarian Invasion</span>
+          <span class="tc-count">24 <span>guided controls</span></span>
+          <code class="tc-pkg">com.feralinteractive.rometwbi</code>
+        </li>
+      </ul>
+      <p class="empty-note" id="title-empty" hidden>No title matches that. <button type="button" class="linklike" id="title-reset">Clear the filter</button></p>
+
+      <p class="sec-foot">Not listed? The raw XML editor still opens any Feral preferences file you can
+        supply — the guided controls are a convenience, not a wall.</p>
+    </div>
+  </section>
+
+  <!-- 6 · screenshots -->
+  <section class="section section-alt" id="shots">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="sec-kicker">04 — Screenshots</p>
+        <h2>The app, unchanged.</h2>
+        <p class="sec-lede">Captured on a Lenovo Yoga Tab Plus TB520FU. No game artwork is used anywhere
+          on this page or in the app.</p>
+      </header>
+
+      <div class="shot-tabs" role="tablist" aria-label="Screenshots">
+        <button type="button" role="tab" id="tab-picker" aria-controls="panel-picker" aria-selected="true">Picker</button>
+        <button type="button" role="tab" id="tab-editor" aria-controls="panel-editor" aria-selected="false" tabindex="-1">Guided editor</button>
+        <button type="button" role="tab" id="tab-presets" aria-controls="panel-presets" aria-selected="false" tabindex="-1">Preset tabs</button>
+        <button type="button" role="tab" id="tab-resolution" aria-controls="panel-resolution" aria-selected="false" tabindex="-1">Resolution</button>
+      </div>
+
+      <div class="shot-panels">
+        <div class="shot-panel" id="panel-picker" role="tabpanel" aria-labelledby="tab-picker" tabindex="0">
+          <figure><picture><source srcset="assets/shots/picker.webp" type="image/webp"><img src="assets/shots/picker.png" width="1600" height="1000" loading="lazy" alt="Title picker: installed Feral titles shown as cards with control counts."></picture>
+            <figcaption>Title picker with installed titles first; uninstalled supported titles sit under “Also supported”.</figcaption></figure>
+        </div>
+        <div class="shot-panel" id="panel-editor" role="tabpanel" aria-labelledby="tab-editor" tabindex="0" hidden>
+          <figure><picture><source srcset="assets/shots/editor.webp" type="image/webp"><img src="assets/shots/editor.png" width="1600" height="1000" loading="lazy" alt="GRID Autosport guided editor with grouped setting cards."></picture>
+            <figcaption>Guided editor: grouped cards, plain-language labels, the stored key shown per row.</figcaption></figure>
+        </div>
+        <div class="shot-panel" id="panel-presets" role="tabpanel" aria-labelledby="tab-presets" tabindex="0" hidden>
+          <figure><picture><source srcset="assets/shots/presets.webp" type="image/webp"><img src="assets/shots/presets.png" width="1600" height="1000" loading="lazy" alt="Hitman preset tabs, each holding its own block of settings."></picture>
+            <figcaption>Preset families as tabs — Hitman's per-preset blocks stay separate rather than flattening.</figcaption></figure>
+        </div>
+        <div class="shot-panel" id="panel-resolution" role="tabpanel" aria-labelledby="tab-resolution" tabindex="0" hidden>
+          <figure><picture><source srcset="assets/shots/resolution.webp" type="image/webp"><img src="assets/shots/resolution.png" width="1600" height="1000" loading="lazy" alt="Saints Row resolution and render scale controls."></picture>
+            <figcaption>Resolution and render scale use common-value lists, not free-form steppers.</figcaption></figure>
+        </div>
+      </div>
+      <p class="shot-note">All four screens are the shipping 1.2.8 interface. Nothing on this page is mocked up.</p>
+    </div>
+  </section>
+
+  <!-- 7 · install -->
+  <section class="section" id="install">
+    <div class="wrap install-grid">
+      <div>
+        <header class="sec-head">
+          <p class="sec-kicker">05 — Install</p>
+          <h2>Four steps, no store.</h2>
+          <p class="sec-lede">Config Tuner is distributed as an APK on GitHub Releases. There is no
+            Play Store listing, and the build is debug-signed.</p>
+        </header>
+
+        <ol class="install-steps">
+          <li><span class="step-no">1</span><div><h3>Download on the tablet</h3><p>Use the Download APK
+            button on the device that will run the game — not on a desktop, unless you plan to transfer
+            the file.</p></div></li>
+          <li><span class="step-no">2</span><div><h3>Allow this source</h3><p>Android asks you to permit
+            installs from your browser or file manager. This is the standard sideload prompt, not a
+            Config Tuner setting.</p></div></li>
+          <li><span class="step-no">3</span><div><h3>Open and pick a title</h3><p>Installed Feral games
+            appear as cards. Nothing is written until you press Save.</p></div></li>
+          <li><span class="step-no">4</span><div><h3>Choose a route if asked</h3><p>If Android blocks the
+            data folder, pick Root, Shizuku or a manual file. The screen shows the exact path it expects
+            for the selected title.</p></div></li>
+        </ol>
+      </div>
+
+      <aside class="req-panel" aria-label="Requirements and build details">
+        <h3>Requirements</h3>
+        <dl class="req-list">
+          <div><dt>Android</dt><dd>8.0 or later (API 26), target 35</dd></div>
+          <div><dt>Download</dt><dd>~10 MB APK, <span class="nowrap">v1.2.8</span> (versionCode 11)</dd></div>
+          <div><dt>Signature</dt><dd>Debug-signed, not on Google Play</dd></div>
+          <div><dt>Permissions</dt><dd>No network permission at all</dd></div>
+          <div><dt>Access</dt><dd>Root, Shizuku, manual file, or direct on older Android</dd></div>
+        </dl>
+        <a class="btn btn-primary btn-block" href="https://github.com/andrewr8712/legend-tuner/releases/latest">
+          Download the latest APK
+          <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0 3-3m-3 3L5 7M3 12v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+        </a>
+        <p class="req-note">Release notes and the changelog live on GitHub. This page never hosts a
+          binary.</p>
+      </aside>
+    </div>
+
+    <div class="wrap">
+      <h3 class="routes-title">The four access routes</h3>
+      <div class="table-scroll">
+        <table class="routes">
+          <caption class="vh">Comparison of the four ways Config Tuner can reach the preferences file</caption>
+          <thead><tr><th scope="col">Route</th><th scope="col">What it needs</th><th scope="col">Good for</th><th scope="col">Cost</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Root</th><td data-label="What it needs">a rooted device, e.g. KernelSU</td><td data-label="Good for">direct read/write, no per-file picking</td><td data-label="Cost">root is a real security decision</td></tr>
+            <tr><th scope="row">Shizuku</th><td data-label="What it needs">Shizuku running, started after each reboot</td><td data-label="Good for">non-root devices that still grant access</td><td data-label="Cost">a second app and a restart routine</td></tr>
+            <tr><th scope="row">Manual file</th><td data-label="What it needs">a copy of the preferences file</td><td data-label="Good for">any device; saving writes back to that copy</td><td data-label="Cost">you move the file yourself</td></tr>
+            <tr><th scope="row">Direct</th><td data-label="What it needs">older or permissive Android</td><td data-label="Good for">devices where Android still allows the folder</td><td data-label="Cost">not available on Android 11+</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 · FAQ -->
+  <section class="section section-alt" id="faq">
+    <div class="wrap">
+      <div class="faq-wrap">
+      <header class="sec-head">
+        <p class="sec-kicker">06 — Questions</p>
+        <h2>Asked before installing.</h2>
+      </header>
+      <div class="faq">
+        <details>
+          <summary>Why does it need root or Shizuku?</summary>
+          <p>Android 11 and later stop normal apps from reading other apps' <code>Android/data</code>
+            folders, which is where every Feral port stores its registry. Root and Shizuku both give the
+            app the file access Android otherwise refuses. If neither is available, the manual-file
+            route copies the file out and writes it back.</p>
+        </details>
+        <details>
+          <summary>Is it safe?</summary>
+          <p>The app never touches anything except the preferences file for the title you selected. It
+            backs the file up before writing, verifies the write, and restores the backup if anything
+            fails. It has no network permission, so it cannot upload your files. The remaining risk is
+            the same as editing the file by hand — which is what it replaces.</p>
+        </details>
+        <details>
+          <summary>What happens when a game updates?</summary>
+          <p>The registry schema can change between game versions. The app shows keys that are absent
+            from your file as “Not stored in this file” instead of inventing them, and the raw XML
+            editor remains available. After a large game update, re-check the settings you rely on.</p>
+        </details>
+        <details>
+          <summary>Why is the APK debug-signed?</summary>
+          <p>The project is built and released outside Google Play, so it uses a debug signature rather
+            than a Play signing key. Android will warn you, and Play Protect may prompt. The package
+            name stays the same between releases so updates install over the previous one.</p>
+        </details>
+        <details>
+          <summary>Does it collect any data?</summary>
+          <p>No. The manifest has no network permission, and there is no analytics, telemetry or crash
+            reporting. Nothing leaves the device.</p>
+        </details>
+        <details>
+          <summary>Can I use it with a title that is not listed?</summary>
+          <p>Open the preferences file with the raw XML editor. Guided controls exist only for the
+            seventeen titles the catalogue covers. A game that is not listed may still work through the
+            raw editor, and its keys may not be documented.</p>
+        </details>
+        <details>
+          <summary>What is Legend Tuner?</summary>
+          <p>Formerly Legend Tuner, which edited GRID Legends only. Version 1.2.x keeps the same package
+            identity and adds sixteen more titles.</p>
+        </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot" id="foot">
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <img src="assets/brand/mark.svg" alt="" width="28" height="28">
+      <span>Config Tuner</span>
+      <p class="foot-note">Built by a non-developer with an AI coding agent. Not a company, not a
+        support team — a tool that does one job.</p>
+    </div>
+    <div class="foot-links">
+      <h3>Project</h3>
+      <ul>
+        <li><a href="https://github.com/andrewr8712/legend-tuner">GitHub</a></li>
+        <li><a href="https://github.com/andrewr8712/legend-tuner/issues">Issues</a></li>
+        <li><a href="https://github.com/andrewr8712/legend-tuner/releases">Releases</a></li>
+        <li><a href="https://github.com/andrewr8712/legend-tuner/blob/main/LICENSE">MIT licence</a></li>
+        <li><a href="brand/">Brand guide</a></li>
+      </ul>
+    </div>
+    <div class="foot-legal">
+      <h3>Disclaimer</h3>
+      <p>Unofficial and not affiliated with or endorsed by Feral Interactive, Sega, Codemasters,
+        Electronic Arts, Eidos, IO Interactive, Crystal Dynamics, The Creative Assembly, Deep Silver,
+        Koch Media or THQ Nordic. Game titles and related marks belong to their respective owners. No
+        game code, artwork, audio or save data is included.</p>
+    </div>
+  </div>
+  <div class="wrap foot-base">
+    <p>© 2026 andrewr8712 · MIT</p>
+    <p>No cookies, no analytics, no third-party requests.</p>
+  </div>
+</footer>
+
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>

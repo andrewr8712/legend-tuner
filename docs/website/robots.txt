@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://andrewr8712.github.io/legend-tuner/sitemap.xml
