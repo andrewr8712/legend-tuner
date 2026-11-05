@@ -1397,3 +1397,151 @@ object RomeTotalWarCatalog {
         )
     )
 }
+
+object Medieval2TotalWarCatalog {
+    private const val DISPLAY = "Display"
+    private const val FRAME = "Frame rate"
+    private const val QUALITY = "Battle quality"
+    private val SETUP = listOf(
+        "HKEY_CURRENT_USER", "Software", "Original Developer", "Medieval II Total War", "Setup"
+    )
+
+    private val textTiers = listOf(
+        ControlChoice("low", "Low"),
+        ControlChoice("medium", "Medium"),
+        ControlChoice("high", "High")
+    )
+    private val caps = listOf(ControlChoice("33", "33 fps")) + fpsChoices()
+
+    private fun textQuality(key: String, label: String, description: String) =
+        Control(key, label, description, QUALITY, ControlKind.CHOICE, textTiers)
+
+    private fun toggle(key: String, label: String, description: String) =
+        Control(key, label, description, QUALITY, ControlKind.TOGGLE, intToggle())
+
+    val catalog = TitleCatalog(
+        groups = listOf(DISPLAY, FRAME, QUALITY),
+        pathSuffix = listOf("VideoSettings"),
+        controls = listOf(
+            Control(
+                "Resolution", "Screen resolution",
+                "Fullscreen width and height stored in ScreenW and ScreenH. The engine may recalculate the pair on launch.",
+                DISPLAY, ControlKind.RESOLUTION, resolutionChoices(),
+                absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "FullScreen", "Fullscreen",
+                "Runs the game fullscreen instead of in a windowed surface.",
+                DISPLAY, ControlKind.TOGGLE, intToggle(), absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "RenderUnderNotch", "Render under notch",
+                "Extends the render surface below the display cutout on edge-to-edge devices.",
+                DISPLAY, ControlKind.TOGGLE, intToggle(), absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "FixedScreenHeight", "Render height",
+                "Internal vertical resolution. Lower values raise frame rate at the cost of sharpness.",
+                DISPLAY, ControlKind.CHOICE, heightChoices(), absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "IdleFPS", "Idle frame cap",
+                "Frame cap used in menus and while the camera is idle.",
+                FRAME, ControlKind.CHOICE, caps, absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "ResponsiveFPS", "Responsive frame cap",
+                "Frame cap used while the camera is moving or the player is issuing orders.",
+                FRAME, ControlKind.CHOICE, fpsChoices(), absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "IdleFPS_battery", "Battery-saver idle cap",
+                "Idle frame cap used when the game is in battery-saver mode.",
+                FRAME, ControlKind.CHOICE, fpsChoices(), absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "ResponsiveFPS_battery", "Battery-saver responsive cap",
+                "Responsive frame cap used when the game is in battery-saver mode.",
+                FRAME, ControlKind.CHOICE, fpsChoices(), absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "Antialiasing", "Anti-aliasing",
+                "MSAA edge smoothing. The stored integer indexes the game's AA mode; the mapping is provisional.",
+                QUALITY, ControlKind.CHOICE, intLevels(3)
+            ),
+            toggle("Bloom", "Bloom", "Soft glow around bright highlights and fire effects."),
+            textQuality(
+                "BuildingDetail", "Building detail",
+                "Mesh and texture detail for settlements, forts and campaign buildings."
+            ),
+            toggle(
+                "CampaignShadows", "Campaign shadows",
+                "Shadow maps on the campaign map, where they cost battery life for little gameplay benefit."
+            ),
+            textQuality(
+                "EffectsDetail", "Effect quality",
+                "Particle effects, smoke, dust and impact effects during battles."
+            ),
+            Control(
+                "feral_unit_size", "Unit size",
+                "Index of the game's unit-size option. Larger units change battle balance as well as load.",
+                QUALITY, ControlKind.CHOICE,
+                listOf(
+                    ControlChoice("0", "Small"),
+                    ControlChoice("1", "Normal"),
+                    ControlChoice("2", "Large")
+                ),
+                note = "Only index 2 is observed; the labels are the game's usual three-way size list."
+            ),
+            textQuality(
+                "GraphicalQuality", "Graphics preset",
+                "Stored quality preset name. The game writes this when its own graphics menu changes the preset."
+            ),
+            textQuality(
+                "GrassDetail", "Grass quality",
+                "Ground cover density and draw distance around the battlefield."
+            ),
+            toggle(
+                "Reflections", "Reflections",
+                "Water and polished-surface reflections, which cost fill rate in battles and on the campaign map."
+            ),
+            Control(
+                "ShaderVersion", "Shader version",
+                "Index of the shader model used by the renderer. Higher models can look better but cost more.",
+                QUALITY, ControlKind.CHOICE,
+                listOf(
+                    ControlChoice("1", "Model 1"),
+                    ControlChoice("2", "Model 2"),
+                    ControlChoice("3", "Model 3")
+                ),
+                note = "Only index 2 is observed; the accepted range is unverified."
+            ),
+            textQuality(
+                "ShadowQuality", "Shadows",
+                "Shadow-map resolution and filtering for units, buildings and terrain."
+            ),
+            textQuality(
+                "TerrainQuality", "Terrain quality",
+                "Battle-map ground mesh detail and blending layers."
+            ),
+            Control(
+                "TextureFiltering", "Texture filtering",
+                "Anisotropic filtering index for ground and unit textures seen at an angle.",
+                QUALITY, ControlKind.STEPPER, min = 0, max = 4,
+                note = "Only index 2 is observed; the index order is unverified."
+            ),
+            textQuality(
+                "TextureQuality", "Texture quality",
+                "Texture resolution for units, buildings and terrain."
+            ),
+            textQuality(
+                "UnitDetail", "Unit detail",
+                "Soldier mesh detail, LOD distances and animation quality."
+            ),
+            textQuality(
+                "VegetationDetail", "Vegetation quality",
+                "Tree and shrub density around the battlefield and campaign map."
+            )
+        )
+    )
+}

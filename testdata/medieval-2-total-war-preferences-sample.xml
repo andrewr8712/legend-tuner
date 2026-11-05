@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<registry>
+    <key name="HKEY_CLASSES_ROOT">
+    </key>
+    <key name="HKEY_CURRENT_CONFIG">
+    </key>
+    <key name="HKEY_CURRENT_USER">
+        <key name="AutoValueRemap">
+            <key name="GPURemap">
+                <key name="keys">
+                    <value name="Software\IndirectX\Direct3D\Config" type="integer">1</value>
+                </key>
+                <key name="values">
+                    <value name="Software\Original Developer\Medieval II Total War\Setup\FullScreen" type="integer">1</value>
+                    <value name="Software\Original Developer\Medieval II Total War\Setup\ScreenH" type="integer">1</value>
+                    <value name="Software\Original Developer\Medieval II Total War\Setup\ScreenW" type="integer">1</value>
+                </key>
+            </key>
+        </key>
+        <key name="Software">
+            <key name="IndirectX">
+                <key name="Direct3D">
+                    <key name="Config">
+                        <value name="EnableF3DWarmer" type="integer">0</value>
+                        <value name="FeralGUIWatermarkText" type="string"></value>
+                        <value name="ShowFeralGUIWatermark" type="integer">0</value>
+                        <value name="VulkanUseSeparateSubmitThread" type="integer">1</value>
+                    </key>
+                </key>
+            </key>
+            <key name="MacDoze">
+                <key name="Config">
+                    <value name="ClearSavesEnabled" type="integer">0</value>
+                    <value name="DisableClearSaveDataAlert" type="integer">0</value>
+                </key>
+            </key>
+            <key name="Original Developer">
+                <key name="Medieval II Total War">
+                    <key name="Setup">
+                        <value name="AddSteamCloudAlias" type="integer">0</value>
+                        <value name="AllowAutorotate" type="integer">1</value>
+                        <value name="AllowPausing" type="integer">1</value>
+                        <value name="AllowPushNotifications" type="integer">1</value>
+                        <value name="AllowSendCrashReports" type="integer">0</value>
+                        <value name="AllowSendUsageData" type="integer">0</value>
+                        <value name="AvoidARGB" type="integer">0</value>
+                        <value name="BattlesCardBarOpacity" type="binary">000000000000e83f</value>
+                        <value name="BodyPenetrationDecay" type="integer">10</value>
+                        <value name="CampaignDeferAITurnRadarUpdate" type="integer">1</value>
+                        <value name="CardBarActivateDraggingDelay" type="integer">200</value>
+                        <value name="CardBarOpenUnitInfoScrollDelay" type="integer">1000</value>
+                        <value name="CardRenderer" type="string">Test GPU</value>
+                        <value name="CheckForEmptyMovieTracklist" type="integer">1</value>
+                        <value name="CheckStratObjectDisplayVisibility" type="integer">1</value>
+                        <value name="CloudOfflineMode" type="integer">1</value>
+                        <value name="CloudSyncVersion" type="binary">000000000000f03f</value>
+                        <value name="CohesionBias" type="binary">0000000000000000</value>
+                        <value name="CohesionExperienceModifier" type="binary">0000000000000840</value>
+                        <value name="CohesionFlankRearModifier" type="binary">00000000000034c0</value>
+                        <value name="CohesionFlankSideModifier" type="binary">00000000000024c0</value>
+                        <value name="CohesionGuardModifier" type="binary">0000000000003440</value>
+                        <value name="CohesionInForestModifier" type="binary">0000000000003ec0</value>
+                        <value name="CohesionNightModifier" type="binary">0000000000002ec0</value>
+                        <value name="CohesionOnWallModifier" type="binary">00000000000059c0</value>
+                        <value name="ConsoleTriggerPercentScreenWidth" type="binary">0000000000002440</value>
+                        <value name="ConstrainLiveWindowResize" type="integer">1</value>
+                        <value name="DisableCloudCellularAlert" type="integer">0</value>
+                        <value name="DisableCloudDisabledAlert" type="integer">0</value>
+                        <value name="DisableFeralNetOverlay" type="integer">1</value>
+                        <value name="DisableMomentumScrolling" type="integer">1</value>
+                        <value name="DisableOSShortcuts" type="integer">1</value>
+                        <value name="DisplayControlsPrompt" type="integer">1</value>
+                        <value name="DoneMinOS" type="integer">0</value>
+                        <value name="DonePromotional" type="integer">0</value>
+                        <value name="DoneUnsupported" type="integer">1</value>
+                        <value name="DoubleLeftClickDelay" type="integer">200</value>
+                        <value name="DownloadSizeAll" type="string">8.0GB</value>
+                        <value name="DownloadSizeAmericas" type="string">2.2GB</value>
+                        <value name="DownloadSizeAudio" type="string">800MB</value>
+                        <value name="DownloadSizeAudioBattle" type="string">2.4GB</value>
+                        <value name="DownloadSizeBattle" type="string">1.6GB</value>
+                        <value name="DownloadSizeBritannia" type="string">1.8GB</value>
+                        <value name="DownloadSizeCrusades" type="string">2.2GB</value>
+                        <value name="DownloadSizeLocalisedAudio" type="string">400MB</value>
+                        <value name="DownloadSizeTeutonic" type="string">2.0GB</value>
+                        <value name="EnableConsoleShell" type="integer">1</value>
+                        <value name="EnableGroupGrid" type="integer">1</value>
+                        <value name="EnableIOSMouse" type="integer">1</value>
+                        <value name="EnableMultiplayer" type="integer">0</value>
+                        <value name="EnableReducedDoubleLeftClickDelay" type="integer">1</value>
+                        <value name="EscBackButton" type="integer">1</value>
+                        <value name="FeralAnalyticsInstallID" type="string">TEST-INSTALL-ID</value>
+                        <value name="FeralLastDLCMode" type="integer">4</value>
+                        <value name="FeralPlaceFormationButtonsBR" type="integer">1</value>
+                        <value name="FeralUIMode" type="integer">1</value>
+                        <value name="FeralUIResolutionWarningThreshold" type="integer">4665600</value>
+                        <value name="FeralUIUseDisplayResolution" type="integer">1</value>
+                        <value name="FixedScreenHeight" type="integer">1080</value>
+                        <value name="ForceTouchControls" type="integer">1</value>
+                        <value name="FullScreen" type="integer">1</value>
+                        <value name="GameInstallVersion" type="integer">17105664</value>
+                        <value name="GameInstallVersionString" type="string">MEDIEVAL II v1.5.3</value>
+                        <value name="GameInstallVersionWithStages" type="integer">22249472</value>
+                        <value name="GameOptionsDialogShouldShow" type="integer">0</value>
+                        <value name="GameOptionsDialogShown" type="integer">1</value>
+                        <value name="GameSelected" type="integer">1</value>
+                        <value name="GameVersionNew" type="integer">17105664</value>
+                        <value name="GameVersionString" type="string">MEDIEVAL II v1.5.3</value>
+                        <value name="HasSimilarHardwareToSupportedDevice" type="integer">1</value>
+                        <value name="IdleFPS" type="integer">33</value>
+                        <value name="IdleFPS_battery" type="integer">20</value>
+                        <value name="IsLanguageAutoDetectSelected" type="integer">0</value>
+                        <value name="kBug_Android_Vulkan_Adreno_AvoidBGRATextures" type="integer">1</value>
+                        <value name="LaunchSendUsageDataAnalyticsSent" type="integer">1</value>
+                        <value name="LiveWindowResizePercentage" type="integer">25</value>
+                        <value name="LiveWindowResizeThreshold" type="integer">3</value>
+                        <value name="LocationListSpacing" type="integer">17</value>
+                        <value name="MaxMenPerBattle" type="integer">4000</value>
+                        <value name="MinWindowedHeight" type="integer">300</value>
+                        <value name="MinWindowedWidth" type="integer">400</value>
+                        <value name="MouseCursorIconScale" type="binary">0000000000000440</value>
+                        <value name="MouseSensitivityMultiplier" type="binary">0000000000002840</value>
+                        <value name="NumberCharactersToCacheFont" type="integer">200</value>
+                        <value name="PauseMoviesOnPause" type="integer">1</value>
+                        <value name="PauseOnSuspend" type="integer">1</value>
+                        <value name="PauseSoundOnPause" type="integer">1</value>
+                        <value name="PauseTimersOnPause" type="integer">1</value>
+                        <value name="PikeUnitReadyToFightRankDepth" type="integer">100</value>
+                        <value name="PositioningModeCornerOverrideOnPress" type="integer">1</value>
+                        <value name="PositioningModeDrag" type="integer">1</value>
+                        <value name="PositioningModeDragOnPan" type="integer">1</value>
+                        <value name="RemoteResourcesHideTotalBytes" type="integer">1</value>
+                        <value name="RenderUnderNotch" type="integer">1</value>
+                        <value name="ReshuffleSpeedMultiplier1" type="binary">000000000000f03f</value>
+                        <value name="ReshuffleSpeedMultiplier2" type="binary">000000000000f03f</value>
+                        <value name="ReshuffleSpeedMultiplier3" type="binary">000000000000f83f</value>
+                        <value name="ResponsiveFPS" type="integer">60</value>
+                        <value name="ResponsiveFPS_battery" type="integer">30</value>
+                        <value name="RibaultShotMoralePenalty" type="integer">-8</value>
+                        <value name="RmlDPRatioVersion" type="integer">1</value>
+                        <value name="RmlRootVFSPath" type="string">feral</value>
+                        <value name="ScreenDensityMax" type="integer">320</value>
+                        <value name="ScreenH" type="integer">1080</value>
+                        <value name="ScreenW" type="integer">1728</value>
+                        <value name="SeenSpecificationAlertUUIDAdreno700seriesworkarounds_1_5b21" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDAdreno740HardwareSpecifications_1_5RC11" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDSnapdragon8Gen5_Crash_Workaround_1_5_3RC2" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDUntestedCapableHardware" type="integer">1</value>
+                        <value name="ShownPatchNotesOnLaunch" type="integer">1</value>
+                        <value name="SpecificationFirstLaunchCheck" type="integer">1</value>
+                        <value name="SpecificationLastUpdateCheckTime" type="binary">a8edec6a00000000</value>
+                        <value name="SpecificationUpdateURL" type="string">https://u1.feralinteractive.com/autoupdate/medieval2/specifications_android_1_5_3.xml</value>
+                        <value name="TwoRankFiringDelay" type="binary">0000000000002e40</value>
+                        <value name="UnitRebalance" type="integer">1</value>
+                        <value name="UpdateServerDomain" type="string">u1.feralinteractive.com</value>
+                        <value name="UpdateServerPath" type="string">/autoupdate/</value>
+                        <value name="UpdateServerProtocol" type="string">https://</value>
+                        <value name="UseDriveSaveSync" type="integer">1</value>
+                        <value name="UseGoogleSignIn" type="integer">1</value>
+                        <value name="UseMultipleFreeUpkeepTypes" type="integer">0</value>
+                        <value name="UseOfflineEvents" type="integer">1</value>
+                        <value name="UseStyledWebSupportPage" type="integer">1</value>
+                        <value name="WarnCornerCutout" type="integer">1</value>
+                        <key name="SpecificationAlerts">
+                            <value name="DefaultHardwareSpecificationsClass_1_5RC11" type="integer">1</value>
+                        </key>
+                        <key name="VideoSettings">
+                            <value name="Antialiasing" type="integer">0</value>
+                            <value name="Bloom" type="integer">1</value>
+                            <value name="BuildingDetail" type="string">high</value>
+                            <value name="CampaignShadows" type="integer">1</value>
+                            <value name="EffectsDetail" type="string">medium</value>
+                            <value name="feral_unit_size" type="integer">2</value>
+                            <value name="GraphicalQuality" type="string">medium</value>
+                            <value name="GrassDetail" type="string">medium</value>
+                            <value name="Reflections" type="integer">1</value>
+                            <value name="ShaderVersion" type="integer">2</value>
+                            <value name="ShadowQuality" type="string">high</value>
+                            <value name="TerrainQuality" type="string">medium</value>
+                            <value name="TextureFiltering" type="integer">2</value>
+                            <value name="TextureQuality" type="string">high</value>
+                            <value name="UnitDetail" type="string">high</value>
+                            <value name="VegetationDetail" type="string">high</value>
+                        </key>
+                    </key>
+                </key>
+            </key>
+            <key name="SystemMonitor">
+                <key name="Config">
+                    <value name="AppVersion" type="integer">17105664</value>
+                    <value name="Backgrounded" type="integer">1</value>
+                    <value name="OSVersion" type="string">17.0</value>
+                    <value name="QuitIntentional" type="integer">0</value>
+                </key>
+            </key>
+        </key>
+    </key>
+    <key name="HKEY_LOCAL_MACHINE">
+        <key name="Hardware">
+            <key name="Description">
+                <key name="System">
+                    <key name="CentralProcessor">
+                        <key name="0">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="1">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="2">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="3">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="4">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="5">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="6">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="7">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                    </key>
+                </key>
+            </key>
+        </key>
+        <key name="Software">
+        </key>
+    </key>
+    <key name="HKEY_USERS">
+    </key>
+</registry>

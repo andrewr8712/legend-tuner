@@ -18,7 +18,8 @@ class GenericDocumentTest {
         "lara-croft-too" to "lara-croft-too-preferences-sample.xml",
         "empire-total-war" to "total-war-empire-preferences-sample.xml",
         "tropico-3" to "tropico-3-preferences-sample.xml",
-        "rome-total-war" to "rome-total-war-preferences-sample.xml"
+        "rome-total-war" to "rome-total-war-preferences-sample.xml",
+        "medieval-2-total-war" to "medieval-2-total-war-preferences-sample.xml"
     )
 
     private fun load(name: String): ConfigDocument {
@@ -339,6 +340,23 @@ class GenericDocumentTest {
 
         assertTrue(TitleCatalogEngine.write(doc, root, catalog, catalog.find("feral_battle_map_shadows")!!, "0"))
         assertEquals("0", doc.value(root, "feral_battle_map_shadows")?.text)
+    }
+
+    @Test
+    fun medieval2ExposesDisplayFrameAndVideoControls() {
+        val title = FeralTitles.ALL.first { it.id == "medieval-2-total-war" }
+        val catalog = title.titleCatalog!!
+        val root = title.valueRoot!!
+        val doc = load("medieval-2-total-war-preferences-sample.xml")
+
+        val resolution = catalog.find("Resolution")!!
+        assertEquals("1728x1080", TitleCatalogEngine.display(doc, root, catalog, resolution))
+        assertEquals("60 fps", TitleCatalogEngine.display(doc, root, catalog, catalog.find("ResponsiveFPS")!!))
+        assertEquals("High", TitleCatalogEngine.display(doc, root, catalog, catalog.find("ShadowQuality")!!))
+        assertEquals("Large", TitleCatalogEngine.display(doc, root, catalog, catalog.find("feral_unit_size")!!))
+
+        assertTrue(TitleCatalogEngine.write(doc, root, catalog, catalog.find("Bloom")!!, "0"))
+        assertEquals("0", doc.value(root + "VideoSettings", "Bloom")?.text)
     }
 
     @Test

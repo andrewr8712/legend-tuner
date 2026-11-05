@@ -84,6 +84,14 @@ object FeralTitles {
             titleCatalog = RomeTotalWarCatalog.catalog
         ),
         FeralTitle(
+            "medieval-2-total-war", "Medieval II: Total War", "com.feralinteractive.medieval2_android",
+            listOf(
+                "HKEY_CURRENT_USER", "Software", "Original Developer",
+                "Medieval II Total War", "Setup"
+            ),
+            titleCatalog = Medieval2TotalWarCatalog.catalog
+        ),
+        FeralTitle(
             "tropico-3", "Tropico 3", "com.feralinteractive.tropico3",
             listOf(
                 "HKEY_CURRENT_USER", "Software", "Haemimont Games",
