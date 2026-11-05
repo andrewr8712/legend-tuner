@@ -113,6 +113,37 @@ class GenericDocumentTest {
     }
 
     @Test
+    fun saintsRowExposesMotionAimAndGyroControls() {
+        val title = FeralTitles.ALL.first { it.id == "saints-row-3" }
+        val catalog = title.titleCatalog!!
+        val root = title.valueRoot!!
+        val motion = catalog.find("Enabled")
+        val gyro = catalog.find("VcpEnableGyroControls")
+        val sensitivity = catalog.find("SensitivityX")
+        assertNotNull("Saints Row must expose Motion Aim", motion)
+        assertNotNull("Saints Row must expose Gyro Controls", gyro)
+        assertNotNull("Saints Row must expose Motion Aim sensitivity", sensitivity)
+        val doc = load("saintsrow3-preferences-sample.xml")
+
+        assertEquals("0", TitleCatalogEngine.value(doc, root, catalog, motion!!)?.text)
+        assertTrue(TitleCatalogEngine.write(doc, root, catalog, motion, "1"))
+        assertEquals("1", TitleCatalogEngine.value(doc, root, catalog, motion)?.text)
+
+        assertEquals("0", TitleCatalogEngine.value(doc, root, catalog, gyro!!)?.text)
+        assertTrue(TitleCatalogEngine.write(doc, root, catalog, gyro, "1"))
+        assertEquals("1", TitleCatalogEngine.value(doc, root, catalog, gyro)?.text)
+
+        assertEquals("400.000000", TitleCatalogEngine.value(doc, root, catalog, sensitivity!!)?.text)
+        assertTrue(TitleCatalogEngine.write(doc, root, catalog, sensitivity, "600.000000"))
+        assertEquals("600.000000", TitleCatalogEngine.value(doc, root, catalog, sensitivity)?.text)
+        val motionPath = listOf(
+            "HKEY_CURRENT_USER", "Software", "Feral Interactive", "Saints Row The Third",
+            "Setup", "MotionAimSettings"
+        )
+        assertEquals("600.000000", doc.value(motionPath, "SensitivityY")?.text)
+    }
+
+    @Test
     fun invertedHitmanToggleWritesTheRawInverseAndDisplaysTheLogicalValue() {
         val title = FeralTitles.ALL.first { it.id == "hitman-blood-money" }
         val catalog = title.titleCatalog!!.withFamily(title.titleCatalog!!.family("graphics"))

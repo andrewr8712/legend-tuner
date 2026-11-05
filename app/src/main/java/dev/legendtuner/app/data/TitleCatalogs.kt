@@ -21,13 +21,22 @@ object SaintsRowCatalog {
     private const val SCENE = "Scene detail"
     private const val PERF = "Performance"
     private const val DISPLAY = "Display"
+    private const val CONTROLS = "Controls"
     private const val TIERS = "Tier names are inferred from the stored value; verify in-game."
+    private val GAME_OPTIONS = listOf(
+        "HKEY_CURRENT_USER", "Software", "Feral Interactive", "Saints Row The Third",
+        "Setup", "GameOptions"
+    )
+    private val MOTION_AIM = listOf(
+        "HKEY_CURRENT_USER", "Software", "Feral Interactive", "Saints Row The Third",
+        "Setup", "MotionAimSettings"
+    )
 
     private fun scene(key: String, label: String, description: String) =
         Control(key, label, description, SCENE, ControlKind.CHOICE, tier3, note = TIERS)
 
     val catalog = TitleCatalog(
-        groups = listOf(IMAGE, SCENE, PERF, DISPLAY),
+        groups = listOf(IMAGE, SCENE, PERF, DISPLAY, CONTROLS),
         families = listOf(
             PresetFamily("graphics", "Graphics", pathSuffix = listOf("GraphicsPreset")),
             PresetFamily("battery", "Battery saver", pathSuffix = listOf("BatterySaverPreset")),
@@ -159,6 +168,41 @@ object SaintsRowCatalog {
                 "FixedScreenHeight", "Render height",
                 "Internal vertical resolution. Lower values raise frame rate at the cost of sharpness.",
                 DISPLAY, ControlKind.CHOICE, heightChoices(), ignoreSuffix = true, ignoreFamilyPath = true
+            ),
+
+            Control(
+                "Enabled", "Motion aim",
+                "Enable the game's tilt/motion aiming. The same motion settings are used while aiming down sights.",
+                CONTROLS, ControlKind.TOGGLE, intToggle(),
+                absolutePath = MOTION_AIM,
+                ignoreSuffix = true,
+                note = "Stored in Setup/MotionAimSettings.Enabled; the game may reset the neutral point when you unpause."
+            ),
+            Control(
+                "VcpEnableGyroControls", "Gyro controls",
+                "Enable gyroscopic steering for vehicles. This is separate from Motion aim, which affects the camera while on foot.",
+                CONTROLS, ControlKind.TOGGLE, intToggle(),
+                absolutePath = GAME_OPTIONS,
+                ignoreSuffix = true,
+                note = "Stored in Setup/GameOptions. Vehicle gyro is independent of the on-foot motion aim toggle."
+            ),
+            Control(
+                "SensitivityX", "Motion aim sensitivity",
+                "Motion-aim sensitivity. The game stores the same value for the X and Y axes here.",
+                CONTROLS, ControlKind.CHOICE,
+                listOf(
+                    ControlChoice("200.000000", "200"),
+                    ControlChoice("300.000000", "300"),
+                    ControlChoice("400.000000", "400"),
+                    ControlChoice("500.000000", "500"),
+                    ControlChoice("600.000000", "600"),
+                    ControlChoice("800.000000", "800"),
+                    ControlChoice("1000.000000", "1000")
+                ),
+                absolutePath = MOTION_AIM,
+                ignoreSuffix = true,
+                linkedWrites = listOf(LinkedWrite(MOTION_AIM, "SensitivityY")),
+                note = "Writes both MotionAimSettings.SensitivityX and SensitivityY."
             )
         )
     )

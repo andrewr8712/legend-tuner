@@ -49,6 +49,9 @@ authored; the game ships no per-option tooltips, only confirmation dialogs.
 | `GfxEnableHighResCharacters` | High-res characters | Streams higher-resolution character textures where installed. | `1` |
 | `FixedScreenHeight` | Render height | Internal vertical resolution. | `800` |
 | `FullScreen` / `ScreenW` / `ScreenH` | Display | Engine display flags and reported backbuffer. | `1`, `1280×800` |
+| `MotionAimSettings/Enabled` | Motion aim | Enables tilt/motion aiming. The game resets the neutral point after unpausing; hold the device comfortably and pause/resume to calibrate. | `0` |
+| `MotionAimSettings/SensitivityX` / `SensitivityY` | Motion aim sensitivity | Sensitivity for tilt aiming. The app writes the same value to both axes. | `400.000000` |
+| `GameOptions/VcpEnableGyroControls` | Gyro controls | Vehicle gyroscopic steering, separate from on-foot motion aim. | `0` |
 
 ## Preset labels
 
