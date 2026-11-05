@@ -41,6 +41,7 @@ class FeralTitlesTest {
         assertEquals("RT", FeralTitles.ALL.first { it.id == "rome-total-war" }.monogram)
         assertEquals("RB", FeralTitles.ALL.first { it.id == "rome-barbarian-invasion" }.monogram)
         assertEquals("RA", FeralTitles.ALL.first { it.id == "rome-alexander" }.monogram)
+        assertEquals("X2", FeralTitles.ALL.first { it.id == "xcom-2" }.monogram)
         assertEquals("MI", FeralTitles.ALL.first { it.id == "medieval-2-total-war" }.monogram)
     }
 
@@ -53,7 +54,7 @@ class FeralTitlesTest {
                 "hitman-blood-money", "lara-croft-gol", "lara-croft-too", "railroads",
                 "tomb-raider", "hitman-absolution", "company-of-heroes",
                 "empire-total-war", "tropico-3", "rome-total-war", "medieval-2-total-war",
-                "rome-barbarian-invasion", "rome-alexander"
+                "rome-barbarian-invasion", "rome-alexander", "xcom-2"
             ),
             catalogued
         )

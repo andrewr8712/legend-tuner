@@ -25,6 +25,7 @@ keys and options for selectable controls.
 | Medieval II: Total War | `medieval-2-total-war.md` | `Medieval2TotalWarCatalog` | 24 | flat, `VideoSettings` subtree |
 | ROME: Barbarian Invasion | `rome-barbarian-invasion.md` | `RomeTotalWarCatalog` | 24 | shares ROME catalogue; own root/build |
 | ROME: Alexander | `rome-alexander.md` | `RomeTotalWarCatalog` | 24 | shares ROME catalogue; own root/build |
+| XCOM 2 Collection | `xcom-2.md` | `Xcom2Catalog` | 25 | flat live values; battery/graphics copies unexposed |
 
 Files live in `app/src/main/java/dev/legendtuner/app/data/TitleCatalog.kt` (GRID Autosport, Alien)
 and `TitleCatalogs.kt` (the rest).

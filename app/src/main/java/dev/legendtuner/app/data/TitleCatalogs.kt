@@ -1540,3 +1540,165 @@ object Medieval2TotalWarCatalog {
         )
     )
 }
+
+object Xcom2Catalog {
+    private const val DISPLAY = "Display"
+    private const val FRAME = "Frame rate"
+    private const val QUALITY = "Image quality"
+    private val SETUP = listOf(
+        "HKEY_CURRENT_USER", "Software", "Feral Interactive", "XCOM 2", "Setup"
+    )
+    private val D3D_CONFIG = listOf("HKEY_CURRENT_USER", "Software", "IndirectX", "Direct3D", "Config")
+    private val imageTiers = listOf("Low", "Medium", "High", "Very High", "Ultra")
+
+    private fun toggle(key: String, label: String, description: String, invert: Boolean = false) =
+        Control(key, label, description, QUALITY, ControlKind.TOGGLE, intToggle(), invert = invert)
+
+    private fun level(
+        key: String,
+        label: String,
+        description: String,
+        max: Int = 3,
+        labels: List<String> = listOf("Low", "Medium", "High", "Ultra")
+    ) = Control(key, label, description, QUALITY, ControlKind.CHOICE, intLevels(max, labels))
+
+    val catalog = TitleCatalog(
+        groups = listOf(DISPLAY, FRAME, QUALITY),
+        controls = listOf(
+            Control(
+                "Resolution", "Screen resolution",
+                "Fullscreen width and height stored in ScreenW and ScreenH. The engine may recalculate the pair on launch.",
+                DISPLAY, ControlKind.RESOLUTION, resolutionChoices(),
+                absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "FullScreen", "Fullscreen",
+                "Runs the game fullscreen instead of in a windowed surface.",
+                DISPLAY, ControlKind.TOGGLE, intToggle(), absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "RenderUnderNotch", "Render under notch",
+                "Extends the render surface below the display cutout on edge-to-edge devices.",
+                DISPLAY, ControlKind.TOGGLE, intToggle(), absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "FixedScreenHeight", "Render height",
+                "Internal vertical resolution. Lower values raise frame rate at the cost of sharpness.",
+                DISPLAY, ControlKind.CHOICE, heightChoices(), absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "GameResolutionScaleNumerator", "Resolution scale",
+                "Internal render scale relative to the panel, stored as a numerator over 10000. Lower values trade sharpness for frame rate.",
+                DISPLAY, ControlKind.CHOICE,
+                listOf(
+                    ControlChoice("5000", "50%"),
+                    ControlChoice("7500", "75%"),
+                    ControlChoice("10000", "100%")
+                ),
+                absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "MaxFramesPerSecond", "Engine frame cap",
+                "Hard engine cap in the Direct3D configuration. Lower values can make frame time more consistent.",
+                FRAME, ControlKind.CHOICE, fpsChoices(),
+                absolutePath = D3D_CONFIG, ignoreSuffix = true,
+                note = "Engine key in IndirectX/Direct3D/Config."
+            ),
+            Control(
+                "IdleFPS", "Idle frame cap",
+                "Frame cap used in menus and while the camera is otherwise idle.",
+                FRAME, ControlKind.CHOICE, fpsChoices(),
+                absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "NonIdleFPS", "Responsive frame cap",
+                "Frame cap used while the camera is moving or the player is giving orders.",
+                FRAME, ControlKind.CHOICE, fpsChoices(),
+                absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "IdleFPS_battery", "Battery-saver idle cap",
+                "Idle frame cap used when the game is in battery-saver mode.",
+                FRAME, ControlKind.CHOICE, fpsChoices(),
+                absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "NonIdleFPS_battery", "Battery-saver responsive cap",
+                "Responsive frame cap used when the game is in battery-saver mode.",
+                FRAME, ControlKind.CHOICE, fpsChoices(),
+                absolutePath = SETUP, ignoreSuffix = true
+            ),
+            toggle(
+                "GFXAmbientOcclusion", "Ambient occlusion",
+                "Screen-space contact shadows in corners and under units."
+            ),
+            toggle(
+                "GFXBloom", "Bloom",
+                "Soft glow around bright lights, plasma and fire effects."
+            ),
+            level(
+                "GFXDecals", "Decals",
+                "Permanent scorch marks, blood and bullet impacts on surfaces.",
+                2,
+                listOf("Low", "Medium", "High")
+            ),
+            toggle(
+                "GFXDepthOfField", "Depth of field",
+                "Blurs distant or foreground ranges for a cinematic look."
+            ),
+            toggle(
+                "GFXDirtyLens", "Dirty lens",
+                "Adds lens grime, flare and screen-space dirt during combat."
+            ),
+            level(
+                "GFXEffects", "Effects quality",
+                "Particle effects, smoke, explosions and ability visuals.",
+                2,
+                listOf("Low", "Medium", "High")
+            ),
+            toggle(
+                "GFXFXAA", "FXAA",
+                "Fast post-process anti-aliasing. Cheap, but softens fine detail."
+            ),
+            level(
+                "GFXMaxDrawDistance", "Draw distance",
+                "How far terrain, props and units remain visible before culling.",
+                2,
+                listOf("Low", "Medium", "High")
+            ),
+            toggle(
+                "GFXScreenSpaceReflections", "Screen-space reflections",
+                "Reflections on wet surfaces, glass and polished floors."
+            ),
+            level(
+                "GFXShadowQuality", "Shadow quality",
+                "Shadow-map resolution and filtering for units, props and terrain.",
+                3
+            ),
+            toggle(
+                "GFXShadowType", "Soft shadows",
+                "Uses a softer shadow filter instead of hard-edged shadow maps."
+            ),
+            toggle(
+                "GFXSubsurfaceScattering", "Subsurface scattering",
+                "Light bleed through skin, cloth and thin materials."
+            ),
+            level(
+                "GFXTextureDetail", "Texture detail",
+                "Texture resolution for characters, weapons and environments.",
+                4,
+                imageTiers
+            ),
+            level(
+                "GFXTextureFiltering", "Texture filtering",
+                "Anisotropic filtering for surfaces seen at grazing angles.",
+                4
+            ),
+            toggle(
+                "DisableDistortion", "Distortion",
+                "Heat haze and other screen-space distortion effects. The stored key is inverted.",
+                invert = true
+            )
+        )
+    )
+}

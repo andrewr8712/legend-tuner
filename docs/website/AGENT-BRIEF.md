@@ -1,6 +1,6 @@
 # Config Tuner website — agent brief
 
-**Status:** current for app release **1.2.9** (2026-11-06)
+**Status:** current for app release **1.3.0** (2026-11-06)
 **Assumption:** the website is for **Config Tuner**, the Android app in this repository. If it is for
 something else, replace the product section but keep the collaboration protocol.
 
@@ -14,7 +14,7 @@ layout, accessibility and colour decisions through the coordinator.
 
 Config Tuner is an unofficial, tablet-first Android app for editing the graphics settings of Feral
 Interactive's Android ports. It replaces hand-editing the games' plaintext XML registry with guided
-controls, validated writes, automatic backups and a raw XML fallback. It supports **18 titles** and
+controls, validated writes, automatic backups and a raw XML fallback. It supports **19 titles** and
 is distributed as a debug-signed APK through GitHub Releases.
 
 Former name: **Legend Tuner**. The package identity stayed the same between 1.1.0 and 1.2.x so debug
@@ -24,14 +24,14 @@ installs update in place.
 
 | Fact | Value |
 |---|---|
-| Current release | **1.2.9** (versionCode 12) |
-| Release URL | https://github.com/andrewr8712/legend-tuner/releases/tag/v1.2.9 |
+| Current release | **1.3.0** (versionCode 13) |
+| Release URL | https://github.com/andrewr8712/legend-tuner/releases/tag/v1.3.0 |
 | Latest download | https://github.com/andrewr8712/legend-tuner/releases/latest |
 | Package | `dev.legendtuner.app.debug` |
 | Android support | Android 8.0+ (`minSdk 26`), target SDK 35 |
 | Distribution | Debug-signed APK on GitHub; **not on Google Play** |
-| Supported titles | **18** |
-| Unit tests | **49** |
+| Supported titles | **19** |
+| Unit tests | **50** |
 | Network permission | **None** |
 | Analytics / telemetry | **None** |
 | Backups | 12 per title, title-scoped |
@@ -76,6 +76,7 @@ four routes honestly rather than presenting Root/Shizuku as an afterthought.
 | Medieval II: Total War | 24 |
 | ROME: Barbarian Invasion | 24 |
 | ROME: Alexander | 24 |
+| XCOM 2 Collection | 25 |
 
 Packages and variants are in the repository README. Do not show an older count such as “12 titles”.
 
@@ -119,7 +120,7 @@ with the app.
 
 1. **Hero** — “Feral settings without the XML.” One-sentence explanation, primary Download APK button,
    secondary GitHub link.
-2. **Proof strip** — 18 titles · 49 unit tests · no network · open source. Use only verified numbers.
+2. **Proof strip** — 19 titles · 50 unit tests · no network · open source. Use only verified numbers.
 3. **How it works** — pick a title → choose Root/Shizuku/Manual → edit guided controls → verified save.
 4. **Safety** — backup before write, read-back verification, rollback on failure, no telemetry.
 5. **Supported titles** — searchable/filterable table or compact grid; show control counts.
@@ -146,10 +147,10 @@ with the app.
 |---|---|---|
 | App mark (SVG) | `docs/website/config-tuner-mark.svg` | Lime “L + signal bars” on near-black; derived from the launcher icon |
 | Design tokens | `docs/website/design-tokens.css` | Exact app palette, type stacks, spacing |
-| Current picker | `docs/website/picker-1.2.9.png` | 1600×900; 17 installed titles visible |
+| Current picker | `docs/website/picker-1.3.0.png` | 1600×900; 18 installed titles visible |
 | Older screenshots | `docs/screenshots/*.png` | Real device captures; picker is from an older release |
 | App icon vector | `app/src/main/res/drawable/ic_launcher_foreground.xml` | Source for the mark |
-| Title list | `README.md` | Authoritative 18-title table |
+| Title list | `README.md` | Authoritative 19-title table |
 
 If you need a specific screen, ask; I can capture it from the tablet or Waydroid.
 

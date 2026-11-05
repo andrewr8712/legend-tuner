@@ -21,7 +21,8 @@ class GenericDocumentTest {
         "rome-total-war" to "rome-total-war-preferences-sample.xml",
         "medieval-2-total-war" to "medieval-2-total-war-preferences-sample.xml",
         "rome-barbarian-invasion" to "rome-barbarian-invasion-preferences-sample.xml",
-        "rome-alexander" to "rome-alexander-preferences-sample.xml"
+        "rome-alexander" to "rome-alexander-preferences-sample.xml",
+        "xcom-2" to "xcom-2-preferences-sample.xml"
     )
 
     private fun load(name: String): ConfigDocument {
@@ -391,6 +392,23 @@ class GenericDocumentTest {
 
         assertTrue(TitleCatalogEngine.write(doc, root, catalog, catalog.find("feral_battle_map_shadows")!!, "0"))
         assertEquals("0", doc.value(root, "feral_battle_map_shadows")?.text)
+    }
+
+    @Test
+    fun xcom2ExposesDisplayFrameAndImageControls() {
+        val title = FeralTitles.ALL.first { it.id == "xcom-2" }
+        val catalog = title.titleCatalog!!
+        val root = title.valueRoot!!
+        val doc = load("xcom-2-preferences-sample.xml")
+
+        val resolution = catalog.find("Resolution")!!
+        assertEquals("1728x1080", TitleCatalogEngine.display(doc, root, catalog, resolution))
+        assertEquals("30 fps", TitleCatalogEngine.display(doc, root, catalog, catalog.find("IdleFPS")!!))
+        assertEquals("Low", TitleCatalogEngine.display(doc, root, catalog, catalog.find("GFXTextureDetail")!!))
+        assertEquals("On", TitleCatalogEngine.display(doc, root, catalog, catalog.find("GFXFXAA")!!))
+
+        assertTrue(TitleCatalogEngine.write(doc, root, catalog, catalog.find("GFXBloom")!!, "0"))
+        assertEquals("0", doc.value(root, "GFXBloom")?.text)
     }
 
     @Test

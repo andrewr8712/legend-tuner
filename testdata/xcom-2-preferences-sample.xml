@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<registry>
+    <key name="HKEY_CLASSES_ROOT">
+    </key>
+    <key name="HKEY_CURRENT_CONFIG">
+    </key>
+    <key name="HKEY_CURRENT_USER">
+        <key name="AutoValueRemap">
+            <key name="GPURemap">
+                <key name="keys">
+                    <value name="Software\IndirectX\Direct3D\Config" type="integer">1</value>
+                </key>
+                <key name="values">
+                    <value name="Software\Feral Interactive\XCOM 2\Setup\FullScreen" type="integer">1</value>
+                    <value name="Software\Feral Interactive\XCOM 2\Setup\ScreenH" type="integer">1</value>
+                    <value name="Software\Feral Interactive\XCOM 2\Setup\ScreenW" type="integer">1</value>
+                </key>
+            </key>
+        </key>
+        <key name="Software">
+            <key name="Feral Interactive">
+                <key name="XCOM 2">
+                    <key name="Setup">
+                        <value name="AddSteamCloudAlias" type="integer">0</value>
+                        <value name="AllowAutorotate" type="integer">1</value>
+                        <value name="AllowPausing" type="integer">1</value>
+                        <value name="AllowPushNotifications" type="integer">1</value>
+                        <value name="AllowSendCrashReports" type="integer">0</value>
+                        <value name="AllowSendUsageData" type="integer">0</value>
+                        <value name="AvoidAOCopies" type="integer">1</value>
+                        <value name="AvoidFilterColorCopies" type="integer">1</value>
+                        <value name="AvoidFOWSceneColorResolve" type="integer">0</value>
+                        <value name="BaseMouseResponsivness" type="double">25.000000</value>
+                        <value name="BufferedPacketData" type="binary">0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</value>
+                        <value name="CalicoRefreshKeychain" type="integer">1</value>
+                        <value name="CardRenderer" type="string">Test GPU</value>
+                        <value name="CombineShadowAttenuationDrawCount" type="integer">6</value>
+                        <value name="ComputeFOWTextureGeneration" type="integer">1</value>
+                        <value name="DisableAllMods" type="integer">1</value>
+                        <value name="DisableDistortion" type="integer">0</value>
+                        <value name="DisableDistortion_battery" type="integer">0</value>
+                        <value name="DisableDistortion_graphics" type="integer">0</value>
+                        <value name="DisableFeralNetOverlay" type="integer">1</value>
+                        <value name="DisableFiraxisLive" type="integer">1</value>
+                        <value name="DisableHDMovies" type="integer">0</value>
+                        <value name="DisableMomentumScrolling" type="integer">1</value>
+                        <value name="DisableOSShortcuts" type="integer">1</value>
+                        <value name="DisplayControlsPrompt" type="integer">1</value>
+                        <value name="DLC0Enabled" type="integer">1</value>
+                        <value name="DLC1Enabled" type="integer">1</value>
+                        <value name="DLC2Enabled" type="integer">1</value>
+                        <value name="DLC3Enabled" type="integer">1</value>
+                        <value name="DoneMinOS" type="integer">0</value>
+                        <value name="DonePromotional" type="integer">0</value>
+                        <value name="DoneUnsupported" type="integer">1</value>
+                        <value name="DoShowBatteryOptimisationsWarning" type="integer">1</value>
+                        <value name="DynamicSubtitleScaling" type="integer">1</value>
+                        <value name="EnableGFXBatteryOption" type="integer">1</value>
+                        <value name="EnableGFXGraphicsOption" type="integer">1</value>
+                        <value name="EnableMouseSmoothing" type="integer">0</value>
+                        <value name="EnableOptimizedBloom" type="integer">1</value>
+                        <value name="EscBackButton" type="integer">1</value>
+                        <value name="FeralAnalyticsInstallID" type="string">TEST-INSTALL-ID</value>
+                        <value name="FeralEnableRemoteResources" type="integer">1</value>
+                        <value name="FeralMaxScrollsPerSecond" type="integer">30</value>
+                        <value name="FeralMouseSensitivity" type="double">2.000000</value>
+                        <value name="FeralThreadedGCEnable" type="integer">1</value>
+                        <value name="FeralThreadedGCMaxBatchSize" type="integer">2048</value>
+                        <value name="FixedScreenHeight" type="integer">1080</value>
+                        <value name="ForceTouchControls" type="integer">1</value>
+                        <value name="FullScreen" type="integer">1</value>
+                        <value name="GameInstallVersion" type="integer">17170688</value>
+                        <value name="GameInstallVersionString" type="string">XCOM 2 v1.6.1</value>
+                        <value name="GameInstallVersionWithStages" type="integer">23166976</value>
+                        <value name="GameOptionsDialogShouldShow" type="integer">0</value>
+                        <value name="GameOptionsDialogShown" type="integer">1</value>
+                        <value name="GameResolutionScaleDenominator" type="integer">10000</value>
+                        <value name="GameResolutionScaleNumerator" type="integer">10000</value>
+                        <value name="GameResolutionScaleNumerator_battery" type="integer">10000</value>
+                        <value name="GameResolutionScaleNumerator_graphics" type="integer">10000</value>
+                        <value name="GameSelected" type="integer">2</value>
+                        <value name="GameVersionNew" type="integer">17170688</value>
+                        <value name="GameVersionString" type="string">XCOM 2 v1.6.1</value>
+                        <value name="GFXAmbientOcclusion" type="integer">0</value>
+                        <value name="GFXAmbientOcclusion_battery" type="integer">0</value>
+                        <value name="GFXAmbientOcclusion_graphics" type="integer">1</value>
+                        <value name="GFXBloom" type="integer">1</value>
+                        <value name="GFXBloom_battery" type="integer">0</value>
+                        <value name="GFXBloom_graphics" type="integer">1</value>
+                        <value name="GFXDecals" type="integer">0</value>
+                        <value name="GFXDecals_battery" type="integer">0</value>
+                        <value name="GFXDecals_graphics" type="integer">2</value>
+                        <value name="GFXDepthOfField" type="integer">0</value>
+                        <value name="GFXDepthOfField_battery" type="integer">0</value>
+                        <value name="GFXDepthOfField_graphics" type="integer">0</value>
+                        <value name="GFXDirtyLens" type="integer">1</value>
+                        <value name="GFXDirtyLens_battery" type="integer">0</value>
+                        <value name="GFXDirtyLens_graphics" type="integer">1</value>
+                        <value name="GFXEffects" type="integer">0</value>
+                        <value name="GFXEffects_battery" type="integer">0</value>
+                        <value name="GFXEffects_graphics" type="integer">0</value>
+                        <value name="GFXFXAA" type="integer">1</value>
+                        <value name="GFXFXAA_battery" type="integer">1</value>
+                        <value name="GFXFXAA_graphics" type="integer">1</value>
+                        <value name="GFXMaxDrawDistance" type="integer">0</value>
+                        <value name="GFXMaxDrawDistance_battery" type="integer">0</value>
+                        <value name="GFXMaxDrawDistance_graphics" type="integer">0</value>
+                        <value name="GFXScreenSpaceReflections" type="integer">0</value>
+                        <value name="GFXScreenSpaceReflections_battery" type="integer">0</value>
+                        <value name="GFXScreenSpaceReflections_graphics" type="integer">1</value>
+                        <value name="GFXShadowQuality" type="integer">0</value>
+                        <value name="GFXShadowQuality_battery" type="integer">0</value>
+                        <value name="GFXShadowQuality_graphics" type="integer">1</value>
+                        <value name="GFXShadowType" type="integer">0</value>
+                        <value name="GFXShadowType_battery" type="integer">0</value>
+                        <value name="GFXShadowType_graphics" type="integer">0</value>
+                        <value name="GFXSubsurfaceScattering" type="integer">0</value>
+                        <value name="GFXSubsurfaceScattering_battery" type="integer">0</value>
+                        <value name="GFXSubsurfaceScattering_graphics" type="integer">0</value>
+                        <value name="GFXTextureDetail" type="integer">0</value>
+                        <value name="GFXTextureDetail_battery" type="integer">0</value>
+                        <value name="GFXTextureDetail_graphics" type="integer">2</value>
+                        <value name="GFXTextureFiltering" type="integer">0</value>
+                        <value name="GFXTextureFiltering_battery" type="integer">0</value>
+                        <value name="GFXTextureFiltering_graphics" type="integer">4</value>
+                        <value name="GraphicsMode" type="integer">1</value>
+                        <value name="IdleFPS" type="integer">30</value>
+                        <value name="IdleFPS_battery" type="integer">20</value>
+                        <value name="IdleFPS_graphics" type="integer">30</value>
+                        <value name="IsLanguageAutoDetectSelected" type="integer">0</value>
+                        <value name="LaunchSendUsageDataAnalyticsSent" type="integer">1</value>
+                        <value name="MaxBloomMips" type="integer">3</value>
+                        <value name="MouseCursorIconScale" type="double">2.000000</value>
+                        <value name="NonIdleFPS" type="integer">40</value>
+                        <value name="NonIdleFPS_battery" type="integer">30</value>
+                        <value name="NonIdleFPS_graphics" type="integer">30</value>
+                        <value name="PauseMoviesOnPause" type="integer">1</value>
+                        <value name="PauseOnSuspend" type="integer">1</value>
+                        <value name="PauseSoundOnPause" type="integer">1</value>
+                        <value name="PauseTimersOnPause" type="integer">1</value>
+                        <value name="PurgeRemoteResourcesOnLaunch" type="integer">1</value>
+                        <value name="RemoteResourcesDisableAnalytics" type="integer">1</value>
+                        <value name="RenderUnderNotch" type="integer">1</value>
+                        <value name="ReorderLightAccumulation" type="integer">1</value>
+                        <value name="ReorderShadowDepths" type="integer">1</value>
+                        <value name="RequireStrictDataCheck" type="integer">0</value>
+                        <value name="RmlDPRatioVersion" type="integer">3</value>
+                        <value name="RmlRootVFSPath" type="string">feral</value>
+                        <value name="ScaleGameResolution" type="integer">1</value>
+                        <value name="ScreenDensityMax" type="integer">320</value>
+                        <value name="ScreenH" type="integer">1080</value>
+                        <value name="ScreenW" type="integer">1728</value>
+                        <value name="SeenSpecificationAlertUUIDAdreno_750_Renderer_Defaults_1_6_1RC6" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDAdrenoWorkarounds" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDAndroid11AdrenoWorkarounds" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDAutoGeneratedDefault_1_6RC6" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDDefaultHardwareSpecificationsClass_1_5RC3" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDFontScaleDefault_1_6RC6" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDMaliWorkarounds" type="integer">0</value>
+                        <value name="SeenSpecificationAlertUUIDUnknownIneligibleHardware" type="integer">1</value>
+                        <value name="SkipSceneCaptureShadows" type="integer">1</value>
+                        <value name="SkipStrictDataCheck" type="integer">1</value>
+                        <value name="SkipTranslucencyLighting" type="integer">1</value>
+                        <value name="SpecializeLightingDraws" type="integer">1</value>
+                        <value name="SpecificationFirstLaunchCheck" type="integer">1</value>
+                        <value name="SpecificationLastUpdateCheckTime" type="binary">3c14ed6a00000000</value>
+                        <value name="SpecificationUpdateURL" type="string">https://u1.feralinteractive.com/autoupdate/xcom2collection/specifications_android_1_6_1.xml</value>
+                        <value name="SubtitleFontScale" type="double">1.500000</value>
+                        <value name="SupportLogFileLimit" type="integer">10</value>
+                        <value name="TotalLaunchCount" type="integer">1</value>
+                        <value name="UpdateServerDomain" type="string">u1.feralinteractive.com</value>
+                        <value name="UpdateServerPath" type="string">/autoupdate/</value>
+                        <value name="UpdateServerProtocol" type="string">https://</value>
+                        <value name="Use3DWarmerAnalytics" type="integer">0</value>
+                        <value name="UseAlternativePostProcess" type="integer">0</value>
+                        <value name="UseDelayedBufferCreation" type="integer">1</value>
+                        <value name="UseDelayedTextureCreation" type="integer">1</value>
+                        <value name="UseDriveSaveSync" type="integer">0</value>
+                        <value name="UseGoogleSignIn" type="integer">1</value>
+                        <value name="UseOfflineEvents" type="integer">1</value>
+                        <value name="UsePersistentConstantBuffer" type="integer">1</value>
+                        <value name="UseSplitAO" type="integer">1</value>
+                        <value name="XCOM2MinCreateTimeJSONList" type="string">[0.00,0.02,0.06]</value>
+                    </key>
+                </key>
+            </key>
+            <key name="IndirectX">
+                <key name="Direct3D">
+                    <key name="Config">
+                        <value name="AllowSM5" type="integer">1</value>
+                        <value name="EnableF3DWarmer" type="integer">1</value>
+                        <value name="EnableIdxD3D11Threaded" type="integer">1</value>
+                        <value name="EnableShaderDeduplicator" type="integer">1</value>
+                        <value name="FeralGUIWatermarkText" type="string"></value>
+                        <value name="IdxD3D11ThreadedQueueSize" type="integer">16777216</value>
+                        <value name="kBug_Android_Vulkan_Adreno_RequiresFragmentShader" type="integer">1</value>
+                        <value name="MaxFramesPerSecond" type="integer">60</value>
+                        <value name="MinPipelineCreateTimeToWarm" type="integer">20</value>
+                        <value name="ShowFeralGUIWatermark" type="integer">0</value>
+                        <value name="VulkanRenderToBackbuffer" type="integer">1</value>
+                        <value name="VulkanUseSeparateSubmitThread" type="integer">1</value>
+                    </key>
+                </key>
+            </key>
+            <key name="MacDoze">
+                <key name="Config">
+                    <value name="BinkWebmUseLibvpx" type="integer">1</value>
+                    <value name="ClearSavesEnabled" type="integer">0</value>
+                    <value name="DisableClearSaveDataAlert" type="integer">0</value>
+                    <value name="SendMouseActivate" type="integer">1</value>
+                </key>
+            </key>
+            <key name="SessionAnalytics">
+                <value name="Enabled" type="integer">0</value>
+            </key>
+            <key name="SystemMonitor">
+                <key name="Config">
+                    <value name="AppVersion" type="integer">17170688</value>
+                    <value name="Backgrounded" type="integer">1</value>
+                    <value name="OSVersion" type="string">17.0</value>
+                    <value name="QuitIntentional" type="integer">0</value>
+                </key>
+            </key>
+        </key>
+    </key>
+    <key name="HKEY_LOCAL_MACHINE">
+        <key name="Hardware">
+            <key name="Description">
+                <key name="System">
+                    <key name="CentralProcessor">
+                        <key name="0">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="1">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="2">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="3">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="4">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="5">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="6">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="7">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string">Arm Limited</value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                    </key>
+                </key>
+            </key>
+        </key>
+        <key name="Software">
+        </key>
+    </key>
+    <key name="HKEY_USERS">
+    </key>
+</registry>

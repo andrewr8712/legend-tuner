@@ -1,7 +1,7 @@
 # Config Tuner site — design document
 
 **Status:** approved design record · 2026-11-06
-**Source of truth for facts:** `docs/website/AGENT-BRIEF.md` (1.2.9) and the repository README.
+**Source of truth for facts:** `docs/website/AGENT-BRIEF.md` (1.3.0) and the repository README.
 **Approved and built.**
 
 ---
@@ -19,7 +19,7 @@ uncomfortable parts (root, debug signature, the game rewrites settings on exit) 
 button, not after it.
 
 Secondary job: give the project a home that outlives a README — a place for release news, the
-18-title catalogue, and the safety model.
+19-title catalogue, and the safety model.
 
 ## 2. Goals and non-goals
 
@@ -55,7 +55,7 @@ README.
 
 **C — Download-first single screen.**
 Hero, one paragraph, one button, footer. Lowest friction for someone who already knows the app;
-useless to everyone else, and it throws away the 18-title catalogue and the safety story, which are
+useless to everyone else, and it throws away the 19-title catalogue and the safety story, which are
 the actual reasons to trust it.
 
 **Recommendation: A.** It keeps the brief's direction (the app's own instrument look), carries the
@@ -71,10 +71,10 @@ Single page, `index.html`, plus a second page `brand/` for the kit. Section ids 
 |---|----|---------|---------|
 | 0 | — | Header, sticky | mark + wordmark, nav (How it works · Safety · Titles · Install · FAQ), Download APK |
 | 1 | `top` | Hero | H1, one-sentence explainer, Download + GitHub, three micro-facts, hero visual |
-| 2 | `proof` | Proof strip | 18 titles · 49 unit tests · no network permission · MIT, stamped "as of 1.2.9" |
+| 2 | `proof` | Proof strip | 19 titles · 50 unit tests · no network permission · MIT, stamped "as of 1.3.0" |
 | 3 | `how` | How it works | 4 steps, line-drawn connectors, the file path in mono |
 | 4 | `safety` | Safety | 3 guarantees + 3 honest caveats, side by side |
-| 5 | `titles` | Supported titles | filter field, 18 cards with control counts, "not installed" behaviour |
+| 5 | `titles` | Supported titles | filter field, 19 cards with control counts, "not installed" behaviour |
 | 6 | `shots` | Screenshots | 4-image tab set: picker, guided editor, preset tabs, resolution |
 | 7 | `install` | Install | 4 steps, requirements, the four access routes compared, debug-build warning |
 | 8 | `faq` | FAQ | 6 `<details>` items |
@@ -82,7 +82,7 @@ Single page, `index.html`, plus a second page `brand/` for the kit. Section ids 
 
 **Hero copy (draft).**
 
-> Unofficial · Android 8.0+ · 18 titles
+> Unofficial · Android 8.0+ · 19 titles
 > # Feral settings without the XML.
 > Every Feral Android port keeps its real graphics settings in a plaintext registry that Android
 > will not let you open. Config Tuner gives you readable controls for that file — backed up,
@@ -90,11 +90,11 @@ Single page, `index.html`, plus a second page `brand/` for the kit. Section ids 
 > **[ Download APK ]** [ View on GitHub ]
 > `Android/data/<package>/files/feral_app_support/preferences`
 
-Hero visual: the path block above rendered as a terminal line with a lime caret, then the 1.2.9
+Hero visual: the path block above rendered as a terminal line with a lime caret, then the 1.3.0
 picker capture in a simple tablet frame, bleeding off the right edge on wide screens.
 
-**Proof strip:** `18` titles · `49` unit tests · `0` network permissions · MIT. Footnote:
-"Counts as of 1.2.9".
+**Proof strip:** `19` titles · `50` unit tests · `0` network permissions · MIT. Footnote:
+"Counts as of 1.3.0".
 
 **How it works (4 steps):**
 
@@ -118,7 +118,7 @@ you can supply."
 
 **Install:** 1) download the APK on the tablet, 2) allow install from this source, 3) open and pick a
 title, 4) choose a route if Android blocks the folder. Requirements list: Android 8.0+, 10 MB, no
-Play Store, version 1.2.9 (versionCode 12), debug-signed.
+Play Store, version 1.3.0 (versionCode 13), debug-signed.
 
 **FAQ:** why root/Shizuku is needed; is it safe; what happens when the game updates; why debug-signed;
 does it collect anything (no network permission at all); can it work with a title that is not listed;
@@ -169,7 +169,7 @@ Shipped in `assets/brand/` and documented at `brand/index.html`.
   192/512 PNG, 512 maskable with the mark inside the 80 % safe circle. `site.webmanifest` with
   canvas background and lime theme colour.
 - **Social card:** 1200×630, canvas, hairline frame, wordmark top-left, the H1 in two lines, lime
-  rule, "18 titles · no network permission · no telemetry" — final line is "Debug-signed APK for
+  rule, "19 titles · no network permission · no telemetry" — final line is "Debug-signed APK for
   Android 8.0+".
 - **Brand guide page:** tokens with swatches and contrast ratios, type specimens, lockup rules and
   five don'ts, download links for SVG/PNG assets. Linked from the footer, not the main nav.
@@ -188,14 +188,14 @@ docs/website/
   assets/js/site.js
   assets/fonts/*.woff2            self-hosted, subset, OFL licences included
   assets/brand/*.svg|*.png
-  assets/shots/*.png              copied from docs/screenshots + picker-1.2.9.png
+  assets/shots/*.png              copied from docs/screenshots + picker-1.3.0.png
   site.webmanifest
   README.md                       handover notes
 ```
 
 - Semantic HTML5; CSS custom properties from the token file; one small JS file for the title filter,
   the screenshot tabs, the scroll-spy nav and reveal animations (all optional — the page works with
-  JS disabled: all 18 titles are in the HTML, filtering is progressive enhancement).
+  JS disabled: all 19 titles are in the HTML, filtering is progressive enhancement).
 - **Zero third-party requests:** fonts self-hosted, no CDN, no analytics, no embeds. This is a
   product claim the site itself should honour.
 - **Deployment:** the source lives in `docs/website/`, which GitHub Pages cannot serve directly
@@ -219,14 +219,14 @@ docs/website/
    1440 px; axe-core scan with no serious violations; keyboard pass through nav, tabs, filter, FAQ.
 5. JS-disabled pass: titles, FAQ and install steps all present and readable.
 6. `prefers-reduced-motion` pass: no transforms, no line draw.
-7. Fact check against the brief: 1.2.9, 18 titles with exact control counts, 49 tests, Android 8.0+,
+7. Fact check against the brief: 1.3.0, 19 titles with exact control counts, 50 tests, Android 8.0+,
    no network permission, debug-signed, no Play Store mention.
 
 ## 9. Open questions
 
 Seven are filed in `docs/website/QUESTIONS.md` (PR #2), each with a default. Nothing in section 7
 blocks on them; the two that could change output are **branding depth** (full kit vs lean) and
-**screenshots** (which 1.2.9 captures exist).
+**screenshots** (which 1.3.0 captures exist).
 
 ## 10. What I will not do without a second approval
 

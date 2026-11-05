@@ -108,6 +108,13 @@ object FeralTitles {
             titleCatalog = RomeTotalWarCatalog.catalog
         ),
         FeralTitle(
+            "xcom-2", "XCOM 2 Collection", "com.feralinteractive.xcom2_android",
+            listOf(
+                "HKEY_CURRENT_USER", "Software", "Feral Interactive", "XCOM 2", "Setup"
+            ),
+            titleCatalog = Xcom2Catalog.catalog
+        ),
+        FeralTitle(
             "tropico-3", "Tropico 3", "com.feralinteractive.tropico3",
             listOf(
                 "HKEY_CURRENT_USER", "Software", "Haemimont Games",
