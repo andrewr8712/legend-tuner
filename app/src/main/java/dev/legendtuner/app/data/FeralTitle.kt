@@ -68,6 +68,22 @@ object FeralTitles {
             titleCatalog = NapoleonCatalog.catalog
         ),
         FeralTitle(
+            "empire-total-war", "Total War: EMPIRE", "com.feralinteractive.empire_android",
+            listOf(
+                "HKEY_CURRENT_USER", "Software", "The Creative Assembly Limited",
+                "Total War EMPIRE", "Setup"
+            ),
+            titleCatalog = EmpireTotalWarCatalog.catalog
+        ),
+        FeralTitle(
+            "tropico-3", "Tropico 3", "com.feralinteractive.tropico3",
+            listOf(
+                "HKEY_CURRENT_USER", "Software", "Haemimont Games",
+                "Tropico 3: Gold Edition", "Setup"
+            ),
+            titleCatalog = Tropico3Catalog.catalog
+        ),
+        FeralTitle(
             "hitman-blood-money", "Hitman: Blood Money", "com.feralinteractive.hitmanbloodmoney_android",
             listOf("HKEY_CURRENT_USER", "Software", "Feral Interactive", "Hitman Blood Money", "Setup"),
             titleCatalog = HitmanCatalog.catalog

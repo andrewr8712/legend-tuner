@@ -16,6 +16,8 @@
         <package android:name="com.feralinteractive.alienisolation_android" />
         <package android:name="com.feralinteractive.saintsrow3_android" />
         <package android:name="com.feralinteractive.napoleon_android" />
+        <package android:name="com.feralinteractive.empire_android" />
+        <package android:name="com.feralinteractive.tropico3" />
         <package android:name="com.feralinteractive.hitmanbloodmoney_android" />
         <package android:name="com.feralinteractive.laracroftgol_android" />
         <package android:name="com.feralinteractive.laracrofttoo_android" />

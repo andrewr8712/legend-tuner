@@ -19,6 +19,8 @@ keys and options for selectable controls.
 | Tomb Raider | `tomb-raider.md` | `TombRaiderCatalog` | 24 | four block presets |
 | Hitman: Absolution | `hitman-absolution.md` | `HitmanAbsolutionCatalog` | 25 | three suffix families |
 | Company of Heroes | `company-of-heroes.md` | `CompanyOfHeroesCatalog` | 24 | flat, split roots |
+| Total War: EMPIRE | `total-war-empire.md` | `EmpireTotalWarCatalog` | 28 | flat, `GraphicsSettings` + `MainMenuSettings` |
+| Tropico 3 | `tropico-3.md` | `Tropico3Catalog` | 15 | flat, `GFX` + engine subtree |
 
 Files live in `app/src/main/java/dev/legendtuner/app/data/TitleCatalog.kt` (GRID Autosport, Alien)
 and `TitleCatalogs.kt` (the rest).
@@ -65,3 +67,5 @@ file's *Open verification* section, and the control ships with a note (the amber
 | Tomb Raider | Preset selector index; AA and filter ladders |
 | Hitman: Absolution | Quality-profile mapping; suffix-family rewrite on exit |
 | Company of Heroes | `antialiasing` tokens; model detail mapping; whether ScreenW/H are written after a display change |
+| Total War: EMPIRE | `GraphicsQuality` preset mapping; anti-aliasing vocabulary; whether ScreenW/H appear after a display change |
+| Tropico 3 | Anisotropy 2×–16× tokens; whether BatterySaverFPS is a hard cap |

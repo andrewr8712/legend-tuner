@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<registry>
+    <key name="HKEY_CLASSES_ROOT">
+    </key>
+    <key name="HKEY_CURRENT_CONFIG">
+    </key>
+    <key name="HKEY_CURRENT_USER">
+        <key name="AutoValueRemap">
+            <key name="GPURemap">
+                <key name="keys">
+                    <value name="Software\IndirectX\Direct3D\Config" type="integer">1</value>
+                </key>
+                <key name="values">
+                    <value name="Software\Haemimont Games\Tropico 3: Gold Edition\Setup\FullScreen" type="integer">1</value>
+                    <value name="Software\Haemimont Games\Tropico 3: Gold Edition\Setup\ScreenH" type="integer">1</value>
+                    <value name="Software\Haemimont Games\Tropico 3: Gold Edition\Setup\ScreenW" type="integer">1</value>
+                </key>
+            </key>
+        </key>
+        <key name="Software">
+            <key name="Haemimont Games">
+                <key name="Tropico 3: Gold Edition">
+                    <key name="Setup">
+                        <value name="32BitArch" type="integer">0</value>
+                        <value name="AddSteamCloudAlias" type="integer">1</value>
+                        <value name="AllowAutorotate" type="integer">1</value>
+                        <value name="AllowPausing" type="integer">1</value>
+                        <value name="AllowSendCrashReports" type="integer">0</value>
+                        <value name="AllowSendUsageData" type="integer">0</value>
+                        <value name="ArchitectModeMaxZoom" type="binary">0000000000002440</value>
+                        <value name="ArchitectModeMinZoom" type="binary">0000000000000040</value>
+                        <value name="BakedTerrainResolution" type="integer">2048</value>
+                        <value name="BatterySaverFPS" type="integer">30</value>
+                        <value name="BufferedPacketData" type="binary">00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</value>
+                        <value name="CardRenderer" type="string">Test GPU</value>
+                        <value name="ConstrainLiveWindowResize" type="integer">1</value>
+                        <value name="CrashCounter" type="integer">0</value>
+                        <value name="DefaultFadeDistanceMax" type="integer">1700</value>
+                        <value name="DefaultFadeDistanceMin" type="integer">1350</value>
+                        <value name="DefaultFadeDistanceRange" type="integer">100</value>
+                        <value name="DisableOverlayBlendInArchitectMode" type="integer">1</value>
+                        <value name="DoneMinOS" type="integer">0</value>
+                        <value name="DonePromotional" type="integer">0</value>
+                        <value name="DoneUnsupported" type="integer">0</value>
+                        <value name="DownloadMissionPacks" type="integer">1</value>
+                        <value name="EnableAbsolutePower" type="integer">1</value>
+                        <value name="EnableHelpOverlayCache" type="integer">1</value>
+                        <value name="EnableOrthoCameraInArchitectMode" type="integer">1</value>
+                        <value name="EnableUltraTex" type="integer">1</value>
+                        <value name="EnablOnlinePortal" type="integer">0</value>
+                        <value name="FastWheelScaleIndex" type="integer">2</value>
+                        <value name="FeralAnalyticsInstallID" type="string">TEST-INSTALL-ID</value>
+                        <value name="FeralFastWheelScaleLarge" type="integer">85</value>
+                        <value name="FeralFastWheelScaleMedium" type="integer">75</value>
+                        <value name="FeralFastWheelScaleSmall" type="integer">65</value>
+                        <value name="FeralLowResGameplayScaleFactor" type="binary">0000000000000000</value>
+                        <value name="FeralShadowShaderQuality" type="integer">1</value>
+                        <value name="FixedScreenHeight" type="integer">1080</value>
+                        <value name="Foliage2SidedShader" type="integer">1</value>
+                        <value name="FoliageDensity" type="string">0.5</value>
+                        <value name="FoliageLODMultiplier" type="string">0.5</value>
+                        <value name="FontScaleModifier" type="binary">000000000000f03f</value>
+                        <value name="FullScreen" type="integer">1</value>
+                        <value name="GameInstallVersion" type="integer">17040384</value>
+                        <value name="GameInstallVersionString" type="string">Tropico v1.4.4</value>
+                        <value name="GameInstallVersionWithStages" type="integer">21266432</value>
+                        <value name="GameOptionsDialogShouldShow" type="integer">0</value>
+                        <value name="GameOptionsDialogShown" type="integer">1</value>
+                        <value name="GameVersionNew" type="integer">17040384</value>
+                        <value name="GameVersionString" type="string">Tropico v1.4.4</value>
+                        <value name="HasNotch" type="integer">0</value>
+                        <value name="HideGoogleSettings" type="integer">0</value>
+                        <value name="IsOfficiallySupportedDevice" type="integer">1</value>
+                        <value name="LiveWindowResizePercentage" type="integer">0</value>
+                        <value name="LiveWindowResizeThreshold" type="integer">0</value>
+                        <value name="MaxPanSpeed" type="binary">0000000000005940</value>
+                        <value name="MinWindowedHeight" type="integer">0</value>
+                        <value name="MinWindowedWidth" type="integer">0</value>
+                        <value name="OrthoScaleAtMaxZoom" type="binary">000000403333d33f</value>
+                        <value name="OrthoScaleAtMinZoom" type="binary">000000a09999993f</value>
+                        <value name="OverlayToneFactorInArchitectMode" type="binary">000000000000e83f</value>
+                        <value name="PauseMoviesOnPause" type="integer">1</value>
+                        <value name="PauseOnSuspend" type="integer">1</value>
+                        <value name="PauseSoundOnPause" type="integer">1</value>
+                        <value name="PauseTimersOnPause" type="integer">1</value>
+                        <value name="RemoteResourcesForceFDR" type="integer">1</value>
+                        <value name="RenderUnderNotch" type="integer">1</value>
+                        <value name="ScreenH" type="integer">1080</value>
+                        <value name="ScreenW" type="integer">1914</value>
+                        <value name="SeenSpecificationAlertUUIDAdreno730HardwareSpecifications_1_4_3a17" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDMiscGameInfoSettings" type="integer">1</value>
+                        <value name="SeenSpecificationAlertUUIDsimilar_gpu_devices_1_4_4RC1" type="integer">1</value>
+                        <value name="ShowAssertAlerts" type="integer">0</value>
+                        <value name="ShowTheHideDockCheckbox" type="integer">1</value>
+                        <value name="SmokeDensityFactor" type="string">0.6</value>
+                        <value name="SpecificationFirstLaunchCheck" type="integer">1</value>
+                        <value name="SpecificationLastUpdateCheckTime" type="binary">d6bbec6a00000000</value>
+                        <value name="SpecificationUpdateURL" type="string">https://u1.feralinteractive.com/autoupdate/tropico3/specifications_android_1_4_4.xml</value>
+                        <value name="SupportEmail" type="string">tropico3support@feralinteractive.com</value>
+                        <value name="UpdateServerDomain" type="string">u1.feralinteractive.com</value>
+                        <value name="UpdateServerPath" type="string">/autoupdate/</value>
+                        <value name="UpdateServerProtocol" type="string">https://</value>
+                        <value name="Use3DWarmerAnalytics" type="integer">0</value>
+                        <value name="UseAlternativeBillboardRendering" type="integer">1</value>
+                        <value name="UseDepthShadingInArchitectMode" type="integer">1</value>
+                        <value name="UseDriveSaveSync" type="integer">0</value>
+                        <value name="UseOptimizedRenderPath" type="integer">1</value>
+                        <value name="UseOptimizedUIRendering" type="integer">0</value>
+                        <value name="UseOptimizedWaterRendering" type="integer">1</value>
+                        <value name="WarnCornerCutout" type="integer">1</value>
+                        <key name="GFX">
+                            <value name="Anisotropy" type="string">Off</value>
+                            <value name="GrassQuality" type="string">Off</value>
+                            <value name="PostProcessing" type="string">Off</value>
+                            <value name="SceneRez" type="string">High</value>
+                            <value name="ShadowQuality" type="string">High</value>
+                            <value name="TerrainQuality" type="string">Low</value>
+                            <value name="TextureLevel" type="string">High</value>
+                            <value name="ViewDistance" type="string">High</value>
+                            <value name="WaterQuality" type="string">High</value>
+                        </key>
+                        <key name="SpecificationAlerts">
+                            <value name="DefaultHardwareSpecificationsClass_1_3_3RC2" type="integer">1</value>
+                        </key>
+                    </key>
+                </key>
+            </key>
+            <key name="IndirectX">
+                <key name="Direct3D">
+                    <key name="Config">
+                        <value name="EnableF3DWarmer" type="integer">1</value>
+                        <value name="EnableShaderDeduplicator" type="integer">1</value>
+                        <value name="IdxD3D11WaitOnPresentMode" type="integer">1</value>
+                        <value name="LazyShaderCreation" type="integer">0</value>
+                        <value name="MaxFramesPerSecond" type="integer">30</value>
+                        <value name="UseMTGL" type="integer">1</value>
+                        <value name="VBOMinMemToMap" type="integer">1</value>
+                    </key>
+                </key>
+            </key>
+            <key name="MacDoze">
+                <key name="Config">
+                    <value name="ClearSavesEnabled" type="integer">1</value>
+                    <value name="DisableClearSaveDataAlert" type="integer">0</value>
+                    <value name="VerboseFindFile" type="integer">1</value>
+                </key>
+            </key>
+            <key name="SystemMonitor">
+                <key name="Config">
+                    <value name="AppVersion" type="integer">17040384</value>
+                    <value name="Backgrounded" type="integer">1</value>
+                    <value name="OSVersion" type="string">17.0</value>
+                    <value name="QuitIntentional" type="integer">0</value>
+                </key>
+            </key>
+        </key>
+    </key>
+    <key name="HKEY_LOCAL_MACHINE">
+        <key name="Hardware">
+            <key name="Description">
+                <key name="System">
+                    <key name="CentralProcessor">
+                        <key name="0">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string"></value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="1">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string"></value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="2">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string"></value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="3">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string"></value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="4">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string"></value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="5">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string"></value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="6">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string"></value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                        <key name="7">
+                            <value name="Identifier" type="string"></value>
+                            <value name="ProcessorNameString" type="string"></value>
+                            <value name="VendorIdentifier" type="string"></value>
+                            <value name="~MHz" type="integer">2265</value>
+                        </key>
+                    </key>
+                </key>
+            </key>
+        </key>
+        <key name="Software">
+            <key name="Haemimont Games">
+                <value name="LastRun" type="string">C:\Feral\Program Files\WinDeveloper\WinApp.dll</value>
+                <value name="LastRunPath" type="string">C:\Feral\Program Files\WinDeveloper\</value>
+                <key name="Tropico3">
+                    <value name="Language" type="string">English</value>
+                    <value name="Path" type="string">C:\Feral\Program Files\WinDeveloper\</value>
+                    <value name="Version" type="string">2.01.477</value>
+                </key>
+            </key>
+        </key>
+    </key>
+    <key name="HKEY_USERS">
+    </key>
+</registry>

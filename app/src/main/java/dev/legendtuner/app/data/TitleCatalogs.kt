@@ -978,3 +978,262 @@ object LaraTooCatalog {
         )
     )
 }
+
+object Tropico3Catalog {
+    private const val DISPLAY = "Display"
+    private const val QUALITY = "Graphics"
+    private const val PERFORMANCE = "Performance"
+    private val SETUP = listOf(
+        "HKEY_CURRENT_USER", "Software", "Haemimont Games", "Tropico 3: Gold Edition", "Setup"
+    )
+    private val GFX = SETUP + "GFX"
+    private val D3D_CONFIG = listOf("HKEY_CURRENT_USER", "Software", "IndirectX", "Direct3D", "Config")
+
+    private val textTiers = listOf(
+        ControlChoice("Off", "Off"),
+        ControlChoice("Low", "Low"),
+        ControlChoice("Medium", "Medium"),
+        ControlChoice("High", "High")
+    )
+
+    private fun gfx(
+        key: String,
+        label: String,
+        description: String,
+        choices: List<ControlChoice> = textTiers
+    ) = Control(
+        key, label, description, QUALITY, ControlKind.CHOICE, choices,
+        absolutePath = GFX, ignoreSuffix = true
+    )
+
+    val catalog = TitleCatalog(
+        groups = listOf(DISPLAY, QUALITY, PERFORMANCE),
+        controls = listOf(
+            Control(
+                "Resolution", "Screen resolution",
+                "Fullscreen width and height stored in ScreenW and ScreenH. The game may recalculate the pair after a display change.",
+                DISPLAY, ControlKind.RESOLUTION, resolutionChoices(),
+                absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "FullScreen", "Fullscreen",
+                "Runs the game fullscreen instead of in a windowed surface.",
+                DISPLAY, ControlKind.TOGGLE, intToggle(), absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "RenderUnderNotch", "Render under notch",
+                "Extends the render surface below the display cutout on edge-to-edge devices.",
+                DISPLAY, ControlKind.TOGGLE, intToggle(), absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "FixedScreenHeight", "Render height",
+                "Internal vertical resolution. Lower values raise frame rate at the cost of sharpness.",
+                DISPLAY, ControlKind.CHOICE, heightChoices(), absolutePath = SETUP, ignoreSuffix = true
+            ),
+            gfx(
+                "SceneRez", "Scene resolution",
+                "Resolution of the world render target before the UI is composited. Lower values soften the whole scene."
+            ),
+            gfx(
+                "ShadowQuality", "Shadows",
+                "Shadow-map resolution and filtering for buildings, terrain and units."
+            ),
+            gfx(
+                "TextureLevel", "Texture quality",
+                "Texture resolution for terrain, buildings and characters. Higher tiers need more VRAM."
+            ),
+            gfx(
+                "WaterQuality", "Water quality",
+                "Sea and river shading, reflections and wave detail."
+            ),
+            gfx(
+                "TerrainQuality", "Terrain quality",
+                "Ground mesh detail and blending between terrain layers."
+            ),
+            gfx(
+                "GrassQuality", "Grass quality",
+                "Ground-cover density and draw distance around the camera."
+            ),
+            gfx(
+                "ViewDistance", "View distance",
+                "How far detailed scenery and buildings remain visible before LOD switches."
+            ),
+            gfx(
+                "Anisotropy", "Anisotropic filtering",
+                "Texture sharpness on roads, roofs and terrain seen at grazing angles.",
+                listOf(
+                    ControlChoice("Off", "Off"),
+                    ControlChoice("2x", "2×"),
+                    ControlChoice("4x", "4×"),
+                    ControlChoice("8x", "8×"),
+                    ControlChoice("16x", "16×")
+                )
+            ),
+            gfx(
+                "PostProcessing", "Post-processing",
+                "Bloom, colour grading and other full-screen effects applied after the scene is rendered."
+            ),
+            Control(
+                "MaxFramesPerSecond", "Engine frame cap",
+                "Hard engine cap used during normal gameplay. Lower values can make frame time more consistent.",
+                PERFORMANCE, ControlKind.CHOICE, fpsChoices(),
+                absolutePath = D3D_CONFIG, ignoreSuffix = true,
+                note = "Engine key in IndirectX/Direct3D/Config."
+            ),
+            Control(
+                "BatterySaverFPS", "Battery saver frame cap",
+                "Frame cap the game uses when battery saver is active.",
+                PERFORMANCE, ControlKind.CHOICE, fpsChoices(),
+                absolutePath = SETUP, ignoreSuffix = true
+            )
+        )
+    )
+}
+
+object EmpireTotalWarCatalog {
+    private const val QUALITY = "Battle quality"
+    private const val FRAME = "Frame rate"
+    private const val DISPLAY = "Display"
+    private val SETUP = listOf(
+        "HKEY_CURRENT_USER", "Software", "The Creative Assembly Limited", "Total War EMPIRE", "Setup"
+    )
+    private val GRAPHICS = SETUP + "GraphicsSettings"
+    private val MAIN_MENU = SETUP + "MainMenuSettings"
+    private val D3D_CONFIG = listOf("HKEY_CURRENT_USER", "Software", "IndirectX", "Direct3D", "Config")
+
+    private fun q(key: String, label: String, description: String) =
+        Control(key, label, description, QUALITY, ControlKind.CHOICE, intLevels(3))
+
+    private fun toggle(key: String, label: String, description: String) =
+        Control(key, label, description, QUALITY, ControlKind.TOGGLE, intToggle())
+
+    val catalog = TitleCatalog(
+        groups = listOf(QUALITY, FRAME, DISPLAY),
+        pathSuffix = listOf("GraphicsSettings"),
+        controls = listOf(
+            q(
+                "ShadowsQuality", "Shadows",
+                "Shadow-map resolution and filtering for soldiers, buildings and terrain."
+            ),
+            q(
+                "TextureQuality", "Texture quality",
+                "Texture resolution for units, buildings and terrain. Higher tiers need more VRAM."
+            ),
+            q(
+                "TextureFiltering", "Texture filtering",
+                "Anisotropic filtering level for ground and unit textures seen at an angle."
+            ),
+            q(
+                "UnitDetail", "Unit detail",
+                "Soldier mesh detail, LOD distances and animation quality. Scales with the number of men on the field."
+            ),
+            q(
+                "BuildingDetail", "Building detail",
+                "Settlement and fortification mesh detail on the battle map."
+            ),
+            q(
+                "ParticleEffects", "Particle effects",
+                "Smoke, musket fire, cannon impacts and dust. Large battles suffer most."
+            ),
+            q(
+                "GrassQuality", "Grass quality",
+                "Ground cover density and draw distance; grass thins out noticeably at the lowest tier."
+            ),
+            q(
+                "TreesQuality", "Tree quality",
+                "Tree level-of-detail and billboard distance; forests stay dense further from the camera at high tiers."
+            ),
+            q(
+                "WaterQuality", "Water quality",
+                "Sea and river shading, reflections and wave detail."
+            ),
+            q(
+                "SkyQuality", "Sky quality",
+                "Cloud and atmosphere quality, mostly visible in battle lighting."
+            ),
+            q(
+                "TerrainQuality", "Terrain quality",
+                "Ground mesh resolution and blending layers."
+            ),
+            q(
+                "ShipQuality", "Ship detail",
+                "Naval unit mesh and sail detail; only visible in sea battles."
+            ),
+            Control(
+                "AntiAliasing", "Anti-aliasing",
+                "MSAA on geometric edges. Expensive on a tablet GPU when large formations fill the screen.",
+                QUALITY, ControlKind.CHOICE, intLevels(3),
+                note = "Whether this is a toggle or a level on mobile is unverified."
+            ),
+            toggle(
+                "SoftShadows", "Soft shadows",
+                "Blurs shadow edges with a wider filter for a softer look, at a small extra cost."
+            ),
+            toggle("HDR", "HDR", "High-dynamic-range lighting and tone mapping."),
+            toggle("SSAO", "Ambient occlusion", "Screen-space contact shadows in corners and under units."),
+            toggle("DepthOfField", "Depth of field", "Blurs distant or foreground ranges for a cinematic look."),
+            toggle("Distortion", "Distortion", "Heat haze and other screen-space distortion effects."),
+            toggle("VolumetricEffects", "Volumetric effects", "Light shafts and atmospheric scattering in battles."),
+            Control(
+                "FullScreen", "Fullscreen",
+                "Runs the game fullscreen instead of in a windowed surface.",
+                DISPLAY, ControlKind.TOGGLE, intToggle(), absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "RenderUnderNotch", "Render under notch",
+                "Extends the render surface below the display cutout on edge-to-edge devices.",
+                DISPLAY, ControlKind.TOGGLE, intToggle(), absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "FixedScreenHeight", "Render height",
+                "Internal vertical resolution. Lower values raise frame rate at the cost of sharpness.",
+                DISPLAY, ControlKind.CHOICE, heightChoices(), absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "GameResolutionMultiplier", "Resolution scale",
+                "Internal render scale relative to the panel. 100% is native; lower values trade sharpness for frame rate.",
+                DISPLAY, ControlKind.CHOICE,
+                listOf(
+                    ControlChoice("0.500000", "50%"),
+                    ControlChoice("0.750000", "75%"),
+                    ControlChoice("1.000000", "100%")
+                ),
+                absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "GraphicsQuality", "Graphics preset",
+                "Stored quality preset index. The game writes this when its own graphics menu changes the preset.",
+                DISPLAY, ControlKind.CHOICE,
+                intLevels(4, listOf("Very Low", "Low", "Medium", "High", "Ultra")),
+                absolutePath = SETUP, ignoreSuffix = true
+            ),
+            Control(
+                "EnableFramerateManager", "Dynamic frame-rate manager",
+                "The engine's idle/responsive FPS manager. Turning it off may remove its soft caps.",
+                FRAME, ControlKind.TOGGLE, intToggle(),
+                absolutePath = D3D_CONFIG, ignoreSuffix = true,
+                note = "Engine key in IndirectX/Direct3D/Config."
+            ),
+            Control(
+                "FramerateManagerBattleResponsiveFPS", "Battle frame cap",
+                "Maximum responsive frame rate during battles. Raise this to 60 or 120 to unlock the 30 FPS battle cap.",
+                FRAME, ControlKind.CHOICE, fpsChoices(),
+                absolutePath = D3D_CONFIG, ignoreSuffix = true,
+                note = "Engine key in IndirectX/Direct3D/Config."
+            ),
+            Control(
+                "FramerateManagerCampaignResponsiveFPS", "Campaign frame cap",
+                "Maximum responsive frame rate on the campaign map. The campaign is usually lighter than a full battle.",
+                FRAME, ControlKind.CHOICE, fpsChoices(),
+                absolutePath = D3D_CONFIG, ignoreSuffix = true,
+                note = "Engine key in IndirectX/Direct3D/Config."
+            ),
+            Control(
+                "BatterySaver", "Battery saver",
+                "Enables the game's battery-saver mode, which uses the engine's lower idle and responsive caps.",
+                FRAME, ControlKind.TOGGLE, intToggle(),
+                absolutePath = MAIN_MENU, ignoreSuffix = true
+            )
+        )
+    )
+}

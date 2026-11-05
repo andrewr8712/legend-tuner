@@ -102,6 +102,23 @@ class Smoke:
         self.adb("shell", "input", "tap", str(x1 + offset_x), str((y1 + y2) // 2))
         time.sleep(0.6)
 
+    def find_scroll(self, text: str, *, attempts: int = 8) -> tuple[int, int, int, int] | None:
+        for _ in range(attempts):
+            bounds = self.find(text)
+            if bounds:
+                return bounds
+            self.adb("shell", "input", "swipe", "960", "800", "960", "300", "300")
+            time.sleep(0.5)
+        return None
+
+    def tap_scroll(self, text: str) -> None:
+        bounds = self.find_scroll(text)
+        if not bounds:
+            raise UiError(f"could not find {text!r} after scrolling")
+        x1, y1, x2, y2 = bounds
+        self.adb("shell", "input", "tap", str((x1 + x2) // 2), str((y1 + y2) // 2))
+        time.sleep(0.6)
+
     def run(self, apk: Path, fixture: Path) -> None:
         if not apk.is_file():
             raise UiError(f"APK not found: {apk}")
@@ -122,7 +139,7 @@ class Smoke:
         self.adb("shell", "am", "start", "-W", "-n", ACTIVITY)
         self.wait("CONFIG TUNER")
 
-        self.tap("Tomb Raider")
+        self.tap_scroll("Tomb Raider")
         self.wait("Manual file")
         self.tap("Manual file")
 

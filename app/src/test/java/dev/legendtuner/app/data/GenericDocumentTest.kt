@@ -15,7 +15,9 @@ class GenericDocumentTest {
         "napoleon" to "napoleon-preferences-sample.xml",
         "hitman-blood-money" to "hitman-blood-money-preferences-sample.xml",
         "lara-croft-gol" to "lara-croft-gol-preferences-sample.xml",
-        "lara-croft-too" to "lara-croft-too-preferences-sample.xml"
+        "lara-croft-too" to "lara-croft-too-preferences-sample.xml",
+        "empire-total-war" to "total-war-empire-preferences-sample.xml",
+        "tropico-3" to "tropico-3-preferences-sample.xml"
     )
 
     private fun load(name: String): ConfigDocument {
@@ -287,6 +289,38 @@ class GenericDocumentTest {
         )
 
         assertFalse(TitleCatalogEngine.write(load("alien-isolation-preferences-sample.xml"), root, catalog, missing, "1"))
+    }
+
+    @Test
+    fun tropico3ExposesResolutionQualityAndFrameControls() {
+        val title = FeralTitles.ALL.first { it.id == "tropico-3" }
+        val catalog = title.titleCatalog!!
+        val root = title.valueRoot!!
+        val doc = load("tropico-3-preferences-sample.xml")
+
+        val resolution = catalog.find("Resolution")!!
+        assertEquals("1914x1080", TitleCatalogEngine.display(doc, root, catalog, resolution))
+        assertEquals("30 fps", TitleCatalogEngine.display(doc, root, catalog, catalog.find("MaxFramesPerSecond")!!))
+        assertEquals("High", TitleCatalogEngine.display(doc, root, catalog, catalog.find("SceneRez")!!))
+        assertEquals("Off", TitleCatalogEngine.display(doc, root, catalog, catalog.find("Anisotropy")!!))
+
+        assertTrue(TitleCatalogEngine.write(doc, root, catalog, catalog.find("ShadowQuality")!!, "Medium"))
+        assertEquals("Medium", doc.value(root + "GFX", "ShadowQuality")?.text)
+    }
+
+    @Test
+    fun empireTotalWarExposesBattleQualityAndFrameControls() {
+        val title = FeralTitles.ALL.first { it.id == "empire-total-war" }
+        val catalog = title.titleCatalog!!
+        val root = title.valueRoot!!
+        val doc = load("total-war-empire-preferences-sample.xml")
+
+        assertEquals("High", TitleCatalogEngine.display(doc, root, catalog, catalog.find("ShadowsQuality")!!))
+        assertEquals("30 fps", TitleCatalogEngine.display(doc, root, catalog, catalog.find("FramerateManagerBattleResponsiveFPS")!!))
+        assertEquals("Off", TitleCatalogEngine.display(doc, root, catalog, catalog.find("BatterySaver")!!))
+
+        assertTrue(TitleCatalogEngine.write(doc, root, catalog, catalog.find("ShadowsQuality")!!, "2"))
+        assertEquals("2", doc.value(root + "GraphicsSettings", "ShadowsQuality")?.text)
     }
 
     @Test

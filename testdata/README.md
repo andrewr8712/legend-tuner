@@ -18,6 +18,8 @@ have been replaced; every key, type and value shape is preserved.
 | `tomb-raider-preferences-sample.xml` | Android | Tomb Raider v1.4 | tester-supplied dump |
 | `hitman-absolution-preferences-sample.xml` | Android | Hitman: Absolution v1.3.1 | tester-supplied dump |
 | `company-of-heroes-preferences-sample.xml` | Android | Company of Heroes v1.8.1 | TB520FU first-launch dump |
+| `total-war-empire-preferences-sample.xml` | Android | Total War: EMPIRE v1.7.1 | TB520FU dump |
+| `tropico-3-preferences-sample.xml` | Android | Tropico 3 v1.4.4 | TB520FU dump |
 
 `preferences-sample.xml` is a sanitized copy of a publicly shared GRID Legends Android file.
 
@@ -67,6 +69,11 @@ rather than a game key.
   `Original Developer/Company of Heroes/Config` for graphics quality, and
   `IndirectX/Direct3D/Config` for engine FPS. `ScreenW`/`ScreenH` are referenced by the remap but
   absent from the first-launch file.
+- **Total War: EMPIRE** — `The Creative Assembly Limited/Total War EMPIRE/Setup` with
+  `GraphicsSettings` (quality and post-processing) and `MainMenuSettings` (battery saver and audio).
+  `ScreenW`/`ScreenH` are in the remap but absent from the first-launch file.
+- **Tropico 3** — `Haemimont Games/Tropico 3: Gold Edition/Setup` plus `GFX` for the string quality
+  ladder; `IndirectX/Direct3D/Config` holds the engine frame cap.
 
 ## Value types seen
 
