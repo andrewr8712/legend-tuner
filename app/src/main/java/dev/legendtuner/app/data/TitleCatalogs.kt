@@ -208,6 +208,55 @@ object SaintsRowCatalog {
     )
 }
 
+object CompanyOfHeroesCatalog {
+    private const val DISPLAY = "Display"
+    private const val GRAPHICS = "Graphics"
+    private const val PERFORMANCE = "Performance"
+    private const val TIERS = "Tier labels are inferred from the stored integer; verify in-game."
+    private val SETUP = listOf("HKEY_CURRENT_USER", "Software", "Feral Interactive", "Company of Heroes", "Setup")
+    private val GRAPHICS_CONFIG = listOf("HKEY_CURRENT_USER", "Software", "Original Developer", "Company of Heroes", "Config")
+    private val D3D_CONFIG = listOf("HKEY_CURRENT_USER", "Software", "IndirectX", "Direct3D", "Config")
+
+    val catalog = TitleCatalog(
+        groups = listOf(DISPLAY, GRAPHICS, PERFORMANCE),
+        controls = listOf(
+            Control("FullScreen", "Fullscreen", "Run the game fullscreen instead of in a windowed surface.", DISPLAY, ControlKind.TOGGLE, intToggle(), absolutePath = SETUP, ignoreSuffix = true),
+            Control("FixedScreenHeight", "Render height", "Internal vertical resolution; lower values raise frame rate but soften the image.", DISPLAY, ControlKind.CHOICE, heightChoices(), absolutePath = SETUP, ignoreSuffix = true),
+            Control("RenderUnderNotch", "Render under notch", "Draw under a display cutout instead of letterboxing around it.", DISPLAY, ControlKind.TOGGLE, intToggle(), absolutePath = SETUP, ignoreSuffix = true),
+
+            Control(
+                "antialiasing", "Anti-aliasing",
+                "Anti-aliasing mode. Only the off value is observed in the supplied file; labels are inferred.",
+                GRAPHICS, ControlKind.CHOICE,
+                listOf(ControlChoice("0", "Off"), ControlChoice("1", "Low"), ControlChoice("2", "High")),
+                absolutePath = GRAPHICS_CONFIG, ignoreSuffix = true,
+                note = "Only 0 was observed on this device; verify the remaining tokens in-game."
+            ),
+            Control("shaderquality", "Shader quality", "Complexity of the deferred and unit shaders.", GRAPHICS, ControlKind.CHOICE, intLevels(2), absolutePath = GRAPHICS_CONFIG, ignoreSuffix = true, note = TIERS),
+            Control("shadows", "Shadow quality", "Shadow map resolution and filtering for units and terrain.", GRAPHICS, ControlKind.CHOICE, intLevels(2), absolutePath = GRAPHICS_CONFIG, ignoreSuffix = true, note = TIERS),
+            Control("terraindetail", "Terrain detail", "Terrain mesh and texture detail, including ground blending.", GRAPHICS, ControlKind.CHOICE, intLevels(2), absolutePath = GRAPHICS_CONFIG, ignoreSuffix = true, note = TIERS),
+            Control("texturedetail", "Texture detail", "Texture resolution and filtering for units, buildings and terrain.", GRAPHICS, ControlKind.CHOICE, intLevels(2), absolutePath = GRAPHICS_CONFIG, ignoreSuffix = true, note = TIERS),
+            Control("treedetail", "Tree detail", "Density and complexity of the tree layer.", GRAPHICS, ControlKind.CHOICE, intLevels(2), absolutePath = GRAPHICS_CONFIG, ignoreSuffix = true, note = TIERS),
+            Control("effectsdensity", "Effects density", "Particle and explosion density during battles and effects.", GRAPHICS, ControlKind.CHOICE, intLevels(2), absolutePath = GRAPHICS_CONFIG, ignoreSuffix = true, note = TIERS),
+            Control("effectsfidelity", "Effects fidelity", "Quality of particles, smoke and explosion effects.", GRAPHICS, ControlKind.CHOICE, intLevels(2), absolutePath = GRAPHICS_CONFIG, ignoreSuffix = true, note = TIERS),
+            Control("shrubsdetail", "Shrub detail", "Density and detail of small vegetation and ground clutter.", GRAPHICS, ControlKind.CHOICE, intLevels(2), absolutePath = GRAPHICS_CONFIG, ignoreSuffix = true, note = TIERS),
+            Control("modelquality", "Model quality", "Unit and vehicle mesh quality and level-of-detail bias.", GRAPHICS, ControlKind.CHOICE, intLevels(2), absolutePath = GRAPHICS_CONFIG, ignoreSuffix = true, note = TIERS),
+            Control("physics", "Physics effects", "Ragdolls and physics-driven debris on the battlefield.", GRAPHICS, ControlKind.TOGGLE, intToggle(), absolutePath = GRAPHICS_CONFIG, ignoreSuffix = true),
+            Control("postprocessing", "Post-processing", "Colour grading, bloom and other full-screen effects.", GRAPHICS, ControlKind.TOGGLE, intToggle(), absolutePath = GRAPHICS_CONFIG, ignoreSuffix = true),
+            Control("reflections", "Reflections", "Water, puddle and other surface reflections.", GRAPHICS, ControlKind.TOGGLE, intToggle(), absolutePath = GRAPHICS_CONFIG, ignoreSuffix = true),
+            Control("ribbons", "Ribbons", "Motion ribbons and trail effects on selected visuals.", GRAPHICS, ControlKind.TOGGLE, intToggle(), absolutePath = GRAPHICS_CONFIG, ignoreSuffix = true),
+            Control("objectscarring", "Object scarring", "Persistent scorch marks and battle damage on the world.", GRAPHICS, ControlKind.TOGGLE, intToggle(), absolutePath = GRAPHICS_CONFIG, ignoreSuffix = true),
+            Control("raindetail", "Rain detail", "Rain particle density and the resulting splash effects.", GRAPHICS, ControlKind.TOGGLE, intToggle(), absolutePath = GRAPHICS_CONFIG, ignoreSuffix = true),
+
+            Control("EnableFramerateManager", "Dynamic frame-rate manager", "Switch between idle and responsive frame caps automatically.", PERFORMANCE, ControlKind.TOGGLE, intToggle(), absolutePath = D3D_CONFIG, ignoreSuffix = true),
+            Control("MaxFramesPerSecond", "Frame cap", "Hard engine frame cap used during normal gameplay.", PERFORMANCE, ControlKind.CHOICE, fpsChoices(), absolutePath = D3D_CONFIG, ignoreSuffix = true),
+            Control("FramerateManagerNormalIdleFPS", "Idle frame cap", "Frame cap used in menus and while the game is otherwise idle.", PERFORMANCE, ControlKind.CHOICE, fpsChoices(), absolutePath = SETUP, ignoreSuffix = true),
+            Control("FramerateManagerNormalResponsiveFPS", "Responsive frame cap", "Frame cap used while the camera is active or the player is moving.", PERFORMANCE, ControlKind.CHOICE, fpsChoices(), absolutePath = SETUP, ignoreSuffix = true),
+            Control("BatterySaverEnabled", "Battery saver", "Enable the battery-saver frame and effect limits.", PERFORMANCE, ControlKind.TOGGLE, intToggle(), absolutePath = SETUP, ignoreSuffix = true)
+        )
+    )
+}
+
 object TombRaiderCatalog {
     private const val DISPLAY = "Display"
     private const val GRAPHICS = "Graphics"

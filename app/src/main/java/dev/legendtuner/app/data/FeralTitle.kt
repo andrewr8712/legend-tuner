@@ -96,6 +96,13 @@ object FeralTitles {
             titleCatalog = LaraTooCatalog.catalog
         ),
         FeralTitle(
+            "company-of-heroes", "Company of Heroes", "com.feralinteractive.companyofheroes_android",
+            listOf(
+                "HKEY_CURRENT_USER", "Software", "Feral Interactive", "Company of Heroes", "Setup"
+            ),
+            titleCatalog = CompanyOfHeroesCatalog.catalog
+        ),
+        FeralTitle(
             "tomb-raider", "Tomb Raider", "com.feralinteractive.tombraider_android",
             listOf(
                 "HKEY_CURRENT_USER", "Software", "Crystal Dynamics", "Tomb Raider", "Setup"

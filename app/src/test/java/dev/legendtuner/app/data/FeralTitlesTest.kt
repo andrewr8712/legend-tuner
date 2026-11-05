@@ -35,6 +35,7 @@ class FeralTitlesTest {
         assertEquals("SM", FeralTitles.ALL.first { it.id == "railroads" }.monogram)
         assertEquals("TR", FeralTitles.ALL.first { it.id == "tomb-raider" }.monogram)
         assertEquals("HA", FeralTitles.ALL.first { it.id == "hitman-absolution" }.monogram)
+        assertEquals("CO", FeralTitles.ALL.first { it.id == "company-of-heroes" }.monogram)
     }
 
     @Test
@@ -44,7 +45,7 @@ class FeralTitlesTest {
             setOf(
                 "grid-autosport", "alien-isolation", "saints-row-3", "napoleon",
                 "hitman-blood-money", "lara-croft-gol", "lara-croft-too", "railroads",
-                "tomb-raider", "hitman-absolution"
+                "tomb-raider", "hitman-absolution", "company-of-heroes"
             ),
             catalogued
         )

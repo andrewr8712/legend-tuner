@@ -18,6 +18,7 @@ keys and options for selectable controls.
 | Sid Meier's Railroads! | `sid-meiers-railroads.md` | `RailroadsCatalog` | 16 | flat, engine subtree |
 | Tomb Raider | `tomb-raider.md` | `TombRaiderCatalog` | 24 | four block presets |
 | Hitman: Absolution | `hitman-absolution.md` | `HitmanAbsolutionCatalog` | 25 | three suffix families |
+| Company of Heroes | `company-of-heroes.md` | `CompanyOfHeroesCatalog` | 24 | flat, split roots |
 
 Files live in `app/src/main/java/dev/legendtuner/app/data/TitleCatalog.kt` (GRID Autosport, Alien)
 and `TitleCatalogs.kt` (the rest).
@@ -63,3 +64,4 @@ file's *Open verification* section, and the control ships with a note (the amber
 | Railroads | Quality and FSAA tier labels; whether `MaxFramesPerSecond` or the responsive cap is the in-game limiter |
 | Tomb Raider | Preset selector index; AA and filter ladders |
 | Hitman: Absolution | Quality-profile mapping; suffix-family rewrite on exit |
+| Company of Heroes | `antialiasing` tokens; model detail mapping; whether ScreenW/H are written after a display change |

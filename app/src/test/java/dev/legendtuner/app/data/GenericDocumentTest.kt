@@ -113,6 +113,32 @@ class GenericDocumentTest {
     }
 
     @Test
+    fun companyOfHeroesExposesDisplayGraphicsAndFrameControls() {
+        val title = FeralTitles.ALL.first { it.id == "company-of-heroes" }
+        val catalog = title.titleCatalog!!
+        val root = title.valueRoot!!
+        val doc = load("company-of-heroes-preferences-sample.xml")
+        val fullscreen = catalog.find("FullScreen")
+        val aa = catalog.find("antialiasing")
+        val fps = catalog.find("MaxFramesPerSecond")
+        assertNotNull("Company of Heroes must expose fullscreen", fullscreen)
+        assertNotNull("Company of Heroes must expose anti-aliasing", aa)
+        assertNotNull("Company of Heroes must expose the frame cap", fps)
+
+        assertEquals("1", TitleCatalogEngine.value(doc, root, catalog, fullscreen!!)?.text)
+        assertTrue(TitleCatalogEngine.write(doc, root, catalog, fullscreen, "0"))
+        assertEquals("0", TitleCatalogEngine.value(doc, root, catalog, fullscreen)?.text)
+
+        assertEquals("0", TitleCatalogEngine.value(doc, root, catalog, aa!!)?.text)
+        assertTrue(TitleCatalogEngine.write(doc, root, catalog, aa, "1"))
+        assertEquals("1", TitleCatalogEngine.value(doc, root, catalog, aa)?.text)
+
+        assertEquals("30", TitleCatalogEngine.value(doc, root, catalog, fps!!)?.text)
+        assertTrue(TitleCatalogEngine.write(doc, root, catalog, fps, "60"))
+        assertEquals("60", TitleCatalogEngine.value(doc, root, catalog, fps)?.text)
+    }
+
+    @Test
     fun tombRaiderExposesPresetDisplayAndEngineControls() {
         val title = FeralTitles.ALL.first { it.id == "tomb-raider" }
         val catalog = title.titleCatalog!!

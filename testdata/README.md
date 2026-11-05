@@ -17,6 +17,7 @@ have been replaced; every key, type and value shape is preserved.
 | `railroads-preferences-sample.xml` | Android | Sid Meier's Railroads! v1.4.3 | TB520FU dump |
 | `tomb-raider-preferences-sample.xml` | Android | Tomb Raider v1.4 | tester-supplied dump |
 | `hitman-absolution-preferences-sample.xml` | Android | Hitman: Absolution v1.3.1 | tester-supplied dump |
+| `company-of-heroes-preferences-sample.xml` | Android | Company of Heroes v1.8.1 | TB520FU first-launch dump |
 
 `preferences-sample.xml` is a sanitized copy of a publicly shared GRID Legends Android file.
 
@@ -62,6 +63,10 @@ rather than a game key.
   `GraphicsSettings` and engine values under `IndirectX/Direct3D/Config`.
 - **Hitman: Absolution** — `IO Interactive/Hitman Absolution` root with `_battery`, `_framerate` and
   `_graphics` suffix families; display and motion values live at the root or under `Setup`.
+- **Company of Heroes** — `Feral Interactive/Company of Heroes/Setup` for display/FPS values,
+  `Original Developer/Company of Heroes/Config` for graphics quality, and
+  `IndirectX/Direct3D/Config` for engine FPS. `ScreenW`/`ScreenH` are referenced by the remap but
+  absent from the first-launch file.
 
 ## Value types seen
 
