@@ -9,12 +9,12 @@ keys and options for selectable controls.
 |---|---|---|---:|---|
 | GRID Legends | `DESIGN.md` + `SettingsCatalog.kt` | `data/SettingsCatalog.kt` | 28 | Battery Saver · Graphics · Performance |
 | GRID Autosport | `grid-autosport.md` | `GridAutosportCatalog` | 29 | Current · Performance cache · Power saver cache |
-| Alien: Isolation | `alien-isolation.md` | `AlienIsolationCatalog` | 12 | flat |
-| Saints Row: The Third | `saints-row-the-third.md` | `SaintsRowCatalog` | 19 | Graphics · Battery saver · Performance |
-| NAPOLEON | `napoleon-total-war.md` | `NapoleonCatalog` | 16 | flat, `GraphicsSettings` subtree |
+| Alien: Isolation | `alien-isolation.md` | `AlienIsolationCatalog` | 13 | flat |
+| Saints Row: The Third | `saints-row-the-third.md` | `SaintsRowCatalog` | 22 | Graphics · Battery saver · Performance |
+| NAPOLEON | `napoleon-total-war.md` | `NapoleonCatalog` | 21 | flat, `GraphicsSettings` subtree |
 | Hitman: Blood Money | `hitman-blood-money.md` | `HitmanCatalog` | 18 | Live + four suffix families |
 | Lara Croft: Guardian of Light | `lara-croft-guardian-of-light.md` | `LaraGolCatalog` | 10 | four block presets |
-| Lara Croft: Temple of Osiris | `lara-croft-temple-of-osiris.md` | `LaraTooCatalog` | 11 | three block presets |
+| Lara Croft: Temple of Osiris | `lara-croft-temple-of-osiris.md` | `LaraTooCatalog` | 12 | three block presets |
 | Sid Meier's Railroads! | `sid-meiers-railroads.md` | `RailroadsCatalog` | 16 | flat, engine subtree |
 | Tomb Raider | `tomb-raider.md` | `TombRaiderCatalog` | 24 | four block presets |
 | Hitman: Absolution | `hitman-absolution.md` | `HitmanAbsolutionCatalog` | 25 | three suffix families |

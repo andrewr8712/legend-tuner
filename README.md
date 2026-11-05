@@ -50,12 +50,12 @@ a guided editor over that file, with backups and verified writes, plus a raw XML
 |---|---|---:|---|
 | GRID Legends | `com.feralinteractive.gridlegends_android` | 28 | Battery Saver · Graphics · Performance |
 | GRID Autosport | `com.feralinteractive.gridas` | 29 | Current · Performance cache · Power saver cache |
-| Alien: Isolation | `com.feralinteractive.alienisolation_android` | 12 | flat |
-| Saints Row: The Third | `com.feralinteractive.saintsrow3_android` | 19 | Graphics · Battery saver · Performance |
-| NAPOLEON: Total War | `com.feralinteractive.napoleon_android` | 16 | flat (quality index) |
+| Alien: Isolation | `com.feralinteractive.alienisolation_android` | 13 | flat |
+| Saints Row: The Third | `com.feralinteractive.saintsrow3_android` | 22 | Graphics · Battery saver · Performance |
+| NAPOLEON: Total War | `com.feralinteractive.napoleon_android` | 21 | flat (quality index) |
 | Hitman: Blood Money | `com.feralinteractive.hitmanbloodmoney_android` | 18 | Live · Battery saver · Graphics · Performance · Performance+ |
 | Lara Croft: Guardian of Light | `com.feralinteractive.laracroftgol_android` | 10 | Graphics · Battery saver · Performance · Performance+ |
-| Lara Croft: Temple of Osiris | `com.feralinteractive.laracrofttoo_android` | 11 | Graphics · Battery saver · Performance |
+| Lara Croft: Temple of Osiris | `com.feralinteractive.laracrofttoo_android` | 12 | Graphics · Battery saver · Performance |
 | Sid Meier's Railroads! | `com.feralinteractive.railroads_android` | 16 | flat |
 | Tomb Raider | `com.feralinteractive.tombraider_android` | 24 | Battery saver · Graphics · Performance · Performance+ |
 | Hitman: Absolution | `com.feralinteractive.hitmanabsolution_android` | 25 | Battery saver · Framerate · Graphics |

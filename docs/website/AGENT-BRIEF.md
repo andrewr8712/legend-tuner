@@ -60,12 +60,12 @@ four routes honestly rather than presenting Root/Shizuku as an afterthought.
 |---|---:|
 | GRID Legends | 28 |
 | GRID Autosport | 29 |
-| Alien: Isolation | 12 |
-| Saints Row: The Third | 19 |
-| NAPOLEON: Total War | 16 |
+| Alien: Isolation | 13 |
+| Saints Row: The Third | 22 |
+| NAPOLEON: Total War | 21 |
 | Hitman: Blood Money | 18 |
 | Lara Croft: Guardian of Light | 10 |
-| Lara Croft: Temple of Osiris | 11 |
+| Lara Croft: Temple of Osiris | 12 |
 | Sid Meier's Railroads! | 16 |
 | Tomb Raider | 24 |
 | Hitman: Absolution | 25 |
