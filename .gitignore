@@ -11,6 +11,7 @@ toolchain/
 
 # Signing material — never commit these
 keystore.properties
+release-keystore.properties
 keystore/*.jks
 keystore/*.keystore
 
@@ -25,3 +26,4 @@ __pycache__/
 .DS_Store
 .idea/
 *.iml
+.scratch/

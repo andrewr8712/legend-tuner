@@ -26,8 +26,9 @@
 An unofficial, tablet-first Android app for editing the graphics settings of **Feral Interactive**'s
 Android ports — with readable, guided controls instead of hand-editing XML.
 
-Formerly Legend Tuner, which edited GRID Legends only. Version 1.2.x keeps the same package
-identity as 1.1.0, so existing debug installs update in place, and adds eighteen more titles.
+Formerly Legend Tuner, which edited GRID Legends only. Version 1.2.x kept the same package
+identity as 1.1.0, so those debug installs updated in place; the 1.4.0 public release uses a separate
+release package (see Install).
 
 ![Config Tuner title picker](docs/screenshots/picker.png)
 
@@ -110,16 +111,19 @@ game that is not installed under **Also supported**.
 ## Install
 
 **[Download the latest APK](https://github.com/andrewr8712/legend-tuner/releases/latest)** and open it
-on the tablet, or:
+on the tablet, or install the signed release build:
 
 ```bash
-adb install -r app/build/outputs/apk/debug/app-debug.apk
+adb install -r app/build/outputs/apk/release/app-release.apk
 ```
 
-- Package: `dev.legendtuner.app` (debug builds install as `dev.legendtuner.app.debug`)
+- Package: `dev.legendtuner.app` (debug builds install separately as `dev.legendtuner.app.debug`)
 - Minimum Android: 8.0 (API 26) · Target: Android 15 (API 35)
-- Version 1.3.3 (versionCode 16)
-- Signed debug build
+- Version 1.4.0 (versionCode 17)
+- Signed release build (v2 + v3), not debuggable
+
+The signed release is a new package. It does not update an existing debug install, and app-private
+settings or root/Shizuku grants do not migrate.
 
 ## First run
 
@@ -183,10 +187,11 @@ export ANDROID_HOME=/path/to/android-sdk
 The APK is generated at `app/build/outputs/apk/debug/app-debug.apk`.
 
 A clean checkout uses Gradle's machine-local debug signing key and leaves the release unsigned.
-Maintainers can supply a local `keystore.properties` (ignored by git) to sign both debug and
-release builds with the same local identity, then run `./gradlew :app:assembleRelease`; the signed
-artifact is `app/build/outputs/apk/release/app-release.apk`. See
-[keystore/README.md](keystore/README.md).
+Debug builds use the local `keystore.properties`; the public release uses a separate
+`release-keystore.properties` and dedicated release key, neither of which is committed. Run
+`./gradlew :app:assembleRelease` to produce the signed
+`app/build/outputs/apk/release/app-release.apk`. See [keystore/README.md](keystore/README.md) for the
+key setup and backup requirements.
 
 ## Tests
 
@@ -233,8 +238,9 @@ scripts/            Waydroid UI smoke harness
 docs/screenshots/   real device captures used in this README
 prototype/          tablet design prototype and screenshots
 DESIGN.md           historical GRID Legends schema notes and design rationale
-docs/CHANGELOG-1.3.3.md  current release notes (UI smoke tests and read-failure coverage)
-docs/CHANGELOG-1.3.2.md  previous release notes (semantics and empty state)
+docs/CHANGELOG-1.4.0.md  current release notes (signed public release)
+docs/CHANGELOG-1.3.3.md  previous release notes (UI smoke tests and read-failure coverage)
+docs/CHANGELOG-1.3.2.md  older release notes (semantics and empty state)
 docs/CHANGELOG-1.3.1.md  older release notes (readability and copy polish)
 docs/CHANGELOG-1.3.0.md  older release notes (XCOM 2, compact picker)
 docs/CHANGELOG-1.2.9.md  older release notes (ROME: Alexander)

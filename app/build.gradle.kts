@@ -6,10 +6,17 @@ plugins {
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
+val releaseKeystorePropertiesFile = rootProject.file("release-keystore.properties")
+val releaseKeystoreProperties = Properties().apply {
+    if (releaseKeystorePropertiesFile.exists()) {
+        releaseKeystorePropertiesFile.inputStream().use { load(it) }
+    }
+}
+val hasReleaseKeystore = releaseKeystorePropertiesFile.exists()
 // A public clone has no signing key. In that case Gradle uses its normal
 // machine-local debug key for debug builds and leaves the release unsigned.
-// Maintainers can provide keystore.properties locally to sign both debug and
-// release builds with the same local identity; the key and password are never committed.
+// A maintainer can provide keystore.properties for the local debug identity and
+// release-keystore.properties for the public release identity. Neither file is committed.
 val localKeystorePropertiesFile = rootProject.file("keystore.properties")
 val localKeystoreProperties = Properties().apply {
     if (localKeystorePropertiesFile.exists()) {
@@ -27,8 +34,8 @@ android {
         applicationId = "dev.legendtuner.app"
         minSdk = 26
         targetSdk = 35
-        versionCode = 16
-        versionName = "1.3.3"
+        versionCode = 17
+        versionName = "1.4.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -44,6 +51,17 @@ android {
                 keyPassword = localKeystoreProperties.getProperty("keyPassword")
             }
         }
+        if (hasReleaseKeystore) {
+            create("releaseKey") {
+                storeFile = rootProject.file(
+                    releaseKeystoreProperties.getProperty("storeFile")
+                )
+                storePassword = releaseKeystoreProperties.getProperty("storePassword")
+                keyAlias = releaseKeystoreProperties.getProperty("keyAlias")
+                keyPassword = releaseKeystoreProperties.getProperty("keyPassword")
+                enableV3Signing = true
+            }
+        }
     }
 
     buildTypes {
@@ -57,8 +75,8 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            if (hasLocalKeystore) {
-                signingConfig = signingConfigs.getByName("local")
+            if (hasReleaseKeystore) {
+                signingConfig = signingConfigs.getByName("releaseKey")
             }
         }
     }

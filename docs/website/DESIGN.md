@@ -1,7 +1,7 @@
 # Config Tuner site — design document
 
 **Status:** approved design record · 2026-11-06
-**Source of truth for facts:** `docs/website/AGENT-BRIEF.md` (1.3.3) and the repository README.
+**Source of truth for facts:** `docs/website/AGENT-BRIEF.md` (1.4.0) and the repository README.
 **Approved and built.**
 
 ---
@@ -9,13 +9,13 @@
 ## 1. The problem worth solving
 
 Someone hears about Config Tuner, or opens the GitHub release page, and has to decide in about
-thirty seconds whether to install a debug-signed APK that asks for root or Shizuku access to their
+thirty seconds whether to install a self-signed APK that asks for root or Shizuku access to their
 game's files. The current README answers that, but it is a wall of Markdown written for people who
 already care.
 
 The site has one job: make that decision possible without hype. It should look like the app — a tool
 for reading and writing a file that the game does not want you to touch — and it should state the
-uncomfortable parts (root, debug signature, the game rewrites settings on exit) before the download
+uncomfortable parts (root, self-signed signature, the game rewrites settings on exit) before the download
 button, not after it.
 
 Secondary job: give the project a home that outlives a README — a place for release news, the
@@ -71,12 +71,12 @@ Single page, `index.html`, plus a second page `brand/` for the kit. Section ids 
 |---|----|---------|---------|
 | 0 | — | Header, sticky | mark + wordmark, nav (How it works · Safety · Titles · Install · FAQ), Download APK |
 | 1 | `top` | Hero | H1, one-sentence explainer, Download + GitHub, three micro-facts, hero visual |
-| 2 | `proof` | Proof strip | 19 titles · 51 unit tests · no network permission · MIT, stamped "as of 1.3.3" |
+| 2 | `proof` | Proof strip | 19 titles · 51 unit tests · no network permission · MIT, stamped "as of 1.4.0" |
 | 3 | `how` | How it works | 4 steps, line-drawn connectors, the file path in mono |
 | 4 | `safety` | Safety | 3 guarantees + 3 honest caveats, side by side |
 | 5 | `titles` | Supported titles | filter field, 19 cards with control counts, "not installed" behaviour |
 | 6 | `shots` | Screenshots | 4-image tab set: picker, guided editor, preset tabs, resolution |
-| 7 | `install` | Install | 4 steps, requirements, the four access routes compared, debug-build warning |
+| 7 | `install` | Install | 4 steps, requirements, the four access routes compared, signed-release and package note |
 | 8 | `faq` | FAQ | 6 `<details>` items |
 | 9 | `foot` | Footer | disclaimer, trademark line, licence, links, how it was built |
 
@@ -90,11 +90,11 @@ Single page, `index.html`, plus a second page `brand/` for the kit. Section ids 
 > **[ Download APK ]** [ View on GitHub ]
 > `Android/data/<package>/files/feral_app_support/preferences`
 
-Hero visual: the path block above rendered as a terminal line with a lime caret, then the 1.3.3
+Hero visual: the path block above rendered as a terminal line with a lime caret, then the 1.4.0
 picker capture in a simple tablet frame, bleeding off the right edge on wide screens.
 
 **Proof strip:** `19` titles · `50` unit tests · `0` network permissions · MIT. Footnote:
-"Counts as of 1.3.3".
+"Counts as of 1.4.0".
 
 **How it works (4 steps):**
 
@@ -109,7 +109,7 @@ picker capture in a simple tablet frame, bleeding off the right edge on wide scr
 
 **Safety — guarantees:** backup before every save (12 per title); read-back and parse after every
 write; automatic rollback on failure. **Caveats:** the game rewrites `preferences` on exit, so close
-it before editing; the APK is debug-signed, so Play Protect may warn; the app never creates registry
+it before editing; the APK is signed with the project’s own key, so Play Protect may warn; the app never creates registry
 values that are absent from the file.
 
 **Titles:** client-side filter by name; each card shows title, guided-control count, and a "not
@@ -117,10 +117,10 @@ installed" state; one line: "Not listed? The raw XML editor still opens any Fera
 you can supply."
 
 **Install:** 1) download the APK on the tablet, 2) allow install from this source, 3) open and pick a
-title, 4) choose a route if Android blocks the folder. Requirements list: Android 8.0+, 10 MB, no
-Play Store, version 1.3.3 (versionCode 16), debug-signed.
+title, 4) choose a route if Android blocks the folder. Requirements list: Android 8.0+, 7 MB, no
+Play Store, version 1.4.0 (versionCode 17), signed release.
 
-**FAQ:** why root/Shizuku is needed; is it safe; what happens when the game updates; why debug-signed;
+**FAQ:** why root/Shizuku is needed; is it safe; what happens when the game updates; why self-signed;
 does it collect anything (no network permission at all); can it work with a title that is not listed;
 what happened to Legend Tuner.
 
@@ -188,7 +188,7 @@ docs/website/
   assets/js/site.js
   assets/fonts/*.woff2            self-hosted, subset, OFL licences included
   assets/brand/*.svg|*.png
-  assets/shots/*.png              copied from docs/screenshots + picker-1.3.3.png
+  assets/shots/*.png              copied from docs/screenshots + picker-1.4.0.png
   site.webmanifest
   README.md                       handover notes
 ```
@@ -219,14 +219,14 @@ docs/website/
    1440 px; axe-core scan with no serious violations; keyboard pass through nav, tabs, filter, FAQ.
 5. JS-disabled pass: titles, FAQ and install steps all present and readable.
 6. `prefers-reduced-motion` pass: no transforms, no line draw.
-7. Fact check against the brief: 1.3.3, 19 titles with exact control counts, 51 tests, Android 8.0+,
-   no network permission, debug-signed, no Play Store mention.
+7. Fact check against the brief: 1.4.0, 19 titles with exact control counts, 51 tests, Android 8.0+,
+   no network permission, signed release, no Play Store mention.
 
 ## 9. Open questions
 
 Seven are filed in `docs/website/QUESTIONS.md` (PR #2), each with a default. Nothing in section 7
 blocks on them; the two that could change output are **branding depth** (full kit vs lean) and
-**screenshots** (which 1.3.3 captures exist).
+**screenshots** (which 1.4.0 captures exist).
 
 ## 10. What I will not do without a second approval
 

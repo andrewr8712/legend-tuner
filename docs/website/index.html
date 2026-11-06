@@ -75,7 +75,7 @@
             View on GitHub
           </a>
         </div>
-        <p class="hero-note">v1.3.3 · debug-signed · 10 MB · no network permission</p>
+        <p class="hero-note">v1.4.0 · signed release · 7 MB · no network permission</p>
       </div>
 
       <div class="hero-art">
@@ -101,11 +101,11 @@
     <div class="wrap proof-inner">
       <dl class="proof-list">
         <div><dt>19</dt><dd>titles with guided controls</dd></div>
-        <div><dt>50</dt><dd>unit tests on the parser and catalogue</dd></div>
+        <div><dt>51</dt><dd>unit tests on the parser and catalogue</dd></div>
         <div><dt>0</dt><dd>network permissions, analytics or telemetry</dd></div>
-        <div><dt>MIT</dt><dd>open source, debug-signed, on GitHub</dd></div>
+        <div><dt>MIT</dt><dd>open source, signed release, on GitHub</dd></div>
       </dl>
-      <p class="proof-note">19 titles · 51 unit tests · as of 1.3.3</p>
+      <p class="proof-note">19 titles · 51 unit tests · as of 1.4.0</p>
     </div>
   </section>
 
@@ -187,12 +187,14 @@
       </div>
 
       <div class="caveats">
-        <h3>Three things to know before you install</h3>
+        <h3>Four things to know before you install</h3>
         <ul>
           <li><strong>The game rewrites its settings on exit.</strong> Fully close the game before
             editing, or your changes may be overwritten when it closes.</li>
-          <li><strong>The APK is debug-signed.</strong> It is distributed through GitHub Releases, not
-            Google Play, and Play Protect may warn about it.</li>
+          <li><strong>The APK is signed with the project's own release key.</strong> It is distributed
+            through GitHub Releases, not Google Play, and Play Protect may still warn about sideloading.</li>
+          <li><strong>The signed release is a new package.</strong> It installs alongside older debug
+            builds; app settings and root/Shizuku grants do not migrate.</li>
           <li><strong>It never invents keys.</strong> A setting that is absent from your file shows as
             “Not stored in this file” and cannot be written.</li>
         </ul>
@@ -370,7 +372,7 @@
           <p class="sec-kicker">05 — Install</p>
           <h2>Four steps, no store.</h2>
           <p class="sec-lede">Config Tuner is distributed as an APK on GitHub Releases. There is no
-            Play Store listing, and the build is debug-signed.</p>
+            Play Store listing, and the APK is signed with the project's own release key.</p>
         </header>
 
         <ol class="install-steps">
@@ -392,8 +394,9 @@
         <h3>Requirements</h3>
         <dl class="req-list">
           <div><dt>Android</dt><dd>8.0 or later (API 26), target 35</dd></div>
-          <div><dt>Download</dt><dd>~10 MB APK, <span class="nowrap">v1.3.3</span> (versionCode 16)</dd></div>
-          <div><dt>Signature</dt><dd>Debug-signed, not on Google Play</dd></div>
+          <div><dt>Package</dt><dd><code>dev.legendtuner.app</code></dd></div>
+          <div><dt>Download</dt><dd>~7 MB APK, <span class="nowrap">v1.4.0</span> (versionCode 17)</dd></div>
+          <div><dt>Signature</dt><dd>Signed release (v2/v3), not on Google Play</dd></div>
           <div><dt>Permissions</dt><dd>No network permission at all</dd></div>
           <div><dt>Access</dt><dd>Root, Shizuku, manual file, or direct on older Android</dd></div>
         </dl>
@@ -453,10 +456,17 @@
             editor remains available. After a large game update, re-check the settings you rely on.</p>
         </details>
         <details>
-          <summary>Why is the APK debug-signed?</summary>
-          <p>The project is built and released outside Google Play, so it uses a debug signature rather
-            than a Play signing key. Android will warn you, and Play Protect may prompt. The package
-            name stays the same between releases so updates install over the previous one.</p>
+          <summary>Why is the APK signed with its own key?</summary>
+          <p>Android requires every APK to be signed. Config Tuner is released outside Google Play, so
+            it uses a dedicated release key rather than a Play signing key. That key stays the same for
+            future releases, so updates install over this one. Play Protect may still warn because the
+            APK is sideloaded.</p>
+        </details>
+        <details>
+          <summary>Will it update my old debug build?</summary>
+          <p>No. The signed release uses the new package <code>dev.legendtuner.app</code>, while older
+            debug builds use <code>dev.legendtuner.app.debug</code>. Install the release separately and
+            grant root or Shizuku access again; app-private settings do not carry over.</p>
         </details>
         <details>
           <summary>Does it collect any data?</summary>

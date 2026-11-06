@@ -46,7 +46,7 @@ Use a server rather than `file://`: the woff2 files are loaded with CORS, which 
 - **Facts come from the repo.** Title list, package ids, control counts and version numbers are
   copied from the app `README.md` and the current GitHub release. If a title is added or a count
   changes, update `#titles` (the 19 cards) and the proof strip together.
-- **Numbers are stamped, not live.** The page says "19 titles · 51 unit tests · as of 1.3.3".
+- **Numbers are stamped, not live.** The page says "19 titles · 51 unit tests · as of 1.4.0".
   Bump the stamp when the facts change; never claim a number that is not in the release notes.
 - **No forbidden claims.** No "all Feral games", "every setting", "no root ever needed",
   "Play Store", "official", "guaranteed safe on every device", or support for untested versions.

@@ -1,6 +1,6 @@
 # Config Tuner website — agent brief
 
-**Status:** current for app release **1.3.3** (2026-11-06)
+**Status:** current for app release **1.4.0** (2026-11-06)
 **Assumption:** the website is for **Config Tuner**, the Android app in this repository. If it is for
 something else, replace the product section but keep the collaboration protocol.
 
@@ -15,21 +15,21 @@ layout, accessibility and colour decisions through the coordinator.
 Config Tuner is an unofficial, tablet-first Android app for editing the graphics settings of Feral
 Interactive's Android ports. It replaces hand-editing the games' plaintext XML registry with guided
 controls, validated writes, automatic backups and a raw XML fallback. It supports **19 titles** and
-is distributed as a debug-signed APK through GitHub Releases.
+is distributed as a signed release APK through GitHub Releases.
 
-Former name: **Legend Tuner**. The package identity stayed the same between 1.1.0 and 1.2.x so debug
-installs update in place.
+Former name: **Legend Tuner**. From 1.4.0 the public release uses `dev.legendtuner.app`; older
+debug builds use `dev.legendtuner.app.debug` and do not update in place.
 
 ## 2. Verified facts — do not invent around these
 
 | Fact | Value |
 |---|---|
-| Current release | **1.3.3** (versionCode 16) |
-| Release URL | https://github.com/andrewr8712/legend-tuner/releases/tag/v1.3.3 |
+| Current release | **1.4.0** (versionCode 17) |
+| Release URL | https://github.com/andrewr8712/legend-tuner/releases/tag/v1.4.0 |
 | Latest download | https://github.com/andrewr8712/legend-tuner/releases/latest |
-| Package | `dev.legendtuner.app.debug` |
+| Package | `dev.legendtuner.app` (release); debug builds use `.debug` |
 | Android support | Android 8.0+ (`minSdk 26`), target SDK 35 |
-| Distribution | Debug-signed APK on GitHub; **not on Google Play** |
+| Distribution | Signed release APK on GitHub; **not on Google Play** |
 | Supported titles | **19** |
 | Unit tests | **51** |
 | Compose UI tests | **2** |
@@ -38,6 +38,7 @@ installs update in place.
 | Backups | 12 per title, title-scoped |
 | Save path | validate → back up → write → read back → parse → rollback on failure |
 | Access routes | Root, Shizuku, Manual file, Direct (older/permissive Android only) |
+| Upgrade path | Release is a new package; debug builds install separately, settings and access grants do not migrate |
 
 Do **not** claim: “all Feral games”, “every setting”, “no root ever needed”, “Play Store”,
 “official”, “guaranteed safe on every device”, or “works with every game version”.
@@ -113,7 +114,7 @@ with the app.
 
 - Lime is a **signal**, not a background for long text. Use near-black text on lime buttons.
 - Body copy should be off-white or muted grey on near-black, never lime.
-- Reserve amber for caveats (“debug build”, “root recommended”) and red for destructive actions.
+- Reserve amber for caveats (“sideloaded”, “root recommended”) and red for destructive actions.
 - Do not use low-contrast `#5E675D` for essential body text; it is for metadata only.
 - Check WCAG AA contrast for all text, focus states and button labels.
 
@@ -126,9 +127,9 @@ with the app.
 4. **Safety** — backup before write, read-back verification, rollback on failure, no telemetry.
 5. **Supported titles** — searchable/filterable table or compact grid; show control counts.
 6. **Screenshots** — picker + editor + preset tabs; newest screenshot first.
-7. **Install** — GitHub release, Android 8.0+, debug-signed, no Play Store.
-8. **FAQ** — Why root? Is it safe? What happens on game updates? Why is it debug-signed? Does it
-   collect data? Can I use it with a game not listed?
+7. **Install** — GitHub release, Android 8.0+, signed release, no Play Store.
+8. **FAQ** — Why root? Is it safe? What happens on game updates? Why is it signed with its own key?
+   Does it update my old debug install? Does it collect data? Can I use it with a game not listed?
 9. **Footer** — unofficial fan tool disclaimer, MIT licence, GitHub, issue tracker.
 
 ## 7. Copy guidance
@@ -138,7 +139,7 @@ with the app.
   easy access; Config Tuner makes the file readable and recoverable.
 - Say **“guided controls over the game's own file”**, not “mods” or “trainer”.
 - Be explicit that the app writes the game's own preferences and the game may rewrite them on exit.
-- Be explicit that the APK is debug-signed and installed outside the Play Store.
+- Be explicit that the APK is signed with the project’s own release key and installed outside the Play Store.
 - The project is built by a non-developer with an AI coding agent; that honesty is part of the story.
   Do not turn it into a fake company or a fake support team.
 
@@ -148,7 +149,7 @@ with the app.
 |---|---|---|
 | App mark (SVG) | `docs/website/config-tuner-mark.svg` | Lime “L + signal bars” on near-black; derived from the launcher icon |
 | Design tokens | `docs/website/design-tokens.css` | Exact app palette, type stacks, spacing |
-| Current picker | `docs/website/picker-1.3.3.png` | 1600×900; 18 installed titles visible |
+| Current picker | `docs/website/picker-1.4.0.png` | 1600×900; 18 installed titles visible |
 | Older screenshots | `docs/screenshots/*.png` | Real device captures; picker is from an older release |
 | App icon vector | `app/src/main/res/drawable/ic_launcher_foreground.xml` | Source for the mark |
 | Title list | `README.md` | Authoritative 19-title table |

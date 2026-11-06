@@ -51,7 +51,7 @@ Each has a default in italics; “default” is a valid answer for any of them.
 
 ## Answered — app facts
 
-- **Current release:** 1.3.3, versionCode 16, debug-signed.
+- **Current release:** 1.4.0, versionCode 17, signed release for `dev.legendtuner.app`.
 - **Supported titles:** 19; see README for packages and control counts.
 - **Network/analytics:** none.
 - **Android support:** 8.0+.

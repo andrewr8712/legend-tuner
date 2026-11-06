@@ -48,7 +48,7 @@ domain or another static host.
 
 Stamp once in the proof-strip footnote:
 
-> 19 titles · 51 unit tests · as of 1.3.3
+> 19 titles · 51 unit tests · as of 1.4.0
 
 Do not imply the test count is permanent.
 

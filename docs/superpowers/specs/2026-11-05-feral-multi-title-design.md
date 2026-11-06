@@ -5,7 +5,7 @@ selection without changing the model described here.
 **Date:** 2026-11-05
 **Supersedes:** the single-game assumptions in `DESIGN.md`
 **Builds on:** Legend Tuner 1.1.0 (`applicationId dev.legendtuner.app`)
-**Current release:** [1.3.3](../../CHANGELOG-1.3.3.md)
+**Current release:** [1.4.0](../../CHANGELOG-1.4.0.md)
 
 ---
 
