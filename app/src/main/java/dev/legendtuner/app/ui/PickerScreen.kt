@@ -27,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.role
@@ -64,6 +65,7 @@ fun PickerScreen(
     Column(
         Modifier
             .fillMaxSize()
+            .testTag("picker")
             .verticalScroll(rememberScrollState())
             .padding(horizontal = if (wide) 28.dp else 18.dp, vertical = 20.dp)
     ) {
@@ -117,7 +119,7 @@ fun PickerScreen(
                 }
             }
         } else if (installed.isEmpty()) {
-            Panel(Modifier.fillMaxWidth()) {
+            Panel(Modifier.fillMaxWidth().testTag("empty-state")) {
                 Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text("No supported titles found", style = MaterialTheme.typography.headlineSmall, color = Ink)
                     Text(
@@ -126,7 +128,7 @@ fun PickerScreen(
                         color = Muted
                     )
                     Spacer(Modifier.height(4.dp))
-                    GhostButton("Open a preferences file", onOpenFile)
+                    GhostButton("Open a preferences file", onOpenFile, modifier = Modifier.testTag("empty-open-file"))
                 }
             }
         } else {
@@ -164,6 +166,7 @@ fun PickerScreen(
                         Row(
                             Modifier
                                 .fillMaxWidth()
+                                .testTag("missing-${status.title.id}")
                                 .clickable { onOpenMissing(status.title) }
                                 .semantics {
                                     contentDescription = "Open saved ${status.title.label} preferences file"
@@ -201,7 +204,7 @@ fun PickerScreen(
         Spacer(Modifier.height(10.dp))
         Surface(
             onClick = onOpenFile,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().testTag("open-file"),
             color = BgElevated,
             shape = RoundedCornerShape(14.dp),
             border = BorderStroke(1.dp, Line)
@@ -243,7 +246,7 @@ private fun TitleCard(status: TitleStatus, modifier: Modifier, onClick: () -> Un
 
     Surface(
         onClick = onClick,
-        modifier = modifier.semantics(mergeDescendants = true) {
+        modifier = modifier.testTag("title-${title.id}").semantics(mergeDescendants = true) {
             contentDescription = buildString {
                 append(title.label)
                 append(if (ready) ", ready. " else ", installed, setup needed. ")

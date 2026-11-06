@@ -28,6 +28,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
@@ -73,6 +74,7 @@ fun TitleEditorScreen(
     Column(
         Modifier
             .fillMaxSize()
+            .testTag("editor")
             .padding(horizontal = if (twoColumns) 24.dp else 16.dp)
     ) {
         PageHeader(
@@ -91,11 +93,12 @@ fun TitleEditorScreen(
                             .border(1.dp, Amber.copy(alpha = 0.3f), RoundedCornerShape(6.dp))
                             .padding(horizontal = 7.dp, vertical = 5.dp)
                     )
-                    GhostButton("Discard", onDiscard)
+                    GhostButton("Discard", onDiscard, modifier = Modifier.testTag("discard"))
                 }
                 LegendButton(
                     text = if (state.saving) "Saving…" else "Save changes",
                     onClick = onSave,
+                    modifier = Modifier.testTag("save"),
                     enabled = !state.saving && !state.restoring && !state.connecting && state.dirty
                 )
             }

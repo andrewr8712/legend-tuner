@@ -1,6 +1,6 @@
 # Config Tuner website — agent brief
 
-**Status:** current for app release **1.3.2** (2026-11-06)
+**Status:** current for app release **1.3.3** (2026-11-06)
 **Assumption:** the website is for **Config Tuner**, the Android app in this repository. If it is for
 something else, replace the product section but keep the collaboration protocol.
 
@@ -24,14 +24,15 @@ installs update in place.
 
 | Fact | Value |
 |---|---|
-| Current release | **1.3.2** (versionCode 15) |
-| Release URL | https://github.com/andrewr8712/legend-tuner/releases/tag/v1.3.2 |
+| Current release | **1.3.3** (versionCode 16) |
+| Release URL | https://github.com/andrewr8712/legend-tuner/releases/tag/v1.3.3 |
 | Latest download | https://github.com/andrewr8712/legend-tuner/releases/latest |
 | Package | `dev.legendtuner.app.debug` |
 | Android support | Android 8.0+ (`minSdk 26`), target SDK 35 |
 | Distribution | Debug-signed APK on GitHub; **not on Google Play** |
 | Supported titles | **19** |
-| Unit tests | **50** |
+| Unit tests | **51** |
+| Compose UI tests | **2** |
 | Network permission | **None** |
 | Analytics / telemetry | **None** |
 | Backups | 12 per title, title-scoped |
@@ -120,7 +121,7 @@ with the app.
 
 1. **Hero** — “Feral settings without the XML.” One-sentence explanation, primary Download APK button,
    secondary GitHub link.
-2. **Proof strip** — 19 titles · 50 unit tests · no network · open source. Use only verified numbers.
+2. **Proof strip** — 19 titles · 51 unit tests · no network · open source. Use only verified numbers.
 3. **How it works** — pick a title → choose Root/Shizuku/Manual → edit guided controls → verified save.
 4. **Safety** — backup before write, read-back verification, rollback on failure, no telemetry.
 5. **Supported titles** — searchable/filterable table or compact grid; show control counts.
@@ -147,7 +148,7 @@ with the app.
 |---|---|---|
 | App mark (SVG) | `docs/website/config-tuner-mark.svg` | Lime “L + signal bars” on near-black; derived from the launcher icon |
 | Design tokens | `docs/website/design-tokens.css` | Exact app palette, type stacks, spacing |
-| Current picker | `docs/website/picker-1.3.2.png` | 1600×900; 18 installed titles visible |
+| Current picker | `docs/website/picker-1.3.3.png` | 1600×900; 18 installed titles visible |
 | Older screenshots | `docs/screenshots/*.png` | Real device captures; picker is from an older release |
 | App icon vector | `app/src/main/res/drawable/ic_launcher_foreground.xml` | Source for the mark |
 | Title list | `README.md` | Authoritative 19-title table |

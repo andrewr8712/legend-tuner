@@ -118,7 +118,7 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 
 - Package: `dev.legendtuner.app` (debug builds install as `dev.legendtuner.app.debug`)
 - Minimum Android: 8.0 (API 26) · Target: Android 15 (API 35)
-- Version 1.3.2 (versionCode 15)
+- Version 1.3.3 (versionCode 16)
 - Signed debug build
 
 ## First run
@@ -194,13 +194,20 @@ artifact is `app/build/outputs/apk/release/app-release.apk`. See
 ./gradlew :app:testDebugUnitTest
 ```
 
-50 tests cover registry parsing and round-trip preservation, preset edits, live-value mirroring,
+51 tests cover registry parsing and round-trip preservation, preset edits, live-value mirroring,
 unknown keys and types, malformed XML, icon vectors, the title table, inverted-toggle selection,
-catalogue conformance and the config-loading boundary. Every guided control must have a label, a
+catalogue conformance and the config-loading boundary, including a denied-read failure. Every guided control must have a label, a
 description of at least 40 characters, a known group, and unique keys with at least two options for
 selectable controls.
 
-For a real UI pass on the host, use the Waydroid smoke harness:
+Two Compose UI smoke tests run on a device or emulator:
+
+```bash
+./gradlew :app:connectedDebugAndroidTest
+```
+
+They cover the picker → editor → save → back flow, a long title's accessibility label, and the
+empty-state manual-file action. For a broader host-side pass, use the Waydroid smoke harness:
 
 ```bash
 python3 scripts/waydroid_ui_smoke.py
@@ -226,8 +233,9 @@ scripts/            Waydroid UI smoke harness
 docs/screenshots/   real device captures used in this README
 prototype/          tablet design prototype and screenshots
 DESIGN.md           historical GRID Legends schema notes and design rationale
-docs/CHANGELOG-1.3.2.md  current release notes (semantics and empty state)
-docs/CHANGELOG-1.3.1.md  previous release notes (readability and copy polish)
+docs/CHANGELOG-1.3.3.md  current release notes (UI smoke tests and read-failure coverage)
+docs/CHANGELOG-1.3.2.md  previous release notes (semantics and empty state)
+docs/CHANGELOG-1.3.1.md  older release notes (readability and copy polish)
 docs/CHANGELOG-1.3.0.md  older release notes (XCOM 2, compact picker)
 docs/CHANGELOG-1.2.9.md  older release notes (ROME: Alexander)
 docs/CHANGELOG-1.2.8.md  older release notes (ROME: Barbarian Invasion)

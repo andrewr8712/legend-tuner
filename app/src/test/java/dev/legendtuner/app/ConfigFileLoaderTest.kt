@@ -47,6 +47,24 @@ class ConfigFileLoaderTest {
     }
 
     @Test
+    fun reportsReadFailureWithoutCrashing() = runBlocking {
+        val file = LocatedFile("content://locked", "locked.xml", "Manual file", 4L, 0L)
+        val access = object : FileAccess {
+            override val mode = AccessMode.MANUAL
+            override suspend fun locate() = file
+            override suspend fun read(path: String): ByteArray =
+                throw SecurityException("Permission denied")
+            override suspend fun write(path: String, bytes: ByteArray) = Unit
+            override suspend fun forceStop() = false
+        }
+
+        val result = ConfigFileLoader().load(access, null)
+
+        assertTrue(result is ConfigLoadResult.Failure)
+        assertTrue((result as ConfigLoadResult.Failure).failure.message.contains("Could not read"))
+    }
+
+    @Test
     fun reportsMalformedXml() = runBlocking {
         val file = LocatedFile("content://bad", "bad.xml", "Manual file", 4L, 0L)
         val result = ConfigFileLoader().load(FakeAccess(file, "nope".toByteArray()), null)
