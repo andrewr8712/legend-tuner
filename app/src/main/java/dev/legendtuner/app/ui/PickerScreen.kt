@@ -27,6 +27,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -121,6 +125,8 @@ fun PickerScreen(
                         style = MaterialTheme.typography.bodySmall,
                         color = Muted
                     )
+                    Spacer(Modifier.height(4.dp))
+                    GhostButton("Open a preferences file", onOpenFile)
                 }
             }
         } else {
@@ -159,6 +165,10 @@ fun PickerScreen(
                             Modifier
                                 .fillMaxWidth()
                                 .clickable { onOpenMissing(status.title) }
+                                .semantics {
+                                    contentDescription = "Open saved ${status.title.label} preferences file"
+                                    role = Role.Button
+                                }
                                 .padding(horizontal = 15.dp, vertical = 12.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
@@ -233,7 +243,14 @@ private fun TitleCard(status: TitleStatus, modifier: Modifier, onClick: () -> Un
 
     Surface(
         onClick = onClick,
-        modifier = modifier,
+        modifier = modifier.semantics(mergeDescendants = true) {
+            contentDescription = buildString {
+                append(title.label)
+                append(if (ready) ", ready. " else ", installed, setup needed. ")
+                append(detail)
+            }
+            role = Role.Button
+        },
         color = SurfaceColor,
         shape = RoundedCornerShape(12.dp),
         border = BorderStroke(1.dp, if (ready) Lime.copy(alpha = 0.22f) else Line)

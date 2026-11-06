@@ -1,5 +1,10 @@
 # Changelog
 
+> **Historical file.** Entries below stop at 1.2.1. Current release notes live in
+> [`docs/CHANGELOG-1.3.2.md`](docs/CHANGELOG-1.3.2.md) and on
+> [GitHub Releases](https://github.com/andrewr8712/legend-tuner/releases). The per-release files under
+> `docs/` are the source of truth.
+
 All notable changes to Config Tuner (formerly Legend Tuner) are documented here. The project follows [Semantic Versioning](https://semver.org/).
 
 ## [1.2.1] — 2026-11-05

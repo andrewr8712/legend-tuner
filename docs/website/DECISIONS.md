@@ -18,7 +18,7 @@ Self-host webfonts (Barlow Condensed is OFL) so the “zero third-party requests
 
 ## 2. Screenshots
 
-Start with the 1.3.1 picker and a simple save-pipeline diagram. The app side will supply:
+Start with the 1.3.2 picker and a simple save-pipeline diagram. The app side will supply:
 
 - per-title editor with preset tabs visible
 - raw XML editor
@@ -48,7 +48,7 @@ domain or another static host.
 
 Stamp once in the proof-strip footnote:
 
-> 19 titles · 50 unit tests · as of 1.3.1
+> 19 titles · 50 unit tests · as of 1.3.2
 
 Do not imply the test count is permanent.
 
