@@ -98,7 +98,7 @@ fun EditorScreen(
                 if (state.dirty) {
                     Text(
                         "UNSAVED",
-                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 1.sp),
+                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 1.sp),
                         color = Amber,
                         modifier = Modifier
                             .border(1.dp, Amber.copy(alpha = 0.3f), RoundedCornerShape(6.dp))
@@ -190,12 +190,12 @@ fun EditorScreen(
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                     Text(
                         if (state.dirty) "UNSAVED CHANGES" else "ALL CHANGES SAVED",
-                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 1.sp),
+                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 1.sp),
                         color = if (state.dirty) Amber else Dim
                     )
                     Text(
                         "SAVING MAKES THIS PRESET ACTIVE",
-                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 1.sp),
+                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 1.sp),
                         color = Dim
                     )
                 }
@@ -271,7 +271,7 @@ private fun PresetCard(
                 if (active) {
                     Text(
                         "ACTIVE",
-                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 6.sp, letterSpacing = 0.9.sp),
+                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 0.9.sp),
                         color = Lime
                     )
                 }
@@ -283,11 +283,11 @@ private fun PresetCard(
                     style = MaterialTheme.typography.headlineMedium,
                     color = if (selected) Ink else Muted
                 )
-                Text("fps", style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp), color = Dim, modifier = Modifier.padding(start = 2.dp, bottom = 2.dp))
+                Text("fps", style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp), color = Dim, modifier = Modifier.padding(start = 2.dp, bottom = 2.dp))
                 Spacer(Modifier.width(8.dp))
                 Text(
                     preset.description,
-                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 0.1.sp),
+                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 0.1.sp),
                     color = Dim,
                     maxLines = 1
                 )
@@ -311,13 +311,13 @@ private fun SettingsGroupCard(
         ) {
             Text(
                 group.label.uppercase(),
-                style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 1.5.sp),
+                style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 1.5.sp),
                 color = Muted
             )
             Spacer(Modifier.weight(1f))
             Text(
                 "${defs.size} SETTINGS",
-                style = MaterialTheme.typography.labelSmall.copy(fontSize = 6.5.sp, letterSpacing = 0.6.sp),
+                style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 0.6.sp),
                 color = Dim
             )
         }

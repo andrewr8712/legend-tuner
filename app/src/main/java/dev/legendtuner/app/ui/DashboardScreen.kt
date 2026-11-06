@@ -88,7 +88,7 @@ fun DashboardScreen(
             title = "Dashboard",
             subtitle = when {
                 state.manualFile -> "Editing an imported preferences file"
-                state.gameInstalled -> "GRID Legends detected on this tablet"
+                state.gameInstalled -> "GRID Legends detected on this device"
                 else -> "GRID Legends is not installed"
             },
             mode = state.accessMode,
@@ -145,12 +145,12 @@ fun DashboardScreen(
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
             Text(
                 "LOCAL ONLY · NO NETWORK PERMISSION",
-                style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 1.sp),
+                style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 1.sp),
                 color = Dim
             )
             Text(
                 "TABLET LAYOUT · ${if (wide) "WIDE" else "COMPACT"}",
-                style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 1.sp),
+                style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 1.sp),
                 color = Dim
             )
         }
@@ -184,7 +184,7 @@ private fun HeroPanel(
                 )
                 Text(
                     "FAN MADE · NO TELEMETRY",
-                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 1.sp),
+                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 1.sp),
                     color = Dim,
                     modifier = Modifier
                         .border(1.dp, Line, RoundedCornerShape(5.dp))
@@ -223,13 +223,13 @@ private fun HeroPanel(
                         Box(Modifier.size(6.dp).clip(CircleShape).background(Lime))
                         Text(
                             "GAME FOUND",
-                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 1.5.sp),
+                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 1.5.sp),
                             color = Lime
                         )
                         Spacer(Modifier.weight(1f))
                         Text(
                             state.accessMode?.label?.uppercase() ?: "",
-                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 6.sp, letterSpacing = 1.sp),
+                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 1.sp),
                             color = Lime,
                             modifier = Modifier
                                 .border(1.dp, Lime.copy(alpha = 0.25f), RoundedCornerShape(4.dp))
@@ -250,11 +250,11 @@ private fun HeroPanel(
                     )
                     Spacer(Modifier.height(7.dp))
                     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(9.dp)) {
-                        Text(version, style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp), color = Dim)
+                        Text(version, style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp), color = Dim)
                         Dot()
-                        Text(formatSize(file?.size ?: 0L), style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp), color = Dim)
+                        Text(formatSize(file?.size ?: 0L), style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp), color = Dim)
                         Dot()
-                        Text(file?.volumeLabel ?: "—", style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp), color = Dim)
+                        Text(file?.volumeLabel ?: "—", style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp), color = Dim)
                     }
                     DividerLine(Modifier.padding(top = 10.dp))
                     Row(Modifier.fillMaxWidth().padding(top = 10.dp)) {
@@ -281,7 +281,7 @@ private fun QuickTune(label: String, sub: String, modifier: Modifier, onClick: (
         Row(Modifier.padding(horizontal = 11.dp, vertical = 10.dp), verticalAlignment = Alignment.CenterVertically) {
             Column {
                 Text(label, style = MaterialTheme.typography.labelMedium, color = Ink)
-                Text(sub, style = MaterialTheme.typography.labelSmall.copy(fontSize = 6.5.sp, letterSpacing = 0.2.sp), color = Dim)
+                Text(sub, style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 0.2.sp), color = Dim)
             }
         }
     }
@@ -305,12 +305,12 @@ private fun Snapshot(
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Text(
                     "CURRENT PRESET SNAPSHOT",
-                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 6.5.sp, letterSpacing = 1.2.sp),
+                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 1.2.sp),
                     color = Dim
                 )
                 Text(
                     "${preset.label.uppercase()} · ACTIVE",
-                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 6.5.sp, letterSpacing = 0.8.sp),
+                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 0.8.sp),
                     color = Lime
                 )
             }
@@ -342,7 +342,7 @@ private fun SnapshotRow(name: String, fraction: Float, value: String) {
             )
         }
         Spacer(Modifier.width(10.dp))
-        Text(value, style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp), color = Muted, modifier = Modifier.width(32.dp))
+        Text(value, style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp), color = Muted, modifier = Modifier.width(32.dp))
     }
 }
 
@@ -356,7 +356,7 @@ private fun Stat(value: String, key: String, modifier: Modifier, first: Boolean 
         Text(value, style = MaterialTheme.typography.headlineMedium, color = Ink, maxLines = 1)
         Text(
             key,
-            style = MaterialTheme.typography.labelSmall.copy(fontSize = 6.sp, letterSpacing = 1.sp),
+            style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 1.sp),
             color = Dim,
             maxLines = 1
         )
@@ -407,7 +407,7 @@ private fun DashboardActions(
             Column(Modifier.weight(1f)) {
                 Text(
                     "DETECTED DISPLAY",
-                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 6.5.sp, letterSpacing = 1.3.sp),
+                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 1.3.sp),
                     color = Dim
                 )
                 Text(
@@ -453,7 +453,7 @@ fun ActionTile(
             Icon(icon, null, tint = Muted, modifier = Modifier.size(18.dp))
             Spacer(Modifier.height(10.dp))
             Text(title, style = MaterialTheme.typography.labelLarge, color = Ink)
-            Text(subtitle, style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 0.2.sp), color = Dim)
+            Text(subtitle, style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 0.2.sp), color = Dim)
         }
     }
 }

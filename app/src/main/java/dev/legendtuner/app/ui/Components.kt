@@ -154,7 +154,7 @@ fun NavRail(
                 )
                 Text(
                     label,
-                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 0.3.sp),
+                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 0.3.sp),
                     color = if (active) Lime else Dim,
                     maxLines = 1
                 )
@@ -170,7 +170,7 @@ fun NavRail(
             )
             Text(
                 mode?.label?.uppercase() ?: "SETUP",
-                style = MaterialTheme.typography.labelSmall.copy(fontSize = 6.sp, letterSpacing = 0.7.sp),
+                style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 0.7.sp),
                 color = Dim
             )
         }
@@ -214,7 +214,7 @@ fun CompactNav(
                 )
                 Text(
                     label,
-                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp),
+                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp),
                     color = if (active) Lime else Dim,
                     maxLines = 1
                 )
@@ -277,7 +277,7 @@ fun PageHeader(
                     horizontalArrangement = Arrangement.spacedBy(5.dp)
                 ) {
                     Icon(LegendIcons.Settings, null, tint = Muted, modifier = Modifier.size(13.dp))
-                    Text("Access", style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp), color = Muted)
+                    Text("Access", style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp), color = Muted)
                 }
             }
         }
@@ -311,7 +311,7 @@ fun ModeChip(mode: AccessMode) {
         Box(Modifier.size(5.dp).clip(CircleShape).background(Lime))
         Text(
             mode.label.uppercase(),
-            style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 0.8.sp),
+            style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 0.8.sp),
             color = Lime
         )
     }
@@ -331,7 +331,7 @@ fun StatusChip(text: String, lime: Boolean = true) {
         if (lime) Box(Modifier.size(4.dp).clip(CircleShape).background(Lime))
         Text(
             text.uppercase(),
-            style = MaterialTheme.typography.labelSmall.copy(fontSize = 6.5.sp, letterSpacing = 0.9.sp),
+            style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 0.9.sp),
             color = if (lime) Lime else Muted
         )
     }
@@ -441,7 +441,7 @@ fun SettingRow(
             if (def.scope != SettingScope.PRESET) {
                 Text(
                     if (def.scope == SettingScope.SETUP) "Setup · live" else "Live setting",
-                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 0.5.sp),
+                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 0.5.sp),
                     color = Dim
                 )
             }

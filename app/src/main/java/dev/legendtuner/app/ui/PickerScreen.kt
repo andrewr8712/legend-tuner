@@ -96,7 +96,7 @@ fun PickerScreen(
             Spacer(Modifier.weight(1f))
             Text(
                 "${installed.size} installed",
-                style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 0.6.sp),
+                style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 0.6.sp),
                 color = Dim
             )
             Spacer(Modifier.width(10.dp))
@@ -176,7 +176,7 @@ fun PickerScreen(
                                 Text(status.title.label, style = MaterialTheme.typography.bodyMedium, color = Muted)
                                 Text(
                                     "Not installed · tap to open a saved file",
-                                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp),
+                                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp),
                                     color = Dim
                                 )
                             }
@@ -214,7 +214,7 @@ fun PickerScreen(
         Spacer(Modifier.height(18.dp))
         Text(
             "Local only · no network permission · every write is backed up and verified",
-            style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 0.8.sp),
+            style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 0.8.sp),
             color = Dim
         )
         Spacer(Modifier.height(14.dp))
@@ -270,7 +270,7 @@ private fun TitleCard(status: TitleStatus, modifier: Modifier, onClick: () -> Un
                     Spacer(Modifier.width(8.dp))
                     Text(
                         detail,
-                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 0.4.sp),
+                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 0.4.sp),
                         color = Dim,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis

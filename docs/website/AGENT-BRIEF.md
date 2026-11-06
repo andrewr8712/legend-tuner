@@ -1,6 +1,6 @@
 # Config Tuner website — agent brief
 
-**Status:** current for app release **1.3.0** (2026-11-06)
+**Status:** current for app release **1.3.1** (2026-11-06)
 **Assumption:** the website is for **Config Tuner**, the Android app in this repository. If it is for
 something else, replace the product section but keep the collaboration protocol.
 
@@ -24,8 +24,8 @@ installs update in place.
 
 | Fact | Value |
 |---|---|
-| Current release | **1.3.0** (versionCode 13) |
-| Release URL | https://github.com/andrewr8712/legend-tuner/releases/tag/v1.3.0 |
+| Current release | **1.3.1** (versionCode 14) |
+| Release URL | https://github.com/andrewr8712/legend-tuner/releases/tag/v1.3.1 |
 | Latest download | https://github.com/andrewr8712/legend-tuner/releases/latest |
 | Package | `dev.legendtuner.app.debug` |
 | Android support | Android 8.0+ (`minSdk 26`), target SDK 35 |
@@ -147,7 +147,7 @@ with the app.
 |---|---|---|
 | App mark (SVG) | `docs/website/config-tuner-mark.svg` | Lime “L + signal bars” on near-black; derived from the launcher icon |
 | Design tokens | `docs/website/design-tokens.css` | Exact app palette, type stacks, spacing |
-| Current picker | `docs/website/picker-1.3.0.png` | 1600×900; 18 installed titles visible |
+| Current picker | `docs/website/picker-1.3.1.png` | 1600×900; 18 installed titles visible |
 | Older screenshots | `docs/screenshots/*.png` | Real device captures; picker is from an older release |
 | App icon vector | `app/src/main/res/drawable/ic_launcher_foreground.xml` | Source for the mark |
 | Title list | `README.md` | Authoritative 19-title table |

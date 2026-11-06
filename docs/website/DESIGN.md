@@ -1,7 +1,7 @@
 # Config Tuner site — design document
 
 **Status:** approved design record · 2026-11-06
-**Source of truth for facts:** `docs/website/AGENT-BRIEF.md` (1.3.0) and the repository README.
+**Source of truth for facts:** `docs/website/AGENT-BRIEF.md` (1.3.1) and the repository README.
 **Approved and built.**
 
 ---
@@ -71,7 +71,7 @@ Single page, `index.html`, plus a second page `brand/` for the kit. Section ids 
 |---|----|---------|---------|
 | 0 | — | Header, sticky | mark + wordmark, nav (How it works · Safety · Titles · Install · FAQ), Download APK |
 | 1 | `top` | Hero | H1, one-sentence explainer, Download + GitHub, three micro-facts, hero visual |
-| 2 | `proof` | Proof strip | 19 titles · 50 unit tests · no network permission · MIT, stamped "as of 1.3.0" |
+| 2 | `proof` | Proof strip | 19 titles · 50 unit tests · no network permission · MIT, stamped "as of 1.3.1" |
 | 3 | `how` | How it works | 4 steps, line-drawn connectors, the file path in mono |
 | 4 | `safety` | Safety | 3 guarantees + 3 honest caveats, side by side |
 | 5 | `titles` | Supported titles | filter field, 19 cards with control counts, "not installed" behaviour |
@@ -90,11 +90,11 @@ Single page, `index.html`, plus a second page `brand/` for the kit. Section ids 
 > **[ Download APK ]** [ View on GitHub ]
 > `Android/data/<package>/files/feral_app_support/preferences`
 
-Hero visual: the path block above rendered as a terminal line with a lime caret, then the 1.3.0
+Hero visual: the path block above rendered as a terminal line with a lime caret, then the 1.3.1
 picker capture in a simple tablet frame, bleeding off the right edge on wide screens.
 
 **Proof strip:** `19` titles · `50` unit tests · `0` network permissions · MIT. Footnote:
-"Counts as of 1.3.0".
+"Counts as of 1.3.1".
 
 **How it works (4 steps):**
 
@@ -118,7 +118,7 @@ you can supply."
 
 **Install:** 1) download the APK on the tablet, 2) allow install from this source, 3) open and pick a
 title, 4) choose a route if Android blocks the folder. Requirements list: Android 8.0+, 10 MB, no
-Play Store, version 1.3.0 (versionCode 13), debug-signed.
+Play Store, version 1.3.1 (versionCode 14), debug-signed.
 
 **FAQ:** why root/Shizuku is needed; is it safe; what happens when the game updates; why debug-signed;
 does it collect anything (no network permission at all); can it work with a title that is not listed;
@@ -188,7 +188,7 @@ docs/website/
   assets/js/site.js
   assets/fonts/*.woff2            self-hosted, subset, OFL licences included
   assets/brand/*.svg|*.png
-  assets/shots/*.png              copied from docs/screenshots + picker-1.3.0.png
+  assets/shots/*.png              copied from docs/screenshots + picker-1.3.1.png
   site.webmanifest
   README.md                       handover notes
 ```
@@ -219,14 +219,14 @@ docs/website/
    1440 px; axe-core scan with no serious violations; keyboard pass through nav, tabs, filter, FAQ.
 5. JS-disabled pass: titles, FAQ and install steps all present and readable.
 6. `prefers-reduced-motion` pass: no transforms, no line draw.
-7. Fact check against the brief: 1.3.0, 19 titles with exact control counts, 50 tests, Android 8.0+,
+7. Fact check against the brief: 1.3.1, 19 titles with exact control counts, 50 tests, Android 8.0+,
    no network permission, debug-signed, no Play Store mention.
 
 ## 9. Open questions
 
 Seven are filed in `docs/website/QUESTIONS.md` (PR #2), each with a default. Nothing in section 7
 blocks on them; the two that could change output are **branding depth** (full kit vs lean) and
-**screenshots** (which 1.3.0 captures exist).
+**screenshots** (which 1.3.1 captures exist).
 
 ## 10. What I will not do without a second approval
 

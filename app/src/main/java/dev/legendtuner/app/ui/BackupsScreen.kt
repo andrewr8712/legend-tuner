@@ -193,7 +193,7 @@ private fun BackupRow(
                     "${backup.displaySize()} · ${backup.name}",
                     style = MaterialTheme.typography.labelSmall.copy(
                         fontFamily = FontFamily.Monospace,
-                        fontSize = 7.sp,
+                        fontSize = 8.sp,
                         letterSpacing = 0.sp
                     ),
                     color = Dim,

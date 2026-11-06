@@ -101,7 +101,7 @@ fun SettingInspector(
                 Column(Modifier.weight(1f)) {
                     Text(
                         if (presetScope) "${selectedPreset.label.uppercase()} PRESET · ${def.group.label.uppercase()}" else "LIVE · ${def.group.label.uppercase()}",
-                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 1.5.sp),
+                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 1.5.sp),
                         color = Dim
                     )
                     Spacer(Modifier.height(5.dp))
@@ -217,7 +217,7 @@ fun SettingInspector(
             ) {
                 Text(
                     "Raw: ${currentValue ?: "—"}",
-                    style = MaterialTheme.typography.labelSmall.copy(fontFamily = FontFamily.Monospace, fontSize = 7.sp),
+                    style = MaterialTheme.typography.labelSmall.copy(fontFamily = FontFamily.Monospace, fontSize = 8.sp),
                     color = Dim
                 )
                 Spacer(Modifier.weight(1f))
@@ -245,7 +245,7 @@ private fun HeightDropdown(
     Column(Modifier.padding(horizontal = 18.dp, vertical = 8.dp)) {
         Text(
             "RENDER HEIGHT",
-            style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 1.2.sp),
+            style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 1.2.sp),
             color = Dim
         )
         Spacer(Modifier.height(7.dp))
@@ -265,7 +265,7 @@ private fun HeightDropdown(
                         Text("$pending px", style = MaterialTheme.typography.headlineSmall, color = Lime)
                         Text(
                             heightHint(pending),
-                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 0.2.sp),
+                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 0.2.sp),
                             color = Dim
                         )
                     }
@@ -290,14 +290,14 @@ private fun HeightDropdown(
                                     )
                                     Text(
                                         heightHint(option),
-                                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 0.1.sp),
+                                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 0.1.sp),
                                         color = Dim
                                     )
                                 }
                                 if (selected) {
                                     Text("✓", color = Lime, fontSize = 15.sp)
                                 } else if (currentValue == option) {
-                                    Text("CURRENT", style = MaterialTheme.typography.labelSmall.copy(fontSize = 6.sp), color = Muted)
+                                    Text("CURRENT", style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp), color = Muted)
                                 }
                             }
                         },
@@ -312,7 +312,7 @@ private fun HeightDropdown(
         Spacer(Modifier.height(8.dp))
         Text(
             "Common 16:9 and 16:10 render heights. Use Raw XML for an exact non-standard value.",
-            style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.5.sp, letterSpacing = 0.1.sp),
+            style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.5.sp, letterSpacing = 0.1.sp),
             color = Dim
         )
     }
@@ -341,7 +341,7 @@ private fun heightHint(value: Int): String = when (value) {
 @Composable
 private fun EmptyInspector() {
     Column(Modifier.padding(20.dp)) {
-        Text("INSPECTOR", style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 1.5.sp), color = Dim)
+        Text("INSPECTOR", style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 1.5.sp), color = Dim)
         Spacer(Modifier.height(8.dp))
         Text("Select a setting", style = MaterialTheme.typography.headlineMedium, color = Ink)
         Spacer(Modifier.height(7.dp))
@@ -379,7 +379,7 @@ private fun OptionRow(label: String, hint: String?, selected: Boolean, onClick: 
         )
         Spacer(Modifier.weight(1f))
         if (hint != null) {
-            Text(hint, style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp), color = Dim)
+            Text(hint, style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp), color = Dim)
         }
     }
 }
@@ -389,13 +389,13 @@ private fun PerformanceRow(cost: Int) {
     Row(Modifier.fillMaxWidth().padding(horizontal = 18.dp), verticalAlignment = Alignment.CenterVertically) {
         Text(
             "PERFORMANCE COST",
-            style = MaterialTheme.typography.labelSmall.copy(fontSize = 6.5.sp, letterSpacing = 1.2.sp),
+            style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 1.2.sp),
             color = Dim
         )
         Spacer(Modifier.weight(1f))
         PerformanceBars(cost)
         Spacer(Modifier.width(8.dp))
-        Text("$cost / 5", style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp), color = Muted)
+        Text("$cost / 5", style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp), color = Muted)
     }
 }
 

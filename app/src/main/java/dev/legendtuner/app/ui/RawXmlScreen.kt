@@ -89,12 +89,12 @@ fun RawXmlScreen(
                     ) {
                         Text(
                             "preferences · UTF-8",
-                            style = MaterialTheme.typography.labelSmall.copy(fontFamily = FontFamily.Monospace, fontSize = 7.sp),
+                            style = MaterialTheme.typography.labelSmall.copy(fontFamily = FontFamily.Monospace, fontSize = 8.sp),
                             color = Dim
                         )
                         Text(
                             "${state.rawXml.length} chars",
-                            style = MaterialTheme.typography.labelSmall.copy(fontFamily = FontFamily.Monospace, fontSize = 7.sp),
+                            style = MaterialTheme.typography.labelSmall.copy(fontFamily = FontFamily.Monospace, fontSize = 8.sp),
                             color = Dim
                         )
                     }
@@ -124,7 +124,7 @@ fun RawXmlScreen(
         Spacer(Modifier.height(8.dp))
         Text(
             "Edits are parsed and validated before they replace the draft. Save still writes to the game file; use Backups if you need to roll back.",
-            style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.5.sp, letterSpacing = 0.2.sp),
+            style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.5.sp, letterSpacing = 0.2.sp),
             color = Dim,
             modifier = Modifier.padding(bottom = 12.dp)
         )

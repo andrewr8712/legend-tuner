@@ -118,7 +118,7 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 
 - Package: `dev.legendtuner.app` (debug builds install as `dev.legendtuner.app.debug`)
 - Minimum Android: 8.0 (API 26) · Target: Android 15 (API 35)
-- Version 1.3.0 (versionCode 13)
+- Version 1.3.1 (versionCode 14)
 - Signed debug build
 
 ## First run
@@ -226,8 +226,9 @@ scripts/            Waydroid UI smoke harness
 docs/screenshots/   real device captures used in this README
 prototype/          tablet design prototype and screenshots
 DESIGN.md           historical GRID Legends schema notes and design rationale
-docs/CHANGELOG-1.3.0.md  current release notes (XCOM 2, compact picker)
-docs/CHANGELOG-1.2.9.md  previous release notes (ROME: Alexander)
+docs/CHANGELOG-1.3.1.md  current release notes (readability and copy polish)
+docs/CHANGELOG-1.3.0.md  previous release notes (XCOM 2, compact picker)
+docs/CHANGELOG-1.2.9.md  older release notes (ROME: Alexander)
 docs/CHANGELOG-1.2.8.md  older release notes (ROME: Barbarian Invasion)
 docs/CHANGELOG-1.2.7.md  older release notes (Medieval II: Total War)
 docs/CHANGELOG-1.2.6.md  older release notes (ROME: Total War)

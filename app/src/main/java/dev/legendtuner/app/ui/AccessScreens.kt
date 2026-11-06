@@ -99,7 +99,7 @@ fun SetupScreen(
         if (!installed) {
             Spacer(Modifier.height(10.dp))
             Text(
-                "${state.activeLabel} is not installed on this tablet. Tap Manual file to open a preferences file from a backup or another device — edits save straight back to it.",
+                "${state.activeLabel} is not installed on this device. Tap Manual file to open a preferences file from a backup or another device — edits save straight back to it.",
                 style = MaterialTheme.typography.bodyMedium.copy(fontSize = 11.sp, lineHeight = 17.sp),
                 color = Amber,
                 modifier = Modifier.widthIn(max = 720.dp)
@@ -159,7 +159,7 @@ fun SetupScreen(
         Spacer(Modifier.height(18.dp))
         Text(
             "NO INTERNET PERMISSION · NO ANALYTICS · UNOFFICIAL FAN TOOL",
-            style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 1.sp),
+            style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 1.sp),
             color = Dim
         )
         Spacer(Modifier.height(26.dp))
@@ -214,7 +214,7 @@ fun AccessSheet(
             Spacer(Modifier.height(16.dp))
             Text(
                 "The app stores a local backup before every write. It has no network permission.",
-                style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.5.sp, letterSpacing = 0.2.sp),
+                style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.5.sp, letterSpacing = 0.2.sp),
                 color = Dim
             )
         }
@@ -338,7 +338,7 @@ private fun AccessCard(
             Spacer(Modifier.width(12.dp))
             Column(Modifier.weight(1f)) {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(7.dp)) {
-                    Text(index, style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp), color = Dim)
+                    Text(index, style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp), color = Dim)
                     Text(title, style = MaterialTheme.typography.titleMedium, color = if (enabled) Ink else Muted)
                 }
                 Spacer(Modifier.height(3.dp))
@@ -354,7 +354,7 @@ private fun AccessCard(
                     )
                     Text(
                         status,
-                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 6.5.sp, letterSpacing = 0.7.sp),
+                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 0.7.sp),
                         color = if (statusLime) Lime else Dim
                     )
                 }

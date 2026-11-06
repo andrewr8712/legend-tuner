@@ -85,7 +85,7 @@ fun TitleEditorScreen(
                 if (state.dirty) {
                     Text(
                         "UNSAVED",
-                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 1.sp),
+                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 1.sp),
                         color = Amber,
                         modifier = Modifier
                             .border(1.dp, Amber.copy(alpha = 0.3f), RoundedCornerShape(6.dp))
@@ -159,12 +159,12 @@ fun TitleEditorScreen(
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                     Text(
                         if (state.dirty) "UNSAVED CHANGES" else "ALL CHANGES SAVED",
-                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 1.sp),
+                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 1.sp),
                         color = if (state.dirty) Amber else Dim
                     )
                     Text(
                         "BACKUP BEFORE EVERY WRITE",
-                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 1.sp),
+                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 1.sp),
                         color = Dim
                     )
                 }
@@ -224,13 +224,13 @@ private fun GroupCard(
         ) {
             Text(
                 group.uppercase(),
-                style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 1.5.sp),
+                style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 1.5.sp),
                 color = Muted
             )
             Spacer(Modifier.weight(1f))
             Text(
                 "${controls.size} SETTINGS",
-                style = MaterialTheme.typography.labelSmall.copy(fontSize = 6.5.sp, letterSpacing = 0.6.sp),
+                style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 0.6.sp),
                 color = Dim
             )
         }
@@ -277,7 +277,7 @@ private fun ControlRow(
             if (!hasKey) {
                 Text(
                     "Not stored in this file",
-                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp),
+                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp),
                     color = Dim
                 )
             }
@@ -315,7 +315,7 @@ private fun ControlInspector(
             Column(Modifier.padding(20.dp)) {
                 Text(
                     "SELECT A SETTING",
-                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 1.4.sp),
+                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 1.4.sp),
                     color = Dim
                 )
                 Spacer(Modifier.height(10.dp))
@@ -351,7 +351,7 @@ private fun ControlInspector(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
                     "${control.group.uppercase()} · ${stateCased(control.kind)}",
-                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 1.2.sp),
+                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 1.2.sp),
                     color = Lime
                 )
                 Spacer(Modifier.weight(1f))
@@ -468,7 +468,7 @@ private fun FamilyChip(
             Spacer(Modifier.width(7.dp))
             Text(
                 label.uppercase(),
-                style = MaterialTheme.typography.labelSmall.copy(fontSize = 7.sp, letterSpacing = 0.8.sp),
+                style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, letterSpacing = 0.8.sp),
                 color = if (selected) Ink else Muted,
                 maxLines = 1
             )
